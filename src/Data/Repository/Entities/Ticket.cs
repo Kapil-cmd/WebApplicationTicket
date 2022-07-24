@@ -1,10 +1,7 @@
 ﻿using Common.Enums;
-using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
+using Repository.Entities;
 
-namespace Repository.Entities
+namespace Repository.Entites
 {
     public class Ticket
     {
@@ -21,6 +18,8 @@ namespace Repository.Entities
         public string ImageName { get; set; }
         public virtual User User { get; set; }
         public virtual Category Category { get; set; }
+        public List<Category> Categories { get; set; }
+        public virtual IEnumerable<UserTicket> Users { get; set; }
     }
 }
 

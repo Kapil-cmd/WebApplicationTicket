@@ -1,15 +1,16 @@
-﻿using Repository.Entities;
+﻿using Repository.Entites;
 using Repository.Repos.Reposi;
-using System.Linq.Expressions;
 
 namespace Repository.Repos.TicketRep
 {
-    public class TicketRepository : Repository<Ticket>,ITicketRepository
+    public class TicketRepository : Repository<Ticket>, ITicketRepository
     {
         public TicketRepository(TicketingContext db) : base(db)
         {
         }
+    }
 
-       
+    public interface ITicketRepository : IRepository<Ticket>
+    {
     }
 }

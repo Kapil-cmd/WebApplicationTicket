@@ -50,4 +50,8 @@
     <ProjectReference Include="..\..\Data\Repository\Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Image\" />
+  </ItemGroup>
+
 </Project>

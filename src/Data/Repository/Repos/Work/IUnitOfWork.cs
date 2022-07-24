@@ -1,13 +1,12 @@
-﻿using Repository.Repos.CategoryRep;
+﻿using Microsoft.AspNetCore.Http;
+using Repository.Repos.CategoryRep;
 using Repository.Repos.PermissionRep;
+using Repository.Repos.RolePermissionRep;
 using Repository.Repos.RoleRep;
 using Repository.Repos.TicketRep;
+using Repository.Repos.TicketUserRep;
 using Repository.Repos.UserRep;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Repository.Repos.UsersRep;
 
 namespace Repository.Repos.Work
 {
@@ -16,15 +15,14 @@ namespace Repository.Repos.Work
         public TicketingContext _db { get; }
 
         ICategoryRepository Category { get; }
-
-        IPermissionRepository Permission { get; }
-
+        IHttpContextAccessor _httpContextAccessor { get; }
         IRoleRepository Role { get; }
-
         ITicketRepository Ticket { get; }
-
-        IUserRepository User { get; }
-
+        IUserRepository UserRepository { get; }
+        IUserRoleRepository UserRoleRepository { get; }
+        IPermissionRepository Permission { get; }
+        IRolePermissionRepository RolePermissionRepository { get; }
+        IUserTicketRepository UserTicketRepository { get; }
         void Save();
     }
 }

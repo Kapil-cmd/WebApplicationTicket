@@ -13,3 +13,5 @@ D:\Projects\TicketManagementSystem\src\Business\Services\obj\Debug\net6.0\ref\Se
 D:\Projects\TicketManagementSystem\src\Business\Services\bin\Debug\net6.0\Common.dll
 D:\Projects\TicketManagementSystem\src\Business\Services\bin\Debug\net6.0\Common.pdb
 D:\Projects\TicketManagementSystem\src\Business\Services\obj\Debug\net6.0\Services.csproj.CopyComplete
+D:\Projects\TicketManagementSystem\src\Business\Services\bin\Debug\net6.0\Repository.dll
+D:\Projects\TicketManagementSystem\src\Business\Services\bin\Debug\net6.0\Repository.pdb

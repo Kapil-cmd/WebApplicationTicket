@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Repository.Entities;
+using Repository.Entites;
 
 namespace Repository.Configurations
 {

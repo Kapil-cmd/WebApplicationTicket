@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository.Entities
+﻿namespace Repository.Entites
 {
     public class UserRole
     {
@@ -14,5 +8,6 @@ namespace Repository.Entities
 
         public virtual User aUser{get;set;}
         public virtual Role aRole { get; set; }
+        public List<Role> Roles { get; set; }
     }
 }

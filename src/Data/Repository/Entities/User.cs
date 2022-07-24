@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Repository.Entities;
 
-namespace Repository.Entities
+namespace Repository.Entites
 {
     public class User
     {
@@ -15,10 +15,9 @@ namespace Repository.Entities
         public long PhoneNumber { get; set; }
         public string Password { get; set; }
 
-        public virtual IEnumerable<UserRole> Roles { get; set; }
-
         public virtual IEnumerable<Category> Categories { get; set; }
-
-        public virtual IEnumerable<Ticket> Tickets { get; set; }
+        public virtual IEnumerable<UserRole> Roles { get; set; }
+        public virtual IEnumerable<UserTicket> Tickets { get; set; }
+        public List<Ticket> Ticket { get; set; }
     }
 }

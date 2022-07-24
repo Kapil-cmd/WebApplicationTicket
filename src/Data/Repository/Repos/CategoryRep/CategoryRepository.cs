@@ -1,4 +1,5 @@
-﻿using Repository.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Entites;
 using Repository.Repos.Reposi;
 
 namespace Repository.Repos.CategoryRep
@@ -8,5 +9,9 @@ namespace Repository.Repos.CategoryRep
         public CategoryRepository(TicketingContext db) : base(db)
         {
         }
+    }
+
+    public interface ICategoryRepository : IRepository<Category>
+    {
     }
 }

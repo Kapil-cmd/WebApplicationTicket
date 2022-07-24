@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Repository.Entities;
+using Repository.Entites;
 
 namespace Repository.Configurations
 {
@@ -24,7 +24,7 @@ namespace Repository.Configurations
             builder.Property(x => x.ImageName);
 
             builder.HasOne(x => x.User)
-                .WithMany(x => x.Tickets)
+                .WithMany(x => x.Ticket)
                 .HasForeignKey(x => x.CreatedBy)
                 .OnDelete(DeleteBehavior.Cascade);
 

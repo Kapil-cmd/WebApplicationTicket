@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Configurations;
+using Repository.Entites;
 using Repository.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -18,7 +14,7 @@ namespace Repository
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-
+        public DbSet<UserTicket> Ticketusers { get; set; }
         public TicketingContext(DbContextOptions<TicketingContext> options)
             : base(options)
         {
@@ -32,8 +28,8 @@ namespace Repository
             builder.ApplyConfiguration(new RolePermissionConfig());
             builder.ApplyConfiguration(new TicketConfig());
             builder.ApplyConfiguration(new UserConfig());
-            builder.ApplyConfiguration(new UserRoleConfig());
-
+            builder.ApplyConfiguration(new UserRoleConfig());   
+            builder.ApplyConfiguration(new UserTicketConfig());
         }
     }
 }

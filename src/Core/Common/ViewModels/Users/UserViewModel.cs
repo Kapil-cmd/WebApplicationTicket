@@ -46,6 +46,7 @@ namespace Common.ViewModels.Users
     }
     public class EditUserViewModel
     {
+        public string Id { get; set; }
         [Required(ErrorMessage = "FirstName is required"), MaxLength(25), Display(Name = "FirstName")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "LastName is required"), MaxLength(25), Display(Name = "LastName")]
@@ -64,6 +65,18 @@ namespace Common.ViewModels.Users
         [Required(ErrorMessage = "UserName is required"), MaxLength(25), Display(Name = "UserName")]
         public string UserName { get; set; }
     }
+
+    public class UserTokenModel
+    {
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+
+        public List<string> Roles { get; set; }
+    }
+
 
     public class UserViewModel
     {

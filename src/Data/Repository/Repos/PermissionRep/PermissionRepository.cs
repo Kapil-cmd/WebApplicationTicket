@@ -1,5 +1,10 @@
-﻿using Repository.Entities;
+﻿using Repository.Entites;
 using Repository.Repos.Reposi;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository.Repos.PermissionRep
 {
@@ -9,4 +14,7 @@ namespace Repository.Repos.PermissionRep
         {
         }
     }
+    public interface IPermissionRepository :IRepository<Permission>
+{
+}
 }

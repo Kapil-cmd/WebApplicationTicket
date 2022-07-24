@@ -7,7 +7,7 @@ namespace Repository.Repos.Reposi
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly TicketingContext _db;
-        internal DbSet<T> dbSet;
+        private DbSet<T> dbSet;
 
         public Repository(TicketingContext db)
         {
@@ -18,6 +18,12 @@ namespace Repository.Repos.Reposi
         {
             dbSet.Add(entity);
         }
+
+        public bool Any(Expression<Func<T, bool>> filter)
+        {
+            return dbSet.Any(filter);
+        }
+
         public IEnumerable<T> GetAll()
         {
             IQueryable<T> query = dbSet;
@@ -41,6 +47,10 @@ namespace Repository.Repos.Reposi
         public void RemoveRange(IEnumerable<T> entity)
         {
             dbSet.RemoveRange(entity);
+        }
+        public async Task<T> GetById<TId>(TId id)
+        {
+            return await _db.Set<T>().FindAsync(id);
         }
     }
 }

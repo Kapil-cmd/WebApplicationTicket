@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Repository.Entities
+﻿namespace Repository.Entites
 {
     public class RolePermission
     {
@@ -14,5 +8,6 @@ namespace Repository.Entities
 
         public virtual Permission aPermission { get; set; }
         public virtual Role aRole { get; set; }
+        public IEnumerable<Permission> Permissions { get; set; }
     }
 }

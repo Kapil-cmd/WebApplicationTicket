@@ -1,4 +1,5 @@
-﻿using Repository.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Entites;
 using Repository.Repos.Reposi;
 
 namespace Repository.Repos.RoleRep
@@ -8,5 +9,9 @@ namespace Repository.Repos.RoleRep
         public RoleRepository(TicketingContext db) : base(db)
         {
         }
+    }
+
+    public interface IRoleRepository : IRepository<Role>
+    {
     }
 }
