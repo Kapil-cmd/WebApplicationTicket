@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WebApplicationTicket.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-controller="Ticket" asp-action="Create" class="btn btn-outline-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignedTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </th>@*
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignedTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>*@
+            <td>
+                <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Ticket" asp-action="Edit" asp-route-TicketId="@item.TicketId"
+                        class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>Edit</a>
+                         <a asp-controller="Ticket" asp-action="Delete" asp-route-TicketId="@item.TicketId"
+                        class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i>Delete</a>
+                         <a asp-controller="Ticket" asp-action="Details" asp-route-TicketId="@item.TicketId"
+                        class="btn btn-danger mx-2"> <i class="bi bi-ticket-detailed"></i>Details</a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

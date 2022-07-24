@@ -1,0 +1,26 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Repository.Entities;
+
+namespace Repository.Configurations
+{
+    public class UserConfig : IEntityTypeConfiguration<User>
+    {
+        public void Configure(EntityTypeBuilder<User> builder)
+        {
+            builder.ToTable("Users");
+
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).HasMaxLength(25);
+            builder.Property(x => x.UserName).HasMaxLength(25).IsRequired();
+            builder.Property(x => x.FirstName).HasMaxLength(25).IsRequired();
+            builder.Property(x => x.LastName).HasMaxLength(25).IsRequired();
+            builder.Property(x => x.Address).HasMaxLength(15).IsRequired();
+            builder.Property(x => x.Email).HasMaxLength(15).IsRequired();
+            builder.Property(x => x.Age).IsRequired();
+            builder.Property(x => x.DateOfBirth).IsRequired();
+            builder.Property(x => x.PhoneNumber).HasMaxLength(13).IsRequired();
+            builder.Property(x => x.Password).HasMaxLength(25).IsRequired();
+        }
+    }
+}

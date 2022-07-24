@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Category>
+
+@{
+    ViewBag.Title = "All Category";
+}
+<h1>All Category</h1>
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary mb-3" style="width:auto" asp-action="Create"
+   asp-controller="Category">Add New Category</a>
+
+    foreach (var category in Model)
+    {
+
+        <div class="card-body">
+            <h5 class="card-title">
+                @category.CategoryName
+            </h5>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary" asp-action="Edit" asp-controller="Category" asp-route-id="@category.CId">
+                Edit
+            </a>
+            <a class="btn btn-danger" asp-action="Delete" asp-controller="Category" asp-route-id="@category.CId">
+                Delete
+            </a>
+        </div>
+
+
+        foreach (var ticket in category.Tickets)
+        {
+            <div>Ticket Detail: <p>@ticket.TicketDetails</p> </div> 
+            <div>Created By: <p>@ticket.CreatedBy</p> </div> 
+            <div>Date: <p>@ticket.CreatedDateTime.Value.ToString("yyyy/MM/dd")</p> </div> 
+            <div>Assigned To: <p>@ticket.AssignedTo</p> </div> 
+        }
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No Category Created yet
+        </div>
+        <h5 class="card-title">
+            Use the button below to create a Category
+        </h5>
+        <a class="btn btn-outline-primary" style="width:auto"
+       asp-controller="Category" asp-action="Create">
+            Create Category
+        </a>
+    </div>
+    @section Scripts{
+    <script src="~/js/Custom.js"></script>
+    }
+}

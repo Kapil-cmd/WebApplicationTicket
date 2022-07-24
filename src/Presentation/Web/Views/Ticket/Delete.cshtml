@@ -1,0 +1,32 @@
+﻿@model Ticket
+
+<form method="post" asp-action="Delete">
+    <input asp-for="TicketId" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+        <h2 class="text-primary"><u><i>Are you sure want to delete this Ticket?</u></i></h2>
+        <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+        <div class="mb-3">
+            <label asp-for="TicketDetails"></label>
+            <input asp-for="TicketDetails" disabled class="form-control" />
+            <span asp-validation-for="TicketDetails" class="text-dark"></span>
+            </div>
+            
+            <div>
+        <div>
+        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+        <a asp-controller="Ticket" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+    </div>
+   
+
+</form>
+@section Scripts{
+   @{
+     <partial name="_ValidationScriptsPartial" />
+    }
+}
