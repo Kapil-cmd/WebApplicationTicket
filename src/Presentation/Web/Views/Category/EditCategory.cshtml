@@ -1,28 +1,25 @@
-﻿@model WebApplicationTicket.Models.Category
+﻿@model Common.ViewModels.Categories.EditCategoryViewModel
+
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "EditCategory";
 }
 
-<h1>Edit</h1>
+<h1>EditCategory</h1>
 
-<h4>Category</h4>
+<h4>EditCategoryViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="EditCategory">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CId"/>
+            <input type="hidden" asp-for="CId" />
+            <input type="hidden" asp-for="ModifiedBy" />
+            <input type="hidden" asp-for="ModifiedDateTime" />
             <div class="form-group">
                 <label asp-for="CategoryName" class="control-label"></label>
                 <input asp-for="CategoryName" class="form-control" />
                 <span asp-validation-for="CategoryName" class="text-danger"></span>
             </div>
-         
-           @* <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <select asp-for="Id" class="form-control" asp-items="ViewBag.Id"></select>
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -31,7 +28,7 @@
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-toolbar">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

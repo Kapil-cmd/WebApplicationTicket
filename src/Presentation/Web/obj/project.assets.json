@@ -10328,6 +10328,7 @@
     "net6.0": [
       "Microsoft.EntityFrameworkCore.Design >= 6.0.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.7",
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.7",
       "Repository >= 1.0.0",
       "Services >= 1.0.0"
     ]
@@ -10390,6 +10391,10 @@
             "version": "[6.0.7, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
+            "target": "Package",
+            "version": "[6.0.7, )"
+          },
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[6.0.7, )"
           }

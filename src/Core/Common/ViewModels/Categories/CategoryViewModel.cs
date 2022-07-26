@@ -31,7 +31,5 @@ namespace Common.ViewModels.Categories
         public string ModifiedBy { get; set; }
         [Required, Display(Name = "ModifiedDateTime")]
         public DateTime? ModifiedDateTime { get; set; }
-        //public List<Ticket> Tickets { get; set; }
-        //public List<User> Users { get; set; }
     }
 }

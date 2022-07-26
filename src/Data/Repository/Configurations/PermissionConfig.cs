@@ -10,8 +10,8 @@ namespace Repository.Configurations
         {
             builder.ToTable("Permissions");
             builder.HasKey(x => x.PermissionId);
-            builder.Property(x => x.PermissionId).HasMaxLength(200).HasColumnName(@"PId");
-            builder.Property(x => x.Name).HasMaxLength(200).HasColumnName(@"PermissionName").IsRequired();
+            builder.Property(x => x.PermissionId).HasColumnName(@"PId");
+            builder.Property(x => x.Name).HasColumnName(@"PermissionName").IsRequired();
         }
     }
 }

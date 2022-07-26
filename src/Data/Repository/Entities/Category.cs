@@ -1,7 +1,13 @@
-﻿namespace Repository.Entites
+﻿using Repository.Entities;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Repository.Entites
 {
     public class Category
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CId { get; set; }
         public string CategoryName { get; set; }
         public string CreatedBy { get; set; }

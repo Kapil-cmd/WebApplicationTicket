@@ -40,7 +40,7 @@ namespace Repository.Repos.Work
 
         public IPermissionRepository Permission { get; private set; }
         public IRolePermissionRepository RolePermissionRepository { get; private set; }
-         public IUserTicketRepository UserTicketRepository { get; private set; }
+        public IUserTicketRepository UserTicketRepository { get; private set; }
 
         public void Save()
         {

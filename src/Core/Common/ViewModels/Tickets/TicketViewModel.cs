@@ -48,6 +48,7 @@ namespace Common.ViewModels.Tickets
         public DateTime ModifiedDateTime { get; set; }
         [MaxLength(25), Display(Name = "AssignedToS")]
         public string AssignedTo { get; set; }
+        public string ImageName { get; set; }
         [Required(ErrorMessage ="Status is Required"),Display(Name ="Status")]
         public StatusEnum Status { get; set; }
     }

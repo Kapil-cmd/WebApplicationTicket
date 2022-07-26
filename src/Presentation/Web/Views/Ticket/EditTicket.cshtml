@@ -1,0 +1,56 @@
+﻿@model Common.ViewModels.Tickets.EditTicketViewmodel
+
+@{
+    ViewData["Title"] = "EditTicket";
+}
+
+<h1>EditTicket</h1>
+
+<h4>EditTicketViewmodel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditTicket">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TicketId" />
+            <input type="hidden" asp-for="ModifiedBy" />
+            <input type="hidden" asp-for="ModifiedDateTime" />
+            <div class="form-group">
+                <label asp-for="TicketDetails" class="control-label"></label>
+                <input asp-for="TicketDetails" class="form-control" />
+                <span asp-validation-for="TicketDetails" class="text-danger"></span>
+            </div>
+            <br/>
+            <dt class="col-sm-2">
+                Uploaded Image
+            </dt>
+            <dt class="col-sm-2">
+                <img src ="@("~/image/"+ Model.ImageName)" asp-append-version="true" width="250px" height="250px" />
+            </dt><br />
+           @* <div class="xol-sm-2">
+                <label asp-for="AssignedTo" class="control-label"></label>
+                <select asp-for="AssignedTo" class="form-control">
+                    @foreach(var user in Model.)
+                    {
+                        <option value="@user.">@user.</option>
+                    }
+                </select>
+                <span asp-validation-for="AssignedTo" class="text-danger"></span>
+            </div><br />*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-controller="Ticket" asp-action="Index" class="btn btn-danger" style="width:150px">
+                    Back To List
+                </a>
+                <a asp-controller="Ticket" asp-action="AssignTo" class="btn btn-success" style="width:150px">
+                    Assign
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

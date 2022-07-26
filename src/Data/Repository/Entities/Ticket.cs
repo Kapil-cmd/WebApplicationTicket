@@ -1,10 +1,14 @@
 ﻿using Common.Enums;
 using Repository.Entities;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repository.Entites
 {
     public class Ticket
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TicketId { get; set; }
         public string TicketDetails { get; set; }
         public string CreatedBy { get; set; }

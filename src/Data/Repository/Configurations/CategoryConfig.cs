@@ -11,9 +11,9 @@ namespace Repository.Configurations
             builder.ToTable("Categories");
 
             builder.HasKey(x => x.CId);
-            builder.Property(x => x.CId).HasMaxLength(50);
-            builder.Property(x => x.CategoryName).HasMaxLength(50).IsRequired();
-            builder.Property(x => x.CreatedBy).HasMaxLength(25).IsRequired();
+            builder.Property(x => x.CId).IsRequired();
+            builder.Property(x => x.CategoryName).IsRequired();
+            builder.Property(x => x.CreatedBy).IsRequired();
             builder.Property(x => x.CreatedDateTime);
             builder.Property(x => x.ModifiedBy).HasColumnName("Modified By");
             builder.Property(x => x.ModifiedDateTime);

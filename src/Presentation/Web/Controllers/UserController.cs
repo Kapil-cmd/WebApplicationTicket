@@ -1,5 +1,4 @@
-﻿using Common.ViewModels.Role;
-using Common.ViewModels.Users;
+﻿using Common.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
 using Repository.Repos.Work;
@@ -15,6 +14,11 @@ namespace Web.Controllers
         {
             _userService = userService;
             _unitOfWork = unitOfWork;
+        }
+        public IActionResult Index()
+        {
+            IEnumerable<User> userList = _unitOfWork.UserRepository.GetAll();
+            return View(userList);
         }
 
         [HttpGet]

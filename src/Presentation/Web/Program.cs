@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Repos.Work;
+using Services.BL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +11,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TicketingContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContextConnection")));
 
-var app = builder.Build();
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITicketService, TicketServices>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+builder.Services.AddScoped<ICategoryservice, CategoryServices>();
+var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

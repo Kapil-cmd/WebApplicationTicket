@@ -48,7 +48,7 @@ namespace Web.Controllers
             return View(categoryDetails);
         }
         [HttpPost]
-        public IActionResult EditUser(EditCategoryViewModel model)
+        public IActionResult EditCategory(EditCategoryViewModel model)
         {
             var response = _categoryService.EditCategory(model);
             if(response.Status == "00")

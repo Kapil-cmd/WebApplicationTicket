@@ -101,9 +101,9 @@ namespace Services.BL
 
                 _unitOfWork._db.Users.Add(new Repository.Entites.User()
                 {
+                    Id = Register.Id,
                     Address = Register.Address,
                     Age = Register.Age,
-                    DateOfBirth = Register.DateOfBirth,
                     Email = Register.Email,
                     FirstName = Register.FirstName,
                     LastName = Register.LastName,
@@ -139,7 +139,6 @@ namespace Services.BL
 
                 user.Address = EditUser.Address;
                 user.Age = EditUser.Age;
-                user.DateOfBirth = EditUser.DateOfBirth;
                 user.Email = EditUser.Email;
                 user.FirstName = EditUser.FirstName;
                 user.LastName = EditUser.LastName;
@@ -182,7 +181,6 @@ namespace Services.BL
                 user.Age = DeleteUser.Age;
                 user.Email = DeleteUser.Email;
                 user.PhoneNumber = DeleteUser.PhoneNumber;
-                user.DateOfBirth = DeleteUser.DateOfBirth;
 
                 _unitOfWork._db.Users.Remove(user);
                 _unitOfWork._db.SaveChanges();

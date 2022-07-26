@@ -15,8 +15,8 @@ namespace Repository.Configurations
         {
             builder.ToTable("Roles");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasMaxLength(200);
-            builder.Property(x => x.Name).HasMaxLength(200).IsRequired();
+            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.Name).IsRequired();
         }
     }
 }

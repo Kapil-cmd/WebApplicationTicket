@@ -1,4 +1,4 @@
-﻿@model WebApplicationTicket.ViewModels.Tickets.CreateTicketViewModel
+﻿@model Common.ViewModels.Tickets.AddTicketViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -6,50 +6,46 @@
 
 <h1>Create</h1>
 
-<h4>Ticket</h4>
+<h4>AddTicket</h4>
 <hr />
 <div class="row">
-    <form asp-action="Create" enctype="multipart/form-data">
-        <div class="col-md-4">
-
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="TicketId" />
-                <input type="hidden" asp-for="Category" />
-
-                <input type="hidden" asp-for="ImageName" />
-
-                <div class="xol-sm-2">
-                    <label asp-for="CategoryName" class="control-label"></label>
-                    <select asp-for="CategoryName" class="form-control">
-                        @foreach (var user in Model.Categories)
-                        {
-                            <option value="@user.CategoryName">@user.CategoryName</option>
-                        }
-                    </select>
-                    <span asp-validation-for="CategoryName" class="text-danger"></span>
-                </div><br />
-                <span asp-validation-for="CategoryName" class="text-danger"></span>
-        </div>
-
-        <br />
-        <div class="form-group">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TicketId" />
+            <input type="hidden" asp-for="ImageName" />
+            <input type="hidden" asp-for="CreatedBy" />
+            <input type="hidden" asp-for="CreatedDateTime" />
+            @*<div class="xol-sm-2">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <select asp-for="CategoryName" class="form-control">
+                    @foreach (var category in Model.)
+                    {
+                        <option value="@category."
+                    }
+                </select>
+            </div>*@
+             <div class="form-group">
             <label asp-for="TicketDetails" class="control-label"></label>
             <textarea rows="7" asp-for="TicketDetails" class="form-control"></textarea>
             <span asp-validation-for="TicketDetails" class="text-danger"></span>
         </div>
-        <br />
-        <div class="form-gropup">
+        <div class="form-group">
             <label asp-for="Imagefile" class="control-label"></label>
             <input asp-for="Imagefile" accept="image/*" />
             <span asp-validation-for="Imagefile" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
-        </div>
-    </form>
+        </div><br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
-@section Scripts {
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,8 +1,8 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@*@using Microsoft.AspNetCore.Identity
 @using WebApplicationTicket.Areas.Identity.Data
 
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager*@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,49 +26,23 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                 <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="Index">Ticket</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                            </li>
-                        }
-                        @if (SignInManager.IsSignedIn(User))
-
-
-                            @if (SignInManager.IsSignedIn(User))
-                            {
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    @if (User.IsInRole("Admin"))
-                                    {
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Manage
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <li>
-                                                    <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="ListUsers">User</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" asp-area="" asp-controller="Administration" asp-action="ListRoles">Role</a>
-                                                </li>
-
-                                            </ul>
-
-                                        </li>
-                                    }
-                                }
-                            }
-                    </ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="RegisterUser">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="Create">Ticket</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Create">Category</a>
+                        </li>
                 </div>
-                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>
@@ -76,7 +50,7 @@
             <partial name="_Notification" />
             @RenderBody()
         </main>
-    </div>
+    </div>s
     @if (IsSectionDefined("Scripts"))
     {
         @RenderSection("Scripts",required:true)

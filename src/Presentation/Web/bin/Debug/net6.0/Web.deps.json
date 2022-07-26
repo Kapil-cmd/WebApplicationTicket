@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Design": "6.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.7",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.7",
           "Repository": "1.0.0",
           "Services": "1.0.0"
         },

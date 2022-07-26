@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace Services.BL
 {
-    public class CategoryServices
+    public class CategoryServices:ICategoryservice
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly TicketingContext _db;
@@ -22,7 +22,11 @@ namespace Services.BL
             var response = new BaseResponseModel<int>();
             try
             {
-                if(_unitOfWork._db.Category.Any(x => x.CategoryName == x.CategoryName))
+                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+
+                model.CreatedBy = nameClaim;
+                model.CreatedDateTime = DateTime.Now;
+                if (_unitOfWork._db.Category.Any(x => x.CategoryName == x.CategoryName))
                 {
                     response.Status = "97";
                     response.Message = "Cannot create this category as the category with this name already exists";
@@ -34,10 +38,7 @@ namespace Services.BL
                     CreatedBy = model.CreatedBy,
                     CreatedDateTime = model.CreatedDateTime,
                 });
-                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-
-                model.CreatedBy = nameClaim;
-                model.CreatedDateTime = DateTime.Now;
+              
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";

@@ -1,9 +1,13 @@
 ﻿using Common.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repository.Entites
 {
     public class Permission
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string PermissionId { get; set; }
         public string Name { get; set; }
         public virtual ICollection<RolePermission> Roles { get; set; }

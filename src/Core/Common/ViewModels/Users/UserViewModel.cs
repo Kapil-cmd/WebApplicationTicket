@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.ViewModels.Users
 {
@@ -11,12 +7,14 @@ namespace Common.ViewModels.Users
     {
         [Required(ErrorMessage = "Username is required"), Display(Name = "Username")]
         public string UserName { get; set; }
+        [DataType(DataType.Password)]
         [Required(ErrorMessage = "Password is required"), Display(Name = "Password")]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
     }
     public class UserRegister
     {
+        public string Id { get; set; }
         [Required(ErrorMessage = "FirstName is required"), MaxLength(25), Display(Name = "FirstName")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "LastName is required"), MaxLength(25), Display(Name = "LastName")]
@@ -26,10 +24,12 @@ namespace Common.ViewModels.Users
         [Required(ErrorMessage = "Email is required"), MaxLength(15), Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
+        
         [Display(Name = "Age")]
         public int Age { get; set; }
-        [Display(Name = "DateOfBirth")]
-        [Range(1, 100)]
+        [Required]
+        [DisplayName("DateOfBirth")]
+        [DataType(DataType.Date),DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
         public long PhoneNumber { get; set; }
         [Required(ErrorMessage = "UserName is required"), MaxLength(25), Display(Name = "UserName")]
@@ -53,13 +53,15 @@ namespace Common.ViewModels.Users
         public string LastName { get; set; }
         [Required(ErrorMessage = "Address is required"), MaxLength(15), Display(Name = "Address")]
         public string Address { get; set; }
-        [Required(ErrorMessage = "Email is required"), MaxLength(15), Display(Name = "Email")]
+        [Required(ErrorMessage = "Email is required"), Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
         [Display(Name = "Age")]
+        [Range(16,100)]
         public int Age { get; set; }
-        [Display(Name = "DateOfBirth")]
-        [Range(1, 100)]
+        [Required]
+        [DisplayName("DateOfBirth")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
         public long PhoneNumber { get; set; }
         [Required(ErrorMessage = "UserName is required"), MaxLength(25), Display(Name = "UserName")]

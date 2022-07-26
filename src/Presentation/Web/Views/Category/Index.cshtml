@@ -1,40 +1,50 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using Repository.Entites
 @model IEnumerable<Category>
-
 @{
     ViewBag.Title = "All Category";
 }
-<h1>All Category</h1>
+<h1>All Ctaegory</h1>
 
-@if (Model.Any())
+@if(Model.Any())
 {
-    <a class="btn btn-primary mb-3" style="width:auto" asp-action="Create"
-   asp-controller="Category">Add New Category</a>
+    <a class="btn btn mb-3" style="width:auto" asp-action="Create"
+    asp-controller="Category">Add new Category</a>
 
-    foreach (var category in Model)
+    foreach(var category in Model)
     {
-
         <div class="card-body">
             <h5 class="card-title">
                 @category.CategoryName
+                @category.Tickets
             </h5>
         </div>
         <div class="card-footer">
-            <a class="btn btn-primary" asp-action="Edit" asp-controller="Category" asp-route-id="@category.CId">
+            <a class="btn btn-primary" asp-action="EditCategory" asp-controller="Category" asp-route-id="@category.CId">
                 Edit
             </a>
-            <a class="btn btn-danger" asp-action="Delete" asp-controller="Category" asp-route-id="@category.CId">
+            <a class="btn btn-danger" asp-action ="DeleteCategory" asp-controller="Category" asp-route-id="@category.CId">
                 Delete
+            </a>
+            <a class="btn btn-group-sm" asp-action="CateoryDetails" asp-controller="Category" asp-route-id="@category.CId">
+                Details
+            </a>
+            <a class="btn btn-warning" asp-action="Index" asp-controller="Ticket">
+                Tickets
             </a>
         </div>
 
-
         foreach (var ticket in category.Tickets)
         {
-            <div>Ticket Detail: <p>@ticket.TicketDetails</p> </div> 
-            <div>Created By: <p>@ticket.CreatedBy</p> </div> 
-            <div>Date: <p>@ticket.CreatedDateTime.Value.ToString("yyyy/MM/dd")</p> </div> 
-            <div>Assigned To: <p>@ticket.AssignedTo</p> </div> 
+            <div>Ticket Detail: <p>@ticket.TicketId</p></div>
+            <div>Ticket Detail: <p>@ticket.TicketDetails</p></div>
+            <div>Created By: <p>@ticket.CreatedBy</p></div>
+            <div>Created DateTime: <p>@ticket.CreatedDateTime</p></div>
+            <div>Modified By: <p>@ticket.ModifiedBy</p></div>
+            <div>Modififed Datetime: <p>@ticket.ModifiedDateTime</p></div>
+            <div>Assigned To: <p>@ticket.AssignedTo</p></div>
+            <div>Image Name:<p>@ticket.ImageName</p></div>
+            <div>Status:<p>@ticket.Status</p></div>
+
         }
     }
 }
@@ -42,17 +52,14 @@ else
 {
     <div class="card">
         <div class="card-header">
-            No Category Created yet
+            No Category Created Yet
         </div>
         <h5 class="card-title">
-            Use the button below to create a Category
+            Use the button to create a Category
         </h5>
         <a class="btn btn-outline-primary" style="width:auto"
-       asp-controller="Category" asp-action="Create">
-            Create Category
-        </a>
+        asp-asp-controller="Category" asp-action="Create">
+        Create Category  
+    </a>
     </div>
-    @section Scripts{
-    <script src="~/js/Custom.js"></script>
-    }
 }

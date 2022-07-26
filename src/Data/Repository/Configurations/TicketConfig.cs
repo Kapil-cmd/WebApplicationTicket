@@ -11,7 +11,7 @@ namespace Repository.Configurations
             builder.ToTable("Tickets");
 
             builder.HasKey(x => x.TicketId);
-            builder.Property(x => x.TicketId).HasMaxLength(50);
+            builder.Property(x => x.TicketId).IsRequired();
             builder.Property(x => x.TicketDetails).HasMaxLength(200).IsRequired();
             builder.Property(x => x.CreatedBy).IsRequired();
             builder.Property(x => x.CreatedDateTime);
@@ -20,18 +20,18 @@ namespace Repository.Configurations
             builder.Property(x => x.CategoryId);
             builder.Property(x => x.CategoryName).IsRequired();
             builder.Property(x => x.AssignedTo).IsRequired();
-            builder.Property(x => x.Status).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.ImageName);
 
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Ticket)
                 .HasForeignKey(x => x.CreatedBy)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Category)
                 .WithMany(x => x.Tickets)
                 .HasForeignKey(x => x.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
