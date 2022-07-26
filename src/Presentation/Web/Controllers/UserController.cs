@@ -1,4 +1,6 @@
 ﻿using Common.ViewModels.Users;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
 using Repository.Repos.Work;
@@ -107,19 +109,33 @@ namespace Web.Controllers
             }
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl = null)
         {
-            return View();
+            UserLogin model = new UserLogin()
+            {
+                ReturnUrl = ReturnUrl
+            };
+            return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            _unitOfWork._httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
+            return RedirectToAction("Login");
         }
 
         [HttpPost]
-        public IActionResult Login(UserLogin model)
+        public async Task<IActionResult> Login(UserLogin model)
         {
-            var resopnse = _userService.LoginAsync(model).Result;
+            var resopnse = await _userService.LoginAsync(model);
             if (resopnse.Status == "00")
             {
                 //User is authorized
                 //Route user to home page
+                if(!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                {
+                    return Redirect(model.ReturnUrl);
+                }
                 return RedirectToAction("Index", "Home");
             }
             else

@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.Users;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -57,9 +58,16 @@ namespace Services.BL
                     Roles = user.Roles.Select(x => x.aRole.Name).ToList()
                 };
 
-                ClaimsPrincipal claims = new ClaimsPrincipal();
 
-                ClaimsIdentity identity = new ClaimsIdentity();
+                var authProperties = new AuthenticationProperties()
+                {
+                    AllowRefresh = true,
+                    ExpiresUtc = DateTime.UtcNow.AddMinutes(30),
+                    IsPersistent = true,
+                };
+
+
+                ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, data.UserName));
                 identity.AddClaim(new Claim(ClaimTypes.GivenName, data.FirstName + " " + data.LastName));
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, data.Id));
@@ -67,15 +75,12 @@ namespace Services.BL
                 {
                     identity.AddClaim(new Claim(ClaimTypes.Role, item));
                 }
-
-                claims.AddIdentity(identity);
-
-                await _httpContextAccessor.HttpContext.Authentication.SignInAsync(
+                await _httpContextAccessor.HttpContext.SignInAsync(
                     CookieAuthenticationDefaults.AuthenticationScheme,
-                    claims
+                    new ClaimsPrincipal(identity), authProperties
                     );
 
-                response.Status = "200";
+                response.Status = "00";
                 response.Message = "Successfully logged in.";
                 response.Data = data;
             }

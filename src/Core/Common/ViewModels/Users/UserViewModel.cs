@@ -10,6 +10,7 @@ namespace Common.ViewModels.Users
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Password is required"), Display(Name = "Password")]
         public string Password { get; set; }
+        public string ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
     }
     public class UserRegister
