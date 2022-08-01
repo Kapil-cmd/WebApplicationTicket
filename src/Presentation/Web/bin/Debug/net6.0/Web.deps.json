@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Web/1.0.0": {
         "dependencies": {
+          "Common": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "6.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.7",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.7",

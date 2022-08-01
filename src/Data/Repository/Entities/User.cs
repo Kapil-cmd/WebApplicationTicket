@@ -18,10 +18,9 @@ namespace Repository.Entites
         public long PhoneNumber { get; set; }
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
-
-        public virtual IEnumerable<Category> Categories { get; set; }
+        public virtual IEnumerable<Category> Categories {get; set;}
         public virtual List<Ticket> Ticket { get; set; }
-        public virtual IEnumerable<UserRole> Roles { get; set; } 
-        public virtual IEnumerable<UserTicket> Tickets { get; set; }
+        public virtual IEnumerable<UserRole> Roles { get; set;}
+        public virtual IEnumerable<UserTicket> Tickets {get; set; }
     }
 }

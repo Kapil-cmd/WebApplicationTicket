@@ -286,6 +286,9 @@
               "D:\\Projects\\TicketManagementSystem\\src\\Business\\Services\\Services.csproj": {
                 "projectPath": "D:\\Projects\\TicketManagementSystem\\src\\Business\\Services\\Services.csproj"
               },
+              "D:\\Projects\\TicketManagementSystem\\src\\Core\\Common\\Common.csproj": {
+                "projectPath": "D:\\Projects\\TicketManagementSystem\\src\\Core\\Common\\Common.csproj"
+              },
               "D:\\Projects\\TicketManagementSystem\\src\\Data\\Repository\\Repository.csproj": {
                 "projectPath": "D:\\Projects\\TicketManagementSystem\\src\\Data\\Repository\\Repository.csproj"
               }

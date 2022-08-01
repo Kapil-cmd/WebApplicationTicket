@@ -17,7 +17,6 @@ namespace Repository.Configurations
             builder.Property(x => x.CreatedDateTime);
             builder.Property(x => x.ModifiedDateTime);
             builder.Property(x => x.ModifiedBy);
-            builder.Property(x => x.CategoryId);
             builder.Property(x => x.CategoryName).IsRequired();
             builder.Property(x => x.AssignedTo).IsRequired();
             builder.Property(x => x.Status).IsRequired();
@@ -30,7 +29,7 @@ namespace Repository.Configurations
 
             builder.HasOne(x => x.Category)
                 .WithMany(x => x.Tickets)
-                .HasForeignKey(x => x.CategoryId)
+                .HasForeignKey(x => x.CategoryName)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

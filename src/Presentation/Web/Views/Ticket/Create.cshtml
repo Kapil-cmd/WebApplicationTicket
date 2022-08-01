@@ -1,4 +1,4 @@
-﻿@model Common.ViewModels.Tickets.AddTicketViewModel
+﻿@model Common.ViewModels.Tickets.AddTicketViewModel;
 
 @{
     ViewData["Title"] = "Create";
@@ -6,44 +6,41 @@
 
 <h1>Create</h1>
 
-<h4>AddTicket</h4>
+<h4>AddTicketViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" entype ="multipart/form-data">
+            <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="TicketId" />
-            <input type="hidden" asp-for="ImageName" />
             <input type="hidden" asp-for="CreatedBy" />
-            <input type="hidden" asp-for="CreatedDateTime" />
+            <input type="hidden" asp-for="ImageName" />
             @*<div class="xol-sm-2">
                 <label asp-for="CategoryName" class="control-label"></label>
                 <select asp-for="CategoryName" class="form-control">
-                    @foreach (var category in Model.)
-                    {
-                        <option value="@category."
-                    }
-                </select>
-            </div>*@
-             <div class="form-group">
-            <label asp-for="TicketDetails" class="control-label"></label>
-            <textarea rows="7" asp-for="TicketDetails" class="form-control"></textarea>
-            <span asp-validation-for="TicketDetails" class="text-danger"></span>
-        </div>
-        <div class="form-group">
+                    @foreach(var category in Model.Categories)
+                        {
+                            <option value="@category.CategoryName">@category.CategoryName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                    </div>*@
+            <div class="form-group">
+                <label asp-for="TicketDetails" class="control-label"></label>
+                <textarea rows="8" asp-for="TicketDetails" class="form-control"></textarea>
+                <span asp-validation-for="TicketDetails" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
             <label asp-for="Imagefile" class="control-label"></label>
             <input asp-for="Imagefile" accept="image/*" />
             <span asp-validation-for="Imagefile" class="text-danger"></span>
         </div><br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-dark">Back To List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

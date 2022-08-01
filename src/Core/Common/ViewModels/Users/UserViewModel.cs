@@ -22,7 +22,7 @@ namespace Common.ViewModels.Users
         public string LastName { get; set; }
         [Required(ErrorMessage = "Address is required"), MaxLength(15), Display(Name = "Address")]
         public string Address { get; set; }
-        [Required(ErrorMessage = "Email is required"), MaxLength(15), Display(Name = "Email")]
+        [Required(ErrorMessage = "Email is required"), Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
         

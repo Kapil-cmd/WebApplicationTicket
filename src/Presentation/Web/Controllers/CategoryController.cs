@@ -1,18 +1,26 @@
 ﻿using Common.ViewModels.Categories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 using Repository.Repos.Work;
 using Services.BL;
+using System;
+using System.Linq;
+using System.Security.Claims;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryservice _categoryService;
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryController(ICategoryservice categoryService, IUnitOfWork unitOfWork)
+        private readonly TicketingContext _db;
+        public CategoryController(ICategoryservice categoryService, IUnitOfWork unitOfWork,TicketingContext db)
         {
             _categoryService = categoryService;
             _unitOfWork = unitOfWork;
+            _db = db;
         }
         public IActionResult Index()
         {
@@ -27,7 +35,8 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult Create(AddCategoryViewModel model)
         {
-           if(!ModelState.IsValid)
+            
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -61,7 +70,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        public IActionResult CateoryDetails(int CId)
+        public IActionResult CateoryDetails(string CId)
         {
             var categoryDetails = _unitOfWork._db.Category.Find(CId);
             var response = _categoryService.CategoryDetails(CId);
@@ -81,7 +90,7 @@ namespace Web.Controllers
             return View(delete);
         }
         [HttpPost]
-        public IActionResult DeleteUser(CategoryViewModel model)
+        public IActionResult DeleteCategory(CategoryViewModel model)
         {
             var response = _categoryService.DeleteCategory(model);
             if (response.Status == "00")

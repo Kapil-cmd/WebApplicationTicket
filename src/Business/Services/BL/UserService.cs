@@ -69,6 +69,7 @@ namespace Services.BL
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, data.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Actor, data.Email));
                 identity.AddClaim(new Claim(ClaimTypes.GivenName, data.FirstName + " " + data.LastName));
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, data.Id));
                 foreach (var item in data.Roles)

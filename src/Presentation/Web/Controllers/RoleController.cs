@@ -38,7 +38,7 @@ namespace Web.Controllers
             var response = _roleService.CreateRole(model);
             if(response.Status == "00")
             {
-                return View("Create");
+                return View("Index");
             }
             else
             {
@@ -67,6 +67,25 @@ namespace Web.Controllers
                 return View(model);
             }
             var response = _roleService.EditRole(model);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+        [HttpGet]
+        public IActionResult Delete(string Id)
+        {
+            var deleteRole = _unitOfWork._db.Roles.Find(Id);
+            return View(deleteRole);
+        }
+        [HttpPost]
+        public IActionResult Delete(RoleViewModel model)
+        {
+            var response = _roleService.DeleteRole(model);
             if(response.Status == "00")
             {
                 return RedirectToAction("Index");

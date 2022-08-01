@@ -12,8 +12,8 @@ using Repository;
 namespace Repository.Migrations
 {
     [DbContext(typeof(TicketingContext))]
-    [Migration("20220726044832_final")]
-    partial class final
+    [Migration("20220801050444_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,11 +26,9 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Entites.Category", b =>
                 {
-                    b.Property<int>("CId")
+                    b.Property<string>("CId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CId"), 1L, 1);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -50,8 +48,8 @@ namespace Repository.Migrations
                     b.Property<DateTime?>("ModifiedDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TicketId")
-                        .HasColumnType("int");
+                    b.Property<string>("TicketId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CId");
 
@@ -97,15 +95,7 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserRoleRoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserRoleUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserRoleUserId", "UserRoleRoleId");
 
                     b.ToTable("Roles", (string)null);
                 });
@@ -127,22 +117,17 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Entites.Ticket", b =>
                 {
-                    b.Property<int>("TicketId")
+                    b.Property<string>("TicketId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketId"), 1L, 1);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AssignedTo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CategoryName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -168,15 +153,15 @@ namespace Repository.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int?>("UserTicketTicketId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserTicketTicketId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserTicketUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TicketId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryName");
 
                     b.HasIndex("CreatedBy");
 
@@ -199,8 +184,8 @@ namespace Repository.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryCId")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryCId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
@@ -233,8 +218,8 @@ namespace Repository.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<int?>("UserTicketTicketId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserTicketTicketId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserTicketUserId")
                         .HasColumnType("nvarchar(450)");
@@ -268,8 +253,8 @@ namespace Repository.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("TicketId")
-                        .HasColumnType("int");
+                    b.Property<string>("TicketId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId", "TicketId");
 
@@ -300,13 +285,6 @@ namespace Repository.Migrations
                         .HasForeignKey("RolePermissionRoleId", "RolePermissionPermissionId");
                 });
 
-            modelBuilder.Entity("Repository.Entites.Role", b =>
-                {
-                    b.HasOne("Repository.Entites.UserRole", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("UserRoleUserId", "UserRoleRoleId");
-                });
-
             modelBuilder.Entity("Repository.Entites.RolePermission", b =>
                 {
                     b.HasOne("Repository.Entites.Permission", "aPermission")
@@ -330,8 +308,9 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Repository.Entites.Category", "Category")
                         .WithMany("Tickets")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("CategoryName")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "User")
                         .WithMany("Ticket")
@@ -437,11 +416,6 @@ namespace Repository.Migrations
                     b.Navigation("Ticket");
 
                     b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("Repository.Entites.UserRole", b =>
-                {
-                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("Repository.Entities.UserTicket", b =>

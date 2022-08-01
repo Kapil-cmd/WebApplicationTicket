@@ -1,7 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.Tickets;
 using Repository.Entites;
-using Repository.Entities;
 using Repository.Repos.Work;
 using System.Security.Claims;
 
@@ -14,16 +13,12 @@ namespace Services.BL
         {
             _unitOfWork = unitOfWork;
         }
-        public BaseResponseModel<int> AddTicket(AddTicketViewModel Ticket)
+        public BaseResponseModel<string> AddTicket(AddTicketViewModel Ticket)
         {
-            var response = new BaseResponseModel<int>();
+            var response = new BaseResponseModel<string>();
             try
             {
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-                var categoryId = _unitOfWork._db.Category.FindAsync(_unitOfWork._db.Category);
-                Ticket.CreatedBy = nameClaim;
-                Ticket.CreatedDateTime = DateTime.Now;
-
                 if (Ticket.Imagefile != null)
                 {
 
@@ -39,15 +34,14 @@ namespace Services.BL
                         Ticket.Imagefile.CopyToAsync(fileStream);
                     }
                 }
-
+                
                 _unitOfWork._db.Tickets.Add(new Repository.Entites.Ticket()
                 {
                     TicketDetails = Ticket.TicketDetails,
                     CategoryName = Ticket.CategoryName,
-                    CreatedBy = Ticket.CreatedBy,
-                    CreatedDateTime = Ticket.CreatedDateTime,
+                    CreatedBy = Ticket.CreatedBy = nameClaim,
+                    CreatedDateTime = DateTime.Now,
                     ImageName = Ticket.ImageName,
-                    Status = Ticket.Status,
                 });
 
                 _unitOfWork._db.SaveChanges();
@@ -63,9 +57,9 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<int> EditTicket(EditTicketViewmodel Ticket)
+        public BaseResponseModel<string> EditTicket(EditTicketViewmodel Ticket)
         {
-            var response = new BaseResponseModel<int>();
+            var response = new BaseResponseModel<string>();
             try
             {
                 var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == Ticket.TicketId);
@@ -100,9 +94,9 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<int> DeleteTicket(TicketViewModel DeleteTicket)
+        public BaseResponseModel<string> DeleteTicket(TicketViewModel DeleteTicket)
         {
-            var response = new BaseResponseModel<int>();
+            var response = new BaseResponseModel<string>();
             try
             {
                 var Ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == DeleteTicket.TicketId);
@@ -137,9 +131,9 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<int> TicketDetails(int ticketId)
+        public BaseResponseModel<string> TicketDetails(string ticketId)
         {
-            var response = new BaseResponseModel<int>();
+            var response = new BaseResponseModel<string>();
             try
             {
                 var Ticket = _unitOfWork._db.Tickets.Find(ticketId);
@@ -161,9 +155,9 @@ namespace Services.BL
             }
 
         }
-        public BaseResponseModel<int> AssignTicketToDeveloper(int ticketId, string userId)
+        public BaseResponseModel<string> AssignTicketToDeveloper(string ticketId, string userId)
         {
-            var response = new BaseResponseModel<int>();
+            var response = new BaseResponseModel<string>();
             try
             {
                 if (_unitOfWork.UserTicketRepository.Any(x => x.UserId == userId && x.TicketId == ticketId))
@@ -195,11 +189,11 @@ namespace Services.BL
 
         public interface ITicketService
     {
-        BaseResponseModel<int> AddTicket(AddTicketViewModel Ticket);
-        BaseResponseModel<int> EditTicket(EditTicketViewmodel Ticket);
-        BaseResponseModel<int> DeleteTicket (TicketViewModel Ticket);
-        BaseResponseModel<int> TicketDetails(int ticketId);
-        BaseResponseModel<int> AssignTicketToDeveloper(int ticketId, string userId);
+        BaseResponseModel<string> AddTicket(AddTicketViewModel Ticket);
+        BaseResponseModel<string> EditTicket(EditTicketViewmodel Ticket);
+        BaseResponseModel<string> DeleteTicket (TicketViewModel Ticket);
+        BaseResponseModel<string> TicketDetails(string ticketId);
+        BaseResponseModel<string> AssignTicketToDeveloper(string ticketId, string userId);
     }
 }
 

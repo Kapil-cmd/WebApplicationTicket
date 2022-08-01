@@ -14,12 +14,15 @@ namespace WebApplicationTicket.Controllers
             _logger = logger;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
-
+        [Authorize]
+        public IActionResult HomePage()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

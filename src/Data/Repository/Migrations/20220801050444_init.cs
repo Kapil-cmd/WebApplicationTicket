@@ -1,25 +1,37 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Repository.Migrations
 {
-    public partial class final : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
-                    CId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(name: "Modified By", type: "nvarchar(max)", nullable: true),
                     ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TicketId = table.Column<int>(type: "int", nullable: true)
+                    TicketId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,47 +67,36 @@ namespace Repository.Migrations
                         column: x => x.PermissionId,
                         principalTable: "Permissions",
                         principalColumn: "PId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserRoleRoleId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    UserRoleUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RolePermissions_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
-                    TicketId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TicketId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TicketDetails = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AssignedTo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    AssignedTo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryName = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserTicketTicketId = table.Column<int>(type: "int", nullable: true),
+                    UserTicketTicketId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UserTicketUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tickets", x => x.TicketId);
                     table.ForeignKey(
-                        name: "FK_Tickets_Categories_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_Tickets_Categories_CategoryName",
+                        column: x => x.CategoryName,
                         principalTable: "Categories",
                         principalColumn: "CId");
                 });
@@ -131,8 +132,8 @@ namespace Repository.Migrations
                     PhoneNumber = table.Column<long>(type: "bigint", maxLength: 13, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoryCId = table.Column<int>(type: "int", nullable: true),
-                    UserTicketTicketId = table.Column<int>(type: "int", nullable: true),
+                    CategoryCId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserTicketTicketId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UserTicketUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -149,7 +150,7 @@ namespace Repository.Migrations
                 name: "UserTickets",
                 columns: table => new
                 {
-                    TicketId = table.Column<int>(type: "int", nullable: false),
+                    TicketId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -188,14 +189,9 @@ namespace Repository.Migrations
                 column: "PermissionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Roles_UserRoleUserId_UserRoleRoleId",
-                table: "Roles",
-                columns: new[] { "UserRoleUserId", "UserRoleRoleId" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tickets_CategoryId",
+                name: "IX_Tickets_CategoryName",
                 table: "Tickets",
-                column: "CategoryId");
+                column: "CategoryName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_CreatedBy",
@@ -249,20 +245,6 @@ namespace Repository.Migrations
                 principalColumns: new[] { "RoleId", "PermissionId" });
 
             migrationBuilder.AddForeignKey(
-                name: "FK_RolePermissions_Roles_RoleId",
-                table: "RolePermissions",
-                column: "RoleId",
-                principalTable: "Roles",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Roles_UserRoles_UserRoleUserId_UserRoleRoleId",
-                table: "Roles",
-                columns: new[] { "UserRoleUserId", "UserRoleRoleId" },
-                principalTable: "UserRoles",
-                principalColumns: new[] { "UserId", "RoleId" });
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_Tickets_Users_CreatedBy",
                 table: "Tickets",
                 column: "CreatedBy",
@@ -306,10 +288,6 @@ namespace Repository.Migrations
                 table: "Categories");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_UserRoles_Users_UserId",
-                table: "UserRoles");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_UserTickets_Users_UserId",
                 table: "UserTickets");
 
@@ -317,9 +295,8 @@ namespace Repository.Migrations
                 name: "FK_Permissions_RolePermissions_RolePermissionRoleId_RolePermissionPermissionId",
                 table: "Permissions");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_UserRoles_Roles_RoleId",
-                table: "UserRoles");
+            migrationBuilder.DropTable(
+                name: "UserRoles");
 
             migrationBuilder.DropTable(
                 name: "Tickets");
@@ -341,9 +318,6 @@ namespace Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles");
-
-            migrationBuilder.DropTable(
-                name: "UserRoles");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Common.ViewModels.Tickets;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Entites;
 using Repository.Entities;
@@ -9,63 +9,50 @@ using Services.BL;
 
 namespace demo.Controllers
 {
-
+    [Authorize]
     public class TicketController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly TicketingContext _db;
         private readonly ITicketService _ticketService;
-        public TicketController(IUnitOfWork unitOfWork,TicketingContext db, ITicketService ticketService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public TicketController(IUnitOfWork unitOfWork,TicketingContext db, ITicketService ticketService,IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
             _db = db;
             _ticketService = ticketService;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
-            return View();
+            List<Ticket> objFromTickets = _unitOfWork._db.Tickets.ToList();
+            return View(objFromTickets);
         }
         [HttpGet]
         public IActionResult Create()
         {
-            List<Category> category =  _db.Category.ToList();
-            if (category == null)
-            {
-                return NotFound();
-            }
-            Ticket model = new Ticket
-            {
-                Categories = category,
-            };
-            return View(model);
+            //List<Category> category =  _db.Category.ToList();
+            //if (category == null)
+            //{
+            //    return NotFound();
+            //}
+            //Ticket model = new Ticket
+            //{
+            //    Categories = category,
+            //};
+            return View();
 
         }
         [HttpPost]
         public IActionResult Create(AddTicketViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
             var response = _ticketService.AddTicket(model);
             if(response.Status == "00")
             {
-                model.Status = Common.Enums.StatusEnum.Pending;
-                //if (model.Imagefile != null)
-                //{
-
-                //    //var wwwRootPath = Directory.GetCurrentDirectory();
-
-                //    string wwwRootPath = _webhostEnvironment.WebRootPath;
-                //    string fileName = Path.GetFileNameWithoutExtension(model.Imagefile.FileName);
-                //    string extension = Path.GetExtension(model.Imagefile.FileName);
-                //    model.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
-                //    string path = Path.Combine(wwwRootPath + "/Image", fileName);
-                //    using (var fileStream = new FileStream(path, FileMode.Create))
-                //    {
-                //        model.Imagefile.CopyToAsync(fileStream);
-                //    }
-                //}
                 return RedirectToAction("Index");
             }
             else
@@ -107,7 +94,7 @@ namespace demo.Controllers
             }
         }
         [HttpGet]
-        public IActionResult DetailTicket(int ticketId)
+        public IActionResult DetailTicket(string ticketId)
         {
             var response = _ticketService.TicketDetails(ticketId);
             if(response.Status == "00")
@@ -141,7 +128,7 @@ namespace demo.Controllers
         }
         
         [HttpPost]
-        public IActionResult AssignTicketToDeveloper(int ticketId,string userId)
+        public IActionResult AssignTicketToDeveloper(string ticketId,string userId)
         {
             var model = new EditTicketViewmodel();
 

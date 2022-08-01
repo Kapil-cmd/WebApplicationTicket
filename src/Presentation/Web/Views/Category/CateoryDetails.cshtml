@@ -1,4 +1,4 @@
-﻿@model Repository.Entites.Category
+﻿@model Common.ViewModels.Categories.CategoryViewModel
 
 @{
     ViewData["Title"] = "CateoryDetails";
@@ -7,10 +7,15 @@
 <h1>CateoryDetails</h1>
 
 <div>
-    <h4>Category</h4>
+    <h4>CategoryViewModel</h4>
     <hr />
-    <input type="hidden" asp-for="CId" />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CId)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CategoryName)
         </dt>
@@ -45,5 +50,5 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index" class="btn btn-outline-info" style="width:150px">Back to List</a>
+    <a asp-action="Index">Back to List</a>
 </div>

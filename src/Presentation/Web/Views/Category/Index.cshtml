@@ -1,65 +1,65 @@
-﻿@using Repository.Entites
-@model IEnumerable<Category>
+﻿@model IEnumerable<Repository.Entites.Category>
+
 @{
-    ViewBag.Title = "All Category";
+    ViewData["Title"] = "Index";
 }
-<h1>All Ctaegory</h1>
 
-@if(Model.Any())
-{
-    <a class="btn btn mb-3" style="width:auto" asp-action="Create"
-    asp-controller="Category">Add new Category</a>
+<h1>Index</h1>
 
-    foreach(var category in Model)
-    {
-        <div class="card-body">
-            <h5 class="card-title">
-                @category.CategoryName
-                @category.Tickets
-            </h5>
-        </div>
-        <div class="card-footer">
-            <a class="btn btn-primary" asp-action="EditCategory" asp-controller="Category" asp-route-id="@category.CId">
-                Edit
-            </a>
-            <a class="btn btn-danger" asp-action ="DeleteCategory" asp-controller="Category" asp-route-id="@category.CId">
-                Delete
-            </a>
-            <a class="btn btn-group-sm" asp-action="CateoryDetails" asp-controller="Category" asp-route-id="@category.CId">
-                Details
-            </a>
-            <a class="btn btn-warning" asp-action="Index" asp-controller="Ticket">
-                Tickets
-            </a>
-        </div>
-
-        foreach (var ticket in category.Tickets)
-        {
-            <div>Ticket Detail: <p>@ticket.TicketId</p></div>
-            <div>Ticket Detail: <p>@ticket.TicketDetails</p></div>
-            <div>Created By: <p>@ticket.CreatedBy</p></div>
-            <div>Created DateTime: <p>@ticket.CreatedDateTime</p></div>
-            <div>Modified By: <p>@ticket.ModifiedBy</p></div>
-            <div>Modififed Datetime: <p>@ticket.ModifiedDateTime</p></div>
-            <div>Assigned To: <p>@ticket.AssignedTo</p></div>
-            <div>Image Name:<p>@ticket.ImageName</p></div>
-            <div>Status:<p>@ticket.Status</p></div>
-
-        }
-    }
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDateTime)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
 }
-else
-{
-    <div class="card">
-        <div class="card-header">
-            No Category Created Yet
-        </div>
-        <h5 class="card-title">
-            Use the button to create a Category
-        </h5>
-        <a class="btn btn-outline-primary" style="width:auto"
-        asp-asp-controller="Category" asp-action="Create">
-        Create Category  
-    </a>
-    </div>
-}
+    </tbody>
+</table>

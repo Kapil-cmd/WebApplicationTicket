@@ -1,8 +1,14 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Repository;
 using Repository.Repos.Work;
 using Services.BL;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +17,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<TicketingContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContextConnection")));
-
-builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
@@ -49,6 +53,7 @@ builder.Services.AddScoped<ITicketService, TicketServices>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddScoped<ICategoryservice, CategoryServices>();
+builder.Services.AddRazorPages();
 var app = builder.Build();
 
 

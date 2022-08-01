@@ -1,10 +1,13 @@
 ﻿using Common.ViewModels.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Web.Controllers
 {
@@ -49,6 +52,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [Authorize]
         public IActionResult EditUser(string? Id)
         {
 
@@ -136,7 +140,7 @@ namespace Web.Controllers
                 {
                     return Redirect(model.ReturnUrl);
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("HomePage", "Home");
             }
             else
             {

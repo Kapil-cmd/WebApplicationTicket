@@ -10326,6 +10326,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Common >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.7",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.7",
@@ -10367,6 +10368,9 @@
           "projectReferences": {
             "D:\\Projects\\TicketManagementSystem\\src\\Business\\Services\\Services.csproj": {
               "projectPath": "D:\\Projects\\TicketManagementSystem\\src\\Business\\Services\\Services.csproj"
+            },
+            "D:\\Projects\\TicketManagementSystem\\src\\Core\\Common\\Common.csproj": {
+              "projectPath": "D:\\Projects\\TicketManagementSystem\\src\\Core\\Common\\Common.csproj"
             },
             "D:\\Projects\\TicketManagementSystem\\src\\Data\\Repository\\Repository.csproj": {
               "projectPath": "D:\\Projects\\TicketManagementSystem\\src\\Data\\Repository\\Repository.csproj"

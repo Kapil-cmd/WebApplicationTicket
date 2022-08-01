@@ -1,4 +1,6 @@
-﻿namespace Repository.Entites
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Repository.Entites
 {
     public class UserRole
     {
@@ -8,6 +10,7 @@
 
         public virtual User aUser{get;set;}
         public virtual Role aRole { get; set; }
+        [NotMapped]
         public List<Role> Roles { get; set; }
     }
 }

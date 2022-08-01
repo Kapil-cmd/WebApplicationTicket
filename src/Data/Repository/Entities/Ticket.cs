@@ -1,4 +1,5 @@
 ﻿using Common.Enums;
+using Microsoft.AspNetCore.Http;
 using Repository.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,7 @@ namespace Repository.Entites
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TicketId { get; set; }
+        public string TicketId { get; set; }
         public string TicketDetails { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDateTime { get; set; }
@@ -17,10 +18,11 @@ namespace Repository.Entites
         public string ModifiedBy { get; set; }
         public string AssignedTo { get; set; }
         public string CategoryName { get; set; }
-        public int? CategoryId { get; set; }
         public StatusEnum Status { get; set; }
         public string ImageName { get; set; }
         public virtual User User { get; set; }
+        [NotMapped]
+        public IFormFile? Imagefile { get; set; }
         public virtual Category Category { get; set; }
         public List<Category> Categories { get; set; }
         public virtual IEnumerable<UserTicket> Users { get; set; }
