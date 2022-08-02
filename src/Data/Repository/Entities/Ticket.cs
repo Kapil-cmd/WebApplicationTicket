@@ -26,6 +26,7 @@ namespace Repository.Entites
         public virtual Category Category { get; set; }
         public List<Category> Categories { get; set; }
         public virtual IEnumerable<UserTicket> Users { get; set; }
+        
     }
 }
 

@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Repository;
 using Repository.Repos.Work;
 using Services.BL;
-using System;
-using System.Linq;
-using System.Security.Claims;
 
 namespace Web.Controllers
 {
@@ -51,10 +48,18 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        public IActionResult EditCategory(int Id)
+        public IActionResult EditCategory(string CId)
         {
-            var categoryDetails = _unitOfWork._db.Category.Find(Id);
-            return View(categoryDetails);
+            if(CId == null )
+            {
+                return NotFound();
+            }
+            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u => u.CId == CId);
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
         }
         [HttpPost]
         public IActionResult EditCategory(EditCategoryViewModel model)
@@ -72,7 +77,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult CateoryDetails(string CId)
         {
-            var categoryDetails = _unitOfWork._db.Category.Find(CId);
+            var categoryDetails = _unitOfWork.Category.GetFirstOrDefault(u => u.CId == CId);
             var response = _categoryService.CategoryDetails(CId);
             if(response.Status == "00")
             {
@@ -84,10 +89,18 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        public IActionResult DeleteCategory(int Id)
+        public IActionResult DeleteCategory(string Id)
         {
-          var delete = _unitOfWork.Category.GetById(Id);
-            return View(delete);
+            if(Id == null)
+            {
+                return NotFound();
+            }
+            var deleteFromCategory = _unitOfWork.Category.GetFirstOrDefault(u => u.CId == Id);
+            if(deleteFromCategory == null)
+            {
+                return NotFound();
+            }
+            return View(deleteFromCategory);
         }
         [HttpPost]
         public IActionResult DeleteCategory(CategoryViewModel model)

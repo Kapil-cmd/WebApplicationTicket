@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Common.ViewModels.Tickets;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repository.Entites
@@ -16,5 +17,6 @@ namespace Repository.Entites
         public virtual User User { get; set; }
         public List<Ticket> Tickets { get; set;}
         public List<User> Users {get; set;}
+        public IEnumerable<ListCategory> listCategories { get; set; }
     }
 }

@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[5.0.17, )"
+            },
+            "Microsoft.Build.Framework": {
+              "target": "Package",
+              "version": "[17.2.0, )"
             }
           },
           "imports": [
@@ -151,6 +155,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.7, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.28.0, )"
             },
             "Toolbelt.EntityFrameworkCore.AnnotationBasedModelBuilder": {
               "target": "Package",

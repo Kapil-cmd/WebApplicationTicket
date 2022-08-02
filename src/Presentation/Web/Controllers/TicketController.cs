@@ -1,11 +1,13 @@
 ﻿using Common.ViewModels.Tickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository;
 using Repository.Entites;
 using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
+using static Common.ViewModels.Tickets.AddTicketViewModel;
 
 namespace demo.Controllers
 {
@@ -31,16 +33,20 @@ namespace demo.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            //List<Category> category =  _db.Category.ToList();
-            //if (category == null)
-            //{
-            //    return NotFound();
-            //}
-            //Ticket model = new Ticket
-            //{
-            //    Categories = category,
-            //};
-            return View();
+            AddTicketViewModel model = new AddTicketViewModel();
+            var category = _unitOfWork._db.Category.ToList();
+            if(category != null)
+            {
+                if(category.Count() > 0)
+                {
+                    model.categories = category.Select(x => new ListCategory()
+                    {
+                        CId = x.CId,
+                        CategoryName = x.CategoryName
+                    }).ToList();
+                }
+            }
+            return View(model);
 
         }
         [HttpPost]

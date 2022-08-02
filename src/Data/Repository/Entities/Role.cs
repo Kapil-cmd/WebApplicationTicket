@@ -14,6 +14,7 @@ namespace Repository.Entites
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public string Name { get; set; }
+        //public bool IsSelected { get; set;}
         public virtual IEnumerable<UserRole> Users { get; set; }
         public virtual IEnumerable<RolePermission> Permissions { get; set; }
     }

@@ -18,10 +18,9 @@ namespace Services.BL
             var response = new BaseResponseModel<string>();
             try
             {
-                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+                
                 if (Ticket.Imagefile != null)
                 {
-
                     var wwwRootPath = Directory.GetCurrentDirectory();
 
                     //string wwwRootPath = _unitOfWork._webHostEnvironment.WebRootPath;
@@ -34,7 +33,8 @@ namespace Services.BL
                         Ticket.Imagefile.CopyToAsync(fileStream);
                     }
                 }
-                
+                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
                 _unitOfWork._db.Tickets.Add(new Repository.Entites.Ticket()
                 {
                     TicketDetails = Ticket.TicketDetails,

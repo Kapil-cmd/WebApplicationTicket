@@ -31,7 +31,6 @@ namespace Services.BL
                     return response;
                 }
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                //var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.Identity.Name;
                 
                 _unitOfWork._db.Category.Add(new Repository.Entites.Category()
                 {

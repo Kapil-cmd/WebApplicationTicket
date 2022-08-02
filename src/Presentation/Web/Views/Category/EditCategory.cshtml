@@ -12,11 +12,7 @@
     <div class="col-md-4">
         <form asp-action="EditCategory">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CId" class="control-label"></label>
-                <input asp-for="CId" class="form-control" />
-                <span asp-validation-for="CId" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="CId" />
             <div class="form-group">
                 <label asp-for="CategoryName" class="control-label"></label>
                 <input asp-for="CategoryName" class="form-control" />
