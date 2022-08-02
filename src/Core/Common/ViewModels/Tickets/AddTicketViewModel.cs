@@ -19,8 +19,8 @@ namespace Common.ViewModels.Tickets
     }
     public class ListCategory
         {
+        [Key]
         public string CId { get; set; }
         public string CategoryName { get; set; }
     }
-    
 }

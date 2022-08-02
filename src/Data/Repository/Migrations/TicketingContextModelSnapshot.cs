@@ -22,6 +22,24 @@ namespace Repository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Common.ViewModels.Tickets.ListCategory", b =>
+                {
+                    b.Property<string>("CId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CategoryCId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CId");
+
+                    b.HasIndex("CategoryCId");
+
+                    b.ToTable("ListCategory");
+                });
+
             modelBuilder.Entity("Repository.Entites.Category", b =>
                 {
                     b.Property<string>("CId")
@@ -30,11 +48,11 @@ namespace Repository.Migrations
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
@@ -89,6 +107,9 @@ namespace Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -129,7 +150,7 @@ namespace Repository.Migrations
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
@@ -261,11 +282,19 @@ namespace Repository.Migrations
                     b.ToTable("UserTickets", (string)null);
                 });
 
+            modelBuilder.Entity("Common.ViewModels.Tickets.ListCategory", b =>
+                {
+                    b.HasOne("Repository.Entites.Category", null)
+                        .WithMany("listCategories")
+                        .HasForeignKey("CategoryCId");
+                });
+
             modelBuilder.Entity("Repository.Entites.Category", b =>
                 {
                     b.HasOne("Repository.Entites.User", "User")
                         .WithMany("Categories")
                         .HasForeignKey("CreatedBy")
+                        .HasPrincipalKey("UserName")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -307,12 +336,14 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Entites.Category", "Category")
                         .WithMany("Tickets")
                         .HasForeignKey("CategoryName")
+                        .HasPrincipalKey("CategoryName")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "User")
                         .WithMany("Ticket")
                         .HasForeignKey("CreatedBy")
+                        .HasPrincipalKey("UserName")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -379,6 +410,8 @@ namespace Repository.Migrations
                     b.Navigation("Tickets");
 
                     b.Navigation("Users");
+
+                    b.Navigation("listCategories");
                 });
 
             modelBuilder.Entity("Repository.Entites.Permission", b =>

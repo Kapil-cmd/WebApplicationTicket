@@ -33,7 +33,7 @@ namespace Services.BL
                         Ticket.Imagefile.CopyToAsync(fileStream);
                     }
                 }
-                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
 
                 _unitOfWork._db.Tickets.Add(new Repository.Entites.Ticket()
                 {

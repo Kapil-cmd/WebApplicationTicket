@@ -30,7 +30,7 @@ namespace Services.BL
                     response.Message = "Cannot create this category as the category with this name already exists";
                     return response;
                 }
-                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 
                 _unitOfWork._db.Category.Add(new Repository.Entites.Category()
                 {

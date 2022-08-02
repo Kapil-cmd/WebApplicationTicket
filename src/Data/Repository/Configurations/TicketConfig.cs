@@ -25,11 +25,13 @@ namespace Repository.Configurations
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Ticket)
                 .HasForeignKey(x => x.CreatedBy)
+                .HasPrincipalKey(x => x.UserName)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Category)
                 .WithMany(x => x.Tickets)
                 .HasForeignKey(x => x.CategoryName)
+                .HasPrincipalKey(x => x.CategoryName)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }
