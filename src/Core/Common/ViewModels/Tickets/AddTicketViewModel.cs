@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Common.Enums;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace Common.ViewModels.Tickets
@@ -14,6 +15,7 @@ namespace Common.ViewModels.Tickets
         public string ImageName { get; set; }
         [Display(Name = "CreatedBy")]
         public string CreatedBy { get; set; }
+        public StatusEnum Status { get; set; }
         public List<ListCategory> categories { get; set; }
 
     }

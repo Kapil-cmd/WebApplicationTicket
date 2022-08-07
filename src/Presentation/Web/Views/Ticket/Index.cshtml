@@ -7,13 +7,14 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-outline-success">Create New</a>
-&nbsp;
-    <a asp-controller="Home" asp-action="HomePage" class="btn btn-outline-info">HomePage</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.TicketDetails)
             </th>
@@ -47,6 +48,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketId)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TicketDetails)
             </td>

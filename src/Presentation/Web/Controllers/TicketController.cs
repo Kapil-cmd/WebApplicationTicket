@@ -25,7 +25,7 @@ namespace demo.Controllers
         }
         public IActionResult Index()
         {
-            List<Ticket> objFromTickets = _unitOfWork._db.Tickets.ToList();
+            var objFromTickets = _unitOfWork._db.Tickets.ToList();
             return View(objFromTickets);
         }
         [HttpGet]
@@ -66,6 +66,7 @@ namespace demo.Controllers
                     await ticket.Imagefile.CopyToAsync(filestream);
                 }
             }
+           
             var response = _ticketService.AddTicket(ticket);
             if(response.Status == "00")
             {

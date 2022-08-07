@@ -80,16 +80,19 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult CategoryDetails(string CId)
         {
-            if(CId == null)
+            if (CId == null)
             {
                 return NotFound();
             }
             var categoryDetails = _unitOfWork.CategoryRepository.GetFirstOrDefault(u => u.CId == CId);
-            if(CategoryDetails == null)
+            if (CategoryDetails == null)
             {
                 return NotFound();
             }
+            else
+            {
                 return View(categoryDetails);
+            }
         }
         [HttpGet]
         public IActionResult DeleteCategory(string CId)

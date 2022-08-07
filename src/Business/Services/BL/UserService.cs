@@ -204,29 +204,6 @@ namespace Services.BL
 
 
         }
-        public BaseResponseModel<string> UserDetails(string Id)
-        {
-            var response = new BaseResponseModel<string>();
-            try
-            {
-                var users = _unitOfWork._db.Users.Find(Id);
-                if (users == null)
-                {
-                    response.Status = "100";
-                    response.Message = "User not found";
-                    return response;
-                }
-                response.Status = "00";
-                response.Message = "User Details";
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = "500";
-                response.Message = "Error occured: " + ex.Message;
-                return response;
-            }
-        }
         public BaseResponseModel<string> AssignUserToRole(string userId, string roleId)
         {
             BaseResponseModel<string> response = new BaseResponseModel<string>();
@@ -295,7 +272,6 @@ namespace Services.BL
         BaseResponseModel<string> Register(UserRegister Register);
         BaseResponseModel<string> EditUser(EditUserViewModel Edituser);
         BaseResponseModel<string> DeleteUser(UserViewModel DeleteUser);
-        BaseResponseModel<string> UserDetails(string Id);
         BaseResponseModel<string> AssignUserToRole(string userId, string roleId);
         BaseResponseModel<string> RemoveUserFromRole(string userId, string roleId);
     }

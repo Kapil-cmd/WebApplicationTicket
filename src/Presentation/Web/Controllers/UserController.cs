@@ -53,18 +53,26 @@ namespace Web.Controllers
         }
         [HttpGet]
         [Authorize]
-        public IActionResult EditUser(string? Id)
+        public IActionResult EditUser(string Id)
         {
-
-            var userDetail = _unitOfWork._db.Users.Find(Id);
-            List<Role> role = _unitOfWork._db.Roles.ToList();
-
-            var UserRoles = new UserRole
+            var user = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == Id);
+            if (user == null)
             {
-                aUser = userDetail,
-                Roles = role
+                return NotFound();
+            }
+            EditUserViewModel model = new EditUserViewModel
+            {
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                Email = user.Email,
+                Age = user.Age,
+                DateOfBirth = user.DateOfBirth,
+                PhoneNumber = user.PhoneNumber,
             };
-            return View(userDetail); 
+            return View(model);
+
         }
         [HttpPost]
         public IActionResult EditUser(EditUserViewModel model)
@@ -73,7 +81,7 @@ namespace Web.Controllers
             if(response.Status == "00")
             {
                 //redirect to user profile page
-                return RedirectToAction("Profile");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -83,14 +91,18 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult UserDetails(string Id)
         {
-            var response = _userService.UserDetails(Id);
-            if(response.Status =="00")
+            if(Id == null)
             {
-                return RedirectToAction("Details", "User");
+                return NotFound();
+            }
+            var response = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == Id);
+            if( response == null)
+            {
+                return NotFound();
             }
             else
             {
-                return RedirectToAction("Index");
+                return View(response);
             }
         }
         [HttpGet]

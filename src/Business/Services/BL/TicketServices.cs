@@ -19,6 +19,7 @@ namespace Services.BL
             try
             {
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+                Ticket.Status = Common.Enums.StatusEnum.Pending;
 
                 _unitOfWork._db.Tickets.Add(new Repository.Entites.Ticket()
                 {
@@ -64,6 +65,7 @@ namespace Services.BL
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 Ticket.ModifiedBy = nameClaim;
                 Ticket.ModifiedDateTime = DateTime.Now;
+                Ticket.Status = Common.Enums.StatusEnum.InProcess;
 
                 _unitOfWork._db.Tickets.Update(ticket);
                 _unitOfWork._db.SaveChanges();

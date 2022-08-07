@@ -152,7 +152,7 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime?>("CreatedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImageName")

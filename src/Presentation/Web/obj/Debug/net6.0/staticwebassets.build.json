@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "78U79JV25z/s0bTXngCjvH4kY0kC6vGDNGDg9C+A9uU=",
+  "Hash": "ewItnDHmCvB8Tur7L04JXNEhbamGJx3tnxLEyypkCDc=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\helpdesk.jpg"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\ronaldo22043288.PNG",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/ronaldo22043288.PNG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\ronaldo22043288.PNG"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\js\\site.js",
