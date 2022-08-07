@@ -337,7 +337,7 @@ namespace Repository.Migrations
                         .WithMany("Tickets")
                         .HasForeignKey("CategoryName")
                         .HasPrincipalKey("CategoryName")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "User")

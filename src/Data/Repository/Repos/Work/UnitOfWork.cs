@@ -16,10 +16,9 @@ namespace Repository.Repos.Work
         {
             _db = db;
             _httpContextAccessor = httpContextAccessor;
-            Category = new CategoryRepository(_db);
             Role = new RoleRepository(_db);
             Ticket = new TicketRepository(_db);
-            Category = new CategoryRepository(_db);
+            CategoryRepository = new CategoryRepository(_db);
             UserRoleRepository = new UserRoleRepository(_db);
             UserRepository = new UserRepository(_db);
             Permission = new PermissionRepository(_db);
@@ -27,10 +26,7 @@ namespace Repository.Repos.Work
             UserTicketRepository = new UserTicketRepository(_db);
 
         }
-        public ICategoryRepository Category { get; private set; }
-
         public IHttpContextAccessor _httpContextAccessor { get; private set; }
-
         public TicketingContext _db { get; private set; }
         public IRoleRepository Role { get; private set; }
         public ITicketRepository Ticket { get; private set; }

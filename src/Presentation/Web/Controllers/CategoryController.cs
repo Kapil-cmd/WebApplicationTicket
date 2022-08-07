@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
+using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
 
@@ -50,24 +51,26 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult EditCategory(string CId)
         {
-            if(CId == null )
+            var category = _unitOfWork.CategoryRepository.GetFirstOrDefault(x => x.CId == CId);
+            if(category == null)
             {
                 return NotFound();
             }
-            var categoryFromDb = _unitOfWork.Category.GetFirstOrDefault(u => u.CId == CId);
-            if (categoryFromDb == null)
+            EditCategoryViewModel model = new EditCategoryViewModel
             {
-                return NotFound();
-            }
-            return View(categoryFromDb);
+                CId = category.CId,
+                CategoryName = category.CategoryName
+            };
+            return View(model);
         }
         [HttpPost]
         public IActionResult EditCategory(EditCategoryViewModel model)
         {
+
             var response = _categoryService.EditCategory(model);
             if(response.Status == "00")
             {
-                return RedirectToAction("Edit");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -75,40 +78,41 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        public IActionResult CateoryDetails(string CId)
+        public IActionResult CategoryDetails(string CId)
         {
-            var categoryDetails = _unitOfWork.Category.GetFirstOrDefault(u => u.CId == CId);
-            var response = _categoryService.CategoryDetails(CId);
-            if(response.Status == "00")
-            {
-                return RedirectToAction("Detail");
-            }
-            else
-            {
-                return View("Index");
-            }
-        }
-        [HttpGet]
-        public IActionResult DeleteCategory(string Id)
-        {
-            if(Id == null)
+            if(CId == null)
             {
                 return NotFound();
             }
-            var deleteFromCategory = _unitOfWork.Category.GetFirstOrDefault(u => u.CId == Id);
-            if(deleteFromCategory == null)
+            var categoryDetails = _unitOfWork.CategoryRepository.GetFirstOrDefault(u => u.CId == CId);
+            if(CategoryDetails == null)
+            {
+                return NotFound();
+            }
+                return View(categoryDetails);
+        }
+        [HttpGet]
+        public IActionResult DeleteCategory(string CId)
+        {
+            if (CId == null)
+            {
+                return NotFound();
+            }
+            var deleteFromCategory = _unitOfWork.CategoryRepository.GetFirstOrDefault(u => u.CId == CId);
+            if (deleteFromCategory == null)
             {
                 return NotFound();
             }
             return View(deleteFromCategory);
+
         }
-        [HttpPost]
-        public IActionResult DeleteCategory(CategoryViewModel model)
+        [HttpPost, ActionName("DeleteCategory")]
+        public IActionResult DeleteCategoryPost(Category model)
         {
             var response = _categoryService.DeleteCategory(model);
-            if (response.Status == "00")
+            if(response.Status == "00")
             {
-                return RedirectToAction("Delete");
+                return RedirectToAction("Index");
             }
             else
             {

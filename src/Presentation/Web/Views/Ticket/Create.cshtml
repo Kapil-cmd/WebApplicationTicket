@@ -6,41 +6,51 @@
 
 <h1>Create</h1>
 
-<h4>AddTicketViewModel</h4>
+<h4>Ticket</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" entype ="multipart/form-data">
-            <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="xol-sm-2">
-                <label asp-for="CategoryName" class="control-label"></label>
-                <select asp-for="CategoryName" class="form-control">
-                    @foreach(var category in Model.categories)
-                        {
-                            <option value="@category.CategoryName">@category.CategoryName</option>
-                        }
-                    </select>
-                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+             <input type="hidden" asp-for="ImageName" />
+         <div class="row">  
+                    <div class="col-md-6">  
+                        <div class="form-group">  
+                            <label asp-for="CategoryName" class="control-label"></label>  
+                            <select asp-for="CategoryName" class="form-control">  
+                                <option value="">Choose Category</option>  
+                                <option value="Communication">Communication</option>  
+                                <option value="Software Problem">Software Problem</option>
+                                <option value="Hardware Problem">Hardware Problem</option>
+                                <option value="Need Assistance">Need Assistance</option>
+                            </select>  
+                            <span asp-validation-for="CategoryName" class="text-danger"></span>  
+                        </div>  
+                        
                     </div>
-            <div class="form-group">
+                    </div><br />
+                    <div class="form-group">
                 <label asp-for="TicketDetails" class="control-label"></label>
-                <textarea rows="8" asp-for="TicketDetails" class="form-control"></textarea>
+                <textarea rows="7" asp-for="TicketDetails" class="form-control" ></textarea>
                 <span asp-validation-for="TicketDetails" class="text-danger"></span>
             </div><br />
-            <div class="form-group">
-            <label asp-for="Imagefile" class="control-label"></label>
-            <input asp-for="Imagefile" accept="image/*" />
-            <span asp-validation-for="Imagefile" class="text-danger"></span>
-        </div><br />
-            <div class="form-group">
+                    <div class="form-gropup">
+                        <label asp-for="Imagefile" class="control-label"></label>
+                        <input asp-for="Imagefile" accept="image/*" />
+                        <span asp-validation-for="Imagefile" class="text-danger"></span>
+                    </div><br />
+                 <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-outline-dark">Back To List</a>
+                <a asp-action ="Index" class="btn btn-light">Back to List</a>
             </div>
+            
         </form>
     </div>
 </div>
 
+<div>
+    
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

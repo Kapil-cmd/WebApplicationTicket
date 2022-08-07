@@ -14,7 +14,7 @@ namespace Repository.Repos.Work
     {
         public TicketingContext _db { get; }
 
-        ICategoryRepository Category { get; }
+        ICategoryRepository CategoryRepository { get; }
         IHttpContextAccessor _httpContextAccessor { get; }
         IRoleRepository Role { get; }
         ITicketRepository Ticket { get; }

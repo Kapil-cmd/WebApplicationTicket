@@ -1,13 +1,11 @@
 ﻿using Common.ViewModels.Tickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository;
 using Repository.Entites;
 using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
-using static Common.ViewModels.Tickets.AddTicketViewModel;
 
 namespace demo.Controllers
 {
@@ -50,20 +48,32 @@ namespace demo.Controllers
 
         }
         [HttpPost]
-        public IActionResult Create(AddTicketViewModel model)
+        public async Task<IActionResult> Create(AddTicketViewModel ticket)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(ticket);
             }
-            var response = _ticketService.AddTicket(model);
+            if(ticket.Imagefile != null)
+            {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(ticket.Imagefile.FileName);
+                string extension = Path.GetExtension(ticket.Imagefile.FileName);
+                ticket.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Image", fileName);
+                using(var filestream = new FileStream(path, FileMode.Create))
+                {
+                    await ticket.Imagefile.CopyToAsync(filestream);
+                }
+            }
+            var response = _ticketService.AddTicket(ticket);
             if(response.Status == "00")
             {
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(model);
+                return View(ticket);
             }
         }
         [HttpGet]

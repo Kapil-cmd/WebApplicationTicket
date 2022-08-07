@@ -11,7 +11,7 @@ namespace Repository.Repos.CategoryRep
         }
     }
 
-    public interface ICategoryRepository : IRepository<Category>
+    public interface ICategoryRepository:IRepository<Category>
     {
     }
 }

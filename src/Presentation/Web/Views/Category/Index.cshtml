@@ -15,9 +15,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CategoryName)
             </th>
             <th>
@@ -39,9 +36,6 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
@@ -59,10 +53,10 @@
             <td>
                 <div class="w-75 btn-group" role="group">
                     <a asp-controller="Category" asp-action="EditCategory" asp-route-CId="@item.CId"
-                    class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
+                    class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>@*
                     <a asp-controller="Category" asp-action="DeleteCategory" asp-route-CId="@item.CId"
-                    class="btn btn-danger mx-2"><i class="bg-info bi-trash-fill"></i>Delete</a>
-                    <a asp-controller="Category" asp-action="CateoryDetails" asp-route-CId="@item.CId"
+                    class="btn btn-danger mx-2"><i class="bg-info bi-trash-fill"></i>Delete</a>*@
+                    <a asp-controller="Category" asp-action="CategoryDetails" asp-route-CId="@item.CId"
                     class="btn btn-danger mx-2"><i class="bg-info bi-ticket-detailed"></i>Details</a>
                 </div>
             </td>

@@ -14,6 +14,8 @@ namespace Common.ViewModels.Categories
     }
     public class AddCategoryViewModel
     {
+        [Key]
+        public string CId { get; set; }
 
         [Required(ErrorMessage = "CategoryName is required"), MaxLength(50), Display(Name = "CategoryName")]
         public string CategoryName { get; set; }

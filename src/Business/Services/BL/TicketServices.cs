@@ -18,21 +18,6 @@ namespace Services.BL
             var response = new BaseResponseModel<string>();
             try
             {
-                
-                if (Ticket.Imagefile != null)
-                {
-                    var wwwRootPath = Directory.GetCurrentDirectory();
-
-                    //string wwwRootPath = _unitOfWork._webHostEnvironment.WebRootPath;
-                    string fileName = Path.GetFileNameWithoutExtension(Ticket.Imagefile.FileName);
-                    string extension = Path.GetExtension(Ticket.Imagefile.FileName);
-                    Ticket.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/Image", fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        Ticket.Imagefile.CopyToAsync(fileStream);
-                    }
-                }
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
 
                 _unitOfWork._db.Tickets.Add(new Repository.Entites.Ticket()

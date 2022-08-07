@@ -32,7 +32,7 @@ namespace Repository.Configurations
                 .WithMany(x => x.Tickets)
                 .HasForeignKey(x => x.CategoryName)
                 .HasPrincipalKey(x => x.CategoryName)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
