@@ -44,7 +44,7 @@ namespace Web.Controllers
             if(response.Status == "00")
             {
                 // redirect to login page
-                return RedirectToAction("Login");
+                return RedirectToAction("RegisterUser");
             }
             else
             {

@@ -21,12 +21,12 @@ namespace Services.BL
           var response = new BaseResponseModel<string>();
             try
             {
-                //if(_unitOfWork.CategoryRepository.Any(x => x.CategoryName == category.CategoryName))
-                //{
-                //    response.Status = "97";
-                //    response.Message = "Category with same name already exists";
-                //    return response;
-                //}
+                if (_unitOfWork.CategoryRepository.Any(x => x.CategoryName == category.CategoryName))
+                {
+                    response.Status = "97";
+                    response.Message = "Category with same name already exists";
+                    return response;
+                }
 
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 _unitOfWork._db.Category.Add(new Repository.Entites.Category()

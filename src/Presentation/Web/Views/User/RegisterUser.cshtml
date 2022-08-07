@@ -62,17 +62,15 @@
                 <label asp-for="ConfirmPassword" class="control-label"></label>
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
+            </div><br />
              <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                 <a asp-action="Login" class="btn btn-outline-danger">Login</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Login" class="btn btn-outline-danger">Login</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

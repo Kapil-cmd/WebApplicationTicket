@@ -12,7 +12,7 @@ namespace Repository.Entites
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string TicketId { get; set; }
         public string TicketDetails { get; set; }
-        public string CreatedBy { get; set; }
+        public string? CreatedBy { get; set; }
         public DateTime? CreatedDateTime { get; set; }
         public DateTime? ModifiedDateTime { get; set; }
         public string? ModifiedBy { get; set; }
