@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Repository.Entites.Role>
+
+@{
+    ViewBag.Title = "All Roles";
+}
+<h1>All Roles</h1>
+
+@if(Model.Any())
+{
+    <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole" asp-controller="Role">Add new Role</a>
+    foreach(var role in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Role Id : @role.Id
+            </div>
+            <div class="card-boday">
+                <h5 class="card-title">
+                    @role.Name
+                </h5>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-primary" asp-action="EditRole" asp-controller="Role" asp-route-id="@role.Id">Edit</a>
+            <a class="btn btn-primary" asp-action="Delete" asp-controller="Role" asp-route-id="@role.Id">Delete</a>
+        </div>
+    }
+}
+else{
+     <div class="card">
+        <div class="card-header">
+            No roles Created yet
+        </div>
+        <h5 class="card-title">
+            Use the button below to create a role
+        </h5>
+        <a class="btn btn-outline-primary" style="width:auto"
+        asp-controller="Role" asp-action="CreateRole">
+            Create Role
+        </a>
+    </div>
+}

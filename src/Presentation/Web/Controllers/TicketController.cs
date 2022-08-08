@@ -1,6 +1,7 @@
 ﻿using Common.ViewModels.Tickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Entites;
 using Repository.Entities;
@@ -25,8 +26,8 @@ namespace demo.Controllers
         }
         public IActionResult Index()
         {
-            var objFromTickets = _unitOfWork._db.Tickets.ToList();
-            return View(objFromTickets);
+            IEnumerable<Ticket> objFromTicket = _unitOfWork._db.Tickets.ToList();
+            return View(objFromTicket);
         }
         [HttpGet]
         public IActionResult Create()

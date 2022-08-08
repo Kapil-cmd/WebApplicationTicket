@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Web.Controllers
 {
@@ -15,7 +13,7 @@ namespace Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IUnitOfWork _unitOfWork;
-        public UserController(IUserService userService,IUnitOfWork unitOfWork)
+        public UserController(IUserService userService, IUnitOfWork unitOfWork)
         {
             _userService = userService;
             _unitOfWork = unitOfWork;
@@ -35,13 +33,13 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult RegisterUser(UserRegister model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 // Message return 
                 return View(model);
             }
             var response = _userService.Register(model);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 // redirect to login page
                 return RedirectToAction("RegisterUser");
@@ -78,7 +76,7 @@ namespace Web.Controllers
         public IActionResult EditUser(EditUserViewModel model)
         {
             var response = _userService.EditUser(model);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 //redirect to user profile page
                 return RedirectToAction("Index");
@@ -91,12 +89,12 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult UserDetails(string Id)
         {
-            if(Id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
             var response = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == Id);
-            if( response == null)
+            if (response == null)
             {
                 return NotFound();
             }
@@ -115,7 +113,7 @@ namespace Web.Controllers
         public IActionResult DeleteUser(UserViewModel model)
         {
             var response = _userService.DeleteUser(model);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("DeleteUser");
             }
@@ -148,7 +146,7 @@ namespace Web.Controllers
             {
                 //User is authorized
                 //Route user to home page
-                if(!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
                 {
                     return Redirect(model.ReturnUrl);
                 }
@@ -165,7 +163,7 @@ namespace Web.Controllers
         public IActionResult AssignRole(string userId, string roleId)
         {
             var response = _userService.AssignUserToRole(userId, roleId);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return View("Edit", "Role");
             }
@@ -174,7 +172,7 @@ namespace Web.Controllers
                 return View("Index", "Role");
             }
         }
-        public IActionResult RemoveRole(string userId,String roleId)
+        public IActionResult RemoveRole(string userId, String roleId)
         {
             var response = _userService.RemoveUserFromRole(userId, roleId);
             if (response.Status == "00")
