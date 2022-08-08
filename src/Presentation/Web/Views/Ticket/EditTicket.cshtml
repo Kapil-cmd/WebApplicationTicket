@@ -5,8 +5,6 @@
 }
 
 <h1>EditTicket</h1>
-
-<h4>EditTicketViewmodel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,23 +16,32 @@
             <input type="hidden" asp-for="Status" />
             <div class="form-group">
                 <label asp-for="TicketDetails" class="control-label"></label>
-                <input asp-for="TicketDetails" class="form-control" />
+                <textarea rows="7" asp-for="TicketDetails" class="form-control" ></textarea>
                 <span asp-validation-for="TicketDetails" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div><br />
+            <div class="xol-sm-2">
                 <label asp-for="AssignedTo" class="control-label"></label>
-                <input asp-for="AssignedTo" class="form-control" />
+                <select asp-for="AssignedTo" class="form-control">
+                    @foreach(var user in Model.Users)
+                    {
+                        <option value="@user.UserName" class="text-danger">@user.UserName</option>
+                    }
+                </select>
                 <span asp-validation-for="AssignedTo" class="text-danger"></span>
-            </div>
+            </div><br />
+             <dt class="col-sm-2">
+          Uploaded Image
+             </dt>
+             <dt class="col-sm-2">
+               <img src="@("~/image/" + Model.ImageName)" asp-append-version="true" width="200px" height="200px" />
+            </dt><br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-success">Back to List</a>
+                <a asp-action="AssignTicketToDeveloper" class="btn btn-outline-warning">Assign</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

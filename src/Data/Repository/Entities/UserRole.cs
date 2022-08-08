@@ -12,7 +12,7 @@ namespace Repository.Entites
 
         public virtual User aUser{get;set;}
         public virtual Role aRole { get; set; }
-        [NotMapped]
-        public List<Role> Roles { get; set; }
+        //[NotMapped]
+        //public List<Role> Roles { get; set; }
     }
 }

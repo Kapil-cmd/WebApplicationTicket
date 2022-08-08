@@ -8,6 +8,6 @@
 
         public virtual Permission aPermission { get; set; }
         public virtual Role aRole { get; set; }
-        public IEnumerable<Permission> Permissions { get; set; }
+        //public IEnumerable<Permission> Permissions { get; set; }
     }
 }

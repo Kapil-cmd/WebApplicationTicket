@@ -21,7 +21,8 @@ namespace Web.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Role> roles = _unitOfWork._db.Roles.ToList();
+            return View(roles);
         }
         [HttpGet]
         public IActionResult CreateRole()
@@ -51,12 +52,13 @@ namespace Web.Controllers
             var editRole = _unitOfWork._db.Roles.Find(id);
             IEnumerable<Permission> permissionList = _unitOfWork.Permission.GetAll();
 
-            var permission = new RolePermission
-            {
-                aRole = editRole,
-                Permissions = permissionList
-            };
-            return View(permission);
+            //var permission = new RolePermission
+            //{
+            //    aRole = editRole,
+            //    Permissions = permissionList
+            //};
+            //return View(permission);
+            return View();
 
         }
         [HttpPost]

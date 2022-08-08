@@ -33,7 +33,6 @@ namespace Repository.Repos.Work
         public ICategoryRepository CategoryRepository { get; private set; }
         public IUserRoleRepository UserRoleRepository { get; private set; }
         public IUserRepository UserRepository { get; private set; }
-
         public IPermissionRepository Permission { get; private set; }
         public IRolePermissionRepository RolePermissionRepository { get; private set; }
         public IUserTicketRepository UserTicketRepository { get; private set; }

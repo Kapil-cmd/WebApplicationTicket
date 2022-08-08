@@ -9,7 +9,5 @@ namespace Repository.Entities
 
         public virtual User aUser { get; set; }
         public virtual Ticket aTicket { get; set; }
-        public List<User> Users { get; set; }
-        public List<Ticket> Tickets { get; set; }
     }
 }

@@ -1,42 +1,47 @@
 ﻿@model IEnumerable<Repository.Entites.Role>
 
 @{
-    ViewBag.Title = "All Roles";
+    ViewData["Title"] = "Index";
 }
-<h1>All Roles</h1>
 
-@if(Model.Any())
-{
-    <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole" asp-controller="Role">Add new Role</a>
-    foreach(var role in Model)
-    {
-        <div class="card mb-3">
-            <div class="card-header">
-                Role Id : @role.Id
-            </div>
-            <div class="card-boday">
-                <h5 class="card-title">
-                    @role.Name
-                </h5>
-            </div>
-        </div>
-        <div class="card-footer">
-            <a class="btn btn-primary" asp-action="EditRole" asp-controller="Role" asp-route-id="@role.Id">Edit</a>
-            <a class="btn btn-primary" asp-action="Delete" asp-controller="Role" asp-route-id="@role.Id">Delete</a>
-        </div>
-    }
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSelected)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSelected)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
 }
-else{
-     <div class="card">
-        <div class="card-header">
-            No roles Created yet
-        </div>
-        <h5 class="card-title">
-            Use the button below to create a role
-        </h5>
-        <a class="btn btn-outline-primary" style="width:auto"
-        asp-controller="Role" asp-action="CreateRole">
-            Create Role
-        </a>
-    </div>
-}
+    </tbody>
+</table>

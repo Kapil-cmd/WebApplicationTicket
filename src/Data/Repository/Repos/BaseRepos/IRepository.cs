@@ -2,7 +2,7 @@
 
 using System.Linq.Expressions;
 
-namespace Repository.Repos.Reposi
+namespace Repository.Repos.BaseRepos
 {
     public interface IRepository <T> where T : class
     {

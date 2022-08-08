@@ -13,22 +13,16 @@
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
              <input type="hidden" asp-for="ImageName" />
-         <div class="row">  
-                    <div class="col-md-6">  
-                        <div class="form-group">  
-                            <label asp-for="CategoryName" class="control-label"></label>  
-                            <select asp-for="CategoryName" class="form-control">  
-                                <option value="">Choose Category</option>  
-                                <option value="Communication">Communication</option>  
-                                <option value="Software Problem">Software Problem</option>
-                                <option value="Hardware Problem">Hardware Problem</option>
-                                <option value="Need Assistance">Need Assistance</option>
-                            </select>  
-                            <span asp-validation-for="CategoryName" class="text-danger"></span>  
-                        </div>  
-                        
-                    </div>
-                    </div><br />
+             <div class="xol-sm-2">
+                 <label asp-for="CategoryName" class="control-label"></label>
+                 <select asp-for="CategoryName" class="form-control">
+                     @foreach(var category in Model.categories)
+                    {
+                        <option value="@category.CategoryName" class="text-danger">@category.CategoryName</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+             </div>
                     <div class="form-group">
                 <label asp-for="TicketDetails" class="control-label"></label>
                 <textarea rows="7" asp-for="TicketDetails" class="form-control" ></textarea>

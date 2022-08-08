@@ -1,10 +1,7 @@
 ﻿using Common.ViewModels.Tickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Repository;
 using Repository.Entites;
-using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
 
@@ -14,29 +11,27 @@ namespace demo.Controllers
     public class TicketController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly TicketingContext _db;
         private readonly ITicketService _ticketService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public TicketController(IUnitOfWork unitOfWork,TicketingContext db, ITicketService ticketService,IWebHostEnvironment webHostEnvironment)
+        public TicketController(IUnitOfWork unitOfWork, ITicketService ticketService, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
-            _db = db;
             _ticketService = ticketService;
             _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
-            IEnumerable<Ticket> objFromTicket = _unitOfWork._db.Tickets.ToList();
-            return View(objFromTicket);
+            var ticketList = _unitOfWork._db.Tickets.ToList();
+            return View(ticketList);
         }
         [HttpGet]
         public IActionResult Create()
         {
             AddTicketViewModel model = new AddTicketViewModel();
             var category = _unitOfWork._db.Category.ToList();
-            if(category != null)
+            if (category != null)
             {
-                if(category.Count() > 0)
+                if (category.Count() > 0)
                 {
                     model.categories = category.Select(x => new ListCategory()
                     {
@@ -55,21 +50,21 @@ namespace demo.Controllers
             {
                 return View(ticket);
             }
-            if(ticket.Imagefile != null)
+            if (ticket.Imagefile != null)
             {
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(ticket.Imagefile.FileName);
                 string extension = Path.GetExtension(ticket.Imagefile.FileName);
                 ticket.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
                 string path = Path.Combine(wwwRootPath + "/Image", fileName);
-                using(var filestream = new FileStream(path, FileMode.Create))
+                using (var filestream = new FileStream(path, FileMode.Create))
                 {
                     await ticket.Imagefile.CopyToAsync(filestream);
                 }
             }
-           
+
             var response = _ticketService.AddTicket(ticket);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("Index");
             }
@@ -79,32 +74,38 @@ namespace demo.Controllers
             }
         }
         [HttpGet]
-        public IActionResult EditTicket(int TicketId)
+        public IActionResult EditTicket(string TicketId)
         {
-
-            var ticketFromDb = _unitOfWork._db.Tickets.Find(TicketId);
-            List<User> objUserList =  _unitOfWork._db.Users.ToList();
-
-            var aTicket = new UserTicket
+            EditTicketViewmodel model = new EditTicketViewmodel();
+            var user = _unitOfWork._db.Users.ToList();
+            var ticket = _unitOfWork._db.Tickets.Find(TicketId);
+            if (user != null) 
             {
-                Users = objUserList,
-                aTicket = ticketFromDb
-            };
-            return View();
+                if (user.Count() > 0)
+                {
+                    model.Users = user.Select(x => new ListUser()
+                    {
+                        Id = x.Id,
+                        UserName = x.UserName
+                    }).ToList();
+                }
+
+            }
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult EditTicket(EditTicketViewmodel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View("Index");
             }
             var response = _ticketService.EditTicket(model);
-            if(response.Status =="00")
+            if (response.Status == "00")
             {
                 model.Status = Common.Enums.StatusEnum.InProcess;
-                return RedirectToAction("Ticket");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -114,19 +115,22 @@ namespace demo.Controllers
         [HttpGet]
         public IActionResult DetailTicket(string ticketId)
         {
-            var response = _ticketService.TicketDetails(ticketId);
-            if(response.Status == "00")
+            if (ticketId == null)
             {
-                return RedirectToAction("Details");
+                return NotFound();
+            }
+            var ticket = _unitOfWork.Ticket.GetFirstOrDefault(x => x.TicketId == ticketId);
+            if (ticket == null)
+            {
+                return NotFound();
             }
             else
             {
-                return RedirectToAction("Index");
+                return View(ticket);
             }
         }
-
         [HttpGet]
-        public IActionResult DeleteTicket(int TicketId)
+        public IActionResult DeleteTicket(string TicketId)
         {
             var deleteTicket = _unitOfWork._db.Tickets.Find(TicketId);
             return View(deleteTicket);
@@ -135,7 +139,7 @@ namespace demo.Controllers
         public IActionResult DeleteTicket(TicketViewModel model)
         {
             var response = _ticketService.DeleteTicket(model);
-            if (response.Status == "00") 
+            if (response.Status == "00")
             {
                 return RedirectToAction("DeleteTicket");
             }
@@ -144,14 +148,14 @@ namespace demo.Controllers
                 return View(model);
             }
         }
-        
+
         [HttpPost]
-        public IActionResult AssignTicketToDeveloper(string ticketId,string userId)
+        public IActionResult AssignTicketToDeveloper(string ticketId, string userId)
         {
             var model = new EditTicketViewmodel();
 
-            var response = _ticketService.AssignTicketToDeveloper(ticketId,userId);
-            if(response.Status =="00")
+            var response = _ticketService.AssignTicketToDeveloper(ticketId, userId);
+            if (response.Status == "00")
             {
                 return RedirectToAction("Index");
             }
@@ -159,7 +163,7 @@ namespace demo.Controllers
             {
                 return View(model);
             }
-            
+
         }
     }
 }

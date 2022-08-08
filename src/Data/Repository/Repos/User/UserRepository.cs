@@ -1,5 +1,5 @@
 ﻿using Repository.Entites;
-using Repository.Repos.Reposi;
+using Repository.Repos.BaseRepos;
 
 namespace Repository.Repos.UsersRep
 {

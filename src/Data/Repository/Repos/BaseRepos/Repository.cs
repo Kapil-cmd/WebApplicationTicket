@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Repository.Repos.Reposi
+namespace Repository.Repos.BaseRepos
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -12,7 +12,7 @@ namespace Repository.Repos.Reposi
         public Repository(TicketingContext db)
         {
             _db = db;
-            this.dbSet = _db.Set<T>();
+            dbSet = _db.Set<T>();
         }
         public void Add(T entity)
         {
@@ -26,8 +26,7 @@ namespace Repository.Repos.Reposi
 
         public IEnumerable<T> GetAll()
         {
-            IQueryable<T> query = dbSet;
-            return query.ToList();
+            return dbSet.AsEnumerable();
         }
         public T GetFirstOrDefault(Expression<Func<T,bool>>filter)
         {

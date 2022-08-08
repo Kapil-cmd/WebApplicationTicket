@@ -6,9 +6,7 @@ namespace Repository.Entites
 {
     public class User
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set;}
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -19,9 +17,12 @@ namespace Repository.Entites
         public long PhoneNumber { get; set; }
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
+
+
+
         public virtual IEnumerable<Category> Categories {get; set;}
-        public virtual List<Ticket> Ticket { get; set; }
+        public virtual IEnumerable<Ticket> MyCreatedTicket { get; set; }
         public virtual IEnumerable<UserRole> Roles { get; set;}
-        public virtual IEnumerable<UserTicket> Tickets {get; set; }
+        public virtual IEnumerable<UserTicket> AssignedeTickets {get; set; }
     }
 }

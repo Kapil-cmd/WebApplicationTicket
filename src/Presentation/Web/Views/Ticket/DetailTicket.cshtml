@@ -1,4 +1,4 @@
-﻿@model Common.ViewModels.Tickets.TicketViewModel
+﻿@model Repository.Entites.Ticket
 
 @{
     ViewData["Title"] = "DetailTicket";
@@ -7,11 +7,14 @@
 <h1>DetailTicket</h1>
 
 <div>
-    <h4>TicketViewModel</h4>
+    <h4>Ticket</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketId)
+            @Html.DisplayFor(model => model.CategoryName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TicketDetails)
@@ -50,27 +53,19 @@
             @Html.DisplayFor(model => model.AssignedTo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Status)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Status)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageName)
-      <dt class="col-sm-2">
+       <dt class="col-sm-2">
           Uploaded Image
     </dt>
     <dt class="col-sm-2">
         <img src="@("~/image/" + Model.ImageName)" asp-append-version="true" width="200px" height="200px" />
     </dt>
-    
+    </dl>
 </div>
-div class="form-group">
-    <a asp-action="Index" class="btn btn-outline-info" style="width:150px">BackToList</a>
-    </div>
+<div>
+    <a asp-action="Index" class="btn btn-outline-info" style="width:150px"> Back to List</a>
+</div>
