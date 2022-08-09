@@ -29,9 +29,7 @@ namespace Common.ViewModels.Categories
         public string CId { get; set; }
         [Required(ErrorMessage = "CategoryName is required"), MaxLength(50), Display(Name = "CategoryName")]
         public string CategoryName { get; set; }
-        [Required(ErrorMessage = "ModifiedBy User is required"), MaxLength(25), Display(Name = "ModifiedBy")]
         public string ModifiedBy { get; set; }
-        [Required, Display(Name = "ModifiedDateTime")]
         public DateTime? ModifiedDateTime { get; set; }
     }
 }

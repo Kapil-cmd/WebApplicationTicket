@@ -7,39 +7,31 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="Role" asp-action="Create"class="btn btn-outline-success">Create New</a>
+    &nbsp;
+    <a asp-controller="Home" asp-action="HomePage" class="btn btn-outline-info">HomePage</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsSelected)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsSelected)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+             <td>
+                <div class="w-75 btn-group" role="group">
+                    <a asp-controller="Role" asp-action="EditRole" asp-route-Id="@item.Id"
+                    class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
+                    <a asp-controller="Role" asp-action="Delete" asp-route-Id="@item.Id"
+                    class="btn btn-danger mx-2"><i class="bg-info bi-trash-fill"></i>Delete</a>
+                </div>
             </td>
         </tr>
 }

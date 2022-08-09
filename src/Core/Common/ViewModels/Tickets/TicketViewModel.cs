@@ -22,7 +22,6 @@ namespace Common.ViewModels.Tickets
     {
         public string TicketId { get; set; }
         public string TicketDetails { get; set; }
-        [Required(ErrorMessage = "ModifiedBy User is required"), MaxLength(25), Display(Name = "CreatedBy")]
         public string ModifiedBy { get; set; }
         [Display(Name = "ModifiedDateTime")]
         public DateTime ModifiedDateTime { get; set; }

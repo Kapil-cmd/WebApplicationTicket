@@ -66,7 +66,10 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult EditCategory(EditCategoryViewModel model)
         {
-
+            if(!ModelState.IsValid)
+            {
+                return View("Index");
+            }
             var response = _categoryService.EditCategory(model);
             if(response.Status == "00")
             {

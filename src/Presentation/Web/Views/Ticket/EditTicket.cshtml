@@ -11,7 +11,6 @@
         <form asp-action="EditTicket">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TicketId" />
-            <input type="hidden" asp-for="ModifiedBy" />
             <input type="hidden" asp-for="ModifiedDateTime" />
             <input type="hidden" asp-for="Status" />
             <div class="form-group">
@@ -20,15 +19,15 @@
                 <span asp-validation-for="TicketDetails" class="text-danger"></span>
             </div><br />
             <div class="xol-sm-2">
-                <label asp-for="AssignedTo" class="control-label"></label>
+                <label asp-for="AssignedTo" class="label-control"></label>
                 <select asp-for="AssignedTo" class="form-control">
-                    @foreach(var user in Model.Users)
+                    @foreach(var users in Model.Users)
                     {
-                        <option value="@user.UserName" class="text-danger">@user.UserName</option>
+                        <option value="@users.UserName" class="text-danger">@users.UserName</option>
                     }
                 </select>
                 <span asp-validation-for="AssignedTo" class="text-danger"></span>
-            </div><br />
+            </div>
              <dt class="col-sm-2">
           Uploaded Image
              </dt>

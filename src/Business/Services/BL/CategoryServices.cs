@@ -61,16 +61,13 @@ namespace Services.BL
                     response.Message = "Category not Found";
                     return response;
                 }
-               
+                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 category.CId = EditCategory.CId;
                 category.CategoryName = EditCategory.CategoryName;
-                category.ModifiedDateTime = EditCategory.ModifiedDateTime;
-                category.ModifiedBy = EditCategory.ModifiedBy;
-
-                var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-
-                category.ModifiedBy = nameClaim;
                 category.ModifiedDateTime = DateTime.Now;
+                category.ModifiedBy = EditCategory.ModifiedBy = nameClaim;
+
+               
 
                 _unitOfWork._db.Category.Update(category);
                 _unitOfWork._db.SaveChanges();

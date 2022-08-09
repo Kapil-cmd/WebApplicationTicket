@@ -50,8 +50,7 @@ namespace Web.Controllers
         public IActionResult EditRole(string? id)
         {
             var editRole = _unitOfWork._db.Roles.Find(id);
-            IEnumerable<Permission> permissionList = _unitOfWork.Permission.GetAll();
-
+            //IEnumerable<Permission> permissionList = _unitOfWork.Permission.GetAll();
             //var permission = new RolePermission
             //{
             //    aRole = editRole,

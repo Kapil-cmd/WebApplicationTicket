@@ -76,9 +76,15 @@ namespace demo.Controllers
         [HttpGet]
         public IActionResult EditTicket(string TicketId)
         {
+
+            var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == TicketId);
+            if(ticket == null)
+            {
+                return NotFound();
+            }
             EditTicketViewmodel model = new EditTicketViewmodel();
+            model.TicketDetails = ticket.TicketDetails;
             var user = _unitOfWork._db.Users.ToList();
-            var ticket = _unitOfWork._db.Tickets.Find(TicketId);
             if (user != null) 
             {
                 if (user.Count() > 0)
@@ -104,7 +110,6 @@ namespace demo.Controllers
             var response = _ticketService.EditTicket(model);
             if (response.Status == "00")
             {
-                model.Status = Common.Enums.StatusEnum.InProcess;
                 return RedirectToAction("Index");
             }
             else
@@ -132,11 +137,19 @@ namespace demo.Controllers
         [HttpGet]
         public IActionResult DeleteTicket(string TicketId)
         {
+            if(TicketId == null)
+            {
+                return NotFound();
+            }
             var deleteTicket = _unitOfWork._db.Tickets.Find(TicketId);
+            if(deleteTicket == null)
+            {
+                return NotFound();
+            }
             return View(deleteTicket);
         }
-        [HttpPost]
-        public IActionResult DeleteTicket(TicketViewModel model)
+        [HttpPost,ActionName("DeleteTicket")]
+        public IActionResult DeletePost(Ticket model)
         {
             var response = _ticketService.DeleteTicket(model);
             if (response.Status == "00")

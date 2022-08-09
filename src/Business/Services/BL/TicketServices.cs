@@ -55,17 +55,12 @@ namespace Services.BL
                     response.Message = "Ticket not Found";
                     return response;
                 }
-                ticket.TicketDetails = Ticket.TicketDetails;
-                ticket.ModifiedBy = Ticket.ModifiedBy;
-                ticket.ModifiedDateTime = Ticket.ModifiedDateTime;
-                ticket.Status = Ticket.Status;
-                ticket.AssignedTo = Ticket.AssignedTo;
-
-
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-                Ticket.ModifiedBy = nameClaim;
-                Ticket.ModifiedDateTime = DateTime.Now;
-                Ticket.Status = Common.Enums.StatusEnum.InProcess;
+                ticket.TicketDetails = Ticket.TicketDetails;
+                ticket.ModifiedDateTime = DateTime.Now;
+                ticket.ModifiedBy = Ticket.ModifiedBy = nameClaim;
+                ticket.Status = Common.Enums.StatusEnum.InProcess;
+                ticket.AssignedTo = Ticket.AssignedTo;
 
                 _unitOfWork._db.Tickets.Update(ticket);
                 _unitOfWork._db.SaveChanges();
@@ -81,30 +76,20 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> DeleteTicket(TicketViewModel DeleteTicket)
+        public BaseResponseModel<string> DeleteTicket(Ticket model)
         {
             var response = new BaseResponseModel<string>();
             try
             {
-                var Ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == DeleteTicket.TicketId);
-                if (Ticket == null)
-                {
-                    response.Status = "100";
-                    response.Message = "Ticket not found";
-                    return response;
-                }
-                Ticket.TicketId = DeleteTicket.TicketId;
-                Ticket.TicketDetails = DeleteTicket.TicketDetails;
-                Ticket.CreatedBy = DeleteTicket.CreatedBy;
-                Ticket.CreatedDateTime = DeleteTicket.CreatedDateTime;
-                Ticket.ModifiedBy = DeleteTicket.ModifiedBy;
-                Ticket.ModifiedDateTime = DeleteTicket.ModifiedDateTime;
-                Ticket.AssignedTo = DeleteTicket.AssignedTo;
-                Ticket.CategoryName = DeleteTicket.CategoryName;
-                Ticket.Status = DeleteTicket.Status;
-                Ticket.ImageName = DeleteTicket.ImageName;
-
-                _unitOfWork._db.Tickets.Remove(Ticket);
+                //var Ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == model.TicketId);
+                //if (Ticket == null)
+                //{
+                //    response.Status = "100";
+                //    response.Message = "Ticket not found";
+                //    return response;
+                //}
+               
+                _unitOfWork._db.Tickets.Remove(model);
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";
@@ -178,7 +163,7 @@ namespace Services.BL
     {
         BaseResponseModel<string> AddTicket(AddTicketViewModel Ticket);
         BaseResponseModel<string> EditTicket(EditTicketViewmodel Ticket);
-        BaseResponseModel<string> DeleteTicket (TicketViewModel Ticket);
+        BaseResponseModel<string> DeleteTicket (Ticket model);
         BaseResponseModel<string> TicketDetails(string ticketId);
         BaseResponseModel<string> AssignTicketToDeveloper(string ticketId, string userId);
     }
