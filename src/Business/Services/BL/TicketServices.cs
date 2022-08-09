@@ -155,7 +155,6 @@ namespace Services.BL
         BaseResponseModel<string> EditTicket(EditTicketViewmodel Ticket);
         BaseResponseModel<string> DeleteTicket (Ticket model);
         BaseResponseModel<string> TicketDetails(string ticketId);
-        BaseResponseModel<string> AssignTicketToDeveloper(string ticketId, string userId);
     }
 }
 
