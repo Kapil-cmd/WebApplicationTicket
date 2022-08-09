@@ -32,9 +32,9 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult CreateRole(RoleViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("Index");
             }
             var response = _roleService.CreateRole(model);
             if(response.Status == "00")
@@ -43,11 +43,11 @@ namespace Web.Controllers
             }
             else
             {
-                return View(model);
+                return View("CreateRole");
             }
         }
         [HttpGet]
-        public IActionResult EditRole(string? id)
+        public IActionResult ManageRole(string? id)
         {
             var editRole = _unitOfWork._db.Roles.Find(id);
             //IEnumerable<Permission> permissionList = _unitOfWork.Permission.GetAll();
@@ -61,13 +61,13 @@ namespace Web.Controllers
 
         }
         [HttpPost]
-        public IActionResult EditRole(EditRole model)
+        public IActionResult ManageRole(EditRole model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var response = _roleService.EditRole(model);
+            var response = _roleService.ManageRole(model);
             if(response.Status == "00")
             {
                 return RedirectToAction("Index");

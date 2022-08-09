@@ -107,7 +107,6 @@ namespace Services.BL
 
                 _unitOfWork._db.Users.Add(new Repository.Entites.User()
                 {
-                    Id = Register.Id,
                     Address = Register.Address,
                     Age = Register.Age,
                     Email = Register.Email,

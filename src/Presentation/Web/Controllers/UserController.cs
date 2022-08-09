@@ -159,7 +159,7 @@ namespace Web.Controllers
                 return View(model);
             }
         }
-        [HttpPost]
+        [HttpGet]
         public IActionResult AssignRole(string userId, string roleId)
         {
             var response = _userService.AssignUserToRole(userId, roleId);
@@ -172,6 +172,7 @@ namespace Web.Controllers
                 return View("Index", "Role");
             }
         }
+        [HttpGet]
         public IActionResult RemoveRole(string userId, String roleId)
         {
             var response = _userService.RemoveUserFromRole(userId, roleId);

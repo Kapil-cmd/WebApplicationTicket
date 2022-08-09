@@ -23,7 +23,7 @@
                 <select asp-for="AssignedTo" class="form-control">
                     @foreach(var users in Model.Users)
                     {
-                        <option value="@users.UserName" class="text-danger">@users.UserName</option>
+                        <option value="@users.Id" class="text-danger">@users.UserName</option>
                     }
                 </select>
                 <span asp-validation-for="AssignedTo" class="text-danger"></span>
@@ -37,7 +37,6 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-outline-success">Back to List</a>
-                <a asp-action="AssignTicketToDeveloper" class="btn btn-outline-warning">Assign</a>
             </div>
         </form>
     </div>

@@ -15,7 +15,7 @@ namespace Common.ViewModels.Users
     }
     public class UserRegister
     {
-        public string Id { get; set; }
+
         [Required(ErrorMessage = "FirstName is required"), MaxLength(25), Display(Name = "FirstName")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "LastName is required"), MaxLength(25), Display(Name = "LastName")]

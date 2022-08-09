@@ -161,22 +161,5 @@ namespace demo.Controllers
                 return View(model);
             }
         }
-
-        [HttpPost]
-        public IActionResult AssignTicketToDeveloper(string ticketId, string userId)
-        {
-            var model = new EditTicketViewmodel();
-
-            var response = _ticketService.AssignTicketToDeveloper(ticketId, userId);
-            if (response.Status == "00")
-            {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View(model);
-            }
-
-        }
     }
 }

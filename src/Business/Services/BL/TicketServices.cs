@@ -55,6 +55,8 @@ namespace Services.BL
                     response.Message = "Ticket not Found";
                     return response;
                 }
+
+                #region TicketUpdate
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 ticket.TicketDetails = Ticket.TicketDetails;
                 ticket.ModifiedDateTime = DateTime.Now;
@@ -64,6 +66,24 @@ namespace Services.BL
 
                 _unitOfWork._db.Tickets.Update(ticket);
                 _unitOfWork._db.SaveChanges();
+                #endregion
+
+                #region TicketAssign
+                if (_unitOfWork.UserTicketRepository.Any(x => x.UserId == Ticket.AssignedTo && x.TicketId == Ticket.TicketId))
+                {
+                    response.Status = "444";
+                    response.Message = "This ticket is already assigned to this user";
+                    return response;
+                }
+
+                _unitOfWork._db.Ticketusers.Add(new Repository.Entities.UserTicket()
+                {
+                    TicketId = Ticket.TicketId,
+                    UserId = Ticket.AssignedTo
+                });
+
+                _unitOfWork._db.SaveChanges();
+                #endregion
 
                 response.Status = "00";
                 response.Message = "Ticket Updated Sucessfully";
@@ -126,36 +146,6 @@ namespace Services.BL
                 return response;
             }
 
-        }
-        public BaseResponseModel<string> AssignTicketToDeveloper(string ticketId, string userId)
-        {
-            var response = new BaseResponseModel<string>();
-            try
-            {
-                if (_unitOfWork.UserTicketRepository.Any(x => x.UserId == userId && x.TicketId == ticketId))
-                {
-                    response.Status = "444";
-                    response.Message = "This ticket is already assigned to this user";
-                    return response;
-                }
-                _unitOfWork.UserTicketRepository.Add(new Repository.Entities.UserTicket()
-                {
-                    TicketId = ticketId,
-                    UserId = userId
-                });
-                _unitOfWork.Save();
-                response.Status = "00";
-                response.Message = "Ticket assigned successfully";
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = "500";
-                response.Message = "Error occurred:" + ex.Message;
-
-                return response;
-            }
         }
     }
 

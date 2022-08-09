@@ -41,7 +41,7 @@ namespace Services.BL
             }
         }
 
-        public BaseResponseModel<string> EditRole(EditRole model)
+        public BaseResponseModel<string> ManageRole(EditRole model)
         {
             var response = new BaseResponseModel<string>();
             try
@@ -158,7 +158,7 @@ namespace Services.BL
     public interface IRoleService
     {
         BaseResponseModel<string> CreateRole(RoleViewModel model);
-        BaseResponseModel<string> EditRole(EditRole model);
+        BaseResponseModel<string> ManageRole(EditRole model);
         BaseResponseModel<string> DeleteRole(RoleViewModel model);
         BaseResponseModel<string> AssignPermissionToRole(string roleId, string permissionId);
         BaseResponseModel<string> RemovePermissionFromRole(string roleId, string permissionId);
