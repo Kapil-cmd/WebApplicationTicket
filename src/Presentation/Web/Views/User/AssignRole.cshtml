@@ -1,27 +1,27 @@
-﻿@model List<Repository.Entites.UserRole>
+﻿@model Common.ViewModels.UserRole.UserRoleViewModel
 
 @{
-    var roleId = ViewBag.roleId;
+    var userId = ViewBag.userId;
 }
 
 <form method="post">
-    <div class="card-header">
-        <h2>Assign role to this User</h2>
+    <div class="card">
+        <div class="card-header">
+            <h2>Manage User Roles</h2>
+        </div>
     </div>
     <div class="card-body">
-        @for (int i=0; i <Model.Count; i++)
+        @foreach (var role in Model.Roles)
         {
             <div class="form-check m-1">
-                <input type="hidden" asp-for="@Model[i].RoleId"/>
-                <input asp-for="@Model[i].IsSelected" class="form-check-input"/>
-                <label class="form-check-label">
-                    @Model[i].aRole
+                <input type="hidden" asp-for="@Model.RoleId"/>
+                <input type="hidden" asp-for="@Model.RoleName" />
+                <input asp-for="@Model.IsSelected" class="form-check-input" />
+                <label class="form-check-label" asp-for="@Model.IsSelected">
+                    @Model.RoleName
                 </label>
-                </div>
+            </div>
         }
-        <div class="card-footer">
-            <input type="submit" value="Update" class="btn btn-primary" style="width:auto" />
-            <a asp-action="EditRole" asp-route-id="@roleId" class="btn btn-primary" style="width:auto">cancel</a>
-        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
     </div>
 </form>

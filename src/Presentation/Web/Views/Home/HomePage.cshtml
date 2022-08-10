@@ -1,4 +1,4 @@
-﻿@{
+﻿@*@{
     ViewData["Title"] = "Home Page";
 }
 <head>
@@ -33,7 +33,7 @@
                                 @*
                                 <li class="nav-item">
                                     Welcome @User.Claims.FirstOrDefault(System.Security.Claims.ClaimTypes.Name);
-                                </li>*@
+                                </li>
                                 &nbsp;
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Log Out</a>
@@ -48,4 +48,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-
+*@

@@ -7,7 +7,9 @@ namespace Common.ViewModels.UserRole
         public string UserId { get; set; }
         public string RoleId { get; set; }
         public bool IsSelected { get; set; }
+        public string RoleName { get; set; }
         public List<ListRole> Roles { get; set; }
+
 
     }
     public class ListRole
@@ -16,4 +18,6 @@ namespace Common.ViewModels.UserRole
         public string Id { get; set; }
         public string RoleName { get; set; }
     }
+   
+
 }

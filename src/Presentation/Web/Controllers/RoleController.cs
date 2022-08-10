@@ -1,4 +1,5 @@
 ﻿using Common.ViewModels.Role;
+using Common.ViewModels.RolePermission;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 using Repository.Entites;
@@ -95,6 +96,30 @@ namespace Web.Controllers
             {
                 return View(model);
             }
+        }
+        [HttpGet]
+        public IActionResult AssignPermissionToRole(string Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }    
+            var role = _unitOfWork._db.Roles.Find(Id);
+            if(role == null)
+            {
+                return NotFound();
+            }
+             RolePermissionViewModel model= new RolePermissionViewModel();
+            var permission = _unitOfWork._db.Permissions.ToList();
+            if(permission != null)
+            {
+                model.Permissions = permission.Select(x => new PermissionList()
+                {
+                    Id = x.PermissionId,
+                    PermissionName = x.Name
+                }).ToList();
+            }
+            return View(model);
         }
         [HttpPost]
         public IActionResult AssignPermissionToRole(string roleId,string permissionId)

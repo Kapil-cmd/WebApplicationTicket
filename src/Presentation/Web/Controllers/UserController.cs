@@ -174,7 +174,7 @@ namespace Web.Controllers
             }
             UserRoleViewModel model = new UserRoleViewModel();
             var role = _unitOfWork._db.Roles.ToList();
-            if(role != null)
+            if (role != null)
             {
                 model.Roles = role.Select(x => new ListRole()
                 {
@@ -183,7 +183,7 @@ namespace Web.Controllers
                 }).ToList();
             }
             return View(model);
-        }
+         }
         [HttpPost]
         public IActionResult AssignRole(string userId, string roleId)
         {
