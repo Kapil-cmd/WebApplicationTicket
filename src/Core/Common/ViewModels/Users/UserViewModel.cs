@@ -65,8 +65,7 @@ namespace Common.ViewModels.Users
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
         public long PhoneNumber { get; set; }
-        [Required(ErrorMessage = "UserName is required"), MaxLength(25), Display(Name = "UserName")]
-        public string UserName { get; set; }
+        public string Role { get; set; }
     }
 
     public class UserTokenModel

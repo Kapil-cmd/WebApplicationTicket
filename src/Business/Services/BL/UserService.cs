@@ -142,6 +142,7 @@ namespace Services.BL
                     return response;
                 }
 
+                #region UserUpdate
                 user.Address = EditUser.Address;
                 user.Age = EditUser.Age;
                 user.Email = EditUser.Email;
@@ -149,11 +150,27 @@ namespace Services.BL
                 user.LastName = EditUser.LastName;
                 //user.Password = EditUser.Password; //TODO Encrypt Password
                 user.PhoneNumber = EditUser.PhoneNumber;
-                //user.UserName = EditUser.UserName;
-
 
                 _unitOfWork._db.Users.Update(user);
                 _unitOfWork._db.SaveChanges();
+                #endregion
+
+                #region AssignRole
+                if (_unitOfWork.UserRoleRepository.Any(x => x.UserId == EditUser.Id && x.RoleId == EditUser.Role))
+                {
+                    response.Status = "444";
+                    response.Message = "This role is already exists for {this user}";
+                    return response;
+                }
+                _unitOfWork.UserRoleRepository.Add(new Repository.Entites.UserRole()
+                {
+                    RoleId = EditUser.Role,
+                    UserId = EditUser.Id,
+                });
+                _unitOfWork.Save();
+
+
+                #endregion
 
                 response.Status = "00";
                 response.Message = "User successfully registered";
@@ -220,9 +237,9 @@ namespace Services.BL
                     UserId = userId
                 });
                 _unitOfWork.Save();
+
                 response.Status = "00";
                 response.Message = "Successfully assigned {this user} to {this role}";
-
                 return response;
             }
             catch (Exception ex)

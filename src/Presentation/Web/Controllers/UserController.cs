@@ -61,7 +61,6 @@ namespace Web.Controllers
             }
             EditUserViewModel model = new EditUserViewModel
             {
-                UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Address = user.Address,

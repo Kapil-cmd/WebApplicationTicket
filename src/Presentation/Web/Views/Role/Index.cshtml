@@ -5,18 +5,18 @@
 }
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="CreateRole" class="btn btn-outline-success">Create New</a>
-    &nbsp;
-    <a asp-controller="Home" asp-action="HomePage" class="btn btn-outline-info">HomePage</a>
-</p>
-<table class="table">
+<div class="row">
+    <div class="col">
+        <a asp-action="CreateRole" class="btn btn-outline-info pull-right">Create New</a>
+    </div>
+</div>
+<table class="table table-striped table-responsive">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -27,10 +27,8 @@
             </td>
              <td><br/>
                 <div class="w-75 btn-group" role="group">
-                    <a asp-controller="Role" asp-action="EditRole" asp-route-Id="@item.Id"
-                    class="btn btn-primary mx-2" ><i class="bi bi-pencil-square"></i>Edit</a>
-                    <a asp-controller="Role" asp-action="AssignPermissionToRole" asp-route-Id="@item.Id"
-                    class="btn btn-danger mx-2" ><i class="bi bi-dpad-fill"></i>Manage Permission</a>
+                    <a title="Edit" asp-controller="Role" asp-action="EditRole" asp-route-Id="@item.Id" class="btn btn-primary mx-2" ><i class="bi bi-pencil-square"></i></a>
+                    <a title="ManagePermission" asp-controller="Role" asp-action="AssignPermissionToRole" asp-route-Id="@item.Id" class="btn btn-danger mx-2" ><i class="bi bi-shield-lock"></i></a>
                 </div>
             </td>
         </tr>

@@ -5,43 +5,42 @@
 }
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-outline-success">Create New</a>
-&nbsp;
-    <a asp-controller="Home" asp-action="HomePage" class="btn btn-outline-info">HomePage</a>
-</p>
-<table class="table">
+<div class="row">
+    <div class="col">
+        <a asp-action="Create" class="btn btn-sm btn-primary pull-right">Create New</a>
+    </div>
+</div>
+<table class="table table-striped table-responsive">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TicketDetails)
+               TicketDetails
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
+               CreatedBy
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedDateTime)
+                CreatedDateTime
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ModifiedDateTime)
+                ModifiedDateTime
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ModifiedBy)
+                ModifiedBy
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AssignedTo)
+               AssignedTo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
+                CategoryName
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageName)
+                ImageName
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -79,12 +78,8 @@
             </td>
             <td>
             <div class="w-75 btn-group" role="group">
-                    <a asp-controller="Ticket" asp-action="EditTicket" asp-route-TicketId="@item.TicketId"
-                    class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Edit</a>
-                    @*<a asp-controller="Ticket" asp-action="DeleteTicket" asp-route-TicketId="@item.TicketId"
-                    class="btn btn-danger mx-2"><i class="bg-info bi-trash-fill"></i>Delete</a>*@
-                    <a asp-controller="Ticket" asp-action="DetailTicket" asp-route-TicketId="@item.TicketId"
-                    class="btn btn-danger mx-2"><i class="bg-info bi-ticket-detailed"></i>Details</a>
+                    <a title="Edit"  asp-controller="Ticket" asp-action="EditTicket" asp-route-TicketId="@item.TicketId" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i></a>
+                     <a title="Detail" asp-controller="Ticket" asp-action="DetailTicket" asp-route-TicketId="@item.TicketId" class="btn btn-sm btn-danger mx-2"><i class="bi bi-eye"></i></a>
                 </div>
                 </td>
         </tr>
