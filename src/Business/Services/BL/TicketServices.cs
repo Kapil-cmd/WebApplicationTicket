@@ -101,14 +101,14 @@ namespace Services.BL
             var response = new BaseResponseModel<string>();
             try
             {
-                //var Ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == model.TicketId);
-                //if (Ticket == null)
-                //{
-                //    response.Status = "100";
-                //    response.Message = "Ticket not found";
-                //    return response;
-                //}
-               
+                var Ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == model.TicketId);
+                if (Ticket == null)
+                {
+                    response.Status = "100";
+                    response.Message = "Ticket not found";
+                    return response;
+                }
+
                 _unitOfWork._db.Tickets.Remove(model);
                 _unitOfWork._db.SaveChanges();
 

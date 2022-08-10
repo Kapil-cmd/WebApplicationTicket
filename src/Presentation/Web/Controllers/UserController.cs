@@ -1,4 +1,5 @@
-﻿using Common.ViewModels.Users;
+﻿using Common.ViewModels.UserRole;
+using Common.ViewModels.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -160,6 +161,30 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        public IActionResult AssignRole(string Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            UserRoleViewModel model = new UserRoleViewModel();
+            var role = _unitOfWork._db.Roles.ToList();
+            if(role != null)
+            {
+                model.Roles = role.Select(x => new ListRole()
+                {
+                    Id = x.Id,
+                    RoleName = x.Name
+                }).ToList();
+            }
+            return View(model);
+        }
+        [HttpPost]
         public IActionResult AssignRole(string userId, string roleId)
         {
             var response = _userService.AssignUserToRole(userId, roleId);
@@ -173,6 +198,20 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        public IActionResult RemoveRole(string Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+            var user = _unitOfWork._db.Users.Find(Id);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+        [HttpPost]
         public IActionResult RemoveRole(string userId, String roleId)
         {
             var response = _userService.RemoveUserFromRole(userId, roleId);
