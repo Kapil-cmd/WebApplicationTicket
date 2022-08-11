@@ -37,7 +37,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("CategoryCId");
 
-                    b.ToTable("ListCategory", (string)null);
+                    b.ToTable("ListCategory");
                 });
 
             modelBuilder.Entity("Repository.Entites.Category", b =>
@@ -226,9 +226,6 @@ namespace Repository.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("IsSelected")
-                        .HasColumnType("bit");
-
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
@@ -315,7 +312,7 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Entites.Role", "MyRole")
                         .WithMany("MyUser")
                         .HasForeignKey("Role")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("MyRole");
                 });

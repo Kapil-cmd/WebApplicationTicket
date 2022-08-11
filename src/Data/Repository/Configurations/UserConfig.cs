@@ -25,7 +25,6 @@ namespace Repository.Configurations
             builder.HasOne(x => x.MyRole)
                 .WithMany(x => x.MyUser)
                 .HasForeignKey(x => x.Role)
-                .HasPrincipalKey(x => x.Name)
                 .OnDelete(DeleteBehavior.NoAction);
 
         }

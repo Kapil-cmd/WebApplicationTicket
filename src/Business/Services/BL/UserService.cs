@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Repository.Entites;
 using Repository.Repos.Work;
 using System.Security.Claims;
-using static Services.BL.UserService;
 
 namespace Services.BL
 {
