@@ -101,6 +101,7 @@ namespace demo.Controllers
         }
 
         [HttpPost]
+        
         public IActionResult EditTicket(EditTicketViewmodel model)
         {
             if (!ModelState.IsValid)

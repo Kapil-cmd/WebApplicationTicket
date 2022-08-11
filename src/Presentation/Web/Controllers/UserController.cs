@@ -169,34 +169,6 @@ namespace Web.Controllers
                 return View(model);
             }
         }
-        //[HttpGet]
-        //public IActionResult AssignRole(string Id)
-        //{
-        //    if(Id == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
-        //    if(user == null)
-        //    {
-        //        return NotFound();
-        //    }
-         
-        //    return View(model);
-        // }
-        [HttpPost]
-        public IActionResult AssignRole(string userId, string roleId)
-        {
-            var response = _userService.AssignUserToRole(userId, roleId);
-            if (response.Status == "00")
-            {
-                return View("Edit", "Role");
-            }
-            else
-            {
-                return View("Index", "Role");
-            }
-        }
         [HttpGet]
         public IActionResult RemoveRole(string Id)
         {

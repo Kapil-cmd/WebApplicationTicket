@@ -44,7 +44,6 @@
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Shared\NotFound.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Shared\_Notification.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\User\Index.cshtml" />
     <None Include="Views\User\Login.cshtml" />

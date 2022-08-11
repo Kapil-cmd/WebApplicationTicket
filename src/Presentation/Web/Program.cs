@@ -1,14 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Repository;
 using Repository.Repos.Work;
 using Services.BL;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
