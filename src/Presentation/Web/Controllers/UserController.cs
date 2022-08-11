@@ -54,21 +54,31 @@ namespace Web.Controllers
         [Authorize]
         public IActionResult EditUser(string Id)
         {
-            var user = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == Id);
+            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
             if (user == null)
             {
                 return NotFound();
             }
-            EditUserViewModel model = new EditUserViewModel
+            EditUserViewModel model = new EditUserViewModel();
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.Email = user.Email;
+            model.Address = user.Address;
+            model.PhoneNumber = user.PhoneNumber;
+            model.Role = user.Role;
+            var role = _unitOfWork._db.Roles.ToList();
+            if(role != null)
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Address = user.Address,
-                Email = user.Email,
-                Age = user.Age,
-                DateOfBirth = user.DateOfBirth,
-                PhoneNumber = user.PhoneNumber,
-            };
+                if(role.Count() > 0) 
+                { 
+
+                    model.Roles = role.Select( x => new Common.ViewModels.Users.ListRole()
+                    {
+                    Id = x.Id,
+                    Name = x.Name,
+                    }).ToList();
+                }
+            }
             return View(model);
 
         }
@@ -159,30 +169,21 @@ namespace Web.Controllers
                 return View(model);
             }
         }
-        [HttpGet]
-        public IActionResult AssignRole(string Id)
-        {
-            if(Id == null)
-            {
-                return NotFound();
-            }
-            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
-            if(user == null)
-            {
-                return NotFound();
-            }
-            UserRoleViewModel model = new UserRoleViewModel();
-            var role = _unitOfWork._db.Roles.ToList();
-            if (role != null)
-            {
-                model.Roles = role.Select(x => new ListRole()
-                {
-                    Id = x.Id,
-                    RoleName = x.Name
-                }).ToList();
-            }
-            return View(model);
-         }
+        //[HttpGet]
+        //public IActionResult AssignRole(string Id)
+        //{
+        //    if(Id == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
+        //    if(user == null)
+        //    {
+        //        return NotFound();
+        //    }
+         
+        //    return View(model);
+        // }
         [HttpPost]
         public IActionResult AssignRole(string userId, string roleId)
         {

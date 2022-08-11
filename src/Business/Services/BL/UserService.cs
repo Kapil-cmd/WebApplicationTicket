@@ -144,12 +144,12 @@ namespace Services.BL
 
                 #region UserUpdate
                 user.Address = EditUser.Address;
-                user.Age = EditUser.Age;
                 user.Email = EditUser.Email;
                 user.FirstName = EditUser.FirstName;
                 user.LastName = EditUser.LastName;
                 //user.Password = EditUser.Password; //TODO Encrypt Password
                 user.PhoneNumber = EditUser.PhoneNumber;
+                user.Role = EditUser.Role;
 
                 _unitOfWork._db.Users.Update(user);
                 _unitOfWork._db.SaveChanges();
@@ -173,7 +173,7 @@ namespace Services.BL
                 #endregion
 
                 response.Status = "00";
-                response.Message = "User successfully registered";
+                response.Message = "User Edited sucessfully";
                 return response;
             }
             catch (Exception ex)

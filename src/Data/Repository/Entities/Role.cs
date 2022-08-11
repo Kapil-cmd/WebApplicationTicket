@@ -8,5 +8,6 @@
 
         public virtual IEnumerable<UserRole> Users { get; set; }
         public virtual IEnumerable<RolePermission> Permissions { get; set; }
+        public virtual IEnumerable<User> MyUser { get; set; }
     }
 }

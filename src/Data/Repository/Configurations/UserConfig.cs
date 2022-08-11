@@ -21,6 +21,13 @@ namespace Repository.Configurations
             builder.Property(x => x.DateOfBirth).IsRequired();
             builder.Property(x => x.PhoneNumber).HasMaxLength(13).IsRequired();
             builder.Property(x => x.Password).HasMaxLength(25).IsRequired();
+
+            builder.HasOne(x => x.MyRole)
+                .WithMany(x => x.MyUser)
+                .HasForeignKey(x => x.Role)
+                .HasPrincipalKey(x => x.Name)
+                .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }

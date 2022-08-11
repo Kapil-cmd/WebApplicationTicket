@@ -48,17 +48,29 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        public IActionResult ManageRole(string? id)
+        public IActionResult ManageRole(string Id)
         {
-            var editRole = _unitOfWork._db.Roles.Find(id);
-            //IEnumerable<Permission> permissionList = _unitOfWork.Permission.GetAll();
-            //var permission = new RolePermission
-            //{
-            //    aRole = editRole,
-            //    Permissions = permissionList
-            //};
-            //return View(permission);
-            return View();
+            var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == Id);
+            if (role == null)
+            {
+                return NotFound();
+            }
+            EditRole model = new EditRole();
+            model.Name = role.Name;
+            var permission = _unitOfWork.Permission.GetAll();
+            if(permission != null)
+            {
+                if(permission.Count() > 0)
+                {
+                    model.ListPermission = permission.Select(x => new ListPermission()
+                    {
+                        Id = x.PermissionId,
+                        Name = x.Name,
+                    }).ToList();
+                }
+            }
+
+            return View(model);
 
         }
         [HttpPost]
@@ -79,6 +91,22 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        public IActionResult RoleDetails (string Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+            var role = _unitOfWork._db.Roles.Find(Id);
+            if(role == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return View(role);
+            };
+        }
         public IActionResult Delete(string Id)
         {
             var deleteRole = _unitOfWork._db.Roles.Find(Id);

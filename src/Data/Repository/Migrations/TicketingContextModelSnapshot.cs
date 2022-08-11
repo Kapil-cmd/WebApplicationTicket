@@ -37,7 +37,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("CategoryCId");
 
-                    b.ToTable("ListCategory");
+                    b.ToTable("ListCategory", (string)null);
                 });
 
             modelBuilder.Entity("Repository.Entites.Category", b =>
@@ -203,12 +203,17 @@ namespace Repository.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Role");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -223,9 +228,6 @@ namespace Repository.Migrations
 
                     b.Property<bool>("IsSelected")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -308,6 +310,16 @@ namespace Repository.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Repository.Entites.User", b =>
+                {
+                    b.HasOne("Repository.Entites.Role", "MyRole")
+                        .WithMany("MyUser")
+                        .HasForeignKey("Role")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("MyRole");
+                });
+
             modelBuilder.Entity("Repository.Entites.UserRole", b =>
                 {
                     b.HasOne("Repository.Entites.Role", "aRole")
@@ -360,6 +372,8 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Entites.Role", b =>
                 {
+                    b.Navigation("MyUser");
+
                     b.Navigation("Permissions");
 
                     b.Navigation("Users");

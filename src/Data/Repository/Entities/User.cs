@@ -25,5 +25,6 @@ namespace Repository.Entites
         public virtual IEnumerable<Ticket> MyCreatedTicket { get; set; }
         public virtual IEnumerable<UserRole> Roles { get; set;}
         public virtual IEnumerable<UserTicket> AssignedeTickets {get; set; }
+        public virtual Role MyRole { get; set; }
     }
 }

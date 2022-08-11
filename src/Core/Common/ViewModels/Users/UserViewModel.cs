@@ -57,15 +57,14 @@ namespace Common.ViewModels.Users
         [Required(ErrorMessage = "Email is required"), Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
-        [Display(Name = "Age")]
-        [Range(16,100)]
-        public int Age { get; set; }
-        [Required]
-        [DisplayName("DateOfBirth")]
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DateOfBirth { get; set; }
         public long PhoneNumber { get; set; }
+        public List<ListRole> Roles { get; set; }
         public string Role { get; set; }
+    }
+    public class ListRole
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
     }
 
     public class UserTokenModel
