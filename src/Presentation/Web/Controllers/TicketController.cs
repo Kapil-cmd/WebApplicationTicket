@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
+using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
 
@@ -21,8 +22,8 @@ namespace demo.Controllers
         }
         public IActionResult Index()
         {
-            var ticketList = _unitOfWork._db.Tickets.ToList();
-            return View(ticketList);
+            var model = _unitOfWork.Ticket.GetAll();
+            return View(model);
         }
         [HttpGet]
         public IActionResult Create()

@@ -275,3 +275,9 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\refint\
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.pdb
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.genruntimeconfig.cache
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\ref\Web.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.Razor.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.Helpers.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.WebPages.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Repository.Entites;
 using Repository.Repos.Work;
 using System.Security.Claims;
+using System.Web.Helpers;
 
 namespace Services.BL
 {
@@ -104,6 +105,9 @@ namespace Services.BL
                     response.Message = "User with this username already exists";
                     return response;
                 }
+                #region Password Hashing
+                Register.Password = Crypto.Hash(Register.Password);
+                #endregion
 
                 _unitOfWork._db.Users.Add(new Repository.Entites.User()
                 {
@@ -112,10 +116,10 @@ namespace Services.BL
                     Email = Register.Email,
                     FirstName = Register.FirstName,
                     LastName = Register.LastName,
-                    Password = Register.Password, //TODO Encrypt Password
+                    Password = Register.Password,
                     PhoneNumber = Register.PhoneNumber,
                     UserName = Register.UserName,
-                });
+                }); ;
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";
@@ -147,7 +151,6 @@ namespace Services.BL
                 user.Email = EditUser.Email;
                 user.FirstName = EditUser.FirstName;
                 user.LastName = EditUser.LastName;
-                //user.Password = EditUser.Password; //TODO Encrypt Password
                 user.PhoneNumber = EditUser.PhoneNumber;
 
                 _unitOfWork._db.Users.Update(user);
@@ -219,6 +222,9 @@ namespace Services.BL
 
 
         }
+
+       
+
         //public BaseResponseModel<string> AssignUserToRole(string userId, string roleId)
         //{
         //    BaseResponseModel<string> response = new BaseResponseModel<string>();

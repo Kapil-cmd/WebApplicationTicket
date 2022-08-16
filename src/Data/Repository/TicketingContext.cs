@@ -14,7 +14,7 @@ namespace Repository
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<UserTicket> Ticketusers { get; set; }
+        public DbSet<UserTicket> UserTickets { get; set; }
         public TicketingContext(DbContextOptions<TicketingContext> options)
             : base(options)
         {

@@ -7,5 +7,8 @@ namespace Repository.Entities
         public UserRole UserRole { get; set; }
         public User user { get; set; }
         public Role role { get; set; }
+
+        public Ticket Tickets { get; set; }
+        public UserTicket UTicket { get; set; }
     }
 }

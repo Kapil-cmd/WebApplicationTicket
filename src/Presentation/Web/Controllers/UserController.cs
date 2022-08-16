@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
+using System.Security.Claims;
 
 namespace Web.Controllers
 {
@@ -181,6 +182,7 @@ namespace Web.Controllers
             }
             return View(user);
         }
+      
        
     }
 }

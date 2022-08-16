@@ -98,11 +98,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult DeleteCategory(string CId)
         {
-            if (CId == null)
-            {
-                return NotFound();
-            }
-            var deleteFromCategory = _unitOfWork.CategoryRepository.GetFirstOrDefault(u => u.CId == CId);
+            var deleteFromCategory = _unitOfWork._db.Category.Find(CId);
             if (deleteFromCategory == null)
             {
                 return NotFound();

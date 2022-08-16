@@ -93,4 +93,5 @@ namespace Common.ViewModels.Users
         public string Password { get; set; }
 
     }
+   
 }

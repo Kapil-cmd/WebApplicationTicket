@@ -76,7 +76,7 @@ namespace Services.BL
                     return response;
                 }
 
-                _unitOfWork._db.Ticketusers.Add(new Repository.Entities.UserTicket()
+                _unitOfWork._db.UserTickets.Add(new Repository.Entities.UserTicket()
                 {
                     TicketId = Ticket.TicketId,
                     UserId = Ticket.AssignedTo
