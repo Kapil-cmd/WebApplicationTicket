@@ -13,12 +13,10 @@ namespace Web.Controllers
     {
         private readonly ICategoryservice _categoryService;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly TicketingContext _db;
-        public CategoryController(ICategoryservice categoryService, IUnitOfWork unitOfWork,TicketingContext db)
+        public CategoryController(ICategoryservice categoryService, IUnitOfWork unitOfWork)
         {
             _categoryService = categoryService;
             _unitOfWork = unitOfWork;
-            _db = db;
         }
         public IActionResult Index()
         {
