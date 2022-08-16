@@ -4,10 +4,8 @@
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Name { get; set; }
-        public bool IsSelected { get; set;}
 
         public virtual IEnumerable<UserRole> Users { get; set; }
         public virtual IEnumerable<RolePermission> Permissions { get; set; }
-        public virtual IEnumerable<User> MyUser { get; set; }
     }
 }

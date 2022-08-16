@@ -1,6 +1,4 @@
 ﻿using Repository.Entities;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repository.Entites
 {
@@ -12,12 +10,10 @@ namespace Repository.Entites
         public string LastName { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-        //public bool IsEmailConfirmed { get; set; }
         public int Age { get; set; }
         public long PhoneNumber { get; set; }
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string Role { get; set; }
 
 
 
@@ -25,6 +21,5 @@ namespace Repository.Entites
         public virtual IEnumerable<Ticket> MyCreatedTicket { get; set; }
         public virtual IEnumerable<UserRole> Roles { get; set;}
         public virtual IEnumerable<UserTicket> AssignedeTickets {get; set; }
-        public virtual Role MyRole { get; set; }
     }
 }

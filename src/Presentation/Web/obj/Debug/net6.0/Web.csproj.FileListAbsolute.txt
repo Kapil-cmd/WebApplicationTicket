@@ -66,6 +66,8 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\NuGet.P
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\NuGet.Versioning.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\SendGrid.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\StarkbankEcdsa.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Syncfusion.EJ2.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Syncfusion.Licensing.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Composition.AttributedModel.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Composition.Convention.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Composition.Hosting.dll
@@ -258,6 +260,7 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.Gen
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.AssemblyInfoInputs.cache
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.AssemblyInfo.cs
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.csproj.CoreCompileInputs.cache
+D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.MvcApplicationPartsAssemblyInfo.cs
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.RazorAssemblyInfo.cache
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.RazorAssemblyInfo.cs

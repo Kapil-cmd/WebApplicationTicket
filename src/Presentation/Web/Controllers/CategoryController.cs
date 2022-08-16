@@ -68,7 +68,7 @@ namespace Web.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View("Index");
+                return View("Index"); 
             }
             var response = _categoryService.EditCategory(model);
             if(response.Status == "00")

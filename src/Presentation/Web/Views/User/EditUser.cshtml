@@ -1,4 +1,5 @@
-﻿@model Common.ViewModels.Users.EditUserViewModel
+﻿@*@using Syncfusion.EJ2*@
+@model Common.ViewModels.Users.EditUserViewModel
 
 @{
     ViewData["Title"] = "EditUser";
@@ -38,15 +39,17 @@
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div><br />
             <div class="xol-sm-2">
-                <label asp-for="Role" class="label-control" multiple></label>
-                <select asp-for="Role" class="form-control">
+                <label asp-for="Role" class="label-control" ></label>
+                <select asp-for="Role" class="form-control" multiple>
                     @foreach(var role in Model.Roles)
                     {
-                        <option value="@role.Id" class="text-danger">@role.Name</option>
+                        <option value="@role.Id" class="text-danger" >@role.Name</option>
                     }
                 </select>
                 <span asp-validation-for="Role" class="text-danger"></span>
-            </div><br />
+            </div>
+            
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
                  <a asp-action="Index" class="btn btn-outline-success">Back to List</a>

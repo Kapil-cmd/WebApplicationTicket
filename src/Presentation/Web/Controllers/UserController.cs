@@ -1,5 +1,4 @@
-﻿using Common.ViewModels.UserRole;
-using Common.ViewModels.Users;
+﻿using Common.ViewModels.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -65,7 +64,6 @@ namespace Web.Controllers
             model.Email = user.Email;
             model.Address = user.Address;
             model.PhoneNumber = user.PhoneNumber;
-            model.Role = user.Role;
             var role = _unitOfWork._db.Roles.ToList();
             if(role != null)
             {
@@ -183,18 +181,6 @@ namespace Web.Controllers
             }
             return View(user);
         }
-        [HttpPost]
-        public IActionResult RemoveRole(string userId, String roleId)
-        {
-            var response = _userService.RemoveUserFromRole(userId, roleId);
-            if (response.Status == "00")
-            {
-                return RedirectToAction("Index", "Role");
-            }
-            else
-            {
-                return RedirectToAction("Edit", "Role");
-            }
-        }
+       
     }
 }

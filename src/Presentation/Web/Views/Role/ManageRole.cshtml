@@ -15,6 +15,16 @@
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+              <div class="xol-sm-2">
+                <label asp-for="Permission" class="label-control"></label>
+                <select asp-for="Permission" class="form-control">
+                    @foreach(var permissions in Model.ListPermission)
+                    {
+                        <option value="@permissions.Id" class="text-danger">@permissions.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Permission" class="text-danger"></span>
             </div><br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
