@@ -8,6 +8,7 @@ using Repository.Entites;
 using Repository.Repos.Work;
 using System.Security.Claims;
 using System.Web.Helpers;
+using System.Web.WebPages.Html;
 
 namespace Services.BL
 {
@@ -105,10 +106,16 @@ namespace Services.BL
                     response.Message = "User with this username already exists";
                     return response;
                 }
+               
+
+                #region Generate Activation Code
+                Register.ActivationCode = Guid.NewGuid();
+                #endregion
+
                 #region Password Hashing
                 Register.Password = Crypto.Hash(Register.Password);
                 #endregion
-
+                
                 _unitOfWork._db.Users.Add(new Repository.Entites.User()
                 {
                     Address = Register.Address,
@@ -121,6 +128,8 @@ namespace Services.BL
                     UserName = Register.UserName,
                 }); ;
                 _unitOfWork._db.SaveChanges();
+                
+                
 
                 response.Status = "00";
                 response.Message = "User successfully registered";

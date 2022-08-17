@@ -14,6 +14,8 @@ namespace Repository.Entites
         public long PhoneNumber { get; set; }
         public string Password { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public bool IsEmailVerified { get; set; }
+        public System.Guid ActivationCode { get; set; }
 
 
 

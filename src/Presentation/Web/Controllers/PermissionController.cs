@@ -70,7 +70,7 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Delete(string? id)
         {
-            var permission = _unitOfWork.Permission.GetById(id);
+            var permission = _unitOfWork._db.Permissions.FirstOrDefault(x => x.PermissionId == id);
             return View(permission);
         }
         [HttpPost]

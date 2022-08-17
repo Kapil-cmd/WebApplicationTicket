@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
-using System.Security.Claims;
+using System.Net;
+using System.Net.Mail;
 
 namespace Web.Controllers
 {
@@ -34,6 +35,17 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult RegisterUser(UserRegister model)
         {
+            bool Status = false;
+            string message = "";
+            #region Email Verified
+            var isExist = IsEmailExist(model.Email);
+            if (isExist)
+            {
+                ModelState.AddModelError("EmailExist", "Email already exist");
+                return View(model);
+            }
+            #endregion
+            
             if (!ModelState.IsValid)
             {
                 // Message return 
@@ -42,6 +54,9 @@ namespace Web.Controllers
             var response = _userService.Register(model);
             if (response.Status == "00")
             {
+                SendVerificationLinkEmail(model.Email, model.ActivationCode.ToString());
+                message = "Registration sucessfully done.Account activation link" + "has been send to your email id:" + model.Email;
+                Status = true;
                 // redirect to login page
                 return RedirectToAction("RegisterUser");
             }
@@ -85,6 +100,7 @@ namespace Web.Controllers
         public IActionResult EditUser(EditUserViewModel model)
         {
             var response = _userService.EditUser(model);
+
             if (response.Status == "00")
             {
                 //redirect to user profile page
@@ -182,7 +198,67 @@ namespace Web.Controllers
             }
             return View(user);
         }
-      
-       
+
+        [NonAction]
+        public bool IsEmailExist(string Email)
+        {
+            
+                var v = _unitOfWork._db.Users.Where(x => x.Email == Email).FirstOrDefault();
+                return v != null;
+            
+        }
+        [NonAction]
+        public void SendVerificationLinkEmail(string emailID, string activationCode)
+        {
+            var verifyUrl = "/User/VerifyAccount/" + activationCode;
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+
+            var fromEmail = new MailAddress("karkikapil228@gmail.com", "Dotnet Awesome");
+            var toEmail = new MailAddress(emailID);
+            var fromEmailPassword = "Pr@ks1357"; 
+            string subject = "Your account is successfully created!";
+
+            string body = "<br/><br/>We are excited to tell you that your Ticketing account is" +
+                " successfully created. Please click on the below link to verify your account" +
+                " <br/><br/><a href='" + link + "'>" + link + "</a> ";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
+        }
+        [HttpGet]
+        public IActionResult VerifyAccount(string id)
+        {
+            bool Status = false;
+
+            var v = _unitOfWork._db.Users.Where(x => x.ActivationCode == new Guid(id)).FirstOrDefault();
+            if(v != null)
+            {
+                v.IsEmailVerified = true;
+                _unitOfWork._db.SaveChanges();
+                Status = true;
+            }
+            else
+            {
+                ViewBag.Message = "Invalid Request";
+            }
+            ViewBag.Status = Status;
+            return View();
+        }
+
     }
 }
