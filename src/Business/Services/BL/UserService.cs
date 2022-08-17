@@ -36,7 +36,9 @@ namespace Services.BL
                     response.Message = "User not found";
                     return response;
                 }
-
+                #region Password Hashing
+                model.Password = Crypto.Hash(model.Password);
+                #endregion
                 if (user.Password != model.Password )
                 {
                     response.Status = "97";
@@ -68,9 +70,7 @@ namespace Services.BL
                     IsPersistent = true,
                 };
 
-                #region Password Hashing
-                model.Password = Crypto.Hash(model.Password);
-                #endregion
+               
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, data.UserName));
@@ -237,9 +237,7 @@ namespace Services.BL
 
 
         }
-
-       
-
+      
         //public BaseResponseModel<string> AssignUserToRole(string userId, string roleId)
         //{
         //    BaseResponseModel<string> response = new BaseResponseModel<string>();
@@ -308,6 +306,7 @@ namespace Services.BL
         BaseResponseModel<string> Register(UserRegister Register);
         BaseResponseModel<string> EditUser(EditUserViewModel Edituser);
         BaseResponseModel<string> DeleteUser(UserViewModel DeleteUser);
+        //BaseResponseModel<string> ForgetPassword (ForgetPassword forgetPassword)
         //BaseResponseModel<string> AssignUserToRole(string userId, string roleId);
         //BaseResponseModel<string> RemoveUserFromRole(string userId, string roleId);
     }

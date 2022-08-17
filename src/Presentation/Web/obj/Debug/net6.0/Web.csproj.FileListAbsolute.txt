@@ -333,3 +333,4 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\roslyn\
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\MimeKit.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Bogus.dll

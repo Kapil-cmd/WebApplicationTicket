@@ -95,5 +95,11 @@ namespace Common.ViewModels.Users
         public string Password { get; set; }
 
     }
-   
+   public class ForgetPassword
+    {
+        [Display(Name ="Email")]
+        [Required(AllowEmptyStrings = false, ErrorMessage ="User Email is required")]
+        public string Email { get; set; }
+        
+    }
 }

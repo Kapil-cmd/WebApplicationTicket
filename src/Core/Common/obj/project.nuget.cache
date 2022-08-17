@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "HmX61MYrs7cjcV/737K1jN0o4OMGYyoZW+Q70RG+9pf/ScQRS0bxZ4/3cXTiaRspVVxG3ZTiw/V/mGATpXZEKA==",
+  "dgSpecHash": "HV9hSYSWyIZJ4aoHzFI0TiYYPm62lcJ+FxTRcjm0u0bD1dT/zarwIpaUvXpEf2RQ8rF2V22Bb2McLSOi4RFiQw==",
   "success": true,
   "projectFilePath": "D:\\Projects\\TicketManagementSystem\\src\\Core\\Common\\Common.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\karki\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
     "C:\\Users\\karki\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\karki\\.nuget\\packages\\microsoft.build.framework\\17.2.0\\microsoft.build.framework.17.2.0.nupkg.sha512",
     "C:\\Users\\karki\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",

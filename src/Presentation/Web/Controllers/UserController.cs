@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
@@ -15,10 +16,12 @@ namespace Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IUnitOfWork _unitOfWork;
-        public UserController(IUserService userService, IUnitOfWork unitOfWork)
+        private readonly TicketingContext _db;
+        public UserController(IUserService userService, IUnitOfWork unitOfWork,TicketingContext db)
         {
             _userService = userService;
             _unitOfWork = unitOfWork;
+            _db = db;
         }
         public IActionResult Index()
         {
@@ -55,7 +58,7 @@ namespace Web.Controllers
             var response = _userService.Register(model);
             if (response.Status == "00")
             {
-               // SendVerificationLinkEmail(model.Email, model.ActivationCode.ToString());
+                SendVerificationLinkEmail(model.Email, model.ActivationCode.ToString());
                 message = "Registration sucessfully done.Account activation link" + "has been send to your email id:" + model.Email;
                 Status = true;
                 
@@ -215,42 +218,39 @@ namespace Web.Controllers
             var verifyUrl = "/User/VerifyAccount/" + activationCode;
 
             var link = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + verifyUrl;
+
             var fromEmail = new MailAddress("karkikapil228@gmail.com", "Kapil");
             var toEmail = new MailAddress(emailID);
             var fromEmailPassword = "pr@ks1357"; 
             string subject = "Your account is successfully created!";
 
-            string body = "<br/><br/>We are excited to tell you that your Ticketing account is" +
-                " successfully created. Please click on the below link to verify your account" +
-                " <br/><br/><a href='" + link + "'>" + link + "</a> ";
-
             var smtp = new SmtpClient
             {
-                Host = "smtp.google.com",
+                Host = "smtp.gmail.com",
                 Port = 587,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = true,
+                UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
             };
 
-            using (var message = new MailMessage(fromEmail, toEmail)
-            {
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            })
-                smtp.Send(message);
+            var Message = new MailMessage(fromEmail, toEmail);
+            Message.Subject = "Registration Completed";
+            Message.Body = "<br/> Your registration completed succesfully." +
+                   "<br/> please click on the below link for account verification" +
+                   "<br/><br/><a href=" + link + ">" + link + "</a>";
+            Message.IsBodyHtml = true;
+            smtp.Send(Message);
         }
         [HttpGet]
         public IActionResult VerifyAccount(string id)
         {
             bool Status = false;
 
-            var v = _unitOfWork._db.Users.Where(x => x.ActivationCode == new Guid(id)).FirstOrDefault();
-            if(v != null)
+            var IsVerify = _unitOfWork._db.Users.Where(x => x.ActivationCode == new Guid(id)).FirstOrDefault();
+            if(IsVerify != null)
             {
-                v.IsEmailVerified = true;
+                IsVerify.IsEmailVerified = true;
                 _unitOfWork._db.SaveChanges();
                 Status = true;
             }
@@ -262,6 +262,10 @@ namespace Web.Controllers
             
             return View();
         }
-
+        [HttpGet]
+        public IActionResult ForgetPassword()
+        {
+            return View();
+        }
     }
 }

@@ -21,7 +21,9 @@ namespace Repository.Configurations
             builder.Property(x => x.DateOfBirth).IsRequired();
             builder.Property(x => x.PhoneNumber).HasMaxLength(13).IsRequired();
             builder.Property(x => x.Password).IsRequired();
-
+            builder.Property(x => x.IsEmailVerified).HasColumnName("IsEmailVerified");
+            builder.Property(x => x.ActivationCode);
+            builder.Property(x => x.OTP);
         }
     }
 }

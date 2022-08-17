@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "bHKc4kmIyA2PoJTKIxbmnTw4HcDWyUq2dhZAjoPLupIyv/odsDQNSBSHBRKjwltRxaffOoLQc94AnU7AYh9jDQ==",
+  "dgSpecHash": "gzlGNDKJHu2Amdrpqwi6taTu5O8NVbcyFrCa+Q2jSQNnDTPqMOoYwSVQhDr6FPrm81r2MYTyxPLjGY0mBwbC4Q==",
   "success": true,
   "projectFilePath": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\Web.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\karki\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
     "C:\\Users\\karki\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\karki\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\karki\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
