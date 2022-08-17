@@ -37,6 +37,7 @@ namespace Web.Controllers
         {
             bool Status = false;
             string message = "";
+
             #region Email Verified
             var isExist = IsEmailExist(model.Email);
             if (isExist)
@@ -54,9 +55,10 @@ namespace Web.Controllers
             var response = _userService.Register(model);
             if (response.Status == "00")
             {
-                SendVerificationLinkEmail(model.Email, model.ActivationCode.ToString());
+               // SendVerificationLinkEmail(model.Email, model.ActivationCode.ToString());
                 message = "Registration sucessfully done.Account activation link" + "has been send to your email id:" + model.Email;
                 Status = true;
+                
                 // redirect to login page
                 return RedirectToAction("RegisterUser");
             }
@@ -211,11 +213,11 @@ namespace Web.Controllers
         public void SendVerificationLinkEmail(string emailID, string activationCode)
         {
             var verifyUrl = "/User/VerifyAccount/" + activationCode;
-            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
-            var fromEmail = new MailAddress("karkikapil228@gmail.com", "Dotnet Awesome");
+            var link = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + verifyUrl;
+            var fromEmail = new MailAddress("karkikapil228@gmail.com", "Kapil");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "Pr@ks1357"; 
+            var fromEmailPassword = "pr@ks1357"; 
             string subject = "Your account is successfully created!";
 
             string body = "<br/><br/>We are excited to tell you that your Ticketing account is" +
@@ -224,11 +226,11 @@ namespace Web.Controllers
 
             var smtp = new SmtpClient
             {
-                Host = "smtp.gmail.com",
+                Host = "smtp.google.com",
                 Port = 587,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
+                UseDefaultCredentials = true,
                 Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
             };
 
@@ -255,8 +257,9 @@ namespace Web.Controllers
             else
             {
                 ViewBag.Message = "Invalid Request";
+                ViewBag.Status = false;
             }
-            ViewBag.Status = Status;
+            
             return View();
         }
 

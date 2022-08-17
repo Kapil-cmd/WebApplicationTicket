@@ -68,6 +68,9 @@ namespace Services.BL
                     IsPersistent = true,
                 };
 
+                #region Password Hashing
+                model.Password = Crypto.Hash(model.Password);
+                #endregion
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                 identity.AddClaim(new Claim(ClaimTypes.Name, data.UserName));
@@ -115,7 +118,8 @@ namespace Services.BL
                 #region Password Hashing
                 Register.Password = Crypto.Hash(Register.Password);
                 #endregion
-                
+                Register.IsEmailVerified = false;
+
                 _unitOfWork._db.Users.Add(new Repository.Entites.User()
                 {
                     Address = Register.Address,
@@ -126,7 +130,9 @@ namespace Services.BL
                     Password = Register.Password,
                     PhoneNumber = Register.PhoneNumber,
                     UserName = Register.UserName,
-                }); ;
+                    IsEmailVerified = Register.IsEmailVerified,
+                    ActivationCode = Register.ActivationCode,
+                }); 
                 _unitOfWork._db.SaveChanges();
                 
                 

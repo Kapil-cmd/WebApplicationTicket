@@ -166,6 +166,9 @@ namespace Repository.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<Guid>("ActivationCode")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -185,6 +188,9 @@ namespace Repository.Migrations
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
+
+                    b.Property<bool>("IsEmailVerified")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
