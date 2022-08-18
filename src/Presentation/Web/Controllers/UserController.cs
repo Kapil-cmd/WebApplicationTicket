@@ -28,7 +28,7 @@ namespace Web.Controllers
             IEnumerable<User> userList = _unitOfWork.UserRepository.GetAll();
             return View(userList);
         }
-
+        
         [HttpGet]
         public IActionResult RegisterUser()
         {
@@ -104,6 +104,10 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult EditUser(EditUserViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var response = _userService.EditUser(model);
 
             if (response.Status == "00")
@@ -267,6 +271,32 @@ namespace Web.Controllers
         public IActionResult ForgetPassword()
         {
             return View();
+        }
+        [HttpGet]
+        public IActionResult ChangePassword(string Id)
+        {
+            var user = _unitOfWork._db.Users.FirstOrDefault( x => x.Id == x.Id);
+            if(User == null)
+            {
+                return NotFound();
+            }
+            ChangePassword model = new ChangePassword();
+            model.Id = user.Id;
+            model.Password = user.Password;
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePassword password)
+        {
+            var response = _userService.ChangePassword(password);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("ChangePassword");
+            }
+            else
+            {
+                return View(password);
+            }
         }
     }
 }

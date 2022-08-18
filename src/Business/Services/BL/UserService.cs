@@ -4,11 +4,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Repository.Entites;
 using Repository.Repos.Work;
 using System.Security.Claims;
 using System.Web.Helpers;
-using System.Web.WebPages.Html;
 
 namespace Services.BL
 {
@@ -71,7 +69,6 @@ namespace Services.BL
                     ExpiresUtc = DateTime.UtcNow.AddMinutes(30),
                     IsPersistent = true,
                 };
-
                
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -239,7 +236,43 @@ namespace Services.BL
 
 
         }
-      
+      public BaseResponseModel<string> ChangePassword(ChangePassword password)
+        {
+            BaseResponseModel<string> response = new BaseResponseModel<string>();
+            try
+            {
+                if (_unitOfWork.UserRepository.Any(x => x.Password == password.Password))
+                {
+                    response.Status = "98";
+                    response.Message = "Password matched ";
+                    return response;
+                }
+                else
+                {
+                    response.Status = "100";
+                    response.Message = "Password didn't match";
+                    return response;
+                }
+                _unitOfWork._db.Users.Update(new Repository.Entites.User()
+                {
+                    Password = password.NewPassword,
+                });
+                _unitOfWork._db.SaveChanges();
+
+                response.Status = "00";
+                response.Message = "Password changed Sucessfully";
+                return response;
+            }
+            catch(Exception ex)
+            {
+                response.Status = "500";
+                response.Message ="Error Occurred: " + ex.Message;
+                return response;
+            }
+        }
+
+
+
         //public BaseResponseModel<string> AssignUserToRole(string userId, string roleId)
         //{
         //    BaseResponseModel<string> response = new BaseResponseModel<string>();
@@ -308,9 +341,9 @@ namespace Services.BL
         BaseResponseModel<string> Register(UserRegister Register);
         BaseResponseModel<string> EditUser(EditUserViewModel Edituser);
         BaseResponseModel<string> DeleteUser(UserViewModel DeleteUser);
+        BaseResponseModel<string> ChangePassword(ChangePassword password);
         //BaseResponseModel<string> ForgetPassword (ForgetPassword forgetPassword)
-        //BaseResponseModel<string> AssignUserToRole(string userId, string roleId);
-        //BaseResponseModel<string> RemoveUserFromRole(string userId, string roleId);
+        
     }
 }
 
