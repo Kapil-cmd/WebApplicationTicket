@@ -273,30 +273,20 @@ namespace Web.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult ChangePassword(string Id)
+        public IActionResult ChangePassword(ChangePassword model)
         {
-            var user = _unitOfWork._db.Users.FirstOrDefault( x => x.Id == x.Id);
-            if(User == null)
-            {
-                return NotFound();
-            }
-            ChangePassword model = new ChangePassword();
-            model.Id = user.Id;
-            model.Password = user.Password;
             return View(model);
         }
-        [HttpPost]
-        public IActionResult ChangePassword(ChangePassword password)
+        [HttpPost,ActionName("ChangePassword")]
+        public IActionResult ChangePasswordPOST(ChangePassword model)
         {
-            var response = _userService.ChangePassword(password);
+            var response = _userService.ChangePassword(model);
             if(response.Status == "00")
             {
-                return RedirectToAction("ChangePassword");
+                return RedirectToAction("Homepage", "Home");
             }
-            else
-            {
-                return View(password);
-            }
+            return View(model);
+
         }
     }
 }

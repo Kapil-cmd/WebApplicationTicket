@@ -34,10 +34,10 @@ namespace Services.BL
                     response.Message = "User not found";
                     return response;
                 }
-
-                #region Password Hashing
+                #region
                 model.Password = Crypto.Hash(model.Password);
                 #endregion
+
 
                 if (user.Password != model.Password )
                 {
@@ -236,32 +236,28 @@ namespace Services.BL
 
 
         }
-      public BaseResponseModel<string> ChangePassword(ChangePassword password)
+      public BaseResponseModel<string> ChangePassword(ChangePassword model)
         {
-            BaseResponseModel<string> response = new BaseResponseModel<string>();
+            var response = new BaseResponseModel<string>();
             try
             {
-                if (_unitOfWork.UserRepository.Any(x => x.Password == password.Password))
-                {
-                    response.Status = "98";
-                    response.Message = "Password matched ";
-                    return response;
-                }
-                else
-                {
-                    response.Status = "100";
-                    response.Message = "Password didn't match";
-                    return response;
-                }
-                _unitOfWork._db.Users.Update(new Repository.Entites.User()
-                {
-                    Password = password.NewPassword,
-                });
-                _unitOfWork._db.SaveChanges();
+                var Id = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
 
+                model.Id = user.Id;
+
+                if (_unitOfWork.UserRepository.Any(x => x.Password == model.Password))
+                {
+
+                    user.Password = model.NewPassword = Crypto.Hash(model.Password);
+
+                    _unitOfWork._db.Users.Update(user);
+                    _unitOfWork._db.SaveChanges();
+                }
                 response.Status = "00";
-                response.Message = "Password changed Sucessfully";
+                response.Message = "Password Changed Successfully";
                 return response;
+                
             }
             catch(Exception ex)
             {
@@ -341,7 +337,7 @@ namespace Services.BL
         BaseResponseModel<string> Register(UserRegister Register);
         BaseResponseModel<string> EditUser(EditUserViewModel Edituser);
         BaseResponseModel<string> DeleteUser(UserViewModel DeleteUser);
-        BaseResponseModel<string> ChangePassword(ChangePassword password);
+        BaseResponseModel<string> ChangePassword(ChangePassword model);
         //BaseResponseModel<string> ForgetPassword (ForgetPassword forgetPassword)
         
     }
