@@ -219,9 +219,9 @@ namespace Web.Controllers
 
             var link = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + verifyUrl;
 
-            var fromEmail = new MailAddress("karkikapil228@gmail.com", "Kapil");
+            var fromEmail = new MailAddress("dashcharging7@gmail.com", "Kapil");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "pr@ks1357"; 
+            var fromEmailPassword = "qygqezeyxisnoavl"; 
             string subject = "Your account is successfully created!";
 
             var smtp = new SmtpClient
@@ -240,7 +240,7 @@ namespace Web.Controllers
                    "<br/> please click on the below link for account verification" +
                    "<br/><br/><a href=" + link + ">" + link + "</a>";
             Message.IsBodyHtml = true;
-            smtp.Send(Message);
+             smtp.Send(Message);
         }
         [HttpGet]
         public IActionResult VerifyAccount(string id)
@@ -252,6 +252,7 @@ namespace Web.Controllers
             {
                 IsVerify.IsEmailVerified = true;
                 _unitOfWork._db.SaveChanges();
+                ViewBag.Message = "Email Verification completed";
                 Status = true;
             }
             else

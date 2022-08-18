@@ -36,9 +36,11 @@ namespace Services.BL
                     response.Message = "User not found";
                     return response;
                 }
+
                 #region Password Hashing
                 model.Password = Crypto.Hash(model.Password);
                 #endregion
+
                 if (user.Password != model.Password )
                 {
                     response.Status = "97";
@@ -94,7 +96,7 @@ namespace Services.BL
             {
                 response.Status = "500";
                 response.Message = "Exception occured: " + ex.Message;
-                response.Data = null;
+                return response;
             }
             return response;
         }
