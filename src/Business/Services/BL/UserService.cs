@@ -248,12 +248,16 @@ namespace Services.BL
 
                 if (_unitOfWork.UserRepository.Any(x => x.Password == model.Password))
                 {
-
-                    user.Password = model.NewPassword = Crypto.Hash(model.Password);
-
-                    _unitOfWork._db.Users.Update(user);
-                    _unitOfWork._db.SaveChanges();
+                    response.Status = "98";
+                    response.Message = "Password matched";
+                    return response;
+                   
                 }
+                user.Password = model.NewPassword = Crypto.Hash(model.NewPassword);
+
+                _unitOfWork._db.Users.Update(user);
+                _unitOfWork._db.SaveChanges();
+
                 response.Status = "00";
                 response.Message = "Password Changed Successfully";
                 return response;

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Repository.Migrations
 {
-    public partial class init : Migration
+    public partial class final : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,8 +45,11 @@ namespace Repository.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<long>(type: "bigint", maxLength: 13, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsEmailVerified = table.Column<bool>(type: "bit", nullable: false),
+                    ActivationCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OTP = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -119,6 +122,9 @@ namespace Repository.Migrations
                         principalTable: "Users",
                         principalColumn: "Id");
                 });
+
+           
+
             migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
@@ -177,7 +183,7 @@ namespace Repository.Migrations
                 table: "Categories",
                 column: "CreatedBy");
 
-           
+            
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolePermissions_PermissionId",
@@ -207,7 +213,7 @@ namespace Repository.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
+           
 
             migrationBuilder.DropTable(
                 name: "RolePermissions");
