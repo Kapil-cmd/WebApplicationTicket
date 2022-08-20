@@ -1,8 +1,10 @@
 ﻿namespace Common.ViewModels.OTPPassword
 {
-    public string GeneratePassword()
-    {
-        string OTPLength = "4";
+    public class GenerateOtp 
+    { 
+        public string GeneratePassword()
+        {
+           string OTPLength = "4";
         string OTP = string.Empty;
 
         string Chars = string.Empty;
@@ -20,5 +22,6 @@
             OTP = NewOTP;
         }
         return OTP;
+        }
     }
 }
