@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vQEFJEn/Z9gNneBJJYNl+Aygbr4pjJ+tPdAtxk6nbVw=",
+  "Hash": "9qlBxJWFbAAHbeZI2wg9W4GLwff8YXhD3IGCV2JHFxI=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -338,6 +338,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\helpdesk.jpg"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\helpdesk22362087.jpg",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/helpdesk22362087.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\helpdesk22362087.jpg"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\helpdesk22511620.jpg",

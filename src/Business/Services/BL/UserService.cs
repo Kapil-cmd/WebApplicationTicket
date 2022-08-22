@@ -270,9 +270,9 @@ namespace Services.BL
                 return response;
             }
         }
-
-
-
+      
+        
+        
         //public BaseResponseModel<string> AssignUserToRole(string userId, string roleId)
         //{
         //    BaseResponseModel<string> response = new BaseResponseModel<string>();
@@ -342,8 +342,8 @@ namespace Services.BL
         BaseResponseModel<string> EditUser(EditUserViewModel Edituser);
         BaseResponseModel<string> DeleteUser(UserViewModel DeleteUser);
         BaseResponseModel<string> ChangePassword(ChangePassword model);
-        //BaseResponseModel<string> ForgetPassword (ForgetPassword forgetPassword)
-        
+
+
     }
 }
 

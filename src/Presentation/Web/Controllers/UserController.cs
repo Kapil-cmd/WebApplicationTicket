@@ -17,7 +17,7 @@ namespace Web.Controllers
         private readonly IUserService _userService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly TicketingContext _db;
-        public UserController(IUserService userService, IUnitOfWork unitOfWork,TicketingContext db)
+        public UserController(IUserService userService, IUnitOfWork unitOfWork, TicketingContext db)
         {
             _userService = userService;
             _unitOfWork = unitOfWork;
@@ -28,7 +28,7 @@ namespace Web.Controllers
             IEnumerable<User> userList = _unitOfWork.UserRepository.GetAll();
             return View(userList);
         }
-        
+
         [HttpGet]
         public IActionResult RegisterUser()
         {
@@ -49,7 +49,7 @@ namespace Web.Controllers
                 return View(model);
             }
             #endregion
-            
+
             if (!ModelState.IsValid)
             {
                 // Message return 
@@ -61,7 +61,7 @@ namespace Web.Controllers
                 SendVerificationLinkEmail(model.Email, model.ActivationCode.ToString());
                 message = "Registration sucessfully done.Account activation link" + "has been send to your email id:" + model.Email;
                 Status = true;
-                
+
                 // redirect to login page
                 return RedirectToAction("RegisterUser");
             }
@@ -86,15 +86,15 @@ namespace Web.Controllers
             model.Address = user.Address;
             model.PhoneNumber = user.PhoneNumber;
             var role = _unitOfWork._db.Roles.ToList();
-            if(role != null)
+            if (role != null)
             {
-                if(role.Count() > 0) 
-                { 
+                if (role.Count() > 0)
+                {
 
-                    model.Roles = role.Select( x => new Common.ViewModels.Users.ListRole()
+                    model.Roles = role.Select(x => new Common.ViewModels.Users.ListRole()
                     {
-                    Id = x.Id,
-                    Name = x.Name,
+                        Id = x.Id,
+                        Name = x.Name,
                     }).ToList();
                 }
             }
@@ -196,12 +196,12 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult RemoveRole(string Id)
         {
-            if(Id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
             var user = _unitOfWork._db.Users.Find(Id);
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
@@ -211,10 +211,10 @@ namespace Web.Controllers
         [NonAction]
         public bool IsEmailExist(string Email)
         {
-            
-                var v = _unitOfWork._db.Users.Where(x => x.Email == Email).FirstOrDefault();
-                return v != null;
-            
+
+            var v = _unitOfWork._db.Users.Where(x => x.Email == Email).FirstOrDefault();
+            return v != null;
+
         }
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode)
@@ -223,10 +223,13 @@ namespace Web.Controllers
 
             var link = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + verifyUrl;
 
-            var fromEmail = new MailAddress("dashcharging7@gmail.com", "Kapil");
+            var fromEmail = new MailAddress("dashcharging7@gmail.com", "Please Verify your Account");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "qygqezeyxisnoavl"; 
+            var fromEmailPassword = "qygqezeyxisnoavl";
+
             string subject = "Your account is successfully created!";
+
+
 
             var smtp = new SmtpClient
             {
@@ -244,7 +247,7 @@ namespace Web.Controllers
                    "<br/> please click on the below link for account verification" +
                    "<br/><br/><a href=" + link + ">" + link + "</a>";
             Message.IsBodyHtml = true;
-             smtp.Send(Message);
+            smtp.Send(Message);
         }
         [HttpGet]
         public IActionResult VerifyAccount(string id)
@@ -252,7 +255,7 @@ namespace Web.Controllers
             bool Status = false;
 
             var IsVerify = _unitOfWork._db.Users.Where(x => x.ActivationCode == new Guid(id)).FirstOrDefault();
-            if(IsVerify != null)
+            if (IsVerify != null)
             {
                 IsVerify.IsEmailVerified = true;
                 _unitOfWork._db.SaveChanges();
@@ -264,12 +267,7 @@ namespace Web.Controllers
                 ViewBag.Message = "Invalid Request";
                 ViewBag.Status = false;
             }
-            
-            return View();
-        }
-        [HttpGet]
-        public IActionResult ForgetPassword()
-        {
+
             return View();
         }
         [HttpGet]
@@ -277,17 +275,100 @@ namespace Web.Controllers
         {
             return View(model);
         }
-        [HttpPost,ActionName("ChangePassword")]
+        [HttpPost, ActionName("ChangePassword")]
         public IActionResult ChangePasswordPOST(ChangePassword model)
         {
             var response = _userService.ChangePassword(model);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("Homepage", "Home");
             }
             return View(model);
 
         }
-        
+        [HttpGet]
+        public IActionResult ForgetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ForgetPassword(ForgetPassword password)
+        {
+            var IsExists = IsEmailExist(password.Email);
+            if (!IsExists)
+            {
+                ModelState.AddModelError("EmailNotExists", "This email doesn't exists");
+                return View();
+            }
+            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Email == password.Email);
+
+            string OTP = GeneratePassword();
+
+            user.ActivationCode = Guid.NewGuid();
+            user.OTP = OTP;
+            _db.SaveChanges();
+
+            ForgetPasswordEmailToUser(user.Email, user.ActivationCode.ToString(), user.OTP);
+            return View();
+        }
+
+        [NonAction]
+        public void ForgetPasswordEmailToUser(string emailID, string activationCode, string OTP)
+        {
+            var verifyUrl = "/User/ChangePassword/" + activationCode;
+
+            var link = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + verifyUrl;
+
+            var fromEmail = new MailAddress("dashcharging7@gmail.com", "Change Password");
+            var toEmail = new MailAddress(emailID);
+            var fromEmailPassword = "qygqezeyxisnoavl";
+
+            string subject = "Your account is successfully created!";
+
+
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            var Message = new MailMessage(fromEmail, toEmail);
+            Message.Subject = "Password Reset";
+            Message.Body = "<br/> You can sucessfully change your password using OTP." +
+                   "<br/> please click on the below link for password change" +
+                   "<br/><br/><a href=" + link + ">" + link + "</a>" + OTP;
+            Message.IsBodyHtml = true;
+            smtp.Send(Message);
+        }
+        private string GeneratePassword()
+        {
+            string OTPLength = "4";
+            string OTP = string.Empty;
+
+            string Chars = string.Empty;
+            Chars = "1,2,3,4,5,6,7,8,9,0";
+
+            char[] splitChar = { ',' };
+            string[] arr = Chars.Split(splitChar);
+            string NewOTP = "";
+            string temp = "";
+            Random random = new Random();
+            for (int i = 0; i < Convert.ToInt32(OTPLength); i++)
+            {
+                temp = arr[random.Next(0, arr.Length)];
+                NewOTP += temp;
+                OTP = NewOTP;
+            }
+            return OTP;
+        }
     }
 }
+
+       
+    
+
