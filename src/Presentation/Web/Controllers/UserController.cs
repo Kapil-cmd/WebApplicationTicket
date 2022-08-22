@@ -315,7 +315,7 @@ namespace Web.Controllers
         [NonAction]
         public void ForgetPasswordEmailToUser(string emailID, string activationCode, string OTP)
         {
-            var verifyUrl = "/User/ChangePassword/" + activationCode;
+            var verifyUrl = "/User/ResetPassword/" + activationCode;
 
             var link = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + verifyUrl;
 
@@ -365,6 +365,24 @@ namespace Web.Controllers
                 OTP = NewOTP;
             }
             return OTP;
+        }
+        [HttpGet]
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPassword password)
+        {
+            var response = _userService.ResetPassword(password);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                return View(password);
+            }
         }
     }
 }

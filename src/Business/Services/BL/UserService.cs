@@ -271,7 +271,34 @@ namespace Services.BL
             }
         }
       
-        
+        public BaseResponseModel<string> ResetPassword(ResetPassword model)
+        {
+            BaseResponseModel<string> response= new BaseResponseModel<string>();
+            try
+            {
+                var user = _unitOfWork._db.Users.FirstOrDefault(x => x.OTP == model.OTP);
+                if (user == null)
+                {
+                    response.Status = "97";
+                    response.Message = "User not found";
+                    return response;
+                }
+                if (_unitOfWork._db.Users.Any(x => x.OTP == model.OTP))
+                {
+                    user.Password = model.NewPassword = Crypto.Hash(model.NewPassword);
+                    _unitOfWork._db.Users.Update(user);
+                    _unitOfWork._db.SaveChanges();
+                }
+                response.Status = "00";
+                response.Message = "Password reset sucessfully";
+                return response;
+            }catch(Exception ex)
+            {
+                response.Status = "500";
+                response.Message = "Error occured: " + ex.Message;
+                return response;
+            }
+        }
         
         //public BaseResponseModel<string> AssignUserToRole(string userId, string roleId)
         //{
@@ -342,6 +369,7 @@ namespace Services.BL
         BaseResponseModel<string> EditUser(EditUserViewModel Edituser);
         BaseResponseModel<string> DeleteUser(UserViewModel DeleteUser);
         BaseResponseModel<string> ChangePassword(ChangePassword model);
+        BaseResponseModel<string> ResetPassword(ResetPassword model);
 
 
     }
