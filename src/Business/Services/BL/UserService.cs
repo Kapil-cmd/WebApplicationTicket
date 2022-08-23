@@ -84,7 +84,6 @@ namespace Services.BL
                     CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(identity), authProperties
                     );
-
                 response.Status = "00";
                 response.Message = "Successfully logged in.";
                 response.Data = data;

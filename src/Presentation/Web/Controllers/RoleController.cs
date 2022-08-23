@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
+using Services.AuthorizationFilter;
 using Services.BL;
 
 namespace Web.Controllers
@@ -20,6 +21,7 @@ namespace Web.Controllers
             _db = db;
             _roleService = roleService;
         }
+        [Permissions]
         public IActionResult Index()
         {
             IEnumerable<Role> roles = _unitOfWork._db.Roles.ToList();

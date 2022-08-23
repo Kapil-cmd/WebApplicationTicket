@@ -334,3 +334,6 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.pdb
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.genruntimeconfig.cache
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\ref\Web.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.MvcApplicationPartsAssemblyInfo.cs
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\CdnJs.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll

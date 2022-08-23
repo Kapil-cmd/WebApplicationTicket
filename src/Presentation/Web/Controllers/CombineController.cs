@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
 using Repository.Entities;
 using Repository.Repos.Work;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class CombineController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -14,6 +16,7 @@ namespace Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        //[Permissions("Slug", "", "")]Z
         public IActionResult Index()
         {
             List<User> user = _unitOfWork._db.Users.ToList();

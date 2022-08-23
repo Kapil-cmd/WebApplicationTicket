@@ -1,7 +1,7 @@
 ﻿using Common.ViewModels.Categories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
+using Microsoft.EntityFrameworkCore;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
@@ -20,7 +20,7 @@ namespace Web.Controllers
         }
         public IActionResult Index()
         {
-            var category = _unitOfWork._db.Category.ToList();
+            var category = _unitOfWork._db.Category.Include(x => x.Tickets).ToList();
             return View(category);
         }
         [HttpGet]
