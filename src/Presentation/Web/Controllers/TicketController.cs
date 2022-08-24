@@ -22,7 +22,7 @@ namespace demo.Controllers
         }
         public IActionResult Index()
         {
-            var model = _unitOfWork.Ticket.GetAll();
+            var model = _unitOfWork.Ticket.GetAll().OrderBy(x => x.CreatedDateTime).ThenBy(x => x.CategoryName).ToList();
             return View(model);
         }
         [HttpGet]

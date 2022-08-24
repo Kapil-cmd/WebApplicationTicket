@@ -7,19 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA8D055B-EAA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{387F41D6-0CA8-4BCD-9823-83704C72F3B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "src\Data\Repository\Repository.csproj", "{D81D7EBC-B720-4B5A-9BE0-FCCE44B4FE43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "src\Data\Repository\Repository.csproj", "{D81D7EBC-B720-4B5A-9BE0-FCCE44B4FE43}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{221A5DE5-5CE5-429F-AAF5-3879C9E6FD7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "src\Business\Services\Services.csproj", "{958AF52E-AB1C-4564-A255-277922EB4383}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "src\Business\Services\Services.csproj", "{958AF52E-AB1C-4564-A255-277922EB4383}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0BC2D89B-822D-47D9-B861-CBD16806F512}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "src\Presentation\Web\Web.csproj", "{DA2C02CB-054A-4546-A56B-23A2248598AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Presentation\Web\Web.csproj", "{DA2C02CB-054A-4546-A56B-23A2248598AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F8331541-7CD2-45B5-BB39-3C42ADEDA991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "src\Core\Common\Common.csproj", "{B1AA5EF8-F730-4D7F-A62D-D778139029E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "src\Core\Common\Common.csproj", "{B1AA5EF8-F730-4D7F-A62D-D778139029E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

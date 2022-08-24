@@ -8,6 +8,9 @@ namespace Repository.Entites
     {
         public string PermissionId { get; set; } = Guid.NewGuid().ToString();
         public string Name { get; set; }
+        public string ControllerName { get; set; }
+        public string ActionName { get; set; }
+        public bool Permitted { get; set; }
         public virtual ICollection<RolePermission> Roles { get; set; }
 
       

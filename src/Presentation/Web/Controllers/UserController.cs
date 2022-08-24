@@ -7,6 +7,7 @@ using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
+using Services.CustomFilter;
 using System.Net;
 using System.Net.Mail;
 
@@ -23,6 +24,7 @@ namespace Web.Controllers
             _unitOfWork = unitOfWork;
             _db = db;
         }
+        //[PermissionFilter("User", "View")]
         public IActionResult Index()
         {
             IEnumerable<User> userList = _unitOfWork.UserRepository.GetAll();
