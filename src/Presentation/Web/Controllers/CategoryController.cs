@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
+using Services.CustomFilter;
 
 namespace Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryservice _categoryService;
@@ -18,26 +19,29 @@ namespace Web.Controllers
             _categoryService = categoryService;
             _unitOfWork = unitOfWork;
         }
+        [PermissionFilter("Category&View")]
         public IActionResult Index()
         {
             var category = _unitOfWork._db.Category.Include(x => x.Tickets).ToList();
             return View(category);
         }
         [HttpGet]
+        [PermissionFilter("Category&Create")]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
+        [PermissionFilter("Category&Create")]
         public IActionResult Create(AddCategoryViewModel model)
         {
-            
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
             var response = _categoryService.AddCategory(model);
-            if(response.Status =="00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("Index");
             }
@@ -47,10 +51,11 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Category&Edit")]
         public IActionResult EditCategory(string CId)
         {
             var category = _unitOfWork.CategoryRepository.GetFirstOrDefault(x => x.CId == CId);
-            if(category == null)
+            if (category == null)
             {
                 return NotFound();
             }
@@ -62,14 +67,15 @@ namespace Web.Controllers
             return View(model);
         }
         [HttpPost]
+        [PermissionFilter("Category&Edit")]
         public IActionResult EditCategory(EditCategoryViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return View("Index"); 
+                return View("Index");
             }
             var response = _categoryService.EditCategory(model);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("Index");
             }
@@ -79,6 +85,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Category&View")]
         public IActionResult CategoryDetails(string CId)
         {
             if (CId == null)
@@ -96,6 +103,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Category&Delete")]
         public IActionResult DeleteCategory(string CId)
         {
             var deleteFromCategory = _unitOfWork._db.Category.Find(CId);
@@ -106,11 +114,12 @@ namespace Web.Controllers
             return View(deleteFromCategory);
 
         }
-        [HttpPost, ActionName("DeleteCategory")]
-        public IActionResult DeleteCategoryPost(Category model)
+        [HttpPost]
+        [PermissionFilter("Category&Delete")]
+        public IActionResult DeleteCategory(Category model)
         {
             var response = _categoryService.DeleteCategory(model);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("Index");
             }

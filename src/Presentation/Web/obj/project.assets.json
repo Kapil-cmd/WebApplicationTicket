@@ -11,18 +11,6 @@
           "lib/net6.0/Bogus.dll": {}
         }
       },
-      "CdnJs/0.0.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "4.0.5"
-        },
-        "compile": {
-          "lib/net40/CdnJs.dll": {}
-        },
-        "runtime": {
-          "lib/net40/CdnJs.dll": {}
-        }
-      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -61,34 +49,6 @@
       },
       "MessagePackAnalyzer/2.1.152": {
         "type": "package"
-      },
-      "Microsoft.AspNet.Razor/3.2.9": {
-        "type": "package",
-        "compile": {
-          "lib/net45/System.Web.Razor.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Web.Razor.dll": {}
-        }
-      },
-      "Microsoft.AspNet.WebPages/3.2.9": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Razor": "[3.2.9, 3.3.0)",
-          "Microsoft.Web.Infrastructure": "1.0.0"
-        },
-        "compile": {
-          "lib/net45/System.Web.Helpers.dll": {},
-          "lib/net45/System.Web.WebPages.Deployment.dll": {},
-          "lib/net45/System.Web.WebPages.Razor.dll": {},
-          "lib/net45/System.Web.WebPages.dll": {}
-        },
-        "runtime": {
-          "lib/net45/System.Web.Helpers.dll": {},
-          "lib/net45/System.Web.WebPages.Deployment.dll": {},
-          "lib/net45/System.Web.WebPages.Razor.dll": {},
-          "lib/net45/System.Web.WebPages.dll": {}
-        }
       },
       "Microsoft.AspNetCore.Authentication/2.2.0": {
         "type": "package",
@@ -1189,18 +1149,6 @@
           }
         }
       },
-      "Microsoft.CodeDom.Providers.DotNetCompilerPlatform/3.6.0": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll": {}
-        },
-        "build": {
-          "build/net46/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets": {}
-        }
-      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -1916,15 +1864,6 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {}
-        }
-      },
-      "Microsoft.Web.Infrastructure/1.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
-        },
-        "runtime": {
-          "lib/net40/Microsoft.Web.Infrastructure.dll": {}
         }
       },
       "Microsoft.Win32.Primitives/4.3.0": {
@@ -3795,7 +3734,6 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Common": "1.0.0",
-          "Microsoft.AspNet.WebPages": "3.2.9",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
@@ -3830,18 +3768,6 @@
         "lib/netstandard1.3/Bogus.xml",
         "lib/netstandard2.0/Bogus.dll",
         "lib/netstandard2.0/Bogus.xml"
-      ]
-    },
-    "CdnJs/0.0.0.1": {
-      "sha512": "DsnxZ7rMY6llEqdh1yiEJfKLdZ4lTI48p6SZXrCOjzk8gULzxUqwzEVKs+6x1v1j20TuVqkyQ8qX9PROdrEAPg==",
-      "type": "package",
-      "path": "cdnjs/0.0.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "cdnjs.0.0.0.1.nupkg.sha512",
-        "cdnjs.nuspec",
-        "lib/net40/CdnJs.dll"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -3904,44 +3830,6 @@
         "messagepackanalyzer.nuspec",
         "tools/install.ps1",
         "tools/uninstall.ps1"
-      ]
-    },
-    "Microsoft.AspNet.Razor/3.2.9": {
-      "sha512": "QOJEnEw3xp+t5lMvYR5nGCF4CfZpHqr2p8uZOBEgDZoB6r2txtSj6581YNr+/dOHjI3YRlo1QAKGQoSohbQ/KA==",
-      "type": "package",
-      "path": "microsoft.aspnet.razor/3.2.9",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "NET.icon.png",
-        "NET_Library_EULA_ENU.txt",
-        "lib/net45/System.Web.Razor.dll",
-        "lib/net45/System.Web.Razor.xml",
-        "microsoft.aspnet.razor.3.2.9.nupkg.sha512",
-        "microsoft.aspnet.razor.nuspec"
-      ]
-    },
-    "Microsoft.AspNet.WebPages/3.2.9": {
-      "sha512": "yByb721lwv8YFsx1oKA5CLKXa89XVbVMkPafS4bg/bPelBEgChq/coFBQEkA4kwcabG7AR56w3vapnoZUfr2Cw==",
-      "type": "package",
-      "path": "microsoft.aspnet.webpages/3.2.9",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Content/Web.config.install.xdt",
-        "Content/Web.config.uninstall.xdt",
-        "NET.icon.png",
-        "NET_Library_EULA_ENU.txt",
-        "lib/net45/System.Web.Helpers.dll",
-        "lib/net45/System.Web.Helpers.xml",
-        "lib/net45/System.Web.WebPages.Deployment.dll",
-        "lib/net45/System.Web.WebPages.Deployment.xml",
-        "lib/net45/System.Web.WebPages.Razor.dll",
-        "lib/net45/System.Web.WebPages.Razor.xml",
-        "lib/net45/System.Web.WebPages.dll",
-        "lib/net45/System.Web.WebPages.xml",
-        "microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
-        "microsoft.aspnet.webpages.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication/2.2.0": {
@@ -5040,148 +4928,6 @@
         "lib/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll",
         "microsoft.codeanalysis.workspaces.msbuild.4.0.0.nupkg.sha512",
         "microsoft.codeanalysis.workspaces.msbuild.nuspec"
-      ]
-    },
-    "Microsoft.CodeDom.Providers.DotNetCompilerPlatform/3.6.0": {
-      "sha512": "Wxo1vjgqJDawdtSBYegfe7fqUfdKn5vMtAMgHHxjV5rW9rSyQZMQ5t0YTCxyQ/IUyAOoUkrHMVXNLCdqAtH72w==",
-      "type": "package",
-      "path": "microsoft.codedom.providers.dotnetcompilerplatform/3.6.0",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "build/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.targets",
-        "build/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets",
-        "build/net46/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.targets",
-        "build/net46/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets",
-        "build/net472/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.targets",
-        "build/net472/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets",
-        "content/net45/app.config.install.xdt",
-        "content/net45/app.config.uninstall.xdt",
-        "content/net45/web.config.install.xdt",
-        "content/net45/web.config.uninstall.xdt",
-        "content/net46/app.config.install.xdt",
-        "content/net46/app.config.uninstall.xdt",
-        "content/net46/web.config.install.xdt",
-        "content/net46/web.config.uninstall.xdt",
-        "content/net472/app.config.install.xdt",
-        "content/net472/app.config.uninstall.xdt",
-        "content/net472/web.config.install.xdt",
-        "content/net472/web.config.uninstall.xdt",
-        "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll",
-        "lib/net45/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml",
-        "microsoft.codedom.providers.dotnetcompilerplatform.3.6.0.nupkg.sha512",
-        "microsoft.codedom.providers.dotnetcompilerplatform.nuspec",
-        "tasks/DotNetCompilerPlatformTasks.dll",
-        "tasks/System.Management.dll",
-        "tools/Roslyn45/Microsoft.Build.Tasks.CodeAnalysis.dll",
-        "tools/Roslyn45/Microsoft.CSharp.Core.targets",
-        "tools/Roslyn45/Microsoft.CodeAnalysis.CSharp.Scripting.dll",
-        "tools/Roslyn45/Microsoft.CodeAnalysis.CSharp.dll",
-        "tools/Roslyn45/Microsoft.CodeAnalysis.Scripting.dll",
-        "tools/Roslyn45/Microsoft.CodeAnalysis.VisualBasic.dll",
-        "tools/Roslyn45/Microsoft.CodeAnalysis.dll",
-        "tools/Roslyn45/Microsoft.DiaSymReader.Native.amd64.dll",
-        "tools/Roslyn45/Microsoft.DiaSymReader.Native.x86.dll",
-        "tools/Roslyn45/Microsoft.VisualBasic.Core.targets",
-        "tools/Roslyn45/System.AppContext.dll",
-        "tools/Roslyn45/System.Collections.Immutable.dll",
-        "tools/Roslyn45/System.Diagnostics.StackTrace.dll",
-        "tools/Roslyn45/System.IO.FileSystem.Primitives.dll",
-        "tools/Roslyn45/System.IO.FileSystem.dll",
-        "tools/Roslyn45/System.Reflection.Metadata.dll",
-        "tools/Roslyn45/VBCSCompiler.exe",
-        "tools/Roslyn45/VBCSCompiler.exe.config",
-        "tools/Roslyn45/csc.exe",
-        "tools/Roslyn45/csc.exe.config",
-        "tools/Roslyn45/csc.rsp",
-        "tools/Roslyn45/csi.exe",
-        "tools/Roslyn45/csi.rsp",
-        "tools/Roslyn45/vbc.exe",
-        "tools/Roslyn45/vbc.exe.config",
-        "tools/Roslyn45/vbc.rsp",
-        "tools/Roslyn46/Microsoft.Build.Tasks.CodeAnalysis.dll",
-        "tools/Roslyn46/Microsoft.CSharp.Core.targets",
-        "tools/Roslyn46/Microsoft.CodeAnalysis.CSharp.Scripting.dll",
-        "tools/Roslyn46/Microsoft.CodeAnalysis.CSharp.dll",
-        "tools/Roslyn46/Microsoft.CodeAnalysis.Scripting.dll",
-        "tools/Roslyn46/Microsoft.CodeAnalysis.VisualBasic.dll",
-        "tools/Roslyn46/Microsoft.CodeAnalysis.dll",
-        "tools/Roslyn46/Microsoft.DiaSymReader.Native.amd64.dll",
-        "tools/Roslyn46/Microsoft.DiaSymReader.Native.x86.dll",
-        "tools/Roslyn46/Microsoft.Managed.Core.targets",
-        "tools/Roslyn46/Microsoft.VisualBasic.Core.targets",
-        "tools/Roslyn46/Microsoft.Win32.Primitives.dll",
-        "tools/Roslyn46/System.AppContext.dll",
-        "tools/Roslyn46/System.Collections.Immutable.dll",
-        "tools/Roslyn46/System.Console.dll",
-        "tools/Roslyn46/System.Diagnostics.DiagnosticSource.dll",
-        "tools/Roslyn46/System.Diagnostics.FileVersionInfo.dll",
-        "tools/Roslyn46/System.Diagnostics.StackTrace.dll",
-        "tools/Roslyn46/System.Globalization.Calendars.dll",
-        "tools/Roslyn46/System.IO.Compression.ZipFile.dll",
-        "tools/Roslyn46/System.IO.Compression.dll",
-        "tools/Roslyn46/System.IO.FileSystem.Primitives.dll",
-        "tools/Roslyn46/System.IO.FileSystem.dll",
-        "tools/Roslyn46/System.Net.Http.dll",
-        "tools/Roslyn46/System.Net.Sockets.dll",
-        "tools/Roslyn46/System.Reflection.Metadata.dll",
-        "tools/Roslyn46/System.Runtime.InteropServices.RuntimeInformation.dll",
-        "tools/Roslyn46/System.Security.Cryptography.Algorithms.dll",
-        "tools/Roslyn46/System.Security.Cryptography.Encoding.dll",
-        "tools/Roslyn46/System.Security.Cryptography.Primitives.dll",
-        "tools/Roslyn46/System.Security.Cryptography.X509Certificates.dll",
-        "tools/Roslyn46/System.Text.Encoding.CodePages.dll",
-        "tools/Roslyn46/System.Threading.Tasks.Extensions.dll",
-        "tools/Roslyn46/System.ValueTuple.dll",
-        "tools/Roslyn46/System.Xml.ReaderWriter.dll",
-        "tools/Roslyn46/System.Xml.XPath.XDocument.dll",
-        "tools/Roslyn46/System.Xml.XPath.dll",
-        "tools/Roslyn46/System.Xml.XmlDocument.dll",
-        "tools/Roslyn46/VBCSCompiler.exe",
-        "tools/Roslyn46/VBCSCompiler.exe.config",
-        "tools/Roslyn46/csc.exe",
-        "tools/Roslyn46/csc.exe.config",
-        "tools/Roslyn46/csc.rsp",
-        "tools/Roslyn46/csi.exe",
-        "tools/Roslyn46/csi.exe.config",
-        "tools/Roslyn46/csi.rsp",
-        "tools/Roslyn46/vbc.exe",
-        "tools/Roslyn46/vbc.exe.config",
-        "tools/Roslyn46/vbc.rsp",
-        "tools/Roslyn472/Microsoft.Build.Tasks.CodeAnalysis.dll",
-        "tools/Roslyn472/Microsoft.CSharp.Core.targets",
-        "tools/Roslyn472/Microsoft.CodeAnalysis.CSharp.Scripting.dll",
-        "tools/Roslyn472/Microsoft.CodeAnalysis.CSharp.dll",
-        "tools/Roslyn472/Microsoft.CodeAnalysis.Scripting.dll",
-        "tools/Roslyn472/Microsoft.CodeAnalysis.VisualBasic.dll",
-        "tools/Roslyn472/Microsoft.CodeAnalysis.dll",
-        "tools/Roslyn472/Microsoft.DiaSymReader.Native.amd64.dll",
-        "tools/Roslyn472/Microsoft.DiaSymReader.Native.x86.dll",
-        "tools/Roslyn472/Microsoft.Managed.Core.targets",
-        "tools/Roslyn472/Microsoft.VisualBasic.Core.targets",
-        "tools/Roslyn472/System.Buffers.dll",
-        "tools/Roslyn472/System.Collections.Immutable.dll",
-        "tools/Roslyn472/System.Memory.dll",
-        "tools/Roslyn472/System.Numerics.Vectors.dll",
-        "tools/Roslyn472/System.Reflection.Metadata.dll",
-        "tools/Roslyn472/System.Runtime.CompilerServices.Unsafe.dll",
-        "tools/Roslyn472/System.Text.Encoding.CodePages.dll",
-        "tools/Roslyn472/System.Threading.Tasks.Extensions.dll",
-        "tools/Roslyn472/VBCSCompiler.exe",
-        "tools/Roslyn472/VBCSCompiler.exe.config",
-        "tools/Roslyn472/csc.exe",
-        "tools/Roslyn472/csc.exe.config",
-        "tools/Roslyn472/csc.rsp",
-        "tools/Roslyn472/csi.exe",
-        "tools/Roslyn472/csi.exe.config",
-        "tools/Roslyn472/csi.rsp",
-        "tools/Roslyn472/vbc.exe",
-        "tools/Roslyn472/vbc.exe.config",
-        "tools/Roslyn472/vbc.rsp",
-        "tools/net45/common.ps1",
-        "tools/net45/install.ps1",
-        "tools/net45/uninstall.ps1"
       ]
     },
     "Microsoft.CSharp/4.5.0": {
@@ -6619,18 +6365,6 @@
         "lib/net6.0/minimalApiChanges.json",
         "microsoft.visualstudio.web.codegenerators.mvc.6.0.8.nupkg.sha512",
         "microsoft.visualstudio.web.codegenerators.mvc.nuspec"
-      ]
-    },
-    "Microsoft.Web.Infrastructure/1.0.0": {
-      "sha512": "FNmvLn5m2LTU/Rs2KWVo0SIIh9Ek+U0ojex7xeDaSHw/zgEP77A8vY5cVWgUtBGS8MJfDGNn8rpXJWEIQaPwTg==",
-      "type": "package",
-      "path": "microsoft.web.infrastructure/1.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net40/Microsoft.Web.Infrastructure.dll",
-        "microsoft.web.infrastructure.1.0.0.nupkg.sha512",
-        "microsoft.web.infrastructure.nuspec"
       ]
     },
     "Microsoft.Win32.Primitives/4.3.0": {
@@ -11152,10 +10886,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "CdnJs >= 0.0.0.1",
       "Common >= 1.0.0",
       "Microsoft.AspNetCore.Http.Extensions >= 2.2.0",
-      "Microsoft.CodeDom.Providers.DotNetCompilerPlatform >= 3.6.0",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.7",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.8",
@@ -11220,17 +10952,9 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
-          "CdnJs": {
-            "target": "Package",
-            "version": "[0.0.0.1, )"
-          },
           "Microsoft.AspNetCore.Http.Extensions": {
             "target": "Package",
             "version": "[2.2.0, )"
-          },
-          "Microsoft.CodeDom.Providers.DotNetCompilerPlatform": {
-            "target": "Package",
-            "version": "[3.6.0, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -11280,57 +11004,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'CdnJs 0.0.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "CdnJs",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Razor 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.Razor",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebPages 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebPages",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.CodeDom.Providers.DotNetCompilerPlatform 3.6.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.CodeDom.Providers.DotNetCompilerPlatform",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.Web.Infrastructure 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.Web.Infrastructure",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  }
 }

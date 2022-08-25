@@ -1,52 +1,62 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Repository.Repos.Work;
-using System.Security.Claims;
+using Microsoft.Extensions.DependencyInjection;
+using Repository;
 
 namespace Services.CustomFilter
 {
-    public class PermissionFilter : IAuthorizationFilter
+    public class PermissionFilter : TypeFilterAttribute
     {
-        private readonly string[] _permission;
-        private readonly IUnitOfWork _unitOfWork;
-        public PermissionFilter(IUnitOfWork unitOfWork, params string[] permissions)
+        private string actionName = string.Empty;
+        public PermissionFilter(string claimValue = null) : base(typeof(ClaimRequirementFilter))
         {
-            _permission = permissions;
-            _unitOfWork = unitOfWork;
+            Arguments = new object[] { claimValue};
         }
-        public void OnAuthorization(AuthorizationFilterContext context)
+        public class ClaimRequirementFilter : IAsyncActionFilter
         {
-            bool isAuthorized = CheckUserPermission(context.HttpContext.User.Identity.Name, _permission);
-            if (!isAuthorized)
+            private readonly string _claim;
+            public ClaimRequirementFilter(string claim)
             {
-                context.Result = new UnauthorizedResult();
-            }
-        }
-        private bool CheckUserPermission(string username, string[] permission)
-        {
-            var Id = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var permissions = _unitOfWork._db.Permissions.FirstOrDefault(x => x.Name == permission[0]);
-
-
-            if (permissions != null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
+                _claim = claim;
             }
 
+            public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+            {
+                TicketingContext db = context.HttpContext.RequestServices.GetRequiredService<TicketingContext>();
 
-            var users = _unitOfWork._db.Users;
-            var userRole = _unitOfWork._db.UserRoles;
-            var rolePermissions = _unitOfWork._db.RolePermissions;
+                var distributor = (ControllerActionDescriptor)context.ActionDescriptor;
+                var actionName = distributor.ActionName;
+                var controllerName = distributor.ControllerName;
 
-            var hasPermission = (from rp in rolePermissions
-                                 join ur in userRole on rp.RoleId equals ur.RoleId
-                                 where ur.UserId == Id && rp.PermissionId == permission[0]
-                                 select rp
-                                ).Any();
+                var Id = db.Users.FirstOrDefault(x=>x.UserName == context.HttpContext.User.Identity.Name)?.Id;
+                var permissions = db.Permissions.FirstOrDefault(x => x.Name == _claim);
+
+                if (permissions == null)
+                {
+                    context.Result = new UnauthorizedResult();
+                    return;
+                }
+
+                var users = db.Users;
+                var userRole = db.UserRoles;
+                var rolePermissions = db.RolePermissions;
+
+                var hasPermission = (from rp in rolePermissions
+                                     join ur in userRole on rp.RoleId equals ur.RoleId
+                                     where ur.UserId == Id && rp.PermissionId == permissions.PermissionId
+                                     select rp
+                                    ).Any();
+                if (hasPermission)
+                {
+                    await next();
+                }
+                else
+                {
+                    context.Result = new UnauthorizedResult();
+                    return;
+                }
+            }
         }
     }
 }

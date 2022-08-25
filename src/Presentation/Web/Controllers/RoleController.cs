@@ -20,7 +20,6 @@ namespace Web.Controllers
             _db = db;
             _roleService = roleService;
         }
-        
         public IActionResult Index()
         {
             IEnumerable<Role> roles = _unitOfWork._db.Roles.ToList();

@@ -38,6 +38,7 @@ builder.Services.AddAuthentication(option =>
     options.AccessDeniedPath = "/User/login";
 });
 
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
@@ -57,6 +58,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+
 
 var app = builder.Build();
 

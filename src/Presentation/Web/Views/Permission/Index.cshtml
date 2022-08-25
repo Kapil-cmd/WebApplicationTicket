@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Repository.Entites.Permission>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Permission List</h1>
+<div class="row">
+    <div class="col"><a asp-action="AddPermission" class="btn btn-sm btn-primary pull-right">Create New</a>
+        </div>
+    </div>
+    
+
+<table class="table table-striped table-responsive">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+               ControllerName
+            </th>
+            <th>
+               ActionName
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if(Model != null)
+            {
+                @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ControllerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActionName)
+            </td>
+            <td>
+                <div class="w-75 btn-group" role="group">
+                        <a title="Edit" asp-controller="Permission" asp-action="Edit" asp-route-Id="@item.PermissionId" class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i></a>
+                    </div>
+            </td>
+        </tr>
+            }
+        }
+
+}
+    </tbody>
+</table>

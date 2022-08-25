@@ -1,4 +1,5 @@
 ﻿using Common.ViewModels.BaseModel;
+using Common.ViewModels.Permission;
 using Repository.Repos.Work;
 
 namespace Services.BL
@@ -10,7 +11,7 @@ namespace Services.BL
         {
             _unitOfWork = unitOfWork;
         }
-        public BaseResponseModel<string> AddPermission(PermissionViewModel model)
+        public BaseResponseModel<string> AddPermission(AddPermission model)
         {
             var response = new BaseResponseModel<string>();
             try
@@ -24,8 +25,9 @@ namespace Services.BL
 
                 _unitOfWork._db.Permissions.Add(new Repository.Entites.Permission()
                 {
-                    PermissionId = model.PermissionId,
                     Name = model.Name,
+                    ActionName = model.ActionName,
+                    ControllerName = model.ControllerName,
                 });
                 _unitOfWork._db.SaveChanges();
                 response.Status = "00";
@@ -55,6 +57,9 @@ namespace Services.BL
                     }
                     permission.PermissionId = model.PermissionId;
                     permission.Name = model.Name;
+                    permission.ActionName = model.ActionName;
+                    permission.ControllerName = model.ControllerName;
+
                     _unitOfWork._db.Update(model);
                     _unitOfWork._db.SaveChanges();
 
@@ -104,7 +109,7 @@ namespace Services.BL
     }
     public interface IPermissionService
     {
-        BaseResponseModel<string> AddPermission(PermissionViewModel model);
+        BaseResponseModel<string> AddPermission(AddPermission model);
         BaseResponseModel<string> EditPermission(EditPermission model);
         BaseResponseModel<string> DeletePermission(PermissionViewModel model);
     }

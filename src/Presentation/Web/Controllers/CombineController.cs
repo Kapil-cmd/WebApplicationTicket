@@ -16,7 +16,6 @@ namespace Web.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        //[Permissions("Slug", "", "")]Z
         public IActionResult Index()
         {
             List<User> user = _unitOfWork._db.Users.ToList();

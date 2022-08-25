@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Repository.Repos.Work;
+using Services.Hash;
 using System.Security.Claims;
-using System.Web.Helpers;
 
 namespace Services.BL
 {
@@ -35,7 +35,7 @@ namespace Services.BL
                     return response;
                 }
                 #region
-                model.Password = Crypto.Hash(model.Password);
+                model.Password = HashPassword.Hash(model.Password);
                 #endregion
 
 
@@ -114,7 +114,7 @@ namespace Services.BL
                 #endregion
 
                 #region Password Hashing
-                Register.Password = Crypto.Hash(Register.Password);
+                Register.Password = HashPassword.Hash(Register.Password);
                 #endregion
                 Register.IsEmailVerified = false;
 
@@ -252,7 +252,7 @@ namespace Services.BL
                     return response;
                    
                 }
-                user.Password = model.NewPassword = Crypto.Hash(model.NewPassword);
+                user.Password = model.NewPassword = HashPassword.Hash(model.NewPassword);
 
                 _unitOfWork._db.Users.Update(user);
                 _unitOfWork._db.SaveChanges();
@@ -284,7 +284,7 @@ namespace Services.BL
                 }
                 if (_unitOfWork._db.Users.Any(x => x.OTP == model.OTP))
                 {
-                    user.Password = model.NewPassword = Crypto.Hash(model.NewPassword);
+                    user.Password = model.NewPassword = HashPassword.Hash(model.NewPassword);
                     _unitOfWork._db.Users.Update(user);
                     _unitOfWork._db.SaveChanges();
                 }
