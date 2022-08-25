@@ -68,7 +68,7 @@ namespace Web.Controllers
             var response = _permissionService.EditPermission(model);
             if(response.Status =="00")
             {
-                return RedirectToAction("Edit");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -87,7 +87,7 @@ namespace Web.Controllers
             var response = _permissionService.DeletePermission(model);
             if(response.Status == "00")
             {
-                return RedirectToAction("Delete");
+                return RedirectToAction("Index");
             }
             else
             {

@@ -83,36 +83,29 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> DeleteCategory(Category DeleteCategory)
+        public BaseResponseModel<string> DeleteCategory(Category model)
         {
             var response = new BaseResponseModel<string>();
             try
             {
-                var category = _unitOfWork.CategoryRepository.GetFirstOrDefault(x => x.CId == DeleteCategory.CId);
-                if (category == null)
+                var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == model.CId);
+                if(category == null)
                 {
-                    response.Status = "100";
-                    response.Message = "Category not found";
+                    response.Status = "404";
+                    response.Message = "User Not Found";
                     return response;
                 }
-                category.CId = DeleteCategory.CId;
-                category.CreatedBy = DeleteCategory.CreatedBy;
-                category.CreatedDateTime = DeleteCategory.CreatedDateTime;
-                category.ModifiedDateTime = DeleteCategory.ModifiedDateTime;
-                category.ModifiedBy = DeleteCategory.ModifiedBy;
-                category.CategoryName = DeleteCategory.CategoryName;
-
-                _unitOfWork._db.Category.Remove(DeleteCategory);
+                _unitOfWork._db.Category.Remove(model);
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";
-                response.Message = "Category deleted sucessfully";
+                response.Message = "Category deleted sucessfully!!!";
                 return response;
             }
             catch(Exception ex)
             {
                 response.Status = "500";
-                response.Message ="Error occured: "+ ex.Message;
+                response.Message = "Error occurred:" + ex.Message;
                 return response;
             }
         }

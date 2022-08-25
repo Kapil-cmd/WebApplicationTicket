@@ -143,15 +143,15 @@ namespace demo.Controllers
             {
                 return NotFound();
             }
-            var deleteTicket = _unitOfWork._db.Tickets.Find(TicketId);
+            var deleteTicket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == TicketId);
             if(deleteTicket == null)
             {
                 return NotFound();
             }
             return View(deleteTicket);
         }
-        [HttpPost,ActionName("DeleteTicket")]
-        public IActionResult DeletePost(Ticket model)
+        [HttpPost]
+        public IActionResult DeleteTicket(Ticket model)
         {
             var response = _ticketService.DeleteTicket(model);
             if (response.Status == "00")

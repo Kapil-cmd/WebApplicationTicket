@@ -17,7 +17,7 @@ namespace Common.ViewModels.Permission
         [Required(ErrorMessage = "Permission is required"), MaxLength(25), Display(Name = "PermissionName")]
         public string Name { get; set; }
         public string ActionName { get; set; }
-        [Required(ErrorMessage = "ControllerName is required"), Display(Name = "Controller Name Name")]
+        [Required(ErrorMessage = "ControllerName is required"), Display(Name = "Controller Name")]
         public string ControllerName { get; set; }
     }
     public class EditPermission
@@ -26,7 +26,7 @@ namespace Common.ViewModels.Permission
         [MaxLength(25), Display(Name = "PermissionName")]
         public String Name { get; set; }
 
-        [Display(Name = "Controller Name Name")]
+        [Display(Name = "Controller Name")]
         public string ControllerName { get; set; }
         [Display(Name = "Action Name")]
         public string ActionName { get; set; }

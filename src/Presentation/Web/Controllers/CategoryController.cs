@@ -19,7 +19,6 @@ namespace Web.Controllers
             _categoryService = categoryService;
             _unitOfWork = unitOfWork;
         }
-        [PermissionFilter("Category&View")]
         public IActionResult Index()
         {
             var category = _unitOfWork._db.Category.Include(x => x.Tickets).ToList();
@@ -103,29 +102,30 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Category&Delete")]
         public IActionResult DeleteCategory(string CId)
         {
-            var deleteFromCategory = _unitOfWork._db.Category.Find(CId);
-            if (deleteFromCategory == null)
+            if(CId == null)
             {
                 return NotFound();
             }
-            return View(deleteFromCategory);
-
+            var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == CId);
+            if(category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
         }
         [HttpPost]
-        [PermissionFilter("Category&Delete")]
         public IActionResult DeleteCategory(Category model)
         {
             var response = _categoryService.DeleteCategory(model);
-            if (response.Status == "00")
+            if(response.Status == "00")
             {
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(model);
+                return View("model");
             }
         }
     }

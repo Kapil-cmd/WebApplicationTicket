@@ -113,7 +113,7 @@ namespace Web.Controllers
             return View(deleteRole);
         }
         [HttpPost]
-        public IActionResult Delete(RoleViewModel model)
+        public IActionResult Delete(Role model)
         {
             var response = _roleService.DeleteRole(model);
             if(response.Status == "00")

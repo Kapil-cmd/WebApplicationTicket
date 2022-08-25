@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.Role;
+using Repository.Entites;
 using Repository.Repos.Work;
 
 namespace Services.BL
@@ -53,11 +54,36 @@ namespace Services.BL
                     response.Message = "Role not found";
                     return response;
                 }
+
+                #region Rolepdate
                 role.Id = model.Id;
                 role.Name = model.Name;
 
                 _unitOfWork._db.Update(role);
                 _unitOfWork._db.SaveChanges();
+                #endregion
+
+                #region AssignPermission
+                if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == model.Permission))
+                {
+                    response.Status = "444";
+                    response.Message = "{this permission} already exists for {this role}";
+                    return response;
+                }
+
+                if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == model.Permission))
+                {
+                    response.Status = "444";
+                    response.Message = "{this permission} already exists for {this role}";
+                    return response;
+                }
+                _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
+                {
+                    RoleId = model.Id,
+                    PermissionId = model.Permission,
+                }); 
+                _unitOfWork.Save();
+                #endregion
 
                 response.Status = "00";
                 response.Message = "Role edited sucessfully";
@@ -70,7 +96,7 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> DeleteRole(RoleViewModel model)
+        public BaseResponseModel<string> DeleteRole(Role model)
         {
             var response = new BaseResponseModel<string>();
             try
@@ -82,8 +108,6 @@ namespace Services.BL
                     response.Message = "Role not found";
                     return response;
                 }
-                role.Id = model.Id;
-                role.Name = model.Name;
 
                 _unitOfWork._db.Roles.Remove(role);
                 _unitOfWork._db.SaveChanges();
@@ -159,7 +183,7 @@ namespace Services.BL
     {
         BaseResponseModel<string> CreateRole(RoleViewModel model);
         BaseResponseModel<string> ManageRole(EditRole model);
-        BaseResponseModel<string> DeleteRole(RoleViewModel model);
+        BaseResponseModel<string> DeleteRole(Role model);
         BaseResponseModel<string> AssignPermissionToRole(string roleId, string permissionId);
         BaseResponseModel<string> RemovePermissionFromRole(string roleId, string permissionId);
     }

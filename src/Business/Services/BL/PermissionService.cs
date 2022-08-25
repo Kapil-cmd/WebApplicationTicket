@@ -60,7 +60,7 @@ namespace Services.BL
                     permission.ActionName = model.ActionName;
                     permission.ControllerName = model.ControllerName;
 
-                    _unitOfWork._db.Update(model);
+                    _unitOfWork._db.Update(permission);
                     _unitOfWork._db.SaveChanges();
 
                     response.Status = "00";
