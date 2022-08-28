@@ -1,8 +1,4 @@
-﻿using Common.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Repository.Entites
+﻿namespace Repository.Entites
 {
     public class Permission
     {

@@ -104,28 +104,20 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult DeleteCategory(string CId)
         {
-            if(CId == null)
-            {
-                return NotFound();
-            }
-            var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == CId);
-            if(category == null)
-            {
-                return NotFound();
-            }
+            var category = _unitOfWork._db.Category.Find(CId);
             return View(category);
         }
         [HttpPost]
         public IActionResult DeleteCategory(Category model)
         {
             var response = _categoryService.DeleteCategory(model);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("Index");
             }
             else
             {
-                return View("model");
+                return View(model);
             }
         }
     }

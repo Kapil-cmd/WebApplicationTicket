@@ -104,7 +104,7 @@ namespace Services.BL
                 var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == model.Id);
                 if (role == null)
                 {
-                    response.Status = "100";
+                    response.Status = "404";
                     response.Message = "Role not found";
                     return response;
                 }

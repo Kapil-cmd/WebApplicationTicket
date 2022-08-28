@@ -7,7 +7,6 @@ using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
-using Services.CustomFilter;
 using System.Net;
 using System.Net.Mail;
 
@@ -141,11 +140,11 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult DeleteUser(string? Id)
         {
-            var user = _unitOfWork.UserRepository.GetById(Id);
+            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
             return View(user);
         }
         [HttpPost]
-        public IActionResult DeleteUser(UserViewModel model)
+        public IActionResult DeleteUser(User model)
         {
             var response = _userService.DeleteUser(model);
             if (response.Status == "00")

@@ -89,20 +89,21 @@ namespace Services.BL
             try
             {
                 var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == model.CId);
-                if(category == null)
+                if (category == null)
                 {
                     response.Status = "404";
-                    response.Message = "User Not Found";
+                    response.Message = "Category not found";
                     return response;
                 }
+
                 _unitOfWork._db.Category.Remove(model);
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";
-                response.Message = "Category deleted sucessfully!!!";
+                response.Message = "Category removed sucessfully";
                 return response;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = "500";
                 response.Message = "Error occurred:" + ex.Message;

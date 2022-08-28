@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Repository.Entites;
 using Repository.Repos.Work;
 using Services.Hash;
 using System.Security.Claims;
@@ -198,7 +199,7 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> DeleteUser(UserViewModel DeleteUser)
+        public BaseResponseModel<string> DeleteUser(User DeleteUser)
         {
             var response = new BaseResponseModel<string>();
             try
@@ -366,7 +367,7 @@ namespace Services.BL
         Task<BaseResponseModel<UserTokenModel>> LoginAsync(UserLogin Login);
         BaseResponseModel<string> Register(UserRegister Register);
         BaseResponseModel<string> EditUser(EditUserViewModel Edituser);
-        BaseResponseModel<string> DeleteUser(UserViewModel DeleteUser);
+        BaseResponseModel<string> DeleteUser(User DeleteUser);
         BaseResponseModel<string> ChangePassword(ChangePassword model);
         BaseResponseModel<string> ResetPassword(ResetPassword model);
 

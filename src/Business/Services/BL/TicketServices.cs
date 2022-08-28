@@ -109,7 +109,7 @@ namespace Services.BL
                     return response;
                 }
 
-                _unitOfWork._db.Tickets.Remove(model);
+                _unitOfWork._db.Tickets.Remove(Ticket);
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";

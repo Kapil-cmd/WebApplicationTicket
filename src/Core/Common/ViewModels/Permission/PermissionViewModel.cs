@@ -7,7 +7,7 @@ namespace Common.ViewModels.Permission
         public string PermissionId { get; set; }
         public string Name { get; set; }
         public string ControllerName { get; set; }
-        public string AcrionNAme { get; set; }
+        public string ActionName { get; set; }
        
     }
     public class AddPermission

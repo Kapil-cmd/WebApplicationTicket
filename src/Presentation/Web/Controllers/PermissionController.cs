@@ -1,6 +1,7 @@
 ﻿using Common.ViewModels.Permission;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
+using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
 using Services.CustomFilter;
@@ -76,13 +77,13 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        public IActionResult Delete(string? id)
+        public IActionResult Delete(string PermissionId)
         {
-            var permission = _unitOfWork._db.Permissions.FirstOrDefault(x => x.PermissionId == id);
+            var permission = _unitOfWork._db.Permissions.Find(PermissionId);
             return View(permission);
         }
         [HttpPost]
-        public IActionResult Delete(PermissionViewModel model)
+        public IActionResult Delete(Permission model)
         {
             var response = _permissionService.DeletePermission(model);
             if(response.Status == "00")

@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.Permission;
+using Repository.Entites;
 using Repository.Repos.Work;
 
 namespace Services.BL
@@ -76,15 +77,15 @@ namespace Services.BL
             }
         }
 
-        public BaseResponseModel<string> DeletePermission(PermissionViewModel model)
+        public BaseResponseModel<string> DeletePermission(Permission model)
         {
             var response = new BaseResponseModel<string>();
             try
             {
                 var permission = _unitOfWork._db.Permissions.FirstOrDefault(x => x.PermissionId == model.PermissionId);
-                if (permission == null) ;
+                if (permission == null) 
                 {
-                    response.Status = "97";
+                    response.Status = "404";
                     response.Message = "Permission with id{permissionId} not found";
                     return response ;
                 }
@@ -111,6 +112,6 @@ namespace Services.BL
     {
         BaseResponseModel<string> AddPermission(AddPermission model);
         BaseResponseModel<string> EditPermission(EditPermission model);
-        BaseResponseModel<string> DeletePermission(PermissionViewModel model);
+        BaseResponseModel<string> DeletePermission(Permission model);
     }
 }

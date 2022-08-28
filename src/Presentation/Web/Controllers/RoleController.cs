@@ -107,6 +107,7 @@ namespace Web.Controllers
                 return View(role);
             };
         }
+        [HttpGet]
         public IActionResult Delete(string Id)
         {
             var deleteRole = _unitOfWork._db.Roles.Find(Id);
