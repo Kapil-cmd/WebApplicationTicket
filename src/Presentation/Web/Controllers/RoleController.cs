@@ -80,7 +80,7 @@ namespace Web.Controllers
         }
         [HttpPost]
         public IActionResult ManageRole(EditRole model)
-        {
+            {
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -159,19 +159,19 @@ namespace Web.Controllers
             }
             return View(model);
         }
-        [HttpPost]
-        public IActionResult AssignPermissionToRole(string roleId,string permissionId)
-        {
-            var response = _roleService.AssignPermissionToRole(roleId, permissionId);
-            if(response.Status =="00")
-            {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return View("Index","Role");
-            }
-        }
+        //[HttpPost]
+        //public IActionResult AssignPermissionToRole(string roleId,string permissionId)
+        //{
+        //    var response = _roleService.AssignPermissionToRole(roleId, permissionId);
+        //    if(response.Status =="00")
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        return View("Index","Role");
+        //    }
+        //}
         [HttpPost]
         public IActionResult RemovePermissionFromRole(string roleId,string permissionId)
         {

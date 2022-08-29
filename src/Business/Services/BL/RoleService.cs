@@ -64,25 +64,30 @@ namespace Services.BL
                 #endregion
 
                 #region AssignPermission
-                if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == model.Permission))
+                foreach(var permission in model.ListPermission)
                 {
-                    response.Status = "444";
-                    response.Message = "{this permission} already exists for {this role}";
-                    return response;
+                    if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
+                    {
+                        {
+                            response.Status = "404";
+                            response.Message = "{this permission} already exists for {this role}";
+                            return response;
+                        }
+                        if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
+                        {
+                            response.Status = "404";
+                            response.Message = "{this permission} already exists for {this role}";
+                            return response;
+                        }
+                        _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
+                        {
+                            RoleId = model.Id,
+                            PermissionId = permission.Id
+                        });
+                        _unitOfWork.Save();
+                    }
                 }
-
-                if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == model.Permission))
-                {
-                    response.Status = "444";
-                    response.Message = "{this permission} already exists for {this role}";
-                    return response;
-                }
-                _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
-                {
-                    RoleId = model.Id,
-                    PermissionId = model.Permission,
-                }); 
-                _unitOfWork.Save();
+               
                 #endregion
 
                 response.Status = "00";
@@ -123,35 +128,6 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> AssignPermissionToRole(string roleId, string permissionId)
-        {
-            BaseResponseModel<string> response = new BaseResponseModel<string>();
-            try
-            {
-                if(_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == roleId && x.PermissionId == permissionId))
-                {
-                    response.Status = "444";
-                    response.Message = "{this permission} already exists for {this role}";
-                    return response;
-                }
-                _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
-                {
-                    RoleId = roleId,
-                    PermissionId = permissionId
-                });
-                _unitOfWork.Save();
-                response.Status = "00";
-                response.Message = "Sucessfully assigned {this permission} to role";
-
-                return response;
-            }
-            catch(Exception ex)
-            {
-                response.Status = "500";
-                response.Message = "Error occured :" + ex.Message;
-                return response;
-            }
-        }
         public BaseResponseModel<string> RemovePermissionFromRole(string roleId, string permissionId)
         {
             BaseResponseModel<string> response = new BaseResponseModel<string>();
@@ -184,7 +160,7 @@ namespace Services.BL
         BaseResponseModel<string> CreateRole(RoleViewModel model);
         BaseResponseModel<string> ManageRole(EditRole model);
         BaseResponseModel<string> DeleteRole(Role model);
-        BaseResponseModel<string> AssignPermissionToRole(string roleId, string permissionId);
+        //BaseResponseModel<string> AssignPermissionToRole(string roleId, string[] permissionId);
         BaseResponseModel<string> RemovePermissionFromRole(string roleId, string permissionId);
     }
 }

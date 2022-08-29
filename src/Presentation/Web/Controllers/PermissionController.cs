@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.Permission;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;

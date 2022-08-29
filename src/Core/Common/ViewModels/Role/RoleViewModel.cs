@@ -13,13 +13,12 @@ namespace Common.ViewModels.Role
         public string Id { get; set; }
         [MaxLength(25),Display(Name="RoleName")]
         public string Name { get; set; }
-
-        public string Permission { get; set; }
         public List<ListPermission> ListPermission { get; set; }
     }
     public class ListPermission
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public bool IsPermitted { get; set; }
     }
 }
