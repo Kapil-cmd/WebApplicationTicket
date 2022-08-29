@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "y9vn895I6jCLoyYEn/dQKT5PnseTurOYb9Uv9gTNa4s=",
+  "Hash": "R+GtGAgDYfjavJMsFDutKNE02pGZJIVPb3NFGeV3Amg=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -16,6 +16,40 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\karki\\.nuget\\packages\\ntoastnotify\\8.0.0\\staticwebassets\\noty.js",
+      "SourceId": "NToastNotify",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\karki\\.nuget\\packages\\ntoastnotify\\8.0.0\\staticwebassets\\",
+      "BasePath": "_content/NToastNotify",
+      "RelativePath": "noty.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\karki\\.nuget\\packages\\ntoastnotify\\8.0.0\\staticwebassets\\noty.js"
+    },
+    {
+      "Identity": "C:\\Users\\karki\\.nuget\\packages\\ntoastnotify\\8.0.0\\staticwebassets\\toastr.js",
+      "SourceId": "NToastNotify",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\karki\\.nuget\\packages\\ntoastnotify\\8.0.0\\staticwebassets\\",
+      "BasePath": "_content/NToastNotify",
+      "RelativePath": "toastr.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\karki\\.nuget\\packages\\ntoastnotify\\8.0.0\\staticwebassets\\toastr.js"
+    },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\obj\\Debug\\net6.0\\scopedcss\\bundle\\Web.styles.css",
       "SourceId": "Web",

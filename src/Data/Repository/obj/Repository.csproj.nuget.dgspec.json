@@ -160,6 +160,10 @@
               "target": "Package",
               "version": "[6.0.7, )"
             },
+            "NToastNotify": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "SendGrid": {
               "target": "Package",
               "version": "[9.28.0, )"

@@ -5,6 +5,8 @@
 }
 
 <h1>DeleteCategory</h1>
+
+<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Category</h4>
     <hr />
@@ -49,6 +51,6 @@
     
     <form asp-action="DeleteCategory">
         <input type="submit" value="Delete" class="btn btn-danger" /> 
-        <a asp-action="Index" class="btn btn-group-sm">Back to List</a>
+        <a asp-action="Index" class="btn btn-outline-primary">Back to List</a>
     </form>
 </div>

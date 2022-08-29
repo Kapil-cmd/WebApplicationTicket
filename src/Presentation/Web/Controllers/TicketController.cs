@@ -1,10 +1,12 @@
 ﻿using Common.ViewModels.Tickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using Repository.Entites;
 using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
+using System.Security.Claims;
 
 namespace demo.Controllers
 {
@@ -14,15 +16,22 @@ namespace demo.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly ITicketService _ticketService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public TicketController(IUnitOfWork unitOfWork, ITicketService ticketService, IWebHostEnvironment webHostEnvironment)
+        private readonly IToastNotification _toastNotification;
+        public TicketController(IUnitOfWork unitOfWork, ITicketService ticketService, IWebHostEnvironment webHostEnvironment,IToastNotification toastNotification)
         {
             _unitOfWork = unitOfWork;
             _ticketService = ticketService;
             _webHostEnvironment = webHostEnvironment;
+            _toastNotification = toastNotification;
         }
         public IActionResult Index()
         {
             var model = _unitOfWork.Ticket.GetAll().OrderBy(x => x.CreatedDateTime).ThenBy(x => x.CategoryName).ToList();
+            return View(model);
+        }
+        public IActionResult UserIndex()
+        {
+            var model = _unitOfWork._db.Tickets.Where(a => a.User.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToList();
             return View(model);
         }
         [HttpGet]
@@ -67,10 +76,12 @@ namespace demo.Controllers
             var response = _ticketService.AddTicket(ticket);
             if (response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Ticket created successfully");
                 return RedirectToAction("Index");
             }
             else
             {
+                _toastNotification.AddWarningToastMessage("Unable to create ticket");
                 return View(ticket);
             }
         }
@@ -112,10 +123,12 @@ namespace demo.Controllers
             var response = _ticketService.EditTicket(model);
             if (response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Ticket Edited sucessfully");
                 return RedirectToAction("Index");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Unable to edit ticket");
                 return View(model);
             }
         }
@@ -137,30 +150,32 @@ namespace demo.Controllers
             }
         }
         [HttpGet]
-        public IActionResult DeleteTicket(string TicketId)
+        public IActionResult Delete(string? TicketId)
         {
             if(TicketId == null)
             {
                 return NotFound();
             }
-            var deleteTicket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == TicketId);
-            if(deleteTicket == null)
+            var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == TicketId);
+            if(ticket == null)
             {
                 return NotFound();
             }
-            return View(deleteTicket);
+            return View(ticket);
         }
         [HttpPost]
-        public IActionResult DeleteTicket(Ticket model)
+        public IActionResult Delete(Ticket ticket)
         {
-            var response = _ticketService.DeleteTicket(model);
-            if (response.Status == "00")
+            var response = _ticketService.DeleteTicket(ticket);
+            if(response.Status == "00")
             {
-                return RedirectToAction("DeleteTicket");
+                _toastNotification.AddSuccessToastMessage("Ticket deleted sucessfully");
+                return RedirectToAction("Index");
             }
             else
             {
-                return View(model);
+                _toastNotification.AddErrorToastMessage("Unable to delete ticket");
+                return View(ticket);
             }
         }
     }

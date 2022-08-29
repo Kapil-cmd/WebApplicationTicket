@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Claims;
 
 namespace Web.Controllers
 {
@@ -16,12 +18,16 @@ namespace Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IUnitOfWork _unitOfWork;
+        public readonly IWebHostEnvironment _webHostEnvironment;
         private readonly TicketingContext _db;
-        public UserController(IUserService userService, IUnitOfWork unitOfWork, TicketingContext db)
+        private readonly IToastNotification _toastNotification;
+        public UserController(IUserService userService, IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment, TicketingContext db, IToastNotification toastNotification)
         {
             _userService = userService;
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
             _db = db;
+            _toastNotification = toastNotification;
         }
         public IActionResult Index()
         {
@@ -46,13 +52,14 @@ namespace Web.Controllers
             if (isExist)
             {
                 ModelState.AddModelError("EmailExist", "Email already exist");
+                _toastNotification.AddWarningToastMessage("Email already exists");
                 return View(model);
             }
             #endregion
 
             if (!ModelState.IsValid)
             {
-                // Message return 
+                _toastNotification.AddAlertToastMessage("Fill all the form carefully");
                 return View(model);
             }
             var response = _userService.Register(model);
@@ -60,9 +67,11 @@ namespace Web.Controllers
             {
                 SendVerificationLinkEmail(model.Email, model.ActivationCode.ToString());
                 message = "Registration sucessfully done.Account activation link" + "has been send to your email id:" + model.Email;
+                _toastNotification.AddAlertToastMessage("Please check your email to verify your account");
                 Status = true;
 
                 // redirect to login page
+                _toastNotification.AddSuccessToastMessage("User registered sucessfully");
                 return RedirectToAction("RegisterUser");
             }
             else
@@ -113,10 +122,12 @@ namespace Web.Controllers
             if (response.Status == "00")
             {
                 //redirect to user profile page
+                _toastNotification.AddSuccessToastMessage("User edited sucessfully");
                 return RedirectToAction("Index");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Unable to edit the User");
                 return View(model);
             }
         }
@@ -149,10 +160,12 @@ namespace Web.Controllers
             var response = _userService.DeleteUser(model);
             if (response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("User deleted sucessfully");
                 return RedirectToAction("DeleteUser");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Can't delete the User");
                 return View(model);
             }
         }
@@ -184,12 +197,14 @@ namespace Web.Controllers
                 {
                     return Redirect(model.ReturnUrl);
                 }
+                _toastNotification.AddSuccessToastMessage("Login sucess");
                 return RedirectToAction("HomePage", "Home");
             }
             else
             {
                 // User is not authorized
                 // Redirect to user login page
+                _toastNotification.AddErrorToastMessage("Unable to login");
                 return View(model);
             }
         }
@@ -259,11 +274,13 @@ namespace Web.Controllers
             {
                 IsVerify.IsEmailVerified = true;
                 _unitOfWork._db.SaveChanges();
+                _toastNotification.AddSuccessToastMessage("Email sucessfully verified");
                 ViewBag.Message = "Email Verification completed";
                 Status = true;
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Invalid request");
                 ViewBag.Message = "Invalid Request";
                 ViewBag.Status = false;
             }
@@ -281,8 +298,10 @@ namespace Web.Controllers
             var response = _userService.ChangePassword(model);
             if (response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Password changed sucessfully");
                 return RedirectToAction("Homepage", "Home");
             }
+            _toastNotification.AddErrorToastMessage("Unable to change the password");
             return View(model);
 
         }
@@ -297,6 +316,7 @@ namespace Web.Controllers
             var IsExists = IsEmailExist(password.Email);
             if (!IsExists)
             {
+                _toastNotification.AddAlertToastMessage("This email doesn't exists");
                 ModelState.AddModelError("EmailNotExists", "This email doesn't exists");
                 return View();
             }
@@ -377,13 +397,57 @@ namespace Web.Controllers
             var response = _userService.ResetPassword(password);
             if(response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Password reset sucessfully");
                 return RedirectToAction("Login", "User");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Unable to reset the password");
                 return View(password);
             }
         }
+        [HttpGet]
+        public IActionResult UserProfile(string? Id)
+        {
+            var userId = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == userId);
+            UserProfile model = new UserProfile();
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.PhoneNumber = user.PhoneNumber;
+            model.Address = user.Address;
+            model.ImageName = user.ProfilePicture;
+            model.DateOfBirth = user.DateOfBirth;
+            model.Email = user.Email;
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UserProfile(UserProfile model)
+        {
+            if (model.ProfilePic != null)
+            {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(model.ProfilePic.FileName);
+                string extension = Path.GetExtension(model.ProfilePic.FileName);
+                model.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Profile", fileName);
+                using (var filestream = new FileStream(path, FileMode.Create))
+                {
+                    await model.ProfilePic.CopyToAsync(filestream);
+                }
+            }
+            var response = _userService.UserProfile(model);
+            if (response.Status == "00")
+            {
+                _toastNotification.AddSuccessToastMessage("User profile");
+                return RedirectToAction("Home", "Homepage");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
     }
 }
 

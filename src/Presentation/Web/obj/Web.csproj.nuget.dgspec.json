@@ -247,6 +247,10 @@
               "target": "Package",
               "version": "[6.0.7, )"
             },
+            "NToastNotify": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "SendGrid": {
               "target": "Package",
               "version": "[9.28.0, )"
@@ -347,13 +351,13 @@
               "target": "Package",
               "version": "[3.3.0, )"
             },
-            "Syncfusion.EJ2.AspNet.Core": {
-              "target": "Package",
-              "version": "[20.2.0.43, )"
-            },
             "System.Net.Http": {
               "target": "Package",
               "version": "[4.3.4, )"
+            },
+            "toastr": {
+              "target": "Package",
+              "version": "[2.1.1, )"
             }
           },
           "imports": [

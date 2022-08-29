@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using Repository;
 using Repository.Repos.Work;
 using Services.BL;
@@ -59,7 +60,11 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-
+builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
+{
+    ProgressBar = true,
+    Timeout = 5000,
+});
 
 var app = builder.Build();
 
@@ -79,6 +84,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseNToastNotify();
 
 app.UseSession();
 

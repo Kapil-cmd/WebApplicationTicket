@@ -216,6 +216,9 @@ namespace Repository.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("bigint");
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(25)

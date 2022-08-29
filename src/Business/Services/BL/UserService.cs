@@ -299,7 +299,35 @@ namespace Services.BL
                 return response;
             }
         }
-        
+        public BaseResponseModel<string> UserProfile(UserProfile model)
+        {
+            var response= new BaseResponseModel<string>();
+            try
+            {
+                var id = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == id);
+                if(user == null)
+                {
+                    response.Status = "404";
+                    response.Message = "User Not Found";
+                    return response;
+                }
+                user.ProfilePicture = model.ImageName;
+
+                _unitOfWork._db.Users.Update(user);
+                _unitOfWork._db.SaveChanges();
+
+                response.Status = "00";
+                response.Message = "Profile picture added sucessfully";
+                return response;
+            }catch(Exception ex)
+            {
+                response.Status = "500";
+                response.Message = "Error occurred :" + ex.Message;
+                return response;
+            }
+        }
+
         //public BaseResponseModel<string> AssignUserToRole(string userId, string roleId)
         //{
         //    BaseResponseModel<string> response = new BaseResponseModel<string>();
@@ -370,8 +398,7 @@ namespace Services.BL
         BaseResponseModel<string> DeleteUser(User DeleteUser);
         BaseResponseModel<string> ChangePassword(ChangePassword model);
         BaseResponseModel<string> ResetPassword(ResetPassword model);
-
-
+        BaseResponseModel<string> UserProfile(UserProfile model);
     }
 }
 

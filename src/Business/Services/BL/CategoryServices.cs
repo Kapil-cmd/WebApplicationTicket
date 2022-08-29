@@ -83,30 +83,30 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> DeleteCategory(Category model)
+        public BaseResponseModel<string> DeleteCategory(Category category)
         {
             var response = new BaseResponseModel<string>();
             try
             {
-                var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == model.CId);
-                if (category == null)
+                var model = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == category.CId);
+                if(model == null)
                 {
                     response.Status = "404";
-                    response.Message = "Category not found";
+                    response.Message = "Category Not Found";
                     return response;
                 }
-
-                _unitOfWork._db.Category.Remove(model);
-                _unitOfWork._db.SaveChanges();
-
+                else
+                {
+                    _unitOfWork._db.Category.Remove(model);
+                    _unitOfWork._db.SaveChanges();
+                }
                 response.Status = "00";
-                response.Message = "Category removed sucessfully";
+                response.Message = "Category Deleted sucessfully";
                 return response;
-            }
-            catch (Exception ex)
+            }catch(Exception ex)
             {
                 response.Status = "500";
-                response.Message = "Error occurred:" + ex.Message;
+                response.Message = "Error occured :" + ex.Message;
                 return response;
             }
         }
@@ -115,7 +115,7 @@ namespace Services.BL
     {
         BaseResponseModel<string> AddCategory(AddCategoryViewModel model);
         BaseResponseModel<string> EditCategory(EditCategoryViewModel EditCategory);
-        BaseResponseModel<string> DeleteCategory(Category model);
+        BaseResponseModel<string> DeleteCategory(Category category);
         
     }
 }

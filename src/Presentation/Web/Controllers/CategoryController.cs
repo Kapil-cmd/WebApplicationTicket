@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
@@ -9,15 +10,17 @@ using Services.CustomFilter;
 
 namespace Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryservice _categoryService;
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryController(ICategoryservice categoryService, IUnitOfWork unitOfWork)
+        private readonly IToastNotification _toastNotification;
+        public CategoryController(ICategoryservice categoryService, IUnitOfWork unitOfWork, IToastNotification toastNotification)
         {
             _categoryService = categoryService;
             _unitOfWork = unitOfWork;
+            _toastNotification = toastNotification;
         }
         public IActionResult Index()
         {
@@ -42,10 +45,12 @@ namespace Web.Controllers
             var response = _categoryService.AddCategory(model);
             if (response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Category created sucessfully");
                 return RedirectToAction("Index");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Unable to create Category");
                 return View(model);
             }
         }
@@ -76,10 +81,12 @@ namespace Web.Controllers
             var response = _categoryService.EditCategory(model);
             if (response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Category edited sucessfully");
                 return RedirectToAction("Index");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Unable to edit ticket");
                 return View(model);
             }
         }
@@ -104,20 +111,28 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult DeleteCategory(string CId)
         {
-            var category = _unitOfWork._db.Category.Find(CId);
-            return View(category);
+            if(CId == null)
+            {
+                return NotFound();
+            }
+            var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == CId);
+            Category model = new Category();
+            model = category;
+            return View(model);
         }
         [HttpPost]
-        public IActionResult DeleteCategory(Category model)
+        public IActionResult DeleteCategory(Category category)
         {
-            var response = _categoryService.DeleteCategory(model);
-            if (response.Status == "00")
+            var response = _categoryService.DeleteCategory(category);
+            if(response.Status =="00")
             {
+                _toastNotification.AddWarningToastMessage("Category deleted sucessfully");
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(model);
+                _toastNotification.AddErrorToastMessage("Unable to delete the category");
+                return View(category);
             }
         }
     }

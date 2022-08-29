@@ -16,6 +16,7 @@ namespace Repository.Entites
         public DateTime DateOfBirth { get; set; }
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
+        public string ProfilePicture { get; set; }
         public string OTP { get; set; }
 
 

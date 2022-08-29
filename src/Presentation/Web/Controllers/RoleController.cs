@@ -1,6 +1,7 @@
 ﻿using Common.ViewModels.Role;
 using Common.ViewModels.RolePermission;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
@@ -13,12 +14,14 @@ namespace Web.Controllers
         public readonly IUnitOfWork _unitOfWork;
         public readonly TicketingContext _db;
         public readonly IRoleService _roleService;
+        private readonly IToastNotification _toastNotification;
 
-        public RoleController(IUnitOfWork unitOfWork, TicketingContext db, IRoleService roleService)
+        public RoleController(IUnitOfWork unitOfWork, TicketingContext db, IRoleService roleService,IToastNotification toastNotification)
         {
             _unitOfWork = unitOfWork;
             _db = db;
             _roleService = roleService;
+            _toastNotification = toastNotification;
         }
         public IActionResult Index()
         {
@@ -40,10 +43,12 @@ namespace Web.Controllers
             var response = _roleService.CreateRole(model);
             if(response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Role created sucessfully");
                 return View("Index");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Unable to create role");
                 return View("CreateRole");
             }
         }
@@ -83,10 +88,12 @@ namespace Web.Controllers
             var response = _roleService.ManageRole(model);
             if(response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Role edited sucessfully");
                 return RedirectToAction("Index");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Unable to edit role");
                 return View(model);
             }
         }
@@ -119,10 +126,12 @@ namespace Web.Controllers
             var response = _roleService.DeleteRole(model);
             if(response.Status == "00")
             {
+                _toastNotification.AddSuccessToastMessage("Role deleted sucessfully");
                 return RedirectToAction("Index");
             }
             else
             {
+                _toastNotification.AddErrorToastMessage("Unable to delete role");
                 return View(model);
             }
         }

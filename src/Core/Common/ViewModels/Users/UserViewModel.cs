@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Common.ViewModels.Users
@@ -139,5 +140,18 @@ namespace Common.ViewModels.Users
         [Display(Name = "Confirm Password")]
         [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+    public class UserProfile
+    {
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public string ImageName { get; set; }
+        public int Age { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public long PhoneNumber { get; set; }
+        public IFormFile? ProfilePic { get; set; }
     }
 }

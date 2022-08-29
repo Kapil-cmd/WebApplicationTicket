@@ -55,7 +55,7 @@ namespace Services.BL
                     return response;
                 }
 
-                #region Rolepdate
+                #region RoleUpdate
                 role.Id = model.Id;
                 role.Name = model.Name;
 

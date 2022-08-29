@@ -23,7 +23,7 @@ namespace Web.Controllers
         }
         public IActionResult Index()
         {
-            var permission = _unitOfWork._db.Permissions.ToList();
+            var permission = _unitOfWork._db.Permissions.OrderByDescending(o => o.ControllerName).ToList();
             return View(permission);
         }
         [HttpGet]
@@ -77,16 +77,18 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        public IActionResult Delete(string PermissionId)
+        public IActionResult DeletePermission(string? PermissionId)
         {
-            var permission = _unitOfWork._db.Permissions.Find(PermissionId);
+            var permission = _unitOfWork._db.Permissions.FirstOrDefault(x => x.PermissionId == PermissionId);
+            Permission model = new Permission();
+            permission = model;
             return View(permission);
         }
         [HttpPost]
-        public IActionResult Delete(Permission model)
+        public IActionResult DeletePermission(Permission model)
         {
             var response = _permissionService.DeletePermission(model);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("Index");
             }

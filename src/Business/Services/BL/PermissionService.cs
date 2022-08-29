@@ -83,23 +83,21 @@ namespace Services.BL
             try
             {
                 var permission = _unitOfWork._db.Permissions.FirstOrDefault(x => x.PermissionId == model.PermissionId);
-                if (permission == null) 
+                if (permission == null)
                 {
                     response.Status = "404";
-                    response.Message = "Permission with id{permissionId} not found";
-                    return response ;
+                    response.Message = "Permission not found";
+                    return response;
                 }
-                permission.PermissionId=model.PermissionId;
-                permission.Name = model.Name;
 
-                _unitOfWork._db.Remove(model);
-                _unitOfWork.Save();
+                _unitOfWork._db.Permissions.Remove(permission);
+                _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";
-                response.Message = "Permission deleted sucessfully";
+                response.Message = "Permission removed sucessfully";
                 return response;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Status = "500";
                 response.Message = "Error occurred:" + ex.Message;

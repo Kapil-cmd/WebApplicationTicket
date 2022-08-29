@@ -43,6 +43,33 @@ namespace Services.BL
                 return response;
             }
         }
+
+        public BaseResponseModel<string> DeleteTicket(Ticket Ticket)
+        {
+            var response = new BaseResponseModel<string>();
+            try
+            {
+                var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == Ticket.TicketId);
+                if(ticket == null)
+                {
+                    response.Status = "404";
+                    response.Message = "Ticket not found";
+                    return response;
+                }
+                _unitOfWork._db.Tickets.Update(Ticket);
+                _unitOfWork._db.SaveChanges();
+
+                response.Status = "00";
+                response.Message = "Ticket deleted sucessully";
+                return response;
+            }catch(Exception ex)
+            {
+                response.Status = "500";
+                response.Message = "Error occurred :" + ex.Message;
+                return response;
+            }
+        }
+
         public BaseResponseModel<string> EditTicket(EditTicketViewmodel Ticket)
         {
             var response = new BaseResponseModel<string>();
@@ -96,33 +123,6 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> DeleteTicket(Ticket model)
-        {
-            var response = new BaseResponseModel<string>();
-            try
-            {
-                var Ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == model.TicketId);
-                if (Ticket == null)
-                {
-                    response.Status = "100";
-                    response.Message = "Ticket not found";
-                    return response;
-                }
-
-                _unitOfWork._db.Tickets.Remove(Ticket);
-                _unitOfWork._db.SaveChanges();
-
-                response.Status = "00";
-                response.Message = "Ticket deleted sucessfully";
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = "500";
-                response.Message = "Error occured: " + ex.Message;
-                return response;
-            }
-        }
         public BaseResponseModel<string> TicketDetails(string ticketId)
         {
             var response = new BaseResponseModel<string>();
@@ -153,7 +153,7 @@ namespace Services.BL
     {
         BaseResponseModel<string> AddTicket(AddTicketViewModel Ticket);
         BaseResponseModel<string> EditTicket(EditTicketViewmodel Ticket);
-        BaseResponseModel<string> DeleteTicket (Ticket model);
+        BaseResponseModel<string> DeleteTicket(Ticket Ticket);
         BaseResponseModel<string> TicketDetails(string ticketId);
     }
 }
