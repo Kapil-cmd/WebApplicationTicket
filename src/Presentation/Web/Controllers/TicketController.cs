@@ -6,6 +6,7 @@ using Repository.Entites;
 using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
+using Services.CustomFilter;
 using System.Security.Claims;
 
 namespace demo.Controllers
@@ -24,6 +25,7 @@ namespace demo.Controllers
             _webHostEnvironment = webHostEnvironment;
             _toastNotification = toastNotification;
         }
+        [PermissionFilter("Admin&Ticket&View_Ticket")]
         public IActionResult Index()
         {
             var model = _unitOfWork.Ticket.GetAll().OrderBy(x => x.CreatedDateTime).ThenBy(x => x.CategoryName).ToList();
@@ -35,6 +37,7 @@ namespace demo.Controllers
             return View(model);
         }
         [HttpGet]
+        [PermissionFilter("Admin&Ticket&Create_Ticket")]
         public IActionResult Create()
         {
             AddTicketViewModel model = new AddTicketViewModel();
@@ -53,6 +56,7 @@ namespace demo.Controllers
             return View(model);
 
         }
+        [PermissionFilter("Admin&Ticket&Create_Ticket")]
         [HttpPost]
         public async Task<IActionResult> Create(AddTicketViewModel ticket)
         {
@@ -86,6 +90,7 @@ namespace demo.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Ticket&Edit_Ticket")]
         public IActionResult EditTicket(string TicketId)
         {
 
@@ -113,7 +118,7 @@ namespace demo.Controllers
         }
 
         [HttpPost]
-        
+        [PermissionFilter("Admin&Ticket&Edit_Ticket")]
         public IActionResult EditTicket(EditTicketViewmodel model)
         {
             if (!ModelState.IsValid)
@@ -133,6 +138,7 @@ namespace demo.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Ticket&View_Ticket")]
         public IActionResult DetailTicket(string ticketId)
         {
             if (ticketId == null)
@@ -150,6 +156,7 @@ namespace demo.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Ticket&Delete_Ticket")]
         public IActionResult Delete(string? TicketId)
         {
             if(TicketId == null)
@@ -164,6 +171,7 @@ namespace demo.Controllers
             return View(ticket);
         }
         [HttpPost]
+        [PermissionFilter("Admin&Ticket&Delete_Ticket")]
         public IActionResult Delete(Ticket ticket)
         {
             var response = _ticketService.DeleteTicket(ticket);

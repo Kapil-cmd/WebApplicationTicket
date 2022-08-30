@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+93tAfwBKr/eOKWFg/oRHagPpPVBmnzQyCRMxbAZndQ=",
+  "Hash": "kPQYFwnHBgFMqlToxwPyt6ijMhz1kxxknt3DY+jjmNU=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\bootswatchTheme.css"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\css\\checkbox.css",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "css/checkbox.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\checkbox.css"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\css\\site.css",

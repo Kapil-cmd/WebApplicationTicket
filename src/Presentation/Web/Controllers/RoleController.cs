@@ -6,6 +6,7 @@ using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
+using Services.CustomFilter;
 
 namespace Web.Controllers
 {
@@ -23,17 +24,20 @@ namespace Web.Controllers
             _roleService = roleService;
             _toastNotification = toastNotification;
         }
+        [PermissionFilter("Admin&Role&View_Role")]
         public IActionResult Index()
         {
             IEnumerable<Role> roles = _unitOfWork._db.Roles.ToList();
             return View(roles);
         }
         [HttpGet]
+        [PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole()
         {
             return View();
         }
         [HttpPost]
+        [PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole(RoleViewModel model)
         {
             if (!ModelState.IsValid)
@@ -53,6 +57,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Role&Manage_Role")]
         public IActionResult ManageRole(string Id)
         {
             var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == Id);
@@ -71,7 +76,7 @@ namespace Web.Controllers
                     {
                         Id = x.PermissionId,
                         Name = x.Name,
-                    }).ToList();
+                    }).OrderBy(x => x.ControllerName).ToList();
                 }
             }
 
@@ -79,6 +84,7 @@ namespace Web.Controllers
 
         }
         [HttpPost]
+        [PermissionFilter("Admin&Role&Manage_Role")]
         public IActionResult ManageRole(EditRole model)
             {
             if (!ModelState.IsValid)
@@ -98,6 +104,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Role&View_Role")]
         public IActionResult RoleDetails (string Id)
         {
             if(Id == null)
@@ -115,6 +122,7 @@ namespace Web.Controllers
             };
         }
         [HttpGet]
+        [PermissionFilter("Admin&Role&Delete_Role")]
         public IActionResult Delete(string Id)
         {
             var deleteRole = _unitOfWork._db.Roles.Find(Id);
@@ -133,56 +141,6 @@ namespace Web.Controllers
             {
                 _toastNotification.AddErrorToastMessage("Unable to delete role");
                 return View(model);
-            }
-        }
-        [HttpGet]
-        public IActionResult AssignPermissionToRole(string Id)
-        {
-            if(Id == null)
-            {
-                return NotFound();
-            }    
-            var role = _unitOfWork._db.Roles.Find(Id);
-            if(role == null)
-            {
-                return NotFound();
-            }
-             RolePermissionViewModel model= new RolePermissionViewModel();
-            var permission = _unitOfWork._db.Permissions.ToList();
-            if(permission != null)
-            {
-                model.Permissions = permission.Select(x => new PermissionList()
-                {
-                    Id = x.PermissionId,
-                    PermissionName = x.Name
-                }).ToList();
-            }
-            return View(model);
-        }
-        //[HttpPost]
-        //public IActionResult AssignPermissionToRole(string roleId,string permissionId)
-        //{
-        //    var response = _roleService.AssignPermissionToRole(roleId, permissionId);
-        //    if(response.Status =="00")
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    else
-        //    {
-        //        return View("Index","Role");
-        //    }
-        //}
-        [HttpPost]
-        public IActionResult RemovePermissionFromRole(string roleId,string permissionId)
-        {
-            var response = _roleService.RemovePermissionFromRole(roleId, permissionId);
-            if(response.Status =="00")
-            {
-                return RedirectToAction("Index");
-            }    
-            else
-            {
-                return RedirectToAction("Index", "Role");
             }
         }
     }

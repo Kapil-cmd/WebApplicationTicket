@@ -35,7 +35,7 @@ namespace Services.CustomFilter
                 if (permissions == null)
                 {
                     context.Result = new UnauthorizedResult();
-                    return;
+                    return ;
                 }
 
                 var users = db.Users;

@@ -1,7 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.Categories;
 using Repository.Entites;
-using Repository.Repos.CategoryRep;
 using Repository.Repos.Work;
 using System.Security.Claims;
 

@@ -2,14 +2,9 @@
 {
     public class Permission
     {
-        public string PermissionId { get; set; } = Guid.NewGuid().ToString();
-        public string Name { get; set; }
-        public string ControllerName { get; set; }
-        public string ActionName { get; set; }
-
-
+        public string PermissionId { get; set; }
+        public string Name { get; set; } // user friendly name
+        public string ParentPermissionId { get; set; } // Parent Id Of the permission
         public virtual ICollection<RolePermission> Roles { get; set; }
-
-      
     }
 }

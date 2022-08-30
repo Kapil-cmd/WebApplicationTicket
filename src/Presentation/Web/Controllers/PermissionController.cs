@@ -1,6 +1,5 @@
 ﻿using Common.ViewModels.Permission;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
@@ -22,17 +21,20 @@ namespace Web.Controllers
             _db = db;
             _permissionService = permissionService;
         }
+        [PermissionFilter("Admin&Permission&View_Permission")]
         public IActionResult Index()
         {
-            var permission = _unitOfWork._db.Permissions.OrderByDescending(o => o.ControllerName).ToList();
+            var permission = _unitOfWork._db.Permissions.ToList();
             return View(permission);
         }
+        [PermissionFilter("Admin&Permission&Create_Permission")]
         [HttpGet]
         public IActionResult AddPermission()
         {
             return View();
         }
         [HttpPost]
+        [PermissionFilter("Admin&Permission&Create_Permission")]
         public IActionResult AddPermission(AddPermission model)
         {
             if(!ModelState.IsValid)
@@ -50,17 +52,17 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Permission&Edit_Permission")]
         public IActionResult Edit(string? id)
         {
             var permission = _unitOfWork.Permission.GetFirstOrDefault(x => x.PermissionId == id);
             EditPermission model = new EditPermission();
             model.PermissionId = permission.PermissionId;
             model.Name = permission.Name;
-            model.ControllerName = permission.ControllerName;
-            model.ActionName = permission.ActionName;
             return View(model);
         }
         [HttpPost]
+        [PermissionFilter("Admin&Permission&Edit_Permission")]
         public IActionResult Edit(EditPermission model)
         {
             if(!ModelState.IsValid)
@@ -78,6 +80,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Permission&Delete_Permission")]
         public IActionResult DeletePermission(string? PermissionId)
         {
             var permission = _unitOfWork._db.Permissions.FirstOrDefault(x => x.PermissionId == PermissionId);
@@ -86,6 +89,7 @@ namespace Web.Controllers
             return View(permission);
         }
         [HttpPost]
+        [PermissionFilter("Admin&Permission&Delete_Permission")]
         public IActionResult DeletePermission(Permission model)
         {
             var response = _permissionService.DeletePermission(model);

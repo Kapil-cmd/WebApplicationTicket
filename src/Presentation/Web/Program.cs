@@ -31,7 +31,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddAuthentication(option =>
 {
     option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-}).AddCookie(options =>
+}).AddCookie(options =>  
 {
     options.Cookie.Name = ".application.SharedCookie";
     options.LoginPath = "/User/login";
@@ -68,7 +68,7 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 
 var app = builder.Build();
 
-
+//app.UseMiddleware<PermissionMiddleware>();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

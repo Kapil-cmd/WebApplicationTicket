@@ -12,8 +12,7 @@ namespace Repository.Configurations
             builder.HasKey(x => x.PermissionId);
             builder.Property(x => x.PermissionId).HasColumnName(@"PId");
             builder.Property(x => x.Name).HasColumnName(@"PermissionName").IsRequired();
-            builder.Property(x => x.ControllerName).IsRequired();
-            builder.Property(x => x.ActionName);
+            builder.Property(x => x.ParentPermissionId);
         }
     }
 }

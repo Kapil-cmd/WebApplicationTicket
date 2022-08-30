@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository.Entites;
 using Repository.Entities;
 using Repository.Repos.Work;
+using Services.CustomFilter;
 
 namespace Web.Controllers
 {
@@ -15,7 +16,7 @@ namespace Web.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-
+        [PermissionFilter("Admin&Combine&View_Combine")]
         public IActionResult Index()
         {
             List<User> user = _unitOfWork._db.Users.ToList();

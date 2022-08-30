@@ -20,5 +20,6 @@ namespace Common.ViewModels.Role
         public string Id { get; set; }
         public string Name { get; set; }
         public bool IsPermitted { get; set; }
+        public string ControllerName { get; set; }
     }
 }

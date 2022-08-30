@@ -76,17 +76,13 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("PId");
 
-                    b.Property<string>("ActionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ControllerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("PermissionName");
+
+                    b.Property<string>("ParentPermissionId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PermissionId");
 
