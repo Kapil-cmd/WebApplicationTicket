@@ -79,12 +79,15 @@ if (!app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseNToastNotify();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+app.UseNToastNotify(); 
 
 app.UseSession();
 

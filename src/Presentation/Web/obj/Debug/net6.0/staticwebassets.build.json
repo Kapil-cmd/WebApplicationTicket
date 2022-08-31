@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kPQYFwnHBgFMqlToxwPyt6ijMhz1kxxknt3DY+jjmNU=",
+  "Hash": "y9z3mzZSj83yVfANe/qJd9d7tYJOsOj9MXXNOWcDgcY=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -1545,6 +1545,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Profile\\chasma22194666.jpg",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Profile/chasma22194666.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Profile\\chasma22194666.jpg"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Profile\\last yer22465622.jpg",
