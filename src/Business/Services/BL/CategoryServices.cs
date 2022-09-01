@@ -32,7 +32,7 @@ namespace Services.BL
                 {
                     CategoryName = category.CategoryName,
                     CreatedBy = category.CreatedBy = nameClaim,
-                    CreatedDateTime = DateTime.Now,
+                    CreatedDateTime = DateTime.UtcNow,
                 });
 
                 _unitOfWork._db.SaveChanges();
@@ -63,7 +63,7 @@ namespace Services.BL
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 category.CId = EditCategory.CId;
                 category.CategoryName = EditCategory.CategoryName;
-                category.ModifiedDateTime = DateTime.Now;
+                category.ModifiedDateTime = DateTime.UtcNow;
                 category.ModifiedBy = EditCategory.ModifiedBy = nameClaim;
 
                
@@ -82,7 +82,7 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> DeleteCategory(Category category)
+       public BaseResponseModel<string> DeleteCategory(Category category)
         {
             var response = new BaseResponseModel<string>();
             try
@@ -94,19 +94,18 @@ namespace Services.BL
                     response.Message = "Category Not Found";
                     return response;
                 }
-                else
-                {
-                    _unitOfWork._db.Category.Remove(model);
-                    _unitOfWork._db.SaveChanges();
-                }
+                model = category;
+                _unitOfWork._db.Category.Remove(model);
+                _unitOfWork._db.SaveChanges();
+
                 response.Status = "00";
-                response.Message = "Category Deleted sucessfully";
+                response.Message = "Category deleted sucessfully";
                 return response;
             }catch(Exception ex)
             {
                 response.Status = "500";
-                response.Message = "Error occured :" + ex.Message;
-                return response;
+                response.Message ="Error occurred :"+ ex.Message;
+                return response ;
             }
         }
     }

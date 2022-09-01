@@ -1,4 +1,5 @@
 ﻿using Common.ViewModels.Permission;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 using Repository.Entites;
@@ -8,6 +9,7 @@ using Services.CustomFilter;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class PermissionController : Controller
     {
         public readonly IUnitOfWork _unitOfWork;

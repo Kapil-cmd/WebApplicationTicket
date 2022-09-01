@@ -76,6 +76,9 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("PId");
 
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -110,6 +113,9 @@ namespace Repository.Migrations
 
                     b.Property<string>("PermissionId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoleId", "PermissionId");
 

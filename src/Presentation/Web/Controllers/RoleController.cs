@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.Role;
 using Common.ViewModels.RolePermission;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using Repository;
@@ -10,6 +11,7 @@ using Services.CustomFilter;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class RoleController : Controller
     {
         public readonly IUnitOfWork _unitOfWork;
@@ -24,20 +26,17 @@ namespace Web.Controllers
             _roleService = roleService;
             _toastNotification = toastNotification;
         }
-        [PermissionFilter("Admin&Role&View_Role")]
         public IActionResult Index()
         {
             IEnumerable<Role> roles = _unitOfWork._db.Roles.ToList();
             return View(roles);
         }
         [HttpGet]
-        [PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole()
         {
             return View();
         }
         [HttpPost]
-        [PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole(RoleViewModel model)
         {
             if (!ModelState.IsValid)
@@ -57,7 +56,6 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Admin&Role&Manage_Role")]
         public IActionResult ManageRole(string Id)
         {
             var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == Id);
@@ -84,7 +82,6 @@ namespace Web.Controllers
 
         }
         [HttpPost]
-        [PermissionFilter("Admin&Role&Manage_Role")]
         public IActionResult ManageRole(EditRole model)
             {
             if (!ModelState.IsValid)
@@ -104,7 +101,6 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Admin&Role&View_Role")]
         public IActionResult RoleDetails (string Id)
         {
             if(Id == null)
@@ -122,9 +118,12 @@ namespace Web.Controllers
             };
         }
         [HttpGet]
-        [PermissionFilter("Admin&Role&Delete_Role")]
         public IActionResult Delete(string Id)
         {
+            if(Id == null)
+            {
+                return NotFound();
+            }
             var deleteRole = _unitOfWork._db.Roles.Find(Id);
             return View(deleteRole);
         }

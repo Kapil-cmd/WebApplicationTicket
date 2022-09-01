@@ -4,6 +4,7 @@ using NToastNotify;
 using Repository;
 using Repository.Repos.Work;
 using Services.BL;
+using Services.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,7 +69,7 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 
 var app = builder.Build();
 
-//app.UseMiddleware<PermissionMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -83,10 +84,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
 app.UseNToastNotify(); 
 
 app.UseSession();

@@ -42,6 +42,33 @@ namespace Services.BL
             }
         }
 
+        public BaseResponseModel<string> DeleteRole(Role model)
+        {
+            var response = new BaseResponseModel<string>();
+            try
+            {
+                var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == model.Id);
+                if(role == null)
+                {
+                    response.Status = "404";
+                    response.Message = "Role not found";
+                    return response;
+                }
+                role = model;
+                _unitOfWork._db.Remove(model);
+                _unitOfWork._db.SaveChanges();
+
+                response.Status = "00";
+                response.Message = "Role deleted sucessully";
+                return response;
+            }catch(Exception ex)
+            {
+                response.Status = "500";
+                response.Message = "Exception occureed :" + ex.Message;
+                return response;
+            }
+        }
+
         public BaseResponseModel<string> ManageRole(EditRole model)
         {
             var response = new BaseResponseModel<string>();
@@ -92,33 +119,6 @@ namespace Services.BL
 
                 response.Status = "00";
                 response.Message = "Role edited sucessfully";
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = "500";
-                response.Message = "Error occurred:" + ex.Message;
-                return response;
-            }
-        }
-        public BaseResponseModel<string> DeleteRole(Role model)
-        {
-            var response = new BaseResponseModel<string>();
-            try
-            {
-                var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == model.Id);
-                if (role == null)
-                {
-                    response.Status = "404";
-                    response.Message = "Role not found";
-                    return response;
-                }
-
-                _unitOfWork._db.Roles.Remove(role);
-                _unitOfWork._db.SaveChanges();
-
-                response.Status = "00";
-                response.Message = "Role removed sucessfully";
                 return response;
             }
             catch (Exception ex)

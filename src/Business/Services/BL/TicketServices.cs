@@ -26,7 +26,7 @@ namespace Services.BL
                     TicketDetails = Ticket.TicketDetails,
                     CategoryName = Ticket.CategoryName,
                     CreatedBy = Ticket.CreatedBy = nameClaim,
-                    CreatedDateTime = DateTime.Now,
+                    CreatedDateTime = DateTime.UtcNow,
                     ImageName = Ticket.ImageName,
                 });
 
@@ -86,7 +86,7 @@ namespace Services.BL
                 #region TicketUpdate
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 ticket.TicketDetails = Ticket.TicketDetails;
-                ticket.ModifiedDateTime = DateTime.Now;
+                ticket.ModifiedDateTime = DateTime.UtcNow; 
                 ticket.ModifiedBy = Ticket.ModifiedBy = nameClaim;
                 ticket.Status = Common.Enums.StatusEnum.InProcess;
                 ticket.AssignedTo = Ticket.AssignedTo;

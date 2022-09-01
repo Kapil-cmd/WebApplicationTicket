@@ -570,12 +570,3 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microso
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\NToastNotify.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.Mvc.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.Razor.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Net.Http.Formatting.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.Http.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.Helpers.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.Web.WebPages.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

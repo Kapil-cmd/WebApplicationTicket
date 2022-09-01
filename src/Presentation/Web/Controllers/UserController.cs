@@ -414,7 +414,6 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Admin&User&Profile_User")]
         public IActionResult UserProfile(string? Id)
         {
             var userId = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
