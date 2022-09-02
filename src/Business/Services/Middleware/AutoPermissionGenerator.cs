@@ -1,5 +1,4 @@
-﻿using Common.ViewModels.Permission;
-using Repository;
+﻿using Repository;
 using Repository.Entites;
 using Services.CustomFilter;
 using System.Reflection;
@@ -12,7 +11,7 @@ namespace Services.Middleware
         {
             try
             {
-                List<AddPermission> permissions = new List<AddPermission>();
+                List<Permission> permissions = new List<Permission>();
                 Assembly asm = Assembly.GetEntryAssembly();
 
                 var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
@@ -26,7 +25,7 @@ namespace Services.Middleware
                         foreach(var method in methods)
                         {
                             var actionMethod = method.CustomAttributes.Where(x => x.AttributeType.Name == nameof(PermissionFilter)).ToList();
-                            foreach(var action in actionMethod)
+                            foreach (var action in actionMethod)
                             {
                                 if (action.ConstructorArguments[0].Value == null)
                                 {
@@ -35,7 +34,6 @@ namespace Services.Middleware
                                 string name = action.ConstructorArguments[0].Value.ToString();
 
                                 List<string> names = name.Split('&').ToList();
-
                                 List<string> groups = names[0].Split('.').ToList();
                                 string groupName = "";
                                 foreach(var group in groups)
@@ -47,10 +45,9 @@ namespace Services.Middleware
                                     groupName = groupName.TrimStart('.');
                                     if(!permissions.Any(x => x.Name == groupName))
                                     {
-                                        permissions.Add(new AddPermission
+                                        permissions.Add(new Permission
                                         {
                                             Group = group,
-                                            PermissionId = "permission",
                                             ParentPermissionId = parentId,
                                         });
                                     }
@@ -60,28 +57,27 @@ namespace Services.Middleware
                                     string parentId = permissions.Where(x => x.Name == names[0]).FirstOrDefault()?.Name;
                                     if (string.IsNullOrEmpty(parentId))
                                         parentId = null;
-                                    permissions.Add(new AddPermission
+                                    permissions.Add(new Permission
                                     {
                                         ParentPermissionId = parentId,
                                         Name = name,
                                         Group = groups.Last(),
                                     });
                                 }
-
                             }
                         }
-
                     }
                 }
                 foreach(var model in permissions)
                 {
-                    if(!context.RolePermissions.Any(x => x.Name == model.Name))
+                    if(!context.Permissions.Any(x => x.Name == model.Name))
                     {
-                        var parentId = context.RolePermissions.Where(x => x.Name == model.PermissionId).FirstOrDefault()?.Name;
+                        var parentId = context.Permissions.Where(x => x.Name == model.ParentPermissionId).FirstOrDefault()?.Name;
                         context.Permissions.Add(new Permission()
                         {
                             Name = model.Name,
                             Group = model.Group,
+                            ParentPermissionId = parentId,
                         });
                         context.SaveChanges();
                     }

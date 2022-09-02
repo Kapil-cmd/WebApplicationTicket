@@ -37,7 +37,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("CategoryCId");
 
-                    b.ToTable("ListCategory");
+                    b.ToTable("ListCategory", (string)null);
                 });
 
             modelBuilder.Entity("Repository.Entites.Category", b =>
