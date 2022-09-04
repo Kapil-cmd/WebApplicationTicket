@@ -88,14 +88,13 @@ namespace Services.BL
             try
             {
                 var model = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == category.CId);
-                if(model == null)
+                if (model == null)
                 {
                     response.Status = "404";
                     response.Message = "Category Not Found";
                     return response;
                 }
-                model = category;
-                _unitOfWork._db.Category.Remove(model);
+                _unitOfWork._db.Category.Remove(category);
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";

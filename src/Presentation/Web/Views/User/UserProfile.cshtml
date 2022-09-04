@@ -12,6 +12,40 @@
     <div class="col-md-4">
         <form asp-action="UserProfile" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6"
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="ProfilePic" style="width: 100%;"></label>
+                @if (Model.ProfilePic != null)
+                {
+                    <img id="profilePicture" style="width:350px;height:350px; object-fit:cover" src="">
+                }
+                else
+                {
+                    <img id="profilePicture" style="width:350px;height:350px; object-fit:cover" src="">
+                }
+                <input type="file"
+                       accept=".png,.jpg,.jpeg,.gif,.tif"
+                       asp-for="ProfilePic"
+                       class="form-control"
+                       style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
+                       onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="ProfilePic" class="text-danger"></span>
+            </div></div>*@
+                <dt class="col-sm-2">
+          ProfilePic
+    </dt>
+    <dt class="col-sm-2">
+        <img src="@("~/Profile/" + Model.ProfilePic)" asp-append-version="true" width="200px" height="200px" />
+    </dt>
+    
+
+        <div class="form-gropup">
+                        <label asp-for="ProfilePic" class="control-label"></label>
+                        <input asp-for="ProfilePic" accept="image/*" />
+                        <span asp-validation-for="ProfilePic" class="text-danger"></span>
+                    </div><br />    
+        </div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -32,25 +66,18 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-gropup">
-                        <label asp-for="ProfilePic" class="control-label"></label>
-                        <input asp-for="ProfilePic" accept="image/*" />
-                        <span asp-validation-for="ProfilePic" class="text-danger"></span>
-                    </div><br />
-         
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label"></label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                 <a asp-action="Index" class="bt btn-group-sm">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+   
 </div>
 

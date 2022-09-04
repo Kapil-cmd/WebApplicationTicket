@@ -1,17 +1,18 @@
-﻿using Repository;
+﻿using Microsoft.AspNetCore.Builder;
+using Repository;
 using Repository.Entites;
 using Services.CustomFilter;
 using System.Reflection;
 
 namespace Services.Middleware
 {
-    public static class AutoPermissionGenerator
+    public static class AutoPermissionGenerator //static ommitted for check
     {
         public static void GetPermissions(TicketingContext context)
         {
             try
             {
-                List<Permission> permissions = new List<Permission>();
+                List<RolePermission> permissions = new List<RolePermission>();
                 Assembly asm = Assembly.GetEntryAssembly();
 
                 var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
@@ -45,7 +46,7 @@ namespace Services.Middleware
                                     groupName = groupName.TrimStart('.');
                                     if(!permissions.Any(x => x.Name == groupName))
                                     {
-                                        permissions.Add(new Permission
+                                        permissions.Add(new RolePermission
                                         {
                                             Group = group,
                                             ParentPermissionId = parentId,
@@ -70,7 +71,7 @@ namespace Services.Middleware
                 }
                 foreach(var model in permissions)
                 {
-                    if(!context.Permissions.Any(x => x.Name == model.Name))
+                    if(!context.RolePermissions.Any(x => x.Name == model.Name))
                     {
                         var parentId = context.Permissions.Where(x => x.Name == model.ParentPermissionId).FirstOrDefault()?.Name;
                         context.Permissions.Add(new Permission()
@@ -87,5 +88,7 @@ namespace Services.Middleware
             {
             }
         }
+       
     }
+    
 }

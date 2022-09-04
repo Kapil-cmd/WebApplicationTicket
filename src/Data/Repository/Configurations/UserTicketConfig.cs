@@ -14,12 +14,12 @@ namespace Repository.Configurations
             builder.HasOne(x => x.aUser)
                 .WithMany(x => x.AssignedeTickets)
                 .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.HasOne(x => x.aTicket)
                 .WithMany(x => x.AssignedUsers)
                 .HasForeignKey(x => x.TicketId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientCascade);
                 }
         }
 }

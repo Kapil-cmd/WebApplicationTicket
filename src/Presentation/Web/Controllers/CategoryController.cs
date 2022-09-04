@@ -22,10 +22,10 @@ namespace Web.Controllers
             _unitOfWork = unitOfWork;
             _toastNotification = toastNotification;
         }
-        [PermissionFilter("Admin&Category&View_Category")]
+        //[PermissionFilter("Admin&Category&View_Category")]
         public IActionResult Index()
         {
-            var category = _unitOfWork._db.Category.Include(x => x.Tickets).ToList();
+            var category = _unitOfWork._db.Category.Include(x => x.Tickets).OrderBy(x => x.CategoryName).ToList();
             return View(category);
         }
         [HttpGet]
@@ -110,7 +110,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Admin&Category&Delete_Category")]
+        //[PermissionFilter("Admin&Category&Delete_Category")]
         public IActionResult DeleteCategory(string CId)
         {
             if(CId == null)
@@ -118,25 +118,23 @@ namespace Web.Controllers
                 return NotFound();
             }
             var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == CId);
-            Category model = new Category();
-            model = category;
-            return View(model);
+            
+            return View(category);
         }
 
         [HttpPost]
-        [PermissionFilter("Admin&Category&Delete_Category")]
+
+        //[PermissionFilter("Admin&Category&Delete_Category")]
         public IActionResult DeleteCategory(Category category)
         {
             var response = _categoryService.DeleteCategory(category);
-            if(response.Status =="00")
+            if(response.Status == "00")
             {
-                _toastNotification.AddWarningToastMessage("Category deleted sucessfully");
                 return RedirectToAction("Index");
             }
             else
             {
-                _toastNotification.AddErrorToastMessage("Unable to delete the category");
-                return View(category);
+                return View();
             }
         }
     }

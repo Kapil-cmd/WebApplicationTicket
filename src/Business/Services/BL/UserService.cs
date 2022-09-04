@@ -184,10 +184,24 @@ namespace Services.BL
                     UserId = EditUser.Id,
                 });
                 _unitOfWork.Save();
-
-
                 #endregion
+                #region RemoveRole
+                var userRole = _unitOfWork.UserRoleRepository.GetFirstOrDefault(x => x.UserId == x.UserId && x.RoleId == x.RoleId);
+                if (userRole == null)
+                {
+                    response.Status = "404";
+                    response.Message = "{this role} has not been yet assigned to {this user}";
+                    return response;
+                }
 
+                _unitOfWork.UserRoleRepository.Remove(userRole);
+                _unitOfWork.Save();
+
+                response.Status = "00";
+                response.Message = "Successfully removed {this user} from {this role}";
+
+                return response;
+                #endregion
                 response.Status = "00";
                 response.Message = "User Edited sucessfully";
                 return response;
@@ -328,66 +342,7 @@ namespace Services.BL
             }
         }
 
-        //public BaseResponseModel<string> AssignUserToRole(string userId, string roleId)
-        //{
-        //    BaseResponseModel<string> response = new BaseResponseModel<string>();
-        //    try
-        //    {
-        //        if (_unitOfWork.UserRoleRepository.Any(x => x.UserId == userId && x.RoleId == roleId))
-        //        {
-        //            response.Status = "444";
-        //            response.Message = "{this role} already exists for {this user}";
-        //            return response;
-        //        }
-        //        _unitOfWork.UserRoleRepository.Add(new Repository.Entites.UserRole()
-        //        {
-        //            RoleId = roleId,
-        //            UserId = userId
-        //        });
-        //        _unitOfWork.Save();
-
-        //        response.Status = "00";
-        //        response.Message = "Successfully assigned {this user} to {this role}";
-        //        return response;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.Status = "500";
-        //        response.Message = "Error Occured : " + ex.Message;
-        //        return response;
-        //    }
-
-        //}
-        //public BaseResponseModel<string> RemoveUserFromRole(string userId, string roleId)
-        //{
-
-        //    BaseResponseModel<string> response = new BaseResponseModel<string>();
-        //    try
-        //    {
-        //        var userRole = _unitOfWork.UserRoleRepository.GetFirstOrDefault(x => x.UserId == userId && x.RoleId == roleId);
-        //        if (userRole == null)
-        //        {
-        //            response.Status = "404";
-        //            response.Message = "{this role} has not been yet assigned to {this user}";
-        //            return response;
-        //        }
-
-        //        _unitOfWork.UserRoleRepository.Remove(userRole);
-        //        _unitOfWork.Save();
-
-        //        response.Status = "00";
-        //        response.Message = "Successfully removed {this user} from {this role}";
-
-        //        return response;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.Status = "500";
-        //        response.Message = "Error Occured : " + ex.Message;
-        //        return response;
-        //    }
-
-        //}
+     
     }
 
     public interface IUserService

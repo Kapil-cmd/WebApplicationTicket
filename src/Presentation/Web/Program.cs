@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<TicketingContext>(options => 
+builder.Services.AddDbContext<TicketingContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContextConnection")));
 builder.Services.AddRazorPages();
 
@@ -32,7 +32,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddAuthentication(option =>
 {
     option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-}).AddCookie(options =>  
+}).AddCookie(options =>
 {
     options.Cookie.Name = ".application.SharedCookie";
     options.LoginPath = "/User/login";
@@ -40,9 +40,7 @@ builder.Services.AddAuthentication(option =>
     options.AccessDeniedPath = "/User/login";
 });
 
-
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -69,6 +67,12 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 
 var app = builder.Build();
 
+using (var serviceScope = app.Services.CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<TicketingContext>();
+    AutoPermissionGenerator.GetPermissions(context);
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -79,14 +83,15 @@ if (!app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseNToastNotify(); 
+app.UseNToastNotify();
 
 app.UseSession();
+
 
 app.MapControllerRoute(
     name: "default",

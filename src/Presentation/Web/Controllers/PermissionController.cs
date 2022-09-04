@@ -23,7 +23,7 @@ namespace Web.Controllers
             _db = db;
             _permissionService = permissionService;
         }
-        [PermissionFilter("Admin&Permission&View_Permission")]
+        //[PermissionFilter("Admin&Permission&View_Permission")]
         public IActionResult Index()
         {
             var permission = _unitOfWork._db.Permissions.ToList();

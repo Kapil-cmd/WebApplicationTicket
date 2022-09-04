@@ -447,7 +447,7 @@ namespace Web.Controllers
             if (response.Status == "00")
             {
                 _toastNotification.AddSuccessToastMessage("User profile");
-                return RedirectToAction("Home", "Homepage");
+                return RedirectToAction("HomePage", "Home");
             }
             else
             {

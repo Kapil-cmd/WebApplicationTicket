@@ -15,7 +15,7 @@ namespace Repository.Configurations
             builder.HasOne(x => x.aUser)
                 .WithMany(x => x.Roles)
                 .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.HasOne(x => x.aRole)
                 .WithMany(x => x.Users)
