@@ -25,19 +25,19 @@ namespace demo.Controllers
             _webHostEnvironment = webHostEnvironment;
             _toastNotification = toastNotification;
         }
-        [PermissionFilter("Admin&Ticket&View_Ticket")]
+        //[PermissionFilter("Admin&Ticket&View_Ticket")]
         public IActionResult Index()
         {
-            var model = _unitOfWork.Ticket.GetAll().OrderBy(x => x.CreatedDateTime).ThenBy(x => x.CategoryName).ToList();
+            var model = _unitOfWork.Ticket.GetAll().OrderBy(x => x.CreatedDateTime).ToList();
             return View(model);
         }
         public IActionResult UserIndex()
         {
-            var model = _unitOfWork._db.Tickets.Where(a => a.User.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).ToList();
+            var model = _unitOfWork._db.Tickets.Where(a => a.User.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(model);
         }
         [HttpGet]
-        [PermissionFilter("Admin&Ticket&Create_Ticket")]
+        //[PermissionFilter("Admin&Ticket&Create_Ticket")]
         public IActionResult Create()
         {
             AddTicketViewModel model = new AddTicketViewModel();
@@ -56,7 +56,7 @@ namespace demo.Controllers
             return View(model);
 
         }
-        [PermissionFilter("Admin&Ticket&Create_Ticket")]
+        //[PermissionFilter("Admin&Ticket&Create_Ticket")]
         [HttpPost]
         public async Task<IActionResult> Create(AddTicketViewModel ticket)
         {

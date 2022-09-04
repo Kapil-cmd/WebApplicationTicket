@@ -37,7 +37,7 @@ namespace Repository.Migrations
 
                     b.HasIndex("CategoryCId");
 
-                    b.ToTable("ListCategory", (string)null);
+                    b.ToTable("ListCategory");
                 });
 
             modelBuilder.Entity("Repository.Entites.Category", b =>
@@ -80,7 +80,6 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("PermissionName");
 
@@ -114,7 +113,13 @@ namespace Repository.Migrations
                     b.Property<string>("PermissionId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParentPermissionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoleId", "PermissionId");
@@ -305,14 +310,14 @@ namespace Repository.Migrations
                         .WithMany("Tickets")
                         .HasForeignKey("CategoryName")
                         .HasPrincipalKey("CategoryName")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "User")
                         .WithMany("MyCreatedTicket")
                         .HasForeignKey("CreatedBy")
                         .HasPrincipalKey("UserName")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -331,7 +336,7 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Entites.User", "aUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("aRole");
@@ -344,13 +349,13 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Entites.Ticket", "aTicket")
                         .WithMany("AssignedUsers")
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "aUser")
                         .WithMany("AssignedeTickets")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("aTicket");

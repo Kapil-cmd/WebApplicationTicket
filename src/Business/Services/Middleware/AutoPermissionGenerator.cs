@@ -10,7 +10,7 @@ namespace Services.Middleware
     {
         public static void GetPermissions(TicketingContext context)
         {
-            try
+            try 
             {
                 List<RolePermission> permissions = new List<RolePermission>();
                 Assembly asm = Assembly.GetEntryAssembly();
@@ -58,7 +58,7 @@ namespace Services.Middleware
                                     string parentId = permissions.Where(x => x.Name == names[0]).FirstOrDefault()?.Name;
                                     if (string.IsNullOrEmpty(parentId))
                                         parentId = null;
-                                    permissions.Add(new Permission
+                                    permissions.Add(new RolePermission
                                     {
                                         ParentPermissionId = parentId,
                                         Name = name,
@@ -73,7 +73,7 @@ namespace Services.Middleware
                 {
                     if(!context.RolePermissions.Any(x => x.Name == model.Name))
                     {
-                        var parentId = context.Permissions.Where(x => x.Name == model.ParentPermissionId).FirstOrDefault()?.Name;
+                        var parentId = context.RolePermissions.Where(x => x.Name == model.ParentPermissionId).FirstOrDefault()?.Name;
                         context.Permissions.Add(new Permission()
                         {
                             Name = model.Name,

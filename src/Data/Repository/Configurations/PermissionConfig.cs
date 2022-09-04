@@ -11,9 +11,9 @@ namespace Repository.Configurations
             builder.ToTable("Permissions");
             builder.HasKey(x => x.PermissionId);
             builder.Property(x => x.PermissionId).HasColumnName(@"PId");
-            builder.Property(x => x.Name).HasColumnName(@"PermissionName").IsRequired();
-            builder.Property(x => x.ParentPermissionId).IsRequired();
-            builder.Property(x => x.Group).IsRequired();
+            builder.Property(x => x.Name).HasColumnName(@"PermissionName");
+            builder.Property(x => x.ParentPermissionId);
+            builder.Property(x => x.Group);
         }
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6LnZopiYECRuC9iNCGK0rjOgsEvtF33bb0VzxYxQsSA=",
+  "Hash": "EDVvDPAC12FwP22kwR+zYC4KbvMo3MbeSCWcBwjkxRc=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\.net22532839.jpg",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/.net22532839.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\.net22532839.jpg"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\4004.jpg",
@@ -304,6 +321,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\404 error22365088.jpg"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\404 error22545464.jpg",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/404 error22545464.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\404 error22545464.jpg"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\chester22110941.jpg",
@@ -491,6 +525,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\lp22532883.PNG"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\noiceee22155362.jpg",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/noiceee22155362.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\noiceee22155362.jpg"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\noiceee22401246.jpg",
