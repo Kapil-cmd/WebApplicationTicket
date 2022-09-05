@@ -26,7 +26,7 @@ namespace Services.BL
 
                 _unitOfWork._db.Permissions.Add(new Repository.Entites.Permission()
                 {
-                    Name = model.Name,
+                    Slug = model.Name,
                 });
                 _unitOfWork._db.SaveChanges();
                 response.Status = "00";
@@ -55,7 +55,7 @@ namespace Services.BL
                         return response;
                     }
                     permission.PermissionId = model.PermissionId;
-                    permission.Name = model.Name;
+                    permission.Slug = model.Name;
 
                     _unitOfWork._db.Update(permission);
                     _unitOfWork._db.SaveChanges();

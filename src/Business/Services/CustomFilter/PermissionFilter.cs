@@ -30,7 +30,7 @@ namespace Services.CustomFilter
                 var controllerName = distributor.ControllerName;
 
                 var Id = db.Users.FirstOrDefault(x=>x.UserName == context.HttpContext.User.Identity.Name)?.Id;
-                var permissions = db.Permissions.FirstOrDefault(x => x.Name == _claim);
+                var permissions = db.Permissions.FirstOrDefault(x => x.Slug == _claim);
 
                 if (permissions == null)
                 {

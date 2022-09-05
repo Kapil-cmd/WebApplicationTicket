@@ -60,7 +60,7 @@ namespace Web.Controllers
             var permission = _unitOfWork.Permission.GetFirstOrDefault(x => x.PermissionId == id);
             EditPermission model = new EditPermission();
             model.PermissionId = permission.PermissionId;
-            model.Name = permission.Name;
+            model.Name = permission.Slug;
             return View(model);
         }
         [HttpPost]

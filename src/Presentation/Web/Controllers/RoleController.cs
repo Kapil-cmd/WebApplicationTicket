@@ -73,7 +73,7 @@ namespace Web.Controllers
                     model.ListPermission = permission.Select(x => new ListPermission()
                     {
                         Id = x.PermissionId,
-                        Name = x.Name,
+                        Name = x.Slug,
                     }).OrderBy(x => x.ControllerName).ToList();
                 }
             }
