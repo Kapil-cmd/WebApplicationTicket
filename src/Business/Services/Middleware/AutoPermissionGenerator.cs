@@ -71,9 +71,9 @@ namespace Services.Middleware
                         }
                     }
                 }
-                //foreach(var model in permissions)
+                //foreach (var model in permissions)
                 //{
-                //    if(!context.RolePermissions.Any(x => x.Slug == model.Slug))
+                //    if (!context.RolePermissions.Any(x => x.Slug == model.Slug))
                 //    {
                 //        var parentId = context.RolePermissions.Where(x => x.Slug == model.ParentPermissionId).FirstOrDefault()?.Slug;
                 //        context.RolePermissions.Add(new Permission()
