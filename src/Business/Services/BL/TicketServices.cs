@@ -56,7 +56,7 @@ namespace Services.BL
                     response.Message = "Ticket not found";
                     return response;
                 }
-                _unitOfWork._db.Tickets.Update(Ticket);
+                _unitOfWork._db.Tickets.Remove(ticket);
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";

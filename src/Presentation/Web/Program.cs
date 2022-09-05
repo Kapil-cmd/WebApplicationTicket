@@ -67,11 +67,11 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 
 var app = builder.Build();
 
-//using (var serviceScope = app.Services.CreateScope())
-//{
-//    var context = serviceScope.ServiceProvider.GetService<TicketingContext>();
-//    AutoPermissionGenerator.GetPermissions(context);
-//}
+using (var serviceScope = app.Services.CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<TicketingContext>();
+    AutoPermissionGenerator.GetPermission(context);
+}
 
 
 // Configure the HTTP request pipeline.
