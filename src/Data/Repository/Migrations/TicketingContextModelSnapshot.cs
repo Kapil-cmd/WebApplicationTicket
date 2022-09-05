@@ -65,8 +65,7 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("PermissionName");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PermissionId");
 
@@ -94,15 +93,6 @@ namespace Repository.Migrations
 
                     b.Property<string>("PermissionId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Group")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ParentPermissionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoleId", "PermissionId");
 

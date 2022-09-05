@@ -1,5 +1,4 @@
 ﻿using Common.ViewModels.Role;
-using Common.ViewModels.RolePermission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
@@ -7,7 +6,6 @@ using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
-using Services.CustomFilter;
 
 namespace Web.Controllers
 {

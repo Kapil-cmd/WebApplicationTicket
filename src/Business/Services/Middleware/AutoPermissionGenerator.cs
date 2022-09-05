@@ -7,11 +7,11 @@ namespace Services.Middleware
 {
     public static class AutoPermissionGenerator
     {
-        public static void GetPermission(TicketingContext context)
+        public static void GetPermissions(TicketingContext context)
         {
             try
             {
-                List<RolePermission> permissions = new List<RolePermission>();
+                List<Permission> permissions = new List<Permission>();
                 Assembly asm = Assembly.GetEntryAssembly();
 
                 var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
@@ -19,14 +19,13 @@ namespace Services.Middleware
                 {
                     var typePage = assembly.GetTypes().Where(x => x.FullName.Contains("Controllers"));
 
-                    foreach(Type type in typePage)
+                    foreach (Type type in typePage)
                     {
                         var methods = type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public).ToList();
-
-                        foreach(var method in methods)
+                        foreach (var method in methods)
                         {
                             var actionMethod = method.CustomAttributes.Where(x => x.AttributeType.Name == nameof(PermissionFilter)).ToList();
-                            foreach(var action in actionMethod)
+                            foreach (var action in actionMethod)
                             {
                                 if (action.ConstructorArguments[0].Value == null)
                                 {
@@ -35,33 +34,37 @@ namespace Services.Middleware
 
                                 string slug = action.ConstructorArguments[0].Value.ToString();
 
+
                                 List<string> slugs = slug.Split('&').ToList();
                                 List<string> groups = slugs[0].Split('.').ToList();
                                 string groupSlug = "";
-                                foreach(var group in groups)
+                                foreach (var group in groups)
                                 {
                                     string parentId = groupSlug;
                                     if (string.IsNullOrEmpty(parentId))
                                         parentId = null;
                                     groupSlug += "." + group;
                                     groupSlug = groupSlug.TrimStart('.');
-                                    if(!permissions.Any(x => x.Slug == groupSlug))
+                                    if (!permissions.Any(x => x.Slug == groupSlug))
                                     {
-                                        permissions.Add(new RolePermission
+                                        permissions.Add(new Permission
                                         {
                                             Group = group,
+                                            PermissionId = "permission",
                                             Slug = groupSlug,
                                             ParentPermissionId = parentId,
                                         });
                                     }
                                 }
-                                if(!permissions.Any(x => x.Slug == slug))
+
+                                if (!permissions.Any(x => x.Slug == slug))
                                 {
                                     string parentId = permissions.Where(x => x.Slug == slugs[0]).FirstOrDefault()?.Slug;
                                     if (string.IsNullOrEmpty(parentId))
                                         parentId = null;
-                                    permissions.Add(new RolePermission
+                                    permissions.Add(new Permission
                                     {
+                                        PermissionId = "permission",
                                         ParentPermissionId = parentId,
                                         Slug = slug,
                                         Group = groups.Last(),
@@ -71,25 +74,26 @@ namespace Services.Middleware
                         }
                     }
                 }
-                //foreach (var model in permissions)
-                //{
-                //    if (!context.RolePermissions.Any(x => x.Slug == model.Slug))
-                //    {
-                //        var parentId = context.RolePermissions.Where(x => x.Slug == model.ParentPermissionId).FirstOrDefault()?.Slug;
-                //        context.RolePermissions.Add(new Permission()
-                //        {
-                //            Slug = model.Slug,
-                //            Group = model.Group,
-                //            ParentPermissionId = parentId,
-                //        });
-                //        context.SaveChanges();
-                //    }
-                //}
+
+                foreach (var model in permissions)
+                {
+                    if (!context.Permissions.Any(x => x.Slug == model.Slug))
+                    {
+                        var parentId = context.Permissions.Where(x => x.Slug == model.ParentPermissionId).FirstOrDefault()?.Slug;
+                        context.Permissions.Add(new Permission()
+                        {
+                            PermissionId = "permission",
+                            Slug = model.Slug,
+                            Group = model.Group,
+                            ParentPermissionId = parentId,
+                        });
+                        context.SaveChanges();
+                    }
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
-         }
-
+        }
     }
 }

@@ -117,19 +117,19 @@ namespace Services.BL
 
                 #endregion
                 #region RemovePermission
-                var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleId == model.Id && x.PermissionId == model.Id);
-                if(rolePermission == null)
-                {
-                    response.Status = "404";
-                    response.Message = "Permission isnot assign in this role";
-                    return response;
-                }
-                _unitOfWork._db.RolePermissions.Remove(rolePermission);
-                _unitOfWork._db.SaveChanges();
+                //var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleId == model.Id && x.PermissionId == model.Id);
+                //if(rolePermission == null)
+                //{
+                //    response.Status = "404";
+                //    response.Message = "Permission isnot assign in this role";
+                //    return response;
+                //}
+                //_unitOfWork._db.RolePermissions.Remove(rolePermission);
+                //_unitOfWork._db.SaveChanges();
 
-                response.Status = "00";
-                response.Message = "Permission removed sucessfully";
-                return response;
+                //response.Status = "00";
+                //response.Message = "Permission removed sucessfully";
+                //return response;
                 #endregion
 
                 response.Status = "00";

@@ -28,6 +28,11 @@ namespace Web.Controllers
             var category = _unitOfWork._db.Category.Include(x => x.Tickets).OrderBy(x => x.CategoryName).ToList();
             return View(category);
         }
+        public IActionResult CategoryTicket()
+        {
+            var categoryTicket = _unitOfWork._db.CategoryTickets.OrderByDescending(x => x.CategoryName).ToList();
+            return View();
+        }
         [HttpGet]
         [PermissionFilter("Admin&Category&Create_Category")]
         public IActionResult Create()
