@@ -1,6 +1,4 @@
-﻿using Common.ViewModels.Tickets;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Repository.Entities;
 
 namespace Repository.Entites
 {
@@ -14,7 +12,7 @@ namespace Repository.Entites
         public DateTime? ModifiedDateTime { get; set; }
 
         public virtual User User { get; set; }
-        public virtual IEnumerable<ListCategory> listCategories { get; set; }
         public virtual IEnumerable<Ticket> Tickets { get; set; }
+        public List<CategoryTicket> cTicket { get; set; }
     }
 }

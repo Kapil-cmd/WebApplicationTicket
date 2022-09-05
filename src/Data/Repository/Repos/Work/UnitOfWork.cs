@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Repository.Repos.CategoryRep;
+using Repository.Repos.CategoryTicketRep;
 using Repository.Repos.PermissionRep;
 using Repository.Repos.RolePermissionRep;
 using Repository.Repos.RoleRep;
