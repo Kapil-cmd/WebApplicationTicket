@@ -15,13 +15,13 @@ namespace Repository.Configurations
             builder.HasOne(x => x.aRole)
                 .WithMany(x => x.Permissions)
                 .HasForeignKey(x => x.RoleId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
 
             builder.HasOne(x => x.aPermission)
                 .WithMany(x => x.Roles)
                 .HasForeignKey(x => x.PermissionId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
         }
     }
