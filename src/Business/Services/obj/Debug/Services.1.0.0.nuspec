@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Services</id>
+    <version>1.0.0</version>
+    <authors>Services</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Common" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="Repository" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Authentication.Cookies" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http" version="2.2.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Mvc.Abstractions" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Mvc.Core" version="2.2.5" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Identity.Core" version="6.0.7" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Projects\TicketManagementSystem\src\Business\Services\bin\Debug\net6.0\Services.dll" target="lib\net6.0\Services.dll" />
+  </files>
+</package>

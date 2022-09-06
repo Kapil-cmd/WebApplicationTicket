@@ -49,10 +49,10 @@ namespace Services.Middleware
                                     {
                                         permissions.Add(new Permission
                                         {
+                                            PermissionId ="permission",
                                             Group = group,
-                                            ParentId = "permission",
+                                            ParentId = parentId,
                                             Slug = groupSlug,
-                                            PermissionId = parentId,
                                         });
                                     }
                                 }
@@ -64,10 +64,10 @@ namespace Services.Middleware
                                         parentId = null;
                                     permissions.Add(new Permission
                                     {
-                                        PermissionId = "permission",
+                                        PermissionId ="permission",
                                         ParentId = parentId,
                                         Slug = slug,
-                                        MenuName = slugs[1] +""+groups.Last(),
+                                        MenuName = slugs[1] + "" +groups.Last(),
                                         Group = groups.Last(),
                                     });
                                 }
@@ -80,13 +80,13 @@ namespace Services.Middleware
                 {
                     if (!context.Permissions.Any(x => x.Slug == model.Slug))
                     {
-                        var parentId = context.Permissions.Where(x => x.Slug == model.ParentId).FirstOrDefault()?.Slug;
+                        var parentId = context.Permissions.Where(x => x.Slug == model.PermissionId).FirstOrDefault()?.Slug;
                         context.Permissions.Add(new Permission()
                         {
-                            ParentId = "permission",
                             Slug = model.Slug,
                             Group = model.Group,
-                            PermissionId = parentId,
+                            MenuName = model.MenuName,
+                            ParentId = parentId,
                         });
                         context.SaveChanges();
                     }

@@ -51,22 +51,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Permission/AddPermission.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVybWlzc2lvblxBZGRQZXJtaXNzaW9uLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Permission/DeletePermission.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVybWlzc2lvblxEZWxldGVQZXJtaXNzaW9uLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Permission/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVybWlzc2lvblxFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Permission/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVybWlzc2lvblxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Role/CreateRole.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxDcmVhdGVSb2xlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
