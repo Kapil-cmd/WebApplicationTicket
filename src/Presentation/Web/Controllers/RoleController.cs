@@ -1,6 +1,7 @@
 ﻿using Common.ViewModels.Role;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository;
 using Repository.Entites;
@@ -71,8 +72,8 @@ namespace Web.Controllers
                     model.ListPermission = permission.Select(x => new ListPermission()
                     {
                         Id = x.PermissionId,
-                        Name = x.Slug,
-                    }).OrderBy(x => x.ControllerName).ToList();
+                        Slug = x.Slug,
+                    }).OrderBy(x => x.Group).ToList();
                 }
             }
 
@@ -105,8 +106,8 @@ namespace Web.Controllers
             {
                 return NotFound();
             }
-            var role = _unitOfWork._db.Roles.Find(Id);
-            if(role == null)
+            var role = _unitOfWork._db.Roles.Include("Permissions").Include("Permissions.aPermission").FirstOrDefault(x => x.Id == Id);
+            if (role == null)
             {
                 return NotFound();
             }

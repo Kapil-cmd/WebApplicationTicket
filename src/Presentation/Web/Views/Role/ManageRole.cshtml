@@ -24,7 +24,7 @@
                 {
                     <input id="@Model.ListPermission[i].Id" asp-for="@Model.ListPermission[i].IsPermitted" type="checkbox" class="custom-control-input"/>
                     <input asp-for="@Model.ListPermission[i].Id" type="hidden" />
-                    <label for="@Model.ListPermission[i].Id" class="custom-control-label">@Model.ListPermission[i].Name</label>
+                    <label for="@Model.ListPermission[i].Id" class="custom-control-label">@Model.ListPermission[i].Slug</label>
                 }
                 </div>
             </div><br /><br />

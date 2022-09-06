@@ -12,7 +12,8 @@ namespace Repository.Configurations
             builder.HasKey(x => x.PermissionId);
             builder.Property(x => x.PermissionId).HasColumnName(@"PId");
             builder.Property(x => x.Slug);
-            builder.Property(x => x.ParentPermissionId);
+            builder.Property(x => x.ParentId);
+            builder.Property(x => x.MenuName);
             builder.Property(x => x.Group);
         }
     }

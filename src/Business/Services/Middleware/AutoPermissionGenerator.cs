@@ -7,7 +7,7 @@ namespace Services.Middleware
 {
     public static class AutoPermissionGenerator
     {
-        public static void GetPermissions(TicketingContext context)
+       public static void GetPermission(TicketingContext context)
         {
             try
             {
@@ -15,14 +15,14 @@ namespace Services.Middleware
                 Assembly asm = Assembly.GetEntryAssembly();
 
                 var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-                foreach (var assembly in loadedAssemblies)
+                foreach(var assembly in loadedAssemblies)
                 {
                     var typePage = assembly.GetTypes().Where(x => x.FullName.Contains("Controllers"));
 
-                    foreach (Type type in typePage)
+                    foreach(Type type in typePage)
                     {
                         var methods = type.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public).ToList();
-                        foreach (var method in methods)
+                        foreach(var method in methods)
                         {
                             var actionMethod = method.CustomAttributes.Where(x => x.AttributeType.Name == nameof(PermissionFilter)).ToList();
                             foreach (var action in actionMethod)
@@ -50,9 +50,9 @@ namespace Services.Middleware
                                         permissions.Add(new Permission
                                         {
                                             Group = group,
-                                            PermissionId = "permission",
+                                            ParentId = "permission",
                                             Slug = groupSlug,
-                                            ParentPermissionId = parentId,
+                                            PermissionId = parentId,
                                         });
                                     }
                                 }
@@ -65,8 +65,9 @@ namespace Services.Middleware
                                     permissions.Add(new Permission
                                     {
                                         PermissionId = "permission",
-                                        ParentPermissionId = parentId,
+                                        ParentId = parentId,
                                         Slug = slug,
+                                        MenuName = slugs[1] +""+groups.Last(),
                                         Group = groups.Last(),
                                     });
                                 }
@@ -79,18 +80,18 @@ namespace Services.Middleware
                 {
                     if (!context.Permissions.Any(x => x.Slug == model.Slug))
                     {
-                        var parentId = context.Permissions.Where(x => x.Slug == model.ParentPermissionId).FirstOrDefault()?.Slug;
+                        var parentId = context.Permissions.Where(x => x.Slug == model.ParentId).FirstOrDefault()?.Slug;
                         context.Permissions.Add(new Permission()
                         {
+                            ParentId = "permission",
                             Slug = model.Slug,
                             Group = model.Group,
-                            ParentPermissionId = parentId,
+                            PermissionId = parentId,
                         });
                         context.SaveChanges();
                     }
                 }
-            }
-            catch (Exception ex)
+            }catch(Exception ex)
             {
             }
         }

@@ -61,7 +61,10 @@ namespace Repository.Migrations
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ParentPermissionId")
+                    b.Property<string>("MenuName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParentId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Slug")
@@ -244,7 +247,6 @@ namespace Repository.Migrations
                         .WithMany("Categories")
                         .HasForeignKey("CreatedBy")
                         .HasPrincipalKey("UserName")
-                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -255,13 +257,11 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Entites.Permission", "aPermission")
                         .WithMany("Roles")
                         .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.Role", "aRole")
                         .WithMany("Permissions")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("aPermission");
@@ -275,14 +275,12 @@ namespace Repository.Migrations
                         .WithMany("Tickets")
                         .HasForeignKey("CategoryName")
                         .HasPrincipalKey("CategoryName")
-                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "User")
                         .WithMany("MyCreatedTicket")
                         .HasForeignKey("CreatedBy")
                         .HasPrincipalKey("UserName")
-                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Category");

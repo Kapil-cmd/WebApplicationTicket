@@ -18,8 +18,8 @@ namespace Common.ViewModels.Role
     public class ListPermission
     {
         public string Id { get; set; }
-        public string Name { get; set; }
+        public string Slug { get; set; }
+        public string Group { get; set;}
         public bool IsPermitted { get; set; }
-        public string ControllerName { get; set; }
     }
 }

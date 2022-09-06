@@ -100,12 +100,7 @@ namespace Services.BL
                             response.Message = "{this permission} already exists for {this role}";
                             return response;
                         }
-                        if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
-                        {
-                            response.Status = "404";
-                            response.Message = "{this permission} already exists for {this role}";
-                            return response;
-                        }
+                       
                         _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
                         {
                             RoleId = model.Id,
@@ -113,24 +108,17 @@ namespace Services.BL
                         });
                         _unitOfWork.Save();
                     }
+                    else
+                    {
+                        response.Status = "404";
+                        response.Message = "Cannot assign permission to role";
+                        return response;
+                    }
+
                 }
 
                 #endregion
-                #region RemovePermission
-                //var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleId == model.Id && x.PermissionId == model.Id);
-                //if(rolePermission == null)
-                //{
-                //    response.Status = "404";
-                //    response.Message = "Permission isnot assign in this role";
-                //    return response;
-                //}
-                //_unitOfWork._db.RolePermissions.Remove(rolePermission);
-                //_unitOfWork._db.SaveChanges();
 
-                //response.Status = "00";
-                //response.Message = "Permission removed sucessfully";
-                //return response;
-                #endregion
 
                 response.Status = "00";
                 response.Message = "Role edited sucessfully";
@@ -168,6 +156,21 @@ namespace Services.BL
                 response.Message ="Error occured :" + ex.Message;
                 return response;
             }
+            #region RemovePermission
+            //var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleId == model.Id && x.PermissionId == model.Id);
+            //if(rolePermission == null)
+            //{
+            //    response.Status = "404";
+            //    response.Message = "Permission isnot assign in this role";
+            //    return response;
+            //}
+            //_unitOfWork._db.RolePermissions.Remove(rolePermission);
+            //_unitOfWork._db.SaveChanges();
+
+            //response.Status = "00";
+            //response.Message = "Permission removed sucessfully";
+            //return response;
+            #endregion
         }
     }
     public interface IRoleService
