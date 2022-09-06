@@ -13,6 +13,5 @@ namespace Repository.Entites
 
         public virtual User User { get; set; }
         public virtual IEnumerable<Ticket> Tickets { get; set; }
-        public List<CategoryTicket> cTicket { get; set; }
     }
 }

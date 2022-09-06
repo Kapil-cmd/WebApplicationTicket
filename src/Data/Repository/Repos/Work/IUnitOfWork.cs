@@ -3,7 +3,6 @@ using Repository.Repos.CategoryRep;
 using Repository.Repos.PermissionRep;
 using Repository.Repos.RolePermissionRep;
 using Repository.Repos.RoleRep;
-using Repository.Repos.TicketCategoryRep;
 using Repository.Repos.TicketRep;
 using Repository.Repos.TicketUserRep;
 using Repository.Repos.UserRep;
@@ -24,7 +23,6 @@ namespace Repository.Repos.Work
         IPermissionRepository Permission { get; }
         IRolePermissionRepository RolePermissionRepository { get; }
         IUserTicketRepository UserTicketRepository { get; }
-        ITicketCategoryRepository TicketCategoryRepository { get; }
         void Save();
     }
 }

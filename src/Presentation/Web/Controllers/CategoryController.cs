@@ -28,11 +28,6 @@ namespace Web.Controllers
             var category = _unitOfWork._db.Category.Include(x => x.Tickets).OrderBy(x => x.CategoryName).ToList();
             return View(category);
         }
-        public IActionResult CategoryTicket()
-        {
-            var categoryTicket = _unitOfWork._db.CategoryTickets.OrderByDescending(x => x.CategoryName).ToList();
-            return View();
-        }
         [HttpGet]
         [PermissionFilter("Admin&Category&Create_Category")]
         public IActionResult Create()
@@ -61,7 +56,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Admin&Category&Edit_Category")]
+        //[PermissionFilter("Admin&Category&Edit_Category")]
         public IActionResult EditCategory(string CId)
         {
             var category = _unitOfWork.CategoryRepository.GetFirstOrDefault(x => x.CId == CId);
@@ -77,7 +72,7 @@ namespace Web.Controllers
             return View(model);
         }
         [HttpPost]
-        [PermissionFilter("Admin&Category&Edit_Category")]
+        //[PermissionFilter("Admin&Category&Edit_Category")]
         public IActionResult EditCategory(EditCategoryViewModel model)
         {
             if (!ModelState.IsValid)

@@ -82,7 +82,6 @@ namespace Services.Middleware
                         var parentId = context.Permissions.Where(x => x.Slug == model.ParentPermissionId).FirstOrDefault()?.Slug;
                         context.Permissions.Add(new Permission()
                         {
-                            PermissionId = "permission",
                             Slug = model.Slug,
                             Group = model.Group,
                             ParentPermissionId = parentId,

@@ -37,7 +37,7 @@ namespace demo.Controllers
             return View(model);
         }
         [HttpGet]
-        //[PermissionFilter("Admin&Ticket&Create_Ticket")]
+        [PermissionFilter("Admin&Ticket&Create_Ticket")]
         public IActionResult Create()
         {
             AddTicketViewModel model = new AddTicketViewModel();
@@ -56,7 +56,7 @@ namespace demo.Controllers
             return View(model);
 
         }
-        //[PermissionFilter("Admin&Ticket&Create_Ticket")]
+        [PermissionFilter("Admin&Ticket&Create_Ticket")]
         [HttpPost]
         public async Task<IActionResult> Create(AddTicketViewModel ticket)
         {
