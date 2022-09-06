@@ -58,9 +58,6 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("PId");
 
-                    b.Property<string>("Group")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MenuName")
                         .HasColumnType("nvarchar(max)");
 

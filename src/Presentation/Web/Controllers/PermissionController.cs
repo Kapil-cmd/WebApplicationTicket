@@ -12,14 +12,11 @@ namespace Web.Controllers
     {
         public readonly IUnitOfWork _unitOfWork;
         public readonly TicketingContext _db;
-        public readonly IUserService _userService;
-        public readonly IPermissionService _permissionService;
 
-        public PermissionController(IUnitOfWork unitOfWork, TicketingContext db,IPermissionService permissionService)
+        public PermissionController(IUnitOfWork unitOfWork, TicketingContext db)
         {
             _unitOfWork = unitOfWork;
             _db = db;
-            _permissionService = permissionService;
         }
         [PermissionFilter("Admin&Permission&View_Permission")]
         public IActionResult Index()

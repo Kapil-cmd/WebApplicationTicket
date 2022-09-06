@@ -91,44 +91,44 @@ namespace Services.BL
                 #endregion
 
                 #region AssignPermission
-                foreach(var permission in model.ListPermission)
+                foreach (var permission in model.ListPermission)
                 {
                     if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
                     {
-                        {
-                            response.Status = "404";
-                            response.Message = "{this permission} already exists for {this role}";
-                            return response;
-                        }
-                       
+                        response.Status = "404";
+                        response.Message = "{this permission} already exists for {this role}";
+                        return response;
+
+                    }
+                    else
+                    {
                         _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
+                
                         {
                             RoleId = model.Id,
                             PermissionId = permission.Id
                         });
                         _unitOfWork.Save();
                     }
-                    else
-                    {
-                        response.Status = "404";
-                        response.Message = "Cannot assign permission to role";
-                        return response;
-                    }
 
+                    response.Status = "404";
+                    response.Message = "Cannot assign permission to role";
+                    return response;
                 }
-
-                #endregion
-
-
-                response.Status = "00";
-                response.Message = "Role edited sucessfully";
-                return response;
+            
+            #endregion
+                 response.Status = "00";
+                 response.Message = "Role edited sucessfully";
+                 return response;
             }
             catch (Exception ex)
             {
                 response.Status = "500";
                 response.Message = "Error occurred:" + ex.Message;
+
+
                 return response;
+
             }
         }
         public BaseResponseModel<string> RemovePermissionFromRole(string roleId, string permissionId)
@@ -139,6 +139,8 @@ namespace Services.BL
                 var rolePermission = _unitOfWork.RolePermissionRepository.GetFirstOrDefault(x => x.RoleId == roleId && x.PermissionId == permissionId);
                 if(rolePermission == null)
                 {
+
+
                     response.Status = "404";
                     response.Message = "{this permission} has not been yet assigned to this{this user}";
                     return response;
@@ -152,10 +154,18 @@ namespace Services.BL
             }
             catch(Exception ex)
             {
-                response.Status = "500";
+      response.Status = "500";
+    
+                
+                
+                
                 response.Message ="Error occured :" + ex.Message;
-                return response;
+                
+
+return response;
             }
+
+
             #region RemovePermission
             //var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleId == model.Id && x.PermissionId == model.Id);
             //if(rolePermission == null)

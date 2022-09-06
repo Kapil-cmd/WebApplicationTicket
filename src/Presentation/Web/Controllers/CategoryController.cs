@@ -22,20 +22,20 @@ namespace Web.Controllers
             _unitOfWork = unitOfWork;
             _toastNotification = toastNotification;
         }
-        //[PermissionFilter("Admin&Category&View_Category")]
+        [PermissionFilter("Admin&Category&View_Category")]
         public IActionResult Index()
         {
             var category = _unitOfWork._db.Category.Include(x => x.Tickets).OrderBy(x => x.CategoryName).ToList();
             return View(category);
         }
         [HttpGet]
-        [PermissionFilter("Category&Create_Category")]
+        [PermissionFilter("Admin&Category&Create_Category")]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        [PermissionFilter("Category&Create_Category")]
+        [PermissionFilter("Admin&Category&Create_Category")]
         public IActionResult Create(AddCategoryViewModel model)
         {
 
@@ -56,7 +56,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Category&Edit_Category")]
+        [PermissionFilter("Admin&Category&Edit_Category")]
         public IActionResult EditCategory(string CId)
         {
             var category = _unitOfWork.CategoryRepository.GetFirstOrDefault(x => x.CId == CId);
@@ -72,7 +72,7 @@ namespace Web.Controllers
             return View(model);
         }
         [HttpPost]
-        [PermissionFilter("Category&Edit_Category")]
+        [PermissionFilter("Admin&Category&Edit_Category")]
         public IActionResult EditCategory(EditCategoryViewModel model)
         {
             if (!ModelState.IsValid)
@@ -92,7 +92,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Category&View_Category")]
+        [PermissionFilter("Admin&Category&View_Category")]
         public IActionResult CategoryDetails(string CId)
         {
             if (CId == null)
@@ -110,7 +110,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Category&Delete_Category")]
+        [PermissionFilter("Admin&Category&Delete_Category")]
         public IActionResult DeleteCategory(string CId)
         {
             if(CId == null)
@@ -124,7 +124,7 @@ namespace Web.Controllers
 
         [HttpPost]
 
-        [PermissionFilter("Category&Delete_Category")]
+        [PermissionFilter("Admin&Category&Delete_Category")]
         public IActionResult DeleteCategory(Category category)
         {
             var response = _categoryService.DeleteCategory(category);

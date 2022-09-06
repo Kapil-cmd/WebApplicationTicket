@@ -46,7 +46,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITicketService, TicketServices>();
 builder.Services.AddScoped<IRoleService, RoleService>();
-builder.Services.AddScoped<IPermissionService, PermissionService>();
 builder.Services.AddScoped<ICategoryservice, CategoryServices>();
 builder.Services.AddRazorPages();
 

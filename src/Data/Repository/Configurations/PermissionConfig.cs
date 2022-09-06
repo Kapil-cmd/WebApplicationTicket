@@ -14,7 +14,6 @@ namespace Repository.Configurations
             builder.Property(x => x.Slug);
             builder.Property(x => x.ParentId);
             builder.Property(x => x.MenuName);
-            builder.Property(x => x.Group);
         }
     }
 }
