@@ -17,7 +17,7 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div><br />
-            <div class="custom-control custom-checkbox">
+            <div class="custom-control custom-checkbox col-md-4">
                 <div class="form-group">
                 <h3>Choose Permission :</h3><br />
                 @for (int i = 0; i < Model.ListPermission.Count(); i++)

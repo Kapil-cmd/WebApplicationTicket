@@ -7,6 +7,7 @@ using Repository;
 using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
+using Services.CustomFilter;
 
 namespace Web.Controllers
 {
@@ -31,11 +32,13 @@ namespace Web.Controllers
             return View(roles);
         }
         [HttpGet]
+        //[PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole()
         {
             return View();
         }
         [HttpPost]
+        [PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole(RoleViewModel model)
         {
             if (!ModelState.IsValid)
@@ -100,6 +103,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Role&Details_Role")]
         public IActionResult RoleDetails (string Id)
         {
             if(Id == null)
@@ -117,6 +121,7 @@ namespace Web.Controllers
             };
         }
         [HttpGet]
+        //[PermissionFilter("Admin&Role&Delete_Role")]
         public IActionResult Delete(string Id)
         {
             if(Id == null)
@@ -127,6 +132,7 @@ namespace Web.Controllers
             return View(deleteRole);
         }
         [HttpPost]
+        //[PermissionFilter("Admin&Role&Delete_Role")]
         public IActionResult Delete(Role model)
         {
             var response = _roleService.DeleteRole(model);

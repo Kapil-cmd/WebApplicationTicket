@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Repository.Entites.Permission>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>PermissionList</h1>
+
+<table class="table table-striped table-responsive">
+    <thead>
+        <tr>
+            <th>
+                PermissionId
+            </th>
+            <th>
+                Slug
+            </th>
+            <th>
+                ParentId
+            </th>
+            <th>
+                MenuName
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(Model != null){@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermissionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuName)
+            </td>
+        </tr>
+    }
+}
+    </tbody>
+</table>

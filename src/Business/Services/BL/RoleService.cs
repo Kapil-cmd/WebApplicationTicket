@@ -98,7 +98,6 @@ namespace Services.BL
                         response.Status = "404";
                         response.Message = "{this permission} already exists for {this role}";
                         return response;
-
                     }
                     else
                     {
@@ -121,8 +120,6 @@ namespace Services.BL
             {
                 response.Status = "500";
                 response.Message = "Error occurred:" + ex.Message;
-
-
                 return response;
 
             }

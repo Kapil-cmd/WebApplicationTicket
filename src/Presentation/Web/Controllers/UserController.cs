@@ -15,6 +15,7 @@ using System.Security.Claims;
 
 namespace Web.Controllers
 {
+    
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -30,7 +31,7 @@ namespace Web.Controllers
             _db = db;
             _toastNotification = toastNotification;
         }
-        //[PermissionFilter("Admin&User&View_User")]
+        [PermissionFilter("Admin&User&View_User")]
         public IActionResult Index()
         {
             IEnumerable<User> userList = _unitOfWork.UserRepository.GetAll();
@@ -83,7 +84,7 @@ namespace Web.Controllers
         }
         [HttpGet]
         [Authorize]
-        //[PermissionFilter("Admin&User&Edit_User")]
+        [PermissionFilter("Admin&User&Edit_User")]
         public IActionResult EditUser(string Id)
         {
             var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
@@ -114,7 +115,7 @@ namespace Web.Controllers
 
         }
         [HttpPost]
-        //[PermissionFilter("Admin&User&Edit_User")]
+        [PermissionFilter("Admin&User&Edit_User")]
         public IActionResult EditUser(EditUserViewModel model)
         {
             if (!ModelState.IsValid)
@@ -136,7 +137,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        //[PermissionFilter("Admin&User&View_User")]
+        [PermissionFilter("Admin&User&View_User")]
         public IActionResult UserDetails(string Id)
         {
             if (Id == null)
@@ -154,14 +155,14 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        //[PermissionFilter("Admin&User&delete_User")]
+        [PermissionFilter("Admin&User&delete_User")]
         public IActionResult DeleteUser(string? Id)
         {
             var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
             return View(user);
         }
         [HttpPost]
-        //[PermissionFilter("Admin&User&Delete_User")]
+        [PermissionFilter("Admin&User&Delete_User")]
         public IActionResult DeleteUser(User model)
         {
             var response = _userService.DeleteUser(model);
