@@ -16,7 +16,7 @@ namespace Web.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        //[PermissionFilter("Admin&Combine&View_Combine")]
+        [PermissionFilter("Admin&Combine&View_Combine")]
         public IActionResult Index()
         {
             List<User> user = _unitOfWork._db.Users.ToList();

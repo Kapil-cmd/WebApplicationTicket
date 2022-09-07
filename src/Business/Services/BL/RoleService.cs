@@ -103,23 +103,19 @@ namespace Services.BL
                     else
                     {
                         _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
-                
+
                         {
                             RoleId = model.Id,
                             PermissionId = permission.Id
                         });
                         _unitOfWork.Save();
                     }
-
-                    response.Status = "404";
-                    response.Message = "Cannot assign permission to role";
-                    return response;
                 }
-            
-            #endregion
-                 response.Status = "00";
-                 response.Message = "Role edited sucessfully";
-                 return response;
+                #endregion
+
+                response.Status = "00";
+                response.Message = "Role edited sucessfully";
+                return response;
             }
             catch (Exception ex)
             {

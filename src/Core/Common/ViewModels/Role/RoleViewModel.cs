@@ -19,7 +19,7 @@ namespace Common.ViewModels.Role
     {
         public string Id { get; set; }
         public string Slug { get; set; }
-        public string Group { get; set;}
+        public string MenuName { get; set;}
         public bool IsPermitted { get; set; }
     }
 }

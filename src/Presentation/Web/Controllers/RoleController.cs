@@ -72,8 +72,8 @@ namespace Web.Controllers
                     model.ListPermission = permission.Select(x => new ListPermission()
                     {
                         Id = x.PermissionId,
-                        Slug = x.Slug,
-                    }).OrderBy(x => x.Group).ToList();
+                        MenuName = x.MenuName,
+                    }).OrderBy(x => x.MenuName).ToList();
                 }
             }
 
