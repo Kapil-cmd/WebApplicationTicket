@@ -1,5 +1,6 @@
 ﻿using ExcelDataReader;
 using Microsoft.AspNetCore.Mvc;
+using Repository;
 using Repository.Entities;
 using Repository.Repos.Work;
 
@@ -8,12 +9,12 @@ namespace Web.Controllers
     public class CompanyExcelController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public readonly UnitOfWork _unitOfWork;
+        public readonly TicketingContext _db;
 
-        public CompanyExcelController(IWebHostEnvironment environment,UnitOfWork unitOfWork)
+        public CompanyExcelController(IWebHostEnvironment environment,TicketingContext db)
         {
             _webHostEnvironment = environment;
-            _unitOfWork = unitOfWork;   
+            _db = db;
         }
         public IActionResult Index(List<Company> students)
         {
@@ -29,13 +30,13 @@ namespace Web.Controllers
                 file.CopyTo(fileStream);
                 fileStream.Flush();
             }
-            var students = this.GetStudentList(file.FileName);
-            return Index(students);
+            var companies = this.GetCompanyList(file.FileName);
+            return Index(companies);
         }
-        private List<Company> GetStudentList(string fName)
+        private List<Company> GetCompanyList(string fName)
         {
-            List<Company> students = new List<Company>();
-            var fileName = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\files"}" + "" + fName;
+            List<Company> companies = new List<Company>();
+            var fileName = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\files"}" + "\\" + fName;
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using(var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
             {
@@ -43,17 +44,17 @@ namespace Web.Controllers
                 {
                     while (reader.Read())
                     {
-                        _unitOfWork._db.Add(new Company()
+                        _db.Add(new Company()
                         {
                             Name = reader.GetString(0).ToString(),
-                            NumberOfEmployee = reader.GetDouble(1),
-                            Address = reader.GetString(3).ToString(),
-                            PhoneNumber = reader.GetDouble(4)
+                            NumberOfEmployee = reader.GetString(1).ToString(),
+                            Address = reader.GetString(2).ToString(),
+                            PhoneNumber = reader.GetString(3).ToString()
                         });
                     }
                 }
             }
-            return students;
+            return companies;
         }
       
     }

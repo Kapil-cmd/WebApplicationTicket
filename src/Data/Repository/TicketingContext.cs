@@ -31,6 +31,7 @@ namespace Repository
             builder.ApplyConfiguration(new UserConfig());
             builder.ApplyConfiguration(new UserRoleConfig());   
             builder.ApplyConfiguration(new UserTicketConfig());
+            builder.ApplyConfiguration(new CompanyConfig());
         }
     }
 }
