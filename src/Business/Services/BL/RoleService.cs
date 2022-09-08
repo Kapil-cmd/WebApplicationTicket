@@ -93,22 +93,25 @@ namespace Services.BL
                 #region AssignPermission
                 foreach (var permission in model.ListPermission)
                 {
-                    if(permission.IsPermitted == true) { 
-                    //if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
-                    //{
-                    //    response.Status = "404";
-                    //    response.Message = "{this permission} already exists for {this role}";
-                    //    return response;
-                    //}
-                    //else
-                    
-                        _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
+                    if(permission.IsPermitted == true) 
+                    {
+                        if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
+                        {
+                            response.Status = "404";
+                            response.Message = "{this permission} already exists for {this role}";
+                            return response;
+                        }
+                        else
+                        { 
+
+                            _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
 
                         {
                             RoleId = model.Id,
                             PermissionId = permission.Id
                         });
                         _unitOfWork.Save();
+                        }
                     }
                 }
                 #endregion

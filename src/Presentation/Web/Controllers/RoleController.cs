@@ -79,7 +79,6 @@ namespace Web.Controllers
                     }).OrderBy(x => x.MenuName).ToList();
                 }
             }
-
             return View(model);
 
         }
