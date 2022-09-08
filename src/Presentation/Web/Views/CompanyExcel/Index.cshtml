@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Repository.Entities.Company>
+
+@{
+    ViewData["Title"] = "Excel Page";
+}
+<div class="container">
+    <form method="post" asp-controller="CompanyExcel" asp-action="Index" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <button type="submit">Import From Excel</button>
+    </form>
+
+    @if (Model.Count() > 0)
+    {
+        <hr />
+        <table cellpadding="0" cellspacing="0" border="1">
+            <tr>
+                <td>Name</td>
+                <td>NumberOfEmployee</td>
+                <td>Address</td>
+                <td>PhoneNumber</td>
+            </tr>
+            @foreach(var company in Model)
+            {
+                <tr>
+                    <td>@company.Name</td>
+                    <td>@company.NumberOfEmployee</td>
+                    <td>@company.Address</td>
+                    <td>@company.PhoneNumber</td>
+                </tr>
+            }
+        </table>
+    }
+</div>

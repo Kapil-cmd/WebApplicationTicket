@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Repository.Repos.CategoryRep;
+using Repository.Repos.CompanyRep;
 using Repository.Repos.PermissionRep;
 using Repository.Repos.RolePermissionRep;
 using Repository.Repos.RoleRep;
@@ -24,6 +25,7 @@ namespace Repository.Repos.Work
             Permission = new PermissionRepository(_db);
             RolePermissionRepository = new RolePermissionRepository(_db);
             UserTicketRepository = new UserTicketRepository(_db);
+            CompanyRepository = new CompanyRepository(_db);
         }
         public IHttpContextAccessor _httpContextAccessor { get; private set; }
         public TicketingContext _db { get; private set; }
@@ -35,6 +37,7 @@ namespace Repository.Repos.Work
         public IPermissionRepository Permission { get; private set; }
         public IRolePermissionRepository RolePermissionRepository { get; private set; }
         public IUserTicketRepository UserTicketRepository { get; private set; }
+        public ICompanyRepository CompanyRepository { get; private set; }
 
         public void Save()
         {

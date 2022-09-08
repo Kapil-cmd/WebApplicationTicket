@@ -36,6 +36,19 @@ namespace demo.Controllers
             var model = _unitOfWork._db.Tickets.Where(a => a.User.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(model);
         }
+        //public IActionResult DeveloperIndex()
+        //{
+        //    var users = _unitOfWork._db.Users;
+        //    var userTickets = _unitOfWork._db.UserTickets;
+        //    var tickets = _unitOfWork._db.Tickets;
+
+        //    var developerTicketIndex = (from Ticket in tickets
+        //                                join UserTicket in userTickets on Ticket.TicketId equals UserTicket.TicketId
+        //                                join Users in users ).ToList();
+
+        //    return View(developerTicketIndex);
+
+        //}
         [HttpGet]
         [PermissionFilter("Admin&Ticket&Create_Ticket")]
         public IActionResult Create()

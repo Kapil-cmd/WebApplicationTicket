@@ -97,15 +97,13 @@ namespace Services.BL
                     {
                         if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
                         {
-                            response.Status = "404";
-                            response.Message = "{this permission} already exists for {this role}";
-                            return response;
+                            var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleId == model.Id && x.PermissionId == permission.Id);
+                            _unitOfWork._db.RolePermissions.Remove(rolePermission);
+                            _unitOfWork._db.SaveChanges();
                         }
                         else
                         {
-
                             _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
-
                             {
                                 RoleId = model.Id,
                                 PermissionId = permission.Id
@@ -118,7 +116,7 @@ namespace Services.BL
                 #endregion
 
                 response.Status = "00";
-                response.Message = "Role edited sucessfully";
+                response.Message = "Permission edited sucessfully";
                 return response;
             }
             catch (Exception ex)

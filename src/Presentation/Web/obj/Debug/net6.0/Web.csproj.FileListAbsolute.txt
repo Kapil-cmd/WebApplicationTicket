@@ -570,3 +570,8 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\refint\
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.pdb
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.genruntimeconfig.cache
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\ref\Web.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\EPPlus.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\EPPlus.Interfaces.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\EPPlus.System.Drawing.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\ExcelDataReader.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll

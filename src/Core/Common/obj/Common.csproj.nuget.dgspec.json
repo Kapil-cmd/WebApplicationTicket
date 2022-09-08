@@ -48,6 +48,14 @@
               "target": "Package",
               "version": "[34.0.2, )"
             },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "ExcelDataReader": {
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[5.0.17, )"
@@ -55,6 +63,14 @@
             "Microsoft.Build.Framework": {
               "target": "Package",
               "version": "[17.2.0, )"
+            },
+            "System.Text.Encoding": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [

@@ -22,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="6.0.7" />
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.7">
       <PrivateAssets>all</PrivateAssets>
@@ -31,6 +33,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
     <PackageReference Include="MimeKit" Version="3.3.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
     <PackageReference Include="toastr" Version="2.1.1" />
   </ItemGroup>
 
@@ -97,6 +101,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\files\" />
     <Folder Include="wwwroot\Profile\" />
   </ItemGroup>
 

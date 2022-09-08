@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Repository.Repos.CategoryRep;
+using Repository.Repos.CompanyRep;
 using Repository.Repos.PermissionRep;
 using Repository.Repos.RolePermissionRep;
 using Repository.Repos.RoleRep;
@@ -23,6 +24,7 @@ namespace Repository.Repos.Work
         IPermissionRepository Permission { get; }
         IRolePermissionRepository RolePermissionRepository { get; }
         IUserTicketRepository UserTicketRepository { get; }
+        ICompanyRepository CompanyRepository { get; }
         void Save();
     }
 }
