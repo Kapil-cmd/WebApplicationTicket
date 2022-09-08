@@ -93,7 +93,7 @@ namespace Services.BL
                 #region AssignPermission
                 foreach (var permission in model.ListPermission)
                 {
-                    if(permission.IsPermitted == true) 
+                    if (permission.IsPermitted == true)
                     {
                         if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
                         {
@@ -102,18 +102,19 @@ namespace Services.BL
                             return response;
                         }
                         else
-                        { 
+                        {
 
                             _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
 
-                        {
-                            RoleId = model.Id,
-                            PermissionId = permission.Id
-                        });
-                        _unitOfWork.Save();
+                            {
+                                RoleId = model.Id,
+                                PermissionId = permission.Id
+                            });
+                            _unitOfWork.Save();
                         }
                     }
                 }
+
                 #endregion
 
                 response.Status = "00";

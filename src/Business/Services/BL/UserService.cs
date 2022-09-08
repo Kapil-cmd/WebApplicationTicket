@@ -172,36 +172,29 @@ namespace Services.BL
                 #endregion
 
                 #region AssignRole
-                if (_unitOfWork.UserRoleRepository.Any(x => x.UserId == EditUser.Id && x.RoleId == EditUser.Role))
+                foreach(var role in EditUser.Roles)
                 {
-                    response.Status = "444";
-                    response.Message = "This role is already exists for {this user}";
-                    return response;
+                    if(role.IsSelected == true)
+                    {
+                        if(_unitOfWork._db.UserRoles.Any(x => x.UserId == EditUser.Id && x.RoleId == role.Id))
+                        {
+                            var userRoles = _unitOfWork._db.UserRoles.FirstOrDefault(x => x.UserId == EditUser.Id && x.RoleId == role.Id);
+                            _unitOfWork._db.UserRoles.Remove(userRoles);
+                            _unitOfWork._db.SaveChanges();
+                        }
+                        else 
+                        { 
+                            _unitOfWork._db.UserRoles.Add(new Repository.Entites.UserRole()
+                            {
+                                UserId = EditUser.Id,
+                                RoleId = role.Id
+                            });
+                            _unitOfWork.Save();
+                        }
+                    }
                 }
-                _unitOfWork.UserRoleRepository.Add(new Repository.Entites.UserRole()
-                {
-                    RoleId = EditUser.Role,
-                    UserId = EditUser.Id,
-                });
-                _unitOfWork.Save();
                 #endregion
-                #region RemoveRole
-                var userRole = _unitOfWork.UserRoleRepository.GetFirstOrDefault(x => x.UserId == x.UserId && x.RoleId == x.RoleId);
-                if (userRole == null)
-                {
-                    response.Status = "404";
-                    response.Message = "{this role} has not been yet assigned to {this user}";
-                    return response;
-                }
-
-                _unitOfWork.UserRoleRepository.Remove(userRole);
-                _unitOfWork.Save();
-
-                response.Status = "00";
-                response.Message = "Successfully removed {this user} from {this role}";
-
-                return response;
-                #endregion
+               
                 response.Status = "00";
                 response.Message = "User Edited sucessfully";
                 return response;
