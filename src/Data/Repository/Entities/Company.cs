@@ -1,4 +1,6 @@
-﻿namespace Repository.Entities
+﻿using System;
+
+namespace Repository.Entities
 {
     public class Company
     {

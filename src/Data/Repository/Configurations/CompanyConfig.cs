@@ -9,7 +9,7 @@ namespace Repository.Configurations
         public void Configure(EntityTypeBuilder<Company> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id);
+            builder.Property(x => x.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Property(x => x.Name);
             builder.Property(x => x.NumberOfEmployee);
             builder.Property(x => x.Address);
