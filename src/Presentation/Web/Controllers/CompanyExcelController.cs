@@ -1,8 +1,7 @@
-﻿using ExcelDataReader;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using Repository;
 using Repository.Entities;
-using Repository.Repos.Work;
 
 namespace Web.Controllers
 {
@@ -16,45 +15,74 @@ namespace Web.Controllers
             _webHostEnvironment = environment;
             _db = db;
         }
-        public IActionResult Index(List<Company> students)
+        [HttpGet]
+        public IActionResult Index()
         {
-            students = students == null ? new List<Company>() : students;
-            return View(students);
+            var company = _db.Company.ToList();
+            return View(company);
+        }
+        [HttpGet]
+        public IActionResult GetExcel(List<Company> company)
+        {
+            company = company == null ? new List<Company>() : company;
+            return View(company);
         }
         [HttpPost]
-        public  IActionResult Index(IFormFile file)
+        public IActionResult GetExcel(IFormFile file)
         {
-            string fileName = $"{_webHostEnvironment.WebRootPath}\\files\\{file.FileName}";
-            using (FileStream fileStream = System.IO.File.Create(fileName))
+            if (ModelState.IsValid)
             {
-                file.CopyTo(fileStream);
-                fileStream.Flush();
-            }
-            var companies = this.GetCompanyList(file.FileName);
-            return Index(companies);
-        }
-        private List<Company> GetCompanyList(string fName)
-        {
-            List<Company> companies = new List<Company>();
-            var fileName = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\files"}" + "\\" + fName;
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            using(var stream = System.IO.File.Open(fileName, FileMode.Open, FileAccess.Read))
-            {
-                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                if(file?.Length > 0)
                 {
-                    while (reader.Read())
+                    //convert to a stream
+                    var stream = file.OpenReadStream();
+
+                    List<Company> companies = new List<Company>();
+                    try
                     {
-                        _db.Add(new Company()
+                        using (var package = new ExcelPackage(stream))
                         {
-                            Name = reader.GetString(0).ToString(),
-                            NumberOfEmployee = reader.GetString(1).ToString(),
-                            Address = reader.GetString(2).ToString(),
-                            PhoneNumber = reader.GetString(3).ToString()
-                        });
+                            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                            var worksheet = package.Workbook.Worksheets.First();
+                            var rowCount = worksheet.Dimension.Rows;
+                            
+
+                            for (var row = 2; row<= rowCount; row++)
+                            {
+                                try
+                                {
+                                    var Name  = worksheet.Cells[row, 1].Value.ToString();
+                                    var NumberOfEmployee = worksheet.Cells[row, 2].Value.ToString();
+                                    var Address = worksheet.Cells[row, 3].Value.ToString();
+                                    var PhoneNumber = worksheet.Cells[row, 4].Value.ToString();
+
+                                    Company company = new Company()
+                                    {
+                                        Name = Name,
+                                        NumberOfEmployee = NumberOfEmployee,
+                                        Address = Address,
+                                        PhoneNumber = PhoneNumber,
+                                    };
+
+                                    _db.Company.Add(company);
+                                    _db.SaveChanges();
+                                }
+                                catch(Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                }
+                            }
+                        }
                     }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+
                 }
             }
-            return companies;
+
+            return View();
         }
       
     }

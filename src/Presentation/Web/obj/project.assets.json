@@ -2,13 +2,16 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Bogus/34.0.2": {
+      "DocumentFormat.OpenXml/2.18.0": {
         "type": "package",
+        "dependencies": {
+          "System.IO.Packaging": "4.7.0"
+        },
         "compile": {
-          "lib/net6.0/Bogus.dll": {}
+          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {}
         },
         "runtime": {
-          "lib/net6.0/Bogus.dll": {}
+          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {}
         }
       },
       "EPPlus/6.0.7": {
@@ -3051,6 +3054,15 @@
           "lib/netstandard1.3/System.IO.FileSystem.Primitives.dll": {}
         }
       },
+      "System.IO.Packaging/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.IO.Packaging.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.IO.Packaging.dll": {}
+        }
+      },
       "System.IO.Pipelines/5.0.2": {
         "type": "package",
         "compile": {
@@ -3977,8 +3989,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Bogus": "34.0.2",
-          "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Microsoft.Build.Framework": "17.2.0",
@@ -3997,7 +4007,6 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Common": "1.0.0",
-          "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Hosting": "2.2.7",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
@@ -4024,7 +4033,6 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Common": "1.0.0",
-          "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -4045,23 +4053,26 @@
     }
   },
   "libraries": {
-    "Bogus/34.0.2": {
-      "sha512": "2KQAuMn3fLAQ2r6jeiffZnpv0bi3GCW3iRB2v1KeHIEBu8MNTh9dBlLTZwGvM0pr+9doKkU8L5JgCURmTmT88A==",
+    "DocumentFormat.OpenXml/2.18.0": {
+      "sha512": "5fmehgA7WmJD551QwBhvjSsEmMbCQ/yfW83ZLfbPx1TeQGm0ikGIwAvz/XfO4veCjYWpBQfFH9elVhC2Y+HatQ==",
       "type": "package",
-      "path": "bogus/34.0.2",
+      "path": "documentformat.openxml/2.18.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "bogus.34.0.2.nupkg.sha512",
-        "bogus.nuspec",
-        "lib/net40/Bogus.dll",
-        "lib/net40/Bogus.xml",
-        "lib/net6.0/Bogus.dll",
-        "lib/net6.0/Bogus.xml",
-        "lib/netstandard1.3/Bogus.dll",
-        "lib/netstandard1.3/Bogus.xml",
-        "lib/netstandard2.0/Bogus.dll",
-        "lib/netstandard2.0/Bogus.xml"
+        "documentformat.openxml.2.18.0.nupkg.sha512",
+        "documentformat.openxml.nuspec",
+        "icon.png",
+        "lib/net35/DocumentFormat.OpenXml.dll",
+        "lib/net35/DocumentFormat.OpenXml.xml",
+        "lib/net40/DocumentFormat.OpenXml.dll",
+        "lib/net40/DocumentFormat.OpenXml.xml",
+        "lib/net46/DocumentFormat.OpenXml.dll",
+        "lib/net46/DocumentFormat.OpenXml.xml",
+        "lib/netstandard1.3/DocumentFormat.OpenXml.dll",
+        "lib/netstandard1.3/DocumentFormat.OpenXml.xml",
+        "lib/netstandard2.0/DocumentFormat.OpenXml.dll",
+        "lib/netstandard2.0/DocumentFormat.OpenXml.xml"
       ]
     },
     "EPPlus/6.0.7": {
@@ -8905,6 +8916,33 @@
         "system.io.filesystem.primitives.nuspec"
       ]
     },
+    "System.IO.Packaging/4.7.0": {
+      "sha512": "9VV4KAbgRQZ79iEoG40KIeZy38O30oWwewScAST879+oki8g/Wa2HXZQgrhDDxQM4GkP1PnRJll05NMiVPbYAw==",
+      "type": "package",
+      "path": "system.io.packaging/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.IO.Packaging.dll",
+        "lib/net46/System.IO.Packaging.xml",
+        "lib/netstandard1.3/System.IO.Packaging.dll",
+        "lib/netstandard1.3/System.IO.Packaging.xml",
+        "lib/netstandard2.0/System.IO.Packaging.dll",
+        "lib/netstandard2.0/System.IO.Packaging.xml",
+        "ref/net46/System.IO.Packaging.dll",
+        "ref/net46/System.IO.Packaging.xml",
+        "ref/netstandard1.3/System.IO.Packaging.dll",
+        "ref/netstandard1.3/System.IO.Packaging.xml",
+        "ref/netstandard2.0/System.IO.Packaging.dll",
+        "ref/netstandard2.0/System.IO.Packaging.xml",
+        "system.io.packaging.4.7.0.nupkg.sha512",
+        "system.io.packaging.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.IO.Pipelines/5.0.2": {
       "sha512": "Iew+dfa6FFiyvWBdRmXApixRY1db+beyutpIck4SOSe0NLM8FD/7AD54MscqVLhvfSMLHO7KadjTRT7fqxOGTA==",
       "type": "package",
@@ -11602,6 +11640,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Common >= 1.0.0",
+      "DocumentFormat.OpenXml >= 2.18.0",
       "EPPlus >= 6.0.7",
       "ExcelDataReader >= 3.6.0",
       "Microsoft.AspNetCore.Http.Extensions >= 2.2.0",
@@ -11671,6 +11710,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "DocumentFormat.OpenXml": {
+            "target": "Package",
+            "version": "[2.18.0, )"
+          },
           "EPPlus": {
             "target": "Package",
             "version": "[6.0.7, )"

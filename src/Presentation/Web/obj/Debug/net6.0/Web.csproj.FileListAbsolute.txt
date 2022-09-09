@@ -303,7 +303,6 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\refs\Sy
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\refs\System.Xml.XPath.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\refs\System.Xml.XPath.XDocument.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\refs\WindowsBase.dll
-D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Bogus.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Humanizer.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\MessagePack.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\MessagePack.Annotations.dll
@@ -575,3 +574,5 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\EPPlus.
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\EPPlus.System.Drawing.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\ExcelDataReader.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.IO.Packaging.dll

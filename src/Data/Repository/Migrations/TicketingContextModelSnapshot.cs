@@ -226,6 +226,7 @@ namespace Repository.Migrations
             modelBuilder.Entity("Repository.Entities.Company", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
@@ -242,7 +243,7 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Company");
+                    b.ToTable("Company", (string)null);
                 });
 
             modelBuilder.Entity("Repository.Entities.UserTicket", b =>

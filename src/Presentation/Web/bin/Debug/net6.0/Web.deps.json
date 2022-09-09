@@ -35,6 +35,7 @@
       "Web/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
+          "DocumentFormat.OpenXml": "2.18.0",
           "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
@@ -344,15 +345,18 @@
           "Web.dll": {}
         }
       },
-      "Bogus/34.0.2": {
+      "DocumentFormat.OpenXml/2.18.0": {
+        "dependencies": {
+          "System.IO.Packaging": "4.7.0"
+        },
         "runtime": {
-          "lib/net6.0/Bogus.dll": {
-            "assemblyVersion": "34.0.2.0",
-            "fileVersion": "34.0.2.0"
+          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {
+            "assemblyVersion": "2.18.0.0",
+            "fileVersion": "2.18.0.0"
           }
         },
         "compile": {
-          "lib/net6.0/Bogus.dll": {}
+          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {}
         }
       },
       "EPPlus/6.0.7": {
@@ -2800,6 +2804,17 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.IO.Packaging/4.7.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.IO.Packaging.dll": {
+            "assemblyVersion": "4.0.5.0",
+            "fileVersion": "4.700.19.56404"
+          }
+        },
+        "compile": {
+          "ref/netstandard2.0/System.IO.Packaging.dll": {}
+        }
+      },
       "System.IO.Pipelines/5.0.2": {},
       "System.Linq/4.3.0": {
         "dependencies": {
@@ -3312,8 +3327,6 @@
       },
       "Common/1.0.0": {
         "dependencies": {
-          "Bogus": "34.0.2",
-          "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Microsoft.Build.Framework": "17.2.0",
@@ -3330,7 +3343,6 @@
       "Repository/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
-          "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Hosting": "2.2.7",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
@@ -3355,7 +3367,6 @@
       "Services/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
-          "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.2.0",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -5109,12 +5120,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Bogus/34.0.2": {
+    "DocumentFormat.OpenXml/2.18.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-2KQAuMn3fLAQ2r6jeiffZnpv0bi3GCW3iRB2v1KeHIEBu8MNTh9dBlLTZwGvM0pr+9doKkU8L5JgCURmTmT88A==",
-      "path": "bogus/34.0.2",
-      "hashPath": "bogus.34.0.2.nupkg.sha512"
+      "sha512": "sha512-5fmehgA7WmJD551QwBhvjSsEmMbCQ/yfW83ZLfbPx1TeQGm0ikGIwAvz/XfO4veCjYWpBQfFH9elVhC2Y+HatQ==",
+      "path": "documentformat.openxml/2.18.0",
+      "hashPath": "documentformat.openxml.2.18.0.nupkg.sha512"
     },
     "EPPlus/6.0.7": {
       "type": "package",
@@ -6382,6 +6393,13 @@
       "sha512": "sha512-6QOb2XFLch7bEc4lIcJH49nJN2HV+OC3fHDgsLVsBVBk3Y4hFAnOBGzJ2lUu7CyDDFo9IBWkSsnbkT6IBwwiMw==",
       "path": "system.io.filesystem.primitives/4.3.0",
       "hashPath": "system.io.filesystem.primitives.4.3.0.nupkg.sha512"
+    },
+    "System.IO.Packaging/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9VV4KAbgRQZ79iEoG40KIeZy38O30oWwewScAST879+oki8g/Wa2HXZQgrhDDxQM4GkP1PnRJll05NMiVPbYAw==",
+      "path": "system.io.packaging/4.7.0",
+      "hashPath": "system.io.packaging.4.7.0.nupkg.sha512"
     },
     "System.IO.Pipelines/5.0.2": {
       "type": "package",

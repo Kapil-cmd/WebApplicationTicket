@@ -1,33 +1,57 @@
 ﻿@model IEnumerable<Repository.Entities.Company>
 
 @{
-    ViewData["Title"] = "Excel Page";
+    ViewData["Title"] = "Index";
 }
+
+<h1>Excel Sheets of Company</h1><br /><br />
+
 <div class="container">
-    <form method="post" asp-controller="CompanyExcel" asp-action="Index" enctype="multipart/form-data">
+    <form method="post" asp-controller="CompanyExcel" asp-action="GetExcel" enctype="multipart/form-data">
         <input type="file" name="file" />
         <button type="submit">Import From Excel</button>
-    </form>
-
-    @if (Model.Count() > 0)
-    {
-        <hr />
-        <table cellpadding="0" cellspacing="0" border="1">
-            <tr>
-                <td>Name</td>
-                <td>NumberOfEmployee</td>
-                <td>Address</td>
-                <td>PhoneNumber</td>
-            </tr>
-            @foreach(var company in Model)
+    </form><br />
+    </div>
+<table class="table table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfEmployee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if(Model != null)
             {
-                <tr>
-                    <td>@company.Name</td>
-                    <td>@company.NumberOfEmployee</td>
-                    <td>@company.Address</td>
-                    <td>@company.PhoneNumber</td>
-                </tr>
+                foreach (var item in Model) 
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfEmployee)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                    </tr>
+                }   
             }
-        </table>
-    }
-</div>
+         }
+    </tbody>
+</table>

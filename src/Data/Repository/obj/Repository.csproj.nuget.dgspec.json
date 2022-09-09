@@ -44,14 +44,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Bogus": {
-              "target": "Package",
-              "version": "[34.0.2, )"
-            },
-            "EPPlus": {
-              "target": "Package",
-              "version": "[6.0.7, )"
-            },
             "ExcelDataReader": {
               "target": "Package",
               "version": "[3.6.0, )"
@@ -136,10 +128,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "EPPlus": {
-              "target": "Package",
-              "version": "[6.0.7, )"
-            },
             "ExcelDataReader": {
               "target": "Package",
               "version": "[3.6.0, )"

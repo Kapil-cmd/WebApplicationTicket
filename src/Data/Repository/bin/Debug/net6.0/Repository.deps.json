@@ -35,7 +35,6 @@
       "Repository/1.0.0": {
         "dependencies": {
           "Common": "1.0.0",
-          "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Hosting": "2.2.7",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
@@ -141,7 +140,7 @@
           "Microsoft.Extensions.Configuration.EnvironmentVariables.Reference": "6.0.0.0",
           "Microsoft.Extensions.Configuration.FileExtensions.Reference": "6.0.0.0",
           "Microsoft.Extensions.Configuration.Ini": "6.0.0.0",
-          "Microsoft.Extensions.Configuration.Json.Reference": "6.0.0.0",
+          "Microsoft.Extensions.Configuration.Json": "6.0.0.0",
           "Microsoft.Extensions.Configuration.KeyPerFile": "6.0.0.0",
           "Microsoft.Extensions.Configuration.UserSecrets": "6.0.0.0",
           "Microsoft.Extensions.Configuration.Xml": "6.0.0.0",
@@ -347,62 +346,6 @@
           "Repository.dll": {}
         }
       },
-      "Bogus/34.0.2": {
-        "runtime": {
-          "lib/net6.0/Bogus.dll": {
-            "assemblyVersion": "34.0.2.0",
-            "fileVersion": "34.0.2.0"
-          }
-        },
-        "compile": {
-          "lib/net6.0/Bogus.dll": {}
-        }
-      },
-      "EPPlus/6.0.7": {
-        "dependencies": {
-          "EPPlus.Interfaces": "6.0.0",
-          "EPPlus.System.Drawing": "6.0.0",
-          "Microsoft.Extensions.Configuration.Json": "5.0.0",
-          "Microsoft.IO.RecyclableMemoryStream": "2.2.0",
-          "System.Security.Cryptography.Pkcs": "5.0.0",
-          "System.Text.Encoding.CodePages": "6.0.0"
-        },
-        "runtime": {
-          "lib/net6.0/EPPlus.dll": {
-            "assemblyVersion": "6.0.7.0",
-            "fileVersion": "6.0.7.0"
-          }
-        },
-        "compile": {
-          "lib/net6.0/EPPlus.dll": {}
-        }
-      },
-      "EPPlus.Interfaces/6.0.0": {
-        "runtime": {
-          "lib/net6.0/EPPlus.Interfaces.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.0.0"
-          }
-        },
-        "compile": {
-          "lib/net6.0/EPPlus.Interfaces.dll": {}
-        }
-      },
-      "EPPlus.System.Drawing/6.0.0": {
-        "dependencies": {
-          "EPPlus.Interfaces": "6.0.0",
-          "System.Drawing.Common": "6.0.0"
-        },
-        "runtime": {
-          "lib/net6.0/EPPlus.System.Drawing.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.0.0"
-          }
-        },
-        "compile": {
-          "lib/net6.0/EPPlus.System.Drawing.dll": {}
-        }
-      },
       "ExcelDataReader/3.6.0": {
         "runtime": {
           "lib/netstandard2.0/ExcelDataReader.dll": {
@@ -510,11 +453,11 @@
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http": "2.2.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
-          "Microsoft.Extensions.Configuration": "5.0.0",
+          "Microsoft.Extensions.Configuration": "2.2.0",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "2.2.4",
-          "Microsoft.Extensions.Configuration.FileExtensions": "5.0.0",
+          "Microsoft.Extensions.Configuration.FileExtensions": "2.2.0",
           "Microsoft.Extensions.DependencyInjection": "6.0.0",
-          "Microsoft.Extensions.FileProviders.Physical": "5.0.0",
+          "Microsoft.Extensions.FileProviders.Physical": "2.2.0",
           "Microsoft.Extensions.Hosting.Abstractions": "2.2.0",
           "Microsoft.Extensions.Logging": "6.0.0",
           "Microsoft.Extensions.Options": "6.0.0",
@@ -1690,10 +1633,9 @@
           }
         }
       },
-      "Microsoft.Extensions.Configuration/5.0.0": {
+      "Microsoft.Extensions.Configuration/2.2.0": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
-          "Microsoft.Extensions.Primitives": "6.0.0"
+          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0"
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/6.0.0": {
@@ -1703,24 +1645,13 @@
       },
       "Microsoft.Extensions.Configuration.EnvironmentVariables/2.2.4": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration": "5.0.0"
+          "Microsoft.Extensions.Configuration": "2.2.0"
         }
       },
-      "Microsoft.Extensions.Configuration.FileExtensions/5.0.0": {
+      "Microsoft.Extensions.Configuration.FileExtensions/2.2.0": {
         "dependencies": {
-          "Microsoft.Extensions.Configuration": "5.0.0",
-          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
-          "Microsoft.Extensions.FileProviders.Abstractions": "6.0.0",
-          "Microsoft.Extensions.FileProviders.Physical": "5.0.0",
-          "Microsoft.Extensions.Primitives": "6.0.0"
-        }
-      },
-      "Microsoft.Extensions.Configuration.Json/5.0.0": {
-        "dependencies": {
-          "Microsoft.Extensions.Configuration": "5.0.0",
-          "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
-          "Microsoft.Extensions.Configuration.FileExtensions": "5.0.0",
-          "Microsoft.Extensions.FileProviders.Abstractions": "6.0.0"
+          "Microsoft.Extensions.Configuration": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Physical": "2.2.0"
         }
       },
       "Microsoft.Extensions.DependencyInjection/6.0.0": {
@@ -1758,14 +1689,13 @@
           "Microsoft.Extensions.FileProviders.Abstractions": "6.0.0"
         }
       },
-      "Microsoft.Extensions.FileProviders.Physical/5.0.0": {
+      "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "6.0.0",
-          "Microsoft.Extensions.FileSystemGlobbing": "5.0.0",
-          "Microsoft.Extensions.Primitives": "6.0.0"
+          "Microsoft.Extensions.FileSystemGlobbing": "2.2.0"
         }
       },
-      "Microsoft.Extensions.FileSystemGlobbing/5.0.0": {},
+      "Microsoft.Extensions.FileSystemGlobbing/2.2.0": {},
       "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
@@ -1889,17 +1819,6 @@
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.dll": {}
-        }
-      },
-      "Microsoft.IO.RecyclableMemoryStream/2.2.0": {
-        "runtime": {
-          "lib/net5.0/Microsoft.IO.RecyclableMemoryStream.dll": {
-            "assemblyVersion": "2.2.0.0",
-            "fileVersion": "2.2.0.0"
-          }
-        },
-        "compile": {
-          "lib/net5.0/Microsoft.IO.RecyclableMemoryStream.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/2.2.0": {
@@ -3242,8 +3161,6 @@
       },
       "Common/1.0.0": {
         "dependencies": {
-          "Bogus": "34.0.2",
-          "EPPlus": "6.0.7",
           "ExcelDataReader": "3.6.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Microsoft.Build.Framework": "17.2.0",
@@ -3797,7 +3714,7 @@
         },
         "compileOnly": true
       },
-      "Microsoft.Extensions.Configuration.Json.Reference/6.0.0.0": {
+      "Microsoft.Extensions.Configuration.Json/6.0.0.0": {
         "compile": {
           "Microsoft.Extensions.Configuration.Json.dll": {}
         },
@@ -4993,34 +4910,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Bogus/34.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-2KQAuMn3fLAQ2r6jeiffZnpv0bi3GCW3iRB2v1KeHIEBu8MNTh9dBlLTZwGvM0pr+9doKkU8L5JgCURmTmT88A==",
-      "path": "bogus/34.0.2",
-      "hashPath": "bogus.34.0.2.nupkg.sha512"
-    },
-    "EPPlus/6.0.7": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-o2cIiB0zDEuTuvhOnVWi6uR5/TvbsHT6EVGS3+IFWlTrytbf5ISSGjHhEuJ4g/eCGp83frzpdypd5mqF0MtIvw==",
-      "path": "epplus/6.0.7",
-      "hashPath": "epplus.6.0.7.nupkg.sha512"
-    },
-    "EPPlus.Interfaces/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-xCvJjw2dwhWnM20JiSRfgZbZzOLtpoSAQLWF6FD/VoT7CHR879yP7GxhSShsdTfmGeXVsWatbDZCVLbBVQCNeQ==",
-      "path": "epplus.interfaces/6.0.0",
-      "hashPath": "epplus.interfaces.6.0.0.nupkg.sha512"
-    },
-    "EPPlus.System.Drawing/6.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-RbKLgqQ0O/X3QJS/sx7B3KiOhEnwIM3b8+lUoJ6suYWrrI8N8vLcqGozeiW21us5qzmzaWNw9bVw/vlIfAa/lw==",
-      "path": "epplus.system.drawing/6.0.0",
-      "hashPath": "epplus.system.drawing.6.0.0.nupkg.sha512"
-    },
     "ExcelDataReader/3.6.0": {
       "type": "package",
       "serviceable": true,
@@ -5504,12 +5393,12 @@
       "path": "microsoft.extensions.caching.memory/6.0.1",
       "hashPath": "microsoft.extensions.caching.memory.6.0.1.nupkg.sha512"
     },
-    "Microsoft.Extensions.Configuration/5.0.0": {
+    "Microsoft.Extensions.Configuration/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LN322qEKHjuVEhhXueTUe7RNePooZmS8aGid5aK2woX3NPjSnONFyKUc6+JknOS6ce6h2tCLfKPTBXE3mN/6Ag==",
-      "path": "microsoft.extensions.configuration/5.0.0",
-      "hashPath": "microsoft.extensions.configuration.5.0.0.nupkg.sha512"
+      "sha512": "sha512-nOP8R1mVb/6mZtm2qgAJXn/LFm/2kMjHDAg/QJLFG6CuWYJtaD3p1BwQhufBVvRzL9ceJ/xF0SQ0qsI2GkDQAA==",
+      "path": "microsoft.extensions.configuration/2.2.0",
+      "hashPath": "microsoft.extensions.configuration.2.2.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration.Abstractions/6.0.0": {
       "type": "package",
@@ -5525,19 +5414,12 @@
       "path": "microsoft.extensions.configuration.environmentvariables/2.2.4",
       "hashPath": "microsoft.extensions.configuration.environmentvariables.2.2.4.nupkg.sha512"
     },
-    "Microsoft.Extensions.Configuration.FileExtensions/5.0.0": {
+    "Microsoft.Extensions.Configuration.FileExtensions/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-rRdspYKA18ViPOISwAihhCMbusHsARCOtDMwa23f+BGEdIjpKPlhs3LLjmKlxfhpGXBjIsS0JpXcChjRUN+PAw==",
-      "path": "microsoft.extensions.configuration.fileextensions/5.0.0",
-      "hashPath": "microsoft.extensions.configuration.fileextensions.5.0.0.nupkg.sha512"
-    },
-    "Microsoft.Extensions.Configuration.Json/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Pak8ymSUfdzPfBTLHxeOwcR32YDbuVfhnH2hkfOLnJNQd19ItlBdpMjIDY9C5O/nS2Sn9bzDMai0ZrvF7KyY/Q==",
-      "path": "microsoft.extensions.configuration.json/5.0.0",
-      "hashPath": "microsoft.extensions.configuration.json.5.0.0.nupkg.sha512"
+      "sha512": "sha512-H1qCpWBC8Ed4tguTR/qYkbb3F6DI5Su3t8xyFo3/5MzAd8PwPpHzgX8X04KbBxKmk173Pb64x7xMHarczVFQUA==",
+      "path": "microsoft.extensions.configuration.fileextensions/2.2.0",
+      "hashPath": "microsoft.extensions.configuration.fileextensions.2.2.0.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection/6.0.0": {
       "type": "package",
@@ -5574,19 +5456,19 @@
       "path": "microsoft.extensions.fileproviders.embedded/6.0.0",
       "hashPath": "microsoft.extensions.fileproviders.embedded.6.0.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.FileProviders.Physical/5.0.0": {
+    "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1rkd8UO2qf21biwO7X0hL9uHP7vtfmdv/NLvKgCRHkdz1XnW8zVQJXyEYiN68WYpExgtVWn55QF0qBzgfh1mGg==",
-      "path": "microsoft.extensions.fileproviders.physical/5.0.0",
-      "hashPath": "microsoft.extensions.fileproviders.physical.5.0.0.nupkg.sha512"
+      "sha512": "sha512-tbDHZnBJkjYd9NjlRZ9ondDiv1Te3KYCTW2RWpR1B0e1Z8+EnFRo7qNnHkkSCixLdlPZzhjlX24d/PixQ7w2dA==",
+      "path": "microsoft.extensions.fileproviders.physical/2.2.0",
+      "hashPath": "microsoft.extensions.fileproviders.physical.2.2.0.nupkg.sha512"
     },
-    "Microsoft.Extensions.FileSystemGlobbing/5.0.0": {
+    "Microsoft.Extensions.FileSystemGlobbing/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ArliS8lGk8sWRtrWpqI8yUVYJpRruPjCDT+EIjrgkA/AAPRctlAkRISVZ334chAKktTLzD1+PK8F5IZpGedSqA==",
-      "path": "microsoft.extensions.filesystemglobbing/5.0.0",
-      "hashPath": "microsoft.extensions.filesystemglobbing.5.0.0.nupkg.sha512"
+      "sha512": "sha512-ZSsHZp3PyW6vk37tDEdypjgGlNtpJ0EixBMOfUod2Thx7GtwfFSAQXUQx8a8BN8vfWKGGMbp7jPWdoHx/At4wQ==",
+      "path": "microsoft.extensions.filesystemglobbing/2.2.0",
+      "hashPath": "microsoft.extensions.filesystemglobbing.2.2.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
       "type": "package",
@@ -5692,13 +5574,6 @@
       "sha512": "sha512-gTqzsGcmD13HgtNePPcuVHZ/NXWmyV+InJgalW/FhWpII1D7V1k0obIseGlWMeA4G+tZfeGMfXr0klnWbMR/mQ==",
       "path": "microsoft.identitymodel.tokens/6.8.0",
       "hashPath": "microsoft.identitymodel.tokens.6.8.0.nupkg.sha512"
-    },
-    "Microsoft.IO.RecyclableMemoryStream/2.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-uyjY/cqomw1irT4L7lDeg4sJ36MsjHg3wKqpGrBAdzvZaxo85yMF+sAA9RIzTV92fDxuUzjqksMqA0+SNMkMgA==",
-      "path": "microsoft.io.recyclablememorystream/2.2.0",
-      "hashPath": "microsoft.io.recyclablememorystream.2.2.0.nupkg.sha512"
     },
     "Microsoft.Net.Http.Headers/2.2.0": {
       "type": "package",
@@ -7058,7 +6933,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.Extensions.Configuration.Json.Reference/6.0.0.0": {
+    "Microsoft.Extensions.Configuration.Json/6.0.0.0": {
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
