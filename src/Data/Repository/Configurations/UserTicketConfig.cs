@@ -14,6 +14,7 @@ namespace Repository.Configurations
             builder.HasOne(x => x.aUser)
                 .WithMany(x => x.AssignedeTickets)
                 .HasForeignKey(x => x.UserId)
+                .HasPrincipalKey(x => x.UserName)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.HasOne(x => x.aTicket)

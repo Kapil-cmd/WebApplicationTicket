@@ -23,7 +23,7 @@
                 <select asp-for="AssignedTo" class="form-control">
                     @foreach(var users in Model.Users)
                     {
-                        <option value="@users.Id" class="text-danger">@users.UserName</option>
+                        <option value="@users.Id class="text-danger">@users.UserName</option>
                     }
                 </select>
                 <span asp-validation-for="AssignedTo" class="text-danger"></span>

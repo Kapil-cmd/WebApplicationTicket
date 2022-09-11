@@ -44,6 +44,36 @@ namespace Services.BL
             }
         }
 
+        public BaseResponseModel<string> CloseTicket(CloseTicket Ticket)
+        {
+            var response = new BaseResponseModel<string>();
+            try
+            {
+                var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == Ticket.TicketId);
+                if(ticket == null)
+                {
+                    response.Status = "404";
+                    response.Message = "Ticket Not found";
+                    return response;
+                }
+                else
+                {
+                    ticket.Status = Common.Enums.StatusEnum.Completed;
+                    _unitOfWork._db.Tickets.Update(ticket);
+                    _unitOfWork._db.SaveChanges();
+
+                    response.Status = "00";
+                    response.Message = "Ticket closed sucessfully";
+                    return response;
+                }
+            }catch(Exception ex)
+            {
+                response.Status = "500";
+                response.Message = "Exception occurred :" + ex.Message;
+                return response;
+            }
+        }
+
         public BaseResponseModel<string> DeleteTicket(Ticket Ticket)
         {
             var response = new BaseResponseModel<string>();
@@ -155,6 +185,7 @@ namespace Services.BL
         BaseResponseModel<string> EditTicket(EditTicketViewmodel Ticket);
         BaseResponseModel<string> DeleteTicket(Ticket Ticket);
         BaseResponseModel<string> TicketDetails(string ticketId);
+        BaseResponseModel<string> CloseTicket(CloseTicket Ticket);
     }
 }
 

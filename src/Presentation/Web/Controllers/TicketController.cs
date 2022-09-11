@@ -1,6 +1,7 @@
 ﻿using Common.ViewModels.Tickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository.Entites;
 using Repository.Entities;
@@ -36,19 +37,12 @@ namespace demo.Controllers
             var model = _unitOfWork._db.Tickets.Where(a => a.User.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(model);
         }
-        //public IActionResult DeveloperIndex()
-        //{
-        //    var users = _unitOfWork._db.Users;
-        //    var userTickets = _unitOfWork._db.UserTickets;
-        //    var tickets = _unitOfWork._db.Tickets;
-
-        //    var developerTicketIndex = (from Ticket in tickets
-        //                                join UserTicket in userTickets on Ticket.TicketId equals UserTicket.TicketId
-        //                                join Users in users ).ToList();
-
-        //    return View(developerTicketIndex);
-
-        //}
+        public IActionResult DeveloperIndex()
+        {
+            var user = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = _unitOfWork._db.Tickets.Where(x => x.AssignedTo == user).OrderByDescending(x => x.ModifiedDateTime).ToList();
+            return View(model);
+        }
         [HttpGet]
         [PermissionFilter("Admin&Ticket&Create_Ticket")]
         public IActionResult Create()
@@ -196,6 +190,32 @@ namespace demo.Controllers
             else
             {
                 _toastNotification.AddErrorToastMessage("Unable to delete ticket");
+                return View(ticket);
+            }
+        }
+        [HttpGet]
+        public IActionResult CloseTicket(string TicketId)
+        {
+            var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == TicketId);
+            if(ticket == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return View(ticket);
+            }
+        }
+        [HttpPost]
+        public IActionResult CloseTicket(CloseTicket ticket)
+        {
+            var response = _ticketService.CloseTicket(ticket);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
                 return View(ticket);
             }
         }
