@@ -40,14 +40,12 @@ namespace Common.ViewModels.Tickets
     public class CloseTicket
     {
         public string TicketId { get; set; }
-        public string TicketDetails { get; set; }
-        public string ModifiedBy { get; set; }
-        [Display(Name = "ModifiedDateTime")]
-        public DateTime ModifiedDateTime { get; set; }
-        [Display(Name = "AssignedTo")]
-        public string AssignedTo { get; set; }
-        public string ImageName { get; set; }
-        [Required(ErrorMessage = "Status is Required"), Display(Name = "Status")]
         public StatusEnum Status { get; set; }
+        public List<Users> Users { get; set; }
+    }
+    public class Users
+    {
+        public string Id;
+        public string UserName { get; set; }
     }
 }

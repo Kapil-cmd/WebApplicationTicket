@@ -23,6 +23,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
+    <PackageReference Include="MySql.Data" Version="8.0.30" />
+    <PackageReference Include="MySqlConnector" Version="2.1.13" />
+    <PackageReference Include="NepaliCalendarBS" Version="1.1.5" />
     <PackageReference Include="NToastNotify" Version="8.0.0" />
     <PackageReference Include="SendGrid" Version="9.28.0" />
     <PackageReference Include="System.Text.Encoding" Version="4.3.0" />

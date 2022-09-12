@@ -88,7 +88,13 @@ namespace Services.BL
                 }
                 _unitOfWork._db.Tickets.Remove(ticket);
                 _unitOfWork._db.SaveChanges();
-
+                #region UnAssigned Ticket
+                var userTicket = _unitOfWork._db.UserTickets.FirstOrDefault(x => x.TicketId == Ticket.TicketId && x.UserId == Ticket.AssignedTo);
+                if(_unitOfWork._db.UserTickets.Any(x => x.TicketId ==Ticket.TicketId && x.UserId == Ticket.AssignedTo))
+                {
+                    _unitOfWork._db.Remove(userTicket);
+                }
+                #endregion
                 response.Status = "00";
                 response.Message = "Ticket deleted sucessully";
                 return response;

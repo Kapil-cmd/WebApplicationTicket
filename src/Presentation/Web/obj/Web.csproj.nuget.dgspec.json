@@ -75,6 +75,14 @@
               "target": "Package",
               "version": "[6.0.7, )"
             },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.30, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.1.13, )"
+            },
             "System.Text.Encoding": {
               "target": "Package",
               "version": "[4.3.0, )"
@@ -154,6 +162,14 @@
             "Microsoft.Build.Framework": {
               "target": "Package",
               "version": "[17.2.0, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.30, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.1.13, )"
             },
             "System.Text.Encoding": {
               "target": "Package",
@@ -271,9 +287,21 @@
               "target": "Package",
               "version": "[6.0.7, )"
             },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.30, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.1.13, )"
+            },
             "NToastNotify": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "NepaliCalendarBS": {
+              "target": "Package",
+              "version": "[1.1.5, )"
             },
             "SendGrid": {
               "target": "Package",
@@ -394,6 +422,14 @@
             "MimeKit": {
               "target": "Package",
               "version": "[3.3.0, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.30, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.1.13, )"
             },
             "System.Net.Http": {
               "target": "Package",

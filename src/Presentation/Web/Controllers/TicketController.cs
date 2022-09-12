@@ -193,26 +193,15 @@ namespace demo.Controllers
                 return View(ticket);
             }
         }
+        
         [HttpGet]
-        public IActionResult CloseTicket(string TicketId)
-        {
-            var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == TicketId);
-            if(ticket == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return View(ticket);
-            }
-        }
-        [HttpPost]
         public IActionResult CloseTicket(CloseTicket ticket)
         {
+            var id = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == ticket.TicketId);
             var response = _ticketService.CloseTicket(ticket);
             if(response.Status == "00")
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("DeveloperIndex");
             }
             else
             {
