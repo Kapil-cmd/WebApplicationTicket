@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository;
+using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
 using Services.Middleware;

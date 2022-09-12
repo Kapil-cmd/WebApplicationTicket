@@ -223,33 +223,10 @@ namespace Repository.Migrations
                     b.ToTable("UserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Repository.Entities.Company", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NumberOfEmployee")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Company");
-                });
-
             modelBuilder.Entity("Repository.Entities.UserTicket", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TicketId")
                         .HasColumnType("nvarchar(450)");
@@ -338,7 +315,6 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Entites.User", "aUser")
                         .WithMany("AssignedeTickets")
                         .HasForeignKey("UserId")
-                        .HasPrincipalKey("UserName")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 

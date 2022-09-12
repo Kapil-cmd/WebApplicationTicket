@@ -1,18 +1,22 @@
-﻿using Microsoft.Data.SqlClient;
-using Repository;
+﻿using Repository;
+using System.Security.Claims;
 
 namespace Web.StaticModel
 {
     public static class PermissionChecker
     {
-        public static  bool HasPermission(string username, string permissionValue,TicketingContext context)
-        {
-            var Id = context.Users.FirstOrDefault(x => username == x.UserName)?.Id;
-            var permissions = context.Permissions.FirstOrDefault(x => x.Slug == permissionValue);
 
-            var users = context.Users;
-            var rolePermissions = context.RolePermissions;
-            var userRoles = context.UserRoles;
+        private static TicketingContext db;
+        public static bool HasPermission(string username, string permissionValue)
+        {
+            var Id = db.Users.FirstOrDefault(x => username == x.UserName)?.Id;
+            var claims = ClaimsPrincipal.Current.Identities.First().Claims.First();
+
+            var permissions = db.Permissions.FirstOrDefault(x => x.Slug == permissionValue);
+
+            var users = db.Users;
+            var rolePermissions = db.RolePermissions;
+            var userRoles = db.UserRoles;
 
             var hasPermission = (from rp in rolePermissions
                                  join ur in userRoles on rp.RoleId equals ur.RoleId
@@ -20,15 +24,15 @@ namespace Web.StaticModel
                                  select rp
                                 ).Any();
 
-            if(hasPermission == true)
-            {
-                return true; 
-            }
-            else
+            if (hasPermission == null)
             {
                 return false;
             }
-            
+            else
+            {
+                return true;
+            }
+
         }
 
     }

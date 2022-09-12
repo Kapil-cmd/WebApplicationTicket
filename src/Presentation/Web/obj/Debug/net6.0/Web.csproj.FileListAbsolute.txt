@@ -585,3 +585,4 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Ubiety.
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\ZstdNet.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\MySqlConnector.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\NepaliCalendarBS.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\libman.json
