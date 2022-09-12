@@ -576,3 +576,12 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\ExcelDa
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.IO.Packaging.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Google.Protobuf.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\K4os.Compression.LZ4.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\K4os.Hash.xxHash.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\MySql.Data.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Ubiety.Dns.Core.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\ZstdNet.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\MySqlConnector.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\NepaliCalendarBS.dll

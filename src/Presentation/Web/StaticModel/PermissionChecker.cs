@@ -1,22 +1,38 @@
 ﻿using Microsoft.Data.SqlClient;
+using Repository;
 
 namespace Web.StaticModel
 {
     public static class PermissionChecker
     {
-        public static bool HasPermission(string username, string permissionValue)
+        public static  bool HasPermission(string username, string permissionValue,TicketingContext context)
         {
-            using (SqlConnection conn = new SqlConnection())
-            {
-                conn.ConnectionString = "Server=DESKTOP-BQOVRGO\\SQLEXPRESS;Database=N-TierTicket;Trusted_Connection=True;MultipleActiveResultSets=true";
-                conn.Open();
+            var Id = context.Users.FirstOrDefault(x => username == x.UserName)?.Id;
+            var permissions = context.Permissions.FirstOrDefault(x => x.Slug == permissionValue);
 
-                string commandtext = "select * from Users";
-                SqlCommand cmd = new SqlCommand(commandtext, conn);
-                
+            var users = context.Users;
+            var rolePermissions = context.RolePermissions;
+            var userRoles = context.UserRoles;
+
+            var hasPermission = (from rp in rolePermissions
+                                 join ur in userRoles on rp.RoleId equals ur.RoleId
+                                 where ur.UserId == Id && rp.PermissionId == permissions.PermissionId
+                                 select rp
+                                ).Any();
+
+            if(hasPermission == true)
+            {
+                return true; 
             }
+            else
+            {
+                return false;
+            }
+            
         }
-           
+
     }
 }
+
+
 

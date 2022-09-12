@@ -246,9 +246,9 @@ namespace Web.Controllers
 
             var link = HttpContext.Request.Scheme + "://" + HttpContext.Request.Host + verifyUrl;
 
-            var fromEmail = new MailAddress("dashcharging7@gmail.com", "Please Verify your Account");
+            var fromEmail = new MailAddress("creation.soft123@gmail.com", "Please Verify your Account");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "qygqezeyxisnoavl";
+            var fromEmailPassword = "zsudgukujageoqqc";
 
             string subject = "Your account is successfully created!";
 
