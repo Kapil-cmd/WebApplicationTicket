@@ -7,7 +7,7 @@
 <h1>Excel Sheets of Company</h1><br /><br />
 
 <div class="container">
-    <form method="post" asp-controller="CompanyExcel" asp-action="GetExcel" enctype="multipart/form-data">
+    <form method="post" asp-controller="CategoryTemp" asp-action="GetExcel" enctype="multipart/form-data">
         <input type="file" name="file" />
         <button type="submit">Import From Excel</button>
     </form><br />
@@ -31,9 +31,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.CategoryName)
                         </td>
+                        <td>
+                        </td>
                     </tr>
                 }   
             }
          }
     </tbody>
+     <a title="Upload"  asp-controller="CategoryTemp" asp-action="Send" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i></a>
 </table>

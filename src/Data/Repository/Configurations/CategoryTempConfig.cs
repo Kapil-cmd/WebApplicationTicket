@@ -10,7 +10,7 @@ namespace Repository.Configurations
         {
             builder.ToTable("CategoryTemp");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
             builder.Property(x => x.CategoryName).IsRequired();
         }
     }

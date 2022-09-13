@@ -29,6 +29,7 @@ namespace Common.ViewModels.Users
         public string Email { get; set; }
         
         [Display(Name = "Age")]
+        [Range(12,100)]
         public int Age { get; set; }
         [Required]
         [DisplayName("DateOfBirth")]

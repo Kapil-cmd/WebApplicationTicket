@@ -223,10 +223,24 @@ namespace Repository.Migrations
                     b.ToTable("UserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("Repository.Entities.CategoryTemp", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategoryTemp", (string)null);
+                });
+
             modelBuilder.Entity("Repository.Entities.UserTicket", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("TicketId")
                         .HasColumnType("nvarchar(450)");
@@ -315,6 +329,7 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Entites.User", "aUser")
                         .WithMany("AssignedeTickets")
                         .HasForeignKey("UserId")
+                        .HasPrincipalKey("UserName")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 

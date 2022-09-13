@@ -38,7 +38,7 @@ namespace Web.Controllers
             return View();
         }
         [HttpPost]
-        [PermissionFilter("Admin&Role&Create_Role")]
+        //[PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole(RoleViewModel model)
         {
             if (!ModelState.IsValid)
