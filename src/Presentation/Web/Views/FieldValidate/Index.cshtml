@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Repository.Entities.FieldValidation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="row">
+    <div class="col">
+        <a asp-action="Create" class="btn btn-sm btn-primary pull-right">Create New</a>
+    </div>
+</div>
+<table class="table table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>
+                Length
+            </th>
+             <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Length)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

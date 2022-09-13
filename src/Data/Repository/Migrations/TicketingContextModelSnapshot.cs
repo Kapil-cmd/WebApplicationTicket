@@ -226,6 +226,7 @@ namespace Repository.Migrations
             modelBuilder.Entity("Repository.Entities.CategoryTemp", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryName")
@@ -235,6 +236,25 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CategoryTemp", (string)null);
+                });
+
+            modelBuilder.Entity("Repository.Entities.FieldValidation", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Length")
+                        .HasMaxLength(1000)
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Field");
                 });
 
             modelBuilder.Entity("Repository.Entities.UserTicket", b =>

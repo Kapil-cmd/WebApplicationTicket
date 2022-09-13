@@ -16,6 +16,7 @@ namespace Repository
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<UserTicket> UserTickets { get; set; }
         public DbSet<CategoryTemp> CategoryTemp { get; set; }
+        public DbSet<FieldValidation> Field { get; set; }
         public TicketingContext(DbContextOptions<TicketingContext> options)
             : base(options)
         {
@@ -32,6 +33,7 @@ namespace Repository
             builder.ApplyConfiguration(new UserRoleConfig());   
             builder.ApplyConfiguration(new UserTicketConfig());
             builder.ApplyConfiguration(new CategoryTempConfig());
+            builder.ApplyConfiguration(new FieldValidationConfig());
         }
     }
 }

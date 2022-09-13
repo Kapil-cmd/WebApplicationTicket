@@ -48,6 +48,7 @@ namespace Web.Controllers
                     List<CategoryTemp> companies = new List<CategoryTemp>();
                     try
                     {
+                        FieldValidation field = new FieldValidation();
                         using (var package = new ExcelPackage(stream))
                         {
                             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -67,11 +68,11 @@ namespace Web.Controllers
                                     };
                                     if (_unitOfWork._db.CategoryTemp.Any(x => x.CategoryName == category.CategoryName))
                                     {
-                                        return View(Index);
+                                        return RedirectToAction("Index");
                                     }
                                     else
                                     {
-                                        if (category.CategoryName.Length > 3 && category.CategoryName.Take(3).All(char.IsLetter))
+                                        if (category.CategoryName.Length > field.Length  && category.CategoryName.Take(3).All(char.IsLetter))
                                         {
                                             _db.CategoryTemp.Add(category);
                                             _db.SaveChanges();
@@ -89,6 +90,7 @@ namespace Web.Controllers
                     {
                         Console.WriteLine(ex.Message);
                     }
+                    return RedirectToAction("Index");
 
                 }
             }
@@ -116,6 +118,7 @@ namespace Web.Controllers
                         CreatedBy = nameClaim,
                     });
                     _db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
             }
             return View(Index);

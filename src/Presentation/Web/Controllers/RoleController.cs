@@ -28,7 +28,7 @@ namespace Web.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Role> roles = _unitOfWork._db.Roles.ToList();
+            var roles = _unitOfWork._db.Roles.ToList();
             return View(roles);
         }
         [HttpGet]

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Repository</id>
+    <version>1.0.0</version>
+    <authors>Repository</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Common" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="ExcelDataReader" version="3.6.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Hosting" version="2.2.7" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http.Abstractions" version="2.2.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http.Features" version="5.0.17" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="6.0.7" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="6.0.7" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="6.0.7" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.VisualStudio.Web.CodeGeneration.Design" version="6.0.7" exclude="Build,Analyzers" />
+        <dependency id="MySql.Data" version="8.0.30" exclude="Build,Analyzers" />
+        <dependency id="MySqlConnector" version="2.1.13" exclude="Build,Analyzers" />
+        <dependency id="NToastNotify" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="NepaliCalendarBS" version="1.1.5" exclude="Build,Analyzers" />
+        <dependency id="SendGrid" version="9.28.0" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Encoding" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Encoding.CodePages" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Toolbelt.EntityFrameworkCore.AnnotationBasedModelBuilder" version="5.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Projects\TicketManagementSystem\src\Data\Repository\bin\Debug\net6.0\Repository.runtimeconfig.json" target="lib\net6.0\Repository.runtimeconfig.json" />
+    <file src="D:\Projects\TicketManagementSystem\src\Data\Repository\bin\Debug\net6.0\Repository.dll" target="lib\net6.0\Repository.dll" />
+  </files>
+</package>
