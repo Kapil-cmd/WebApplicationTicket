@@ -8,6 +8,7 @@ using Repository.Repos.TicketRep;
 using Repository.Repos.TicketUserRep;
 using Repository.Repos.UserRep;
 using Repository.Repos.UsersRep;
+using Repository.Repos.ValidateRep;
 
 namespace Repository.Repos.Work
 {
@@ -26,6 +27,7 @@ namespace Repository.Repos.Work
             RolePermissionRepository = new RolePermissionRepository(_db);
             UserTicketRepository = new UserTicketRepository(_db);
             CategoryTempRepository = new CategoryTempRepository(_db);
+            FieldValidateRepository = new FieldValidateRepository(_db);
         }
         public IHttpContextAccessor _httpContextAccessor { get; private set; }
         public TicketingContext _db { get; private set; }
@@ -38,7 +40,7 @@ namespace Repository.Repos.Work
         public IRolePermissionRepository RolePermissionRepository { get; private set; }
         public IUserTicketRepository UserTicketRepository { get; private set; }
         public ICategoryTempRepository CategoryTempRepository { get; private set; }
-
+        public IFieldValidateRepository FieldValidateRepository { get; private set; }
         public void Save()
         {
             _db.SaveChanges();

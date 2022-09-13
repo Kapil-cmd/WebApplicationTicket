@@ -1,20 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Repository;
-using Repository.Entities;
+﻿using Common.ViewModels.ValidationModel;
+using Microsoft.AspNetCore.Mvc;
+using Repository.Repos.Work;
+using Services.BL;
 
 namespace Web.Controllers
 {
     public class FieldValidateController : Controller
     {
-        private TicketingContext _db;
-        public FieldValidateController(TicketingContext db)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IFieldValidationService _fieldService;
+        public FieldValidateController(IUnitOfWork unitOfWork, IFieldValidationService fieldService)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
+            _fieldService = fieldService;
         }
 
         public IActionResult Index()
         {
-            var validate = _db.Field.ToList();
+            var validate = _unitOfWork._db.Field.ToList();
             return View(validate);
         }
 
@@ -24,25 +27,49 @@ namespace Web.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(FieldValidation field)
+        public IActionResult Create(AddValidationField field)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if (_db.Field.Any(x => x.Name == field.Name))
-                {
-                    return View(Index);
-                }
-                else
-                {
-                    _db.Field.Add(field);
-                    _db.SaveChanges();
-                    return View("Index");
-                }
+                return View(field);
+            }
+            var response = _fieldService.AddValdation(field);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("Index");
             }
             else
             {
-                return View("Create");
-            }   
+                return View(field);
+            }
+        }
+        [HttpGet]
+        public IActionResult Edit(string? Id)
+        {
+            var validate = _unitOfWork._db.Field.FirstOrDefault(x => x.Id == Id);
+            if(validate == null)
+            {
+                return NotFound();
+            }
+            EditValidationField field = new EditValidationField();
+            field.Id = validate.Id;
+            field.Name = validate.Name;
+            field.Length = validate.Length;
+
+            return View(field);
+        }
+        [HttpPost]
+        public IActionResult Edit(EditValidationField validationField)
+        {
+            var response = _fieldService.EditValidation(validationField);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(validationField);
+            }
         }
     }
 }

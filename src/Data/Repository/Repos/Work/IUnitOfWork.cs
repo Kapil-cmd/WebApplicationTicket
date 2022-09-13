@@ -8,6 +8,7 @@ using Repository.Repos.TicketRep;
 using Repository.Repos.TicketUserRep;
 using Repository.Repos.UserRep;
 using Repository.Repos.UsersRep;
+using Repository.Repos.ValidateRep;
 
 namespace Repository.Repos.Work
 {
@@ -25,6 +26,7 @@ namespace Repository.Repos.Work
         IRolePermissionRepository RolePermissionRepository { get; }
         IUserTicketRepository UserTicketRepository { get; }
         ICategoryTempRepository CategoryTempRepository { get; }
+        IFieldValidateRepository FieldValidateRepository { get; }
         void Save();
     }
 }

@@ -48,6 +48,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITicketService, TicketServices>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ICategoryservice, CategoryServices>();
+builder.Services.AddScoped<IFieldValidationService, FieldValidationService>();
 builder.Services.AddRazorPages();
 
 builder.Services.AddDistributedMemoryCache();

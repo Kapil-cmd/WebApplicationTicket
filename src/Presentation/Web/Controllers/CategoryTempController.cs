@@ -48,7 +48,8 @@ namespace Web.Controllers
                     List<CategoryTemp> companies = new List<CategoryTemp>();
                     try
                     {
-                        FieldValidation field = new FieldValidation();
+                        string name = "CategoryName";
+                        var field = _unitOfWork._db.Field.FirstOrDefault(x => x.Name == name);
                         using (var package = new ExcelPackage(stream))
                         {
                             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -72,7 +73,7 @@ namespace Web.Controllers
                                     }
                                     else
                                     {
-                                        if (category.CategoryName.Length > field.Length  && category.CategoryName.Take(3).All(char.IsLetter))
+                                        if (category.CategoryName.Length > field.Length && category.CategoryName.Take(3).All(char.IsLetter))
                                         {
                                             _db.CategoryTemp.Add(category);
                                             _db.SaveChanges();
