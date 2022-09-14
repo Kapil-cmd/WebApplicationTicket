@@ -1,10 +1,8 @@
 ﻿using Common.ViewModels.Tickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository.Entites;
-using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
 using Services.CustomFilter;

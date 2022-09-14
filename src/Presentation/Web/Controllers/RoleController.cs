@@ -49,7 +49,7 @@ namespace Web.Controllers
             if(response.Status == "00")
             {
                 _toastNotification.AddSuccessToastMessage("Role created sucessfully");
-                return View("Index");
+                return RedirectToAction("Index");
             }
             else
             {

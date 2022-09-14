@@ -1,4 +1,5 @@
 ﻿using Common.ViewModels.Categories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using Repository;
@@ -6,10 +7,12 @@ using Repository.Entites;
 using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
+using Services.CustomFilter;
 using System.Security.Claims;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class CategoryTempController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -23,18 +26,21 @@ namespace Web.Controllers
             _categoryService = categoryservice;
             _unitOfWork = unitOfWork;
         }
+        [PermissionFilter("Admin&CategoryTemp&View_CategoryTemp")]
         [HttpGet]
         public IActionResult Index()
         {
             var company = _db.CategoryTemp.ToList();
             return View(company);
         }
+        [PermissionFilter("Admin&CategoryTemp&Create_CategoryTemp")]
         [HttpGet]
         public IActionResult GetExcel(List<CategoryTemp> excel)
         {
             excel = excel == null ? new List<CategoryTemp>() : excel;
             return View(excel);
         }
+        [PermissionFilter("Admin&CategoryTemp&Create_CategoryTemp")]
         [HttpPost]
         public IActionResult GetExcel(IFormFile file)
         {
@@ -99,6 +105,7 @@ namespace Web.Controllers
             return View(Index);
         }
         [HttpGet]
+        [PermissionFilter("Admin&CategoryTemp&Send_CategoryTemp")]
         public IActionResult Send()
         {
             Category category = new Category();

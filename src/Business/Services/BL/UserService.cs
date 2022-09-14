@@ -122,7 +122,7 @@ namespace Services.BL
                 _unitOfWork._db.Users.Add(new Repository.Entites.User()
                 {
                     Address = Register.Address,
-                    Age = Register.Age,
+                    Age = DateTime.Now.Year - Register.DateOfBirth.Year,
                     Email = Register.Email,
                     FirstName = Register.FirstName,
                     LastName = Register.LastName,
@@ -131,7 +131,7 @@ namespace Services.BL
                     UserName = Register.UserName,
                     IsEmailVerified = Register.IsEmailVerified,
                     ActivationCode = Register.ActivationCode,
-                }); 
+                });   
                 _unitOfWork._db.SaveChanges();
                 
                 

@@ -1,10 +1,13 @@
 ﻿using Common.ViewModels.ValidationModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Repos.Work;
 using Services.BL;
+using Services.CustomFilter;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class FieldValidateController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -14,18 +17,19 @@ namespace Web.Controllers
             _unitOfWork = unitOfWork;
             _fieldService = fieldService;
         }
-
+        [PermissionFilter("Admin&Validate&View_Field")]
         public IActionResult Index()
         {
             var validate = _unitOfWork._db.Field.ToList();
             return View(validate);
         }
-
+        [PermissionFilter("Admin&Validate&Create_Field")]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+        [PermissionFilter("Admin&Validate&Create_Field")]
         [HttpPost]
         public IActionResult Create(AddValidationField field)
         {
@@ -43,6 +47,7 @@ namespace Web.Controllers
                 return View(field);
             }
         }
+        [PermissionFilter("Admin&Validate&Edit_Field")]
         [HttpGet]
         public IActionResult Edit(string? Id)
         {
@@ -58,6 +63,7 @@ namespace Web.Controllers
 
             return View(field);
         }
+        [PermissionFilter("Admin&Validate&Edit_Field")]
         [HttpPost]
         public IActionResult Edit(EditValidationField validationField)
         {

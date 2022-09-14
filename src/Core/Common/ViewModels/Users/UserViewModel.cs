@@ -28,9 +28,9 @@ namespace Common.ViewModels.Users
         [EmailAddress]
         public string Email { get; set; }
         
-        [Display(Name = "Age")]
-        [Range(12,100)]
-        public int Age { get; set; }
+        //[Display(Name = "Age")]
+        //public int Age { get; set; }
+
         [Required]
         [DisplayName("DateOfBirth")]
         [DataType(DataType.Date),DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode = true)]
