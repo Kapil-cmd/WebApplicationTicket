@@ -31,6 +31,12 @@ namespace Web.Controllers
             var roles = _unitOfWork._db.Roles.ToList();
             return View(roles);
         }
+        [PermissionFilter("Admin&Role&User_Role")]
+        public IActionResult UserRole()
+        {
+            var userRole = _unitOfWork._db.UserRoles.ToList();
+            return View(userRole);
+        }
         [HttpGet]
         //[PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole()

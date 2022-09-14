@@ -39,10 +39,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Combine/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tYmluZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/FieldValidate/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRWYWxpZGF0ZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -89,6 +85,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Role/RoleDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxSb2xlRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Role/UserRole.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxVc2VyUm9sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Role/UserRoles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxVc2VyUm9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/Shared/NotFound.cshtml]

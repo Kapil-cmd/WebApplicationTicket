@@ -1,6 +1,7 @@
 ﻿using Common.ViewModels.Tickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository.Entites;
 using Repository.Repos.Work;
@@ -38,7 +39,7 @@ namespace demo.Controllers
         [PermissionFilter("Admin&Ticket&DevView_Ticket")]
         public IActionResult DeveloperIndex()
         {
-            var user = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.GivenName);
+            var user = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var model = _unitOfWork._db.Tickets.Where(x => x.AssignedTo == user).OrderByDescending(x => x.ModifiedDateTime).ToList();
             return View(model);
         }
@@ -107,14 +108,13 @@ namespace demo.Controllers
             }
             EditTicketViewmodel model = new EditTicketViewmodel();
             model.TicketDetails = ticket.TicketDetails;
-            var user = _unitOfWork._db.Users.ToList();
+            var user = _unitOfWork._db.UserRoles.Include(x => x.aUser).Include(x => x.aUser.Roles).Where(x => x.aUser.Roles.Any(x => x.RoleName =="Developer"));
             if (user != null) 
             {
                 if (user.Count() > 0)
                 {
                     model.Users = user.Select(x => new ListUser()
                     {
-                        Id = x.Id,
                         UserName = x.UserName
                     }).ToList();
                 }
