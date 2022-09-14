@@ -31,7 +31,7 @@ namespace Web.Controllers
             _db = db;
             _toastNotification = toastNotification;
         }
-        //[PermissionFilter("Admin&User&View_User")]
+        [PermissionFilter("Admin&User&View_User")]
         public IActionResult Index()
         {
             IEnumerable<User> userList = _unitOfWork.UserRepository.GetAll();
@@ -84,7 +84,7 @@ namespace Web.Controllers
         }
         [HttpGet]
         [Authorize]
-        //[PermissionFilter("Admin&User&Edit_User")]
+        [PermissionFilter("Admin&User&Edit_User")]
         public IActionResult EditUser(string Id)
         {
             var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
@@ -116,7 +116,7 @@ namespace Web.Controllers
 
         }
         [HttpPost]
-        //[PermissionFilter("Admin&User&Edit_User")]
+        [PermissionFilter("Admin&User&Edit_User")]
         public IActionResult EditUser(EditUserViewModel model)
         {
             if (!ModelState.IsValid)

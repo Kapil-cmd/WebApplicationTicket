@@ -26,25 +26,21 @@ namespace Web.Controllers
             _roleService = roleService;
             _toastNotification = toastNotification;
         }
+        [PermissionFilter("Admin&Role&View_Role")]
         public IActionResult Index()
         {
             var roles = _unitOfWork._db.Roles.ToList();
             return View(roles);
         }
-        [PermissionFilter("Admin&Role&User_Role")]
-        public IActionResult UserRole()
-        {
-            var userRole = _unitOfWork._db.UserRoles.ToList();
-            return View(userRole);
-        }
+        
         [HttpGet]
-        //[PermissionFilter("Admin&Role&Create_Role")]
+        [PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole()
         {
             return View();
         }
         [HttpPost]
-        //[PermissionFilter("Admin&Role&Create_Role")]
+        [PermissionFilter("Admin&Role&Create_Role")]
         public IActionResult CreateRole(RoleViewModel model)
         {
             if (!ModelState.IsValid)
@@ -64,6 +60,7 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
+        [PermissionFilter("Admin&Role&Manage_Role")]
         public IActionResult ManageRole(string Id)
         {
             var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == Id);
@@ -89,6 +86,7 @@ namespace Web.Controllers
 
         }
         [HttpPost]
+        [PermissionFilter("Admin&Role&Manage_Role")]
         public IActionResult ManageRole(EditRole model)
             {
             if (!ModelState.IsValid)
@@ -126,7 +124,7 @@ namespace Web.Controllers
             };
         }
         [HttpGet]
-        //[PermissionFilter("Admin&Role&Delete_Role")]
+        [PermissionFilter("Admin&Role&Delete_Role")]
         public IActionResult Delete(string Id)
         {
             if(Id == null)
@@ -137,7 +135,7 @@ namespace Web.Controllers
             return View(deleteRole);
         }
         [HttpPost]
-        //[PermissionFilter("Admin&Role&Delete_Role")]
+        [PermissionFilter("Admin&Role&Delete_Role")]
         public IActionResult Delete(Role model)
         {
             var response = _roleService.DeleteRole(model);
