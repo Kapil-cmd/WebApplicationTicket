@@ -98,6 +98,7 @@ namespace Web.Controllers
             model.Email = user.Email;
             model.Address = user.Address;
             model.PhoneNumber = user.PhoneNumber;
+            model.UserName = user.UserName;
             var role = _unitOfWork._db.Roles.ToList();
             if (role != null)
             {

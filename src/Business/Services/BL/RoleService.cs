@@ -95,9 +95,9 @@ namespace Services.BL
                 {
                     if (permission.IsPermitted == true)
                     {
-                        if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleId == model.Id && x.PermissionId == permission.Id))
+                        if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleName == model.Name && x.PermissionId == permission.Id))
                         {
-                            var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleId == model.Id && x.PermissionId == permission.Id);
+                            var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleName == model.Id && x.PermissionId == permission.Id);
                             _unitOfWork._db.RolePermissions.Remove(rolePermission);
                             _unitOfWork._db.SaveChanges();
                         }
@@ -105,7 +105,7 @@ namespace Services.BL
                         {
                             _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
                             {
-                                RoleId = model.Id,
+                                RoleName = model.Name,
                                 PermissionId = permission.Id
                             });
                             _unitOfWork.Save();
@@ -132,7 +132,7 @@ namespace Services.BL
             BaseResponseModel<string> response = new BaseResponseModel<string>();
             try
             {
-                var rolePermission = _unitOfWork.RolePermissionRepository.GetFirstOrDefault(x => x.RoleId == roleId && x.PermissionId == permissionId);
+                var rolePermission = _unitOfWork.RolePermissionRepository.GetFirstOrDefault(x => x.RoleName == roleId && x.PermissionId == permissionId);
                 if(rolePermission == null)
                 {
 

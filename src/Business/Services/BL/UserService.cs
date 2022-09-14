@@ -166,6 +166,7 @@ namespace Services.BL
                 user.FirstName = EditUser.FirstName;
                 user.LastName = EditUser.LastName;
                 user.PhoneNumber = EditUser.PhoneNumber;
+                user.UserName = EditUser.UserName;
 
                 _unitOfWork._db.Users.Update(user);
                 _unitOfWork._db.SaveChanges();
@@ -176,9 +177,9 @@ namespace Services.BL
                 {
                     if(role.IsSelected == true)
                     {
-                        if(_unitOfWork._db.UserRoles.Any(x => x.UserId == EditUser.Id && x.RoleId == role.Id))
+                        if(_unitOfWork._db.UserRoles.Any(x => x.UserName == EditUser.UserName && x.RoleName == role.Name))
                         {
-                            var userRoles = _unitOfWork._db.UserRoles.FirstOrDefault(x => x.UserId == EditUser.Id && x.RoleId == role.Id);
+                            var userRoles = _unitOfWork._db.UserRoles.FirstOrDefault(x => x.UserName == EditUser.Id && x.RoleName == role.Name);
                             _unitOfWork._db.UserRoles.Remove(userRoles);
                             _unitOfWork._db.SaveChanges();
                         }
@@ -186,8 +187,8 @@ namespace Services.BL
                         { 
                             _unitOfWork._db.UserRoles.Add(new Repository.Entites.UserRole()
                             {
-                                UserId = EditUser.Id,
-                                RoleId = role.Id
+                                UserName = EditUser.UserName,
+                                RoleName = role.Name
                             });
                             _unitOfWork.Save();
                         }

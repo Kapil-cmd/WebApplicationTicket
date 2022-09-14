@@ -4,23 +4,23 @@ using Repository.Entities;
 
 namespace Repository.Configurations
 {
-    public class UserTicketConfig:IEntityTypeConfiguration<UserTicket>
+    public class UserTicketConfig : IEntityTypeConfiguration<UserTicket>
     {
         public void Configure(EntityTypeBuilder<UserTicket> builder)
         {
-            builder.ToTable("UserTickets");
-            builder.HasKey(x => new { x.UserId, x.TicketId });
+            builder.HasKey(x => new { x.UserName, x.TicketId });
 
             builder.HasOne(x => x.aUser)
-                .WithMany(x => x.AssignedeTickets)
-                .HasForeignKey(x => x.UserId)
+                .WithMany(x => x.Tickets)
+                .HasForeignKey(x => x.UserName)
                 .HasPrincipalKey(x => x.UserName)
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .OnDelete(DeleteBehavior.ClientNoAction);
 
             builder.HasOne(x => x.aTicket)
                 .WithMany(x => x.AssignedUsers)
                 .HasForeignKey(x => x.TicketId)
-                .OnDelete(DeleteBehavior.ClientCascade);
-                }
+                .HasPrincipalKey(x => x.TicketId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
+    }
 }

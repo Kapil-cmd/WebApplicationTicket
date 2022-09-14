@@ -10,11 +10,12 @@ namespace Repository.Configurations
         {
             builder.ToTable("RolePermissions");
 
-            builder.HasKey(x => new { x.RoleId, x.PermissionId});
+            builder.HasKey(x => new { x.RoleName, x.PermissionId});
 
             builder.HasOne(x => x.aRole)
                 .WithMany(x => x.Permissions)
-                .HasForeignKey(x => x.RoleId)
+                .HasForeignKey(x => x.RoleName)
+                .HasPrincipalKey(x => x.Name)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
 

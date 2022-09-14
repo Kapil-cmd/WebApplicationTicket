@@ -35,9 +35,10 @@ namespace demo.Controllers
             var model = _unitOfWork._db.Tickets.Where(a => a.User.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(model);
         }
+        [PermissionFilter("Admin&Ticket&DevView_Ticket")]
         public IActionResult DeveloperIndex()
         {
-            var user = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.GivenName);
             var model = _unitOfWork._db.Tickets.Where(x => x.AssignedTo == user).OrderByDescending(x => x.ModifiedDateTime).ToList();
             return View(model);
         }

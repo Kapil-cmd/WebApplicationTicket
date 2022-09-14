@@ -5,7 +5,7 @@ namespace Repository.Entities
     public class UserTicket
     {
         public string TicketId { get; set; }
-        public string UserId { get; set; }
+        public string UserName { get; set; }
 
         public virtual User aUser { get; set; }
         public virtual Ticket aTicket { get; set; }

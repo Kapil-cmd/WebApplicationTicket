@@ -11,6 +11,12 @@
     <div class="col-md-4">
         <form asp-action="EditUser">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+             <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" readonly ="readonly"/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -41,9 +47,9 @@
                  <h3>Assign Role</h3><br />
                     @for(int i = 0; i < Model.Roles.Count(); i++)
                     {
-                        <input id="@Model.Roles[i].Id" asp-for="@Model.Roles[i].IsSelected" type="checkbox" class="custom-control-input"/>
-                        <input asp-for="@Model.Roles[i].Id" type="hidden"/>
-                        <label for="@Model.Roles[i].Id" class="custom-control-label">@Model.Roles[i].Name</label>
+                        <input id="@Model.Roles[i].Name" asp-for="@Model.Roles[i].IsSelected" type="checkbox" class="custom-control-input"/>
+                        <input asp-for="@Model.Roles[i].Name" type="hidden"/>
+                        <label for="@Model.Roles[i].Name" class="custom-control-label">@Model.Roles[i].Name</label>
                     }
                 </div>
          </div> 

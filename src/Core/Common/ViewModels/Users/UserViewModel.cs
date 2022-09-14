@@ -58,6 +58,7 @@ namespace Common.ViewModels.Users
         [Required(ErrorMessage = "LastName is required"), MaxLength(25), Display(Name = "LastName")]
         public string LastName { get; set; }
         [Required(ErrorMessage = "Address is required"), MaxLength(15), Display(Name = "Address")]
+        public string UserName { get; set; }
         public string Address { get; set; }
         [Required(ErrorMessage = "Email is required"), Display(Name = "Email")]
         [EmailAddress]

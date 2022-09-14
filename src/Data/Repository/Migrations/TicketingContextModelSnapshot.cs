@@ -79,7 +79,7 @@ namespace Repository.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -88,13 +88,13 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Entites.RolePermission", b =>
                 {
-                    b.Property<string>("RoleId")
+                    b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PermissionId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("RoleId", "PermissionId");
+                    b.HasKey("RoleName", "PermissionId");
 
                     b.HasIndex("PermissionId");
 
@@ -107,8 +107,7 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AssignedTo")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -210,15 +209,15 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Entites.UserRole", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.HasKey("UserName", "RoleName");
 
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleName");
 
                     b.ToTable("UserRoles", (string)null);
                 });
@@ -259,17 +258,17 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Entities.UserTicket", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("TicketId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId", "TicketId");
+                    b.HasKey("UserName", "TicketId");
 
                     b.HasIndex("TicketId");
 
-                    b.ToTable("UserTickets", (string)null);
+                    b.ToTable("UserTickets");
                 });
 
             modelBuilder.Entity("Repository.Entites.Category", b =>
@@ -292,7 +291,8 @@ namespace Repository.Migrations
 
                     b.HasOne("Repository.Entites.Role", "aRole")
                         .WithMany("Permissions")
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("RoleName")
+                        .HasPrincipalKey("Name")
                         .IsRequired();
 
                     b.Navigation("aPermission");
@@ -309,7 +309,7 @@ namespace Repository.Migrations
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "User")
-                        .WithMany("MyCreatedTicket")
+                        .WithMany("myCreatedTicket")
                         .HasForeignKey("CreatedBy")
                         .HasPrincipalKey("UserName")
                         .IsRequired();
@@ -323,13 +323,15 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Repository.Entites.Role", "aRole")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("RoleName")
+                        .HasPrincipalKey("Name")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "aUser")
                         .WithMany("Roles")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserName")
+                        .HasPrincipalKey("UserName")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
@@ -343,14 +345,14 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Entites.Ticket", "aTicket")
                         .WithMany("AssignedUsers")
                         .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Repository.Entites.User", "aUser")
-                        .WithMany("AssignedeTickets")
-                        .HasForeignKey("UserId")
+                        .WithMany("Tickets")
+                        .HasForeignKey("UserName")
                         .HasPrincipalKey("UserName")
-                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .OnDelete(DeleteBehavior.ClientNoAction)
                         .IsRequired();
 
                     b.Navigation("aTicket");
@@ -382,13 +384,13 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Entites.User", b =>
                 {
-                    b.Navigation("AssignedeTickets");
-
                     b.Navigation("Categories");
 
-                    b.Navigation("MyCreatedTicket");
-
                     b.Navigation("Roles");
+
+                    b.Navigation("Tickets");
+
+                    b.Navigation("myCreatedTicket");
                 });
 #pragma warning restore 612, 618
         }

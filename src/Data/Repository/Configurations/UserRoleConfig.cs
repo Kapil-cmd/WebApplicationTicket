@@ -10,16 +10,18 @@ namespace Repository.Configurations
         {
             builder.ToTable("UserRoles");
 
-            builder.HasKey(x => new { x.UserId, x.RoleId });
+            builder.HasKey(x => new { x.UserName, x.RoleName });
 
             builder.HasOne(x => x.aUser)
                 .WithMany(x => x.Roles)
-                .HasForeignKey(x => x.UserId)
+                .HasForeignKey(x => x.UserName)
+                .HasPrincipalKey(x => x.UserName)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             builder.HasOne(x => x.aRole)
                 .WithMany(x => x.Users)
-                .HasForeignKey(x => x.RoleId)
+                .HasForeignKey(x => x.RoleName)
+                .HasPrincipalKey(x => x.Name)
                 .OnDelete(DeleteBehavior.NoAction);
 
 

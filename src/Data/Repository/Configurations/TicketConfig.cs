@@ -19,12 +19,12 @@ namespace Repository.Configurations
             builder.Property(x => x.ModifiedDateTime);
             builder.Property(x => x.ModifiedBy);
             builder.Property(x => x.CategoryName).IsRequired();
-            builder.Property(x => x.AssignedTo).HasMaxLength(200);
+            builder.Property(x => x.AssignedTo);
             builder.Property(x => x.Status).IsRequired();
             builder.Property(x => x.ImageName);
 
             builder.HasOne(x => x.User)
-                .WithMany(x => x.MyCreatedTicket)
+                .WithMany(x => x.myCreatedTicket)
                 .HasForeignKey(x => x.CreatedBy)
                 .HasPrincipalKey(x => x.UserName)
                 .OnDelete(DeleteBehavior.ClientSetNull);

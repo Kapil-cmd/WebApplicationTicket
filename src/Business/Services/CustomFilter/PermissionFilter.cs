@@ -29,7 +29,7 @@ namespace Services.CustomFilter
                 var actionName = distributor.ActionName;
                 var controllerName = distributor.ControllerName;
 
-                var Id = db.Users.FirstOrDefault(x=>x.UserName == context.HttpContext.User.Identity.Name)?.Id;
+                var userName = db.Users.FirstOrDefault(x=>x.UserName == context.HttpContext.User.Identity.Name)?.UserName;
                 var permissionSlug = _claim.Split('&');
                 var permissions = db.Permissions.FirstOrDefault(x => x.Slug == permissionSlug.Last());
 
@@ -44,8 +44,8 @@ namespace Services.CustomFilter
                 var rolePermissions = db.RolePermissions;
 
                 var hasPermission = (from rp in rolePermissions
-                                     join ur in userRole on rp.RoleId equals ur.RoleId
-                                     where ur.UserId == Id && rp.PermissionId == permissions.PermissionId
+                                     join ur in userRole on rp.RoleName equals ur.RoleName
+                                     where ur.UserName == userName && rp.PermissionId == permissions.PermissionId
                                      select rp
                                     ).Any();
                 if (hasPermission)

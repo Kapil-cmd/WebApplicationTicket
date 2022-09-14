@@ -30,7 +30,7 @@ namespace Repository
             builder.ApplyConfiguration(new RolePermissionConfig());
             builder.ApplyConfiguration(new TicketConfig());
             builder.ApplyConfiguration(new UserConfig());
-            builder.ApplyConfiguration(new UserRoleConfig());   
+            builder.ApplyConfiguration(new UserRoleConfig());
             builder.ApplyConfiguration(new UserTicketConfig());
             builder.ApplyConfiguration(new CategoryTempConfig());
             builder.ApplyConfiguration(new FieldValidationConfig());

@@ -9,7 +9,7 @@ namespace Web.StaticModel
         private static TicketingContext db;
         public static bool HasPermission(string username, string permissionValue)
         {
-            var Id = db.Users.FirstOrDefault(x => username == x.UserName)?.Id;
+            var Id = db.Users.FirstOrDefault(x => username == x.UserName)?.UserName;
             var claims = ClaimsPrincipal.Current.Identities.First().Claims.First();
 
             var permissions = db.Permissions.FirstOrDefault(x => x.Slug == permissionValue);
@@ -19,8 +19,8 @@ namespace Web.StaticModel
             var userRoles = db.UserRoles;
 
             var hasPermission = (from rp in rolePermissions
-                                 join ur in userRoles on rp.RoleId equals ur.RoleId
-                                 where ur.UserId == Id && rp.PermissionId == permissions.PermissionId
+                                 join ur in userRoles on rp.RoleName equals ur.RoleName
+                                 where ur.UserName == Id && rp.PermissionId == permissions.PermissionId
                                  select rp
                                 ).Any();
 
