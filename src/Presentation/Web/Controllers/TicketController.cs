@@ -7,8 +7,8 @@ using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
 using Services.CustomFilter;
-using System.Linq;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace demo.Controllers
 {
@@ -19,7 +19,8 @@ namespace demo.Controllers
         private readonly ITicketService _ticketService;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IToastNotification _toastNotification;
-        public TicketController(IUnitOfWork unitOfWork, ITicketService ticketService, IWebHostEnvironment webHostEnvironment,IToastNotification toastNotification)
+        
+        public TicketController(IUnitOfWork unitOfWork,ITicketService ticketService, IWebHostEnvironment webHostEnvironment,IToastNotification toastNotification)
         {
             _unitOfWork = unitOfWork;
             _ticketService = ticketService;
@@ -27,12 +28,25 @@ namespace demo.Controllers
             _toastNotification = toastNotification;
         }
         [PermissionFilter("Admin&Ticket&View_Ticket")]
-        public IActionResult Index(string Sorting_Order,string Search_Data)
+        public IActionResult Index(string Sorting_Order,string Search_Data,string Filter_Value,int? Page_No)
         {
+            ViewBag.CurrentSortOrder = Sorting_Order;
             ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
             ViewBag.SortingCName = String.IsNullOrEmpty(Sorting_Order) ? "Category_Description" : "";
             ViewBag.SortingDate = Sorting_Order == "Created_Date" ? "Date_Description" : "Date";
+            if (Search_Data != null)
+            {
+                Page_No = 1;
+            }
+            else
+            {
+                Search_Data = Filter_Value;
+            }
+            ViewBag.FilterValue = Search_Data;
+
             var tickets = from ticket in _unitOfWork._db.Tickets select ticket;
+            
+            if(!String.IsNullOrEmpty(Search_Data))
             {
                 tickets = tickets.Where(ticket => ticket.CreatedBy.ToUpper().Contains(Search_Data.ToUpper()));
                 
@@ -53,7 +67,9 @@ namespace demo.Controllers
                     tickets = tickets.OrderBy(ticket => ticket.CreatedDateTime);
                 break;
             }
-            return View(tickets.ToList());
+            int Size_Of_Page = 4;
+            int No_Of_page = (Page_No ?? 1);
+            return View(tickets.ToPagedList(No_Of_page, Size_Of_Page));
 
         }
         public IActionResult UserIndex()

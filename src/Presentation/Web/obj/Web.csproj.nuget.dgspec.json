@@ -431,6 +431,10 @@
               "target": "Package",
               "version": "[2.1.13, )"
             },
+            "PagedList.Mvc": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
             "System.Net.Http": {
               "target": "Package",
               "version": "[4.3.4, )"
@@ -442,6 +446,10 @@
             "System.Text.Encoding.CodePages": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[8.4.3, )"
             },
             "toastr": {
               "target": "Package",

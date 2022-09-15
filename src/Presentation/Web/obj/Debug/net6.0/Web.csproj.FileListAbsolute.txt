@@ -586,3 +586,8 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\ZstdNet
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\MySqlConnector.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\NepaliCalendarBS.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\libman.json
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\PagedList.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\PagedList.Mvc.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\JetBrains.Annotations.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\X.PagedList.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\X.PagedList.Mvc.Core.dll

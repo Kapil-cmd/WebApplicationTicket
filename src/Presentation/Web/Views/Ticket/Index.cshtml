@@ -1,4 +1,8 @@
-﻿@model IEnumerable<Repository.Entites.Ticket>
+﻿@model X.PagedList.IPagedList<Repository.Entites.Ticket>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,10 +13,10 @@
         <a asp-action="Create" class="btn btn-sm btn-primary pull-right">Create New</a>
     </div>
 </div>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index","Ticket", FormMethod.Get))
 {
     <p>
-        Search Ticket: @Html.TextBox("Search_Data",ViewBag.FilterValue as string)
+        Fint by Username: @Html.TextBox("Search_Data",ViewBag.FilterValue as string)
         <input type="submit" value="Find" class="btn btn-group-sm"/>
     </p>
 }
@@ -99,3 +103,7 @@
 
     </tbody>
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount 
+@Html.PagedListPager(Model, Page_No =>Url.Action("Index",  
+    new { Page_No, Sorting_Order= ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
