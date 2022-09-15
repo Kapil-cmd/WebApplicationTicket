@@ -9,6 +9,13 @@
         <a asp-action="Create" class="btn btn-sm btn-primary pull-right">Create New</a>
     </div>
 </div>
+@using (Html.BeginForm())
+{
+    <p>
+        Search Ticket: @Html.TextBox("Search_Data",ViewBag.FilterValue as string)
+        <input type="submit" value="Find" class="btn btn-group-sm"/>
+    </p>
+}
 <table class="table table-striped table-responsive">
     <thead>
         <tr>

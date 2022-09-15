@@ -7,6 +7,7 @@ using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
 using Services.CustomFilter;
+using System.Linq;
 using System.Security.Claims;
 
 namespace demo.Controllers
@@ -26,12 +27,16 @@ namespace demo.Controllers
             _toastNotification = toastNotification;
         }
         [PermissionFilter("Admin&Ticket&View_Ticket")]
-        public IActionResult Index(string Sorting_Order)
+        public IActionResult Index(string Sorting_Order,string Search_Data)
         {
             ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
             ViewBag.SortingCName = String.IsNullOrEmpty(Sorting_Order) ? "Category_Description" : "";
             ViewBag.SortingDate = Sorting_Order == "Created_Date" ? "Date_Description" : "Date";
             var tickets = from ticket in _unitOfWork._db.Tickets select ticket;
+            {
+                tickets = tickets.Where(ticket => ticket.CreatedBy.ToUpper().Contains(Search_Data.ToUpper()));
+                
+            }
             switch (Sorting_Order)
             {
                 case "Name_Description":
@@ -45,10 +50,10 @@ namespace demo.Controllers
                     tickets = tickets.OrderByDescending(ticket => ticket.CreatedDateTime);
                 break;
                 default:
-                    tickets = tickets.OrderBy(ticket => ticket.CreatedBy);
+                    tickets = tickets.OrderBy(ticket => ticket.CreatedDateTime);
                 break;
             }
-            return View(tickets);
+            return View(tickets.ToList());
 
         }
         public IActionResult UserIndex()
