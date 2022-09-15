@@ -185,7 +185,7 @@ namespace demo.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Admin&Ticket&View_Ticket")]
+        [PermissionFilter("Admin&Ticket&Detail_Ticket")]
         public IActionResult DetailTicket(string ticketId)
         {
             if (ticketId == null)
@@ -233,15 +233,13 @@ namespace demo.Controllers
                 return View(ticket);
             }
         }
-        
         [HttpGet]
         public IActionResult CloseTicket(CloseTicket ticket)
         {
-            var id = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == ticket.TicketId);
             var response = _ticketService.CloseTicket(ticket);
             if(response.Status == "00")
             {
-                return RedirectToAction("DeveloperIndex");
+                return RedirectToAction("Index");
             }
             else
             {

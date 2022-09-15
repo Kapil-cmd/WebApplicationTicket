@@ -49,7 +49,7 @@ namespace Services.BL
             var response = new BaseResponseModel<string>();
             try
             {
-                var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == Ticket.TicketId);
+                var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == Ticket.TicketId );
                 if(ticket == null)
                 {
                     response.Status = "404";
@@ -62,11 +62,13 @@ namespace Services.BL
                     _unitOfWork._db.Tickets.Update(ticket);
                     _unitOfWork._db.SaveChanges();
 
-                    response.Status = "00";
-                    response.Message = "Ticket closed sucessfully";
-                    return response;
+                    
                 }
-            }catch(Exception ex)
+                response.Status = "00";
+                response.Message = "Ticket closed sucessfully";
+                return response;
+            }
+            catch (Exception ex)
             {
                 response.Status = "500";
                 response.Message = "Exception occurred :" + ex.Message;

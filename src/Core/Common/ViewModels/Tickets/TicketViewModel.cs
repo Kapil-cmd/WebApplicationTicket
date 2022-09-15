@@ -45,7 +45,7 @@ namespace Common.ViewModels.Tickets
     }
     public class Users
     {
-        public string Id;
+        public string Id { get; set; }
         public string UserName { get; set; }
     }
 }

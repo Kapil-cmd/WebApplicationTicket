@@ -54,9 +54,16 @@ namespace Web.Controllers
                        select users;
             if (!String.IsNullOrEmpty(searchString))
             {
-                user = user.Where(x => x.UserName.Contains(searchString)
-                || x.Email.Contains(searchString));
+                user = user.Where(x => x.UserName
+                .ToUpper()
+                .Contains(searchString
+                    .ToUpper()) ||
+                 x.Email
+                .ToUpper()
+                .Contains(searchString
+                .ToUpper()));
             }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -69,6 +76,7 @@ namespace Web.Controllers
                     user = user.OrderByDescending(x => x.UserName.StartsWith("A"));
                     break;
             }
+
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(user.ToPagedList(pageNumber, pageSize));
@@ -293,6 +301,7 @@ namespace Web.Controllers
             Message.Body = "<br/> Your registration completed succesfully." +
                    "<br/> please click on the below link for account verification" +
                    "<br/><br/><a href=" + link + ">" + link + "</a>";
+
             Message.IsBodyHtml = true;
             smtp.Send(Message);
         }
@@ -410,6 +419,7 @@ namespace Web.Controllers
             string NewOTP = "";
             string temp = "";
             Random random = new Random();
+
             for (int i = 0; i < Convert.ToInt32(OTPLength); i++)
             {
                 temp = arr[random.Next(0, arr.Length)];
@@ -444,13 +454,15 @@ namespace Web.Controllers
             var userId = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == userId);
             UserProfile model = new UserProfile();
-            model.FirstName = user.FirstName;
-            model.LastName = user.LastName;
-            model.PhoneNumber = user.PhoneNumber;
-            model.Address = user.Address;
-            model.ImageName = user.ProfilePicture;
-            model.DateOfBirth = user.DateOfBirth;
-            model.Email = user.Email;
+            { 
+                model.FirstName = user.FirstName;
+                model.LastName = user.LastName;
+                model.PhoneNumber = user.PhoneNumber;
+                model.Address = user.Address;
+                model.ImageName = user.ProfilePicture;
+                model.DateOfBirth = user.DateOfBirth;
+                model.Email = user.Email;
+            }
             return View(model);
         }
         [HttpPost]
@@ -468,6 +480,7 @@ namespace Web.Controllers
                     await model.ProfilePic.CopyToAsync(filestream);
                 }
             }
+
             var response = _userService.UserProfile(model);
             if (response.Status == "00")
             {
