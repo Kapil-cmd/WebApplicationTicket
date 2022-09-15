@@ -26,10 +26,30 @@ namespace demo.Controllers
             _toastNotification = toastNotification;
         }
         [PermissionFilter("Admin&Ticket&View_Ticket")]
-        public IActionResult Index()
+        public IActionResult Index(string Sorting_Order)
         {
-            var model = _unitOfWork.Ticket.GetAll().OrderBy(x => x.CreatedDateTime).ToList();
-            return View(model);
+            ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Name_Description" : "";
+            ViewBag.SortingCName = String.IsNullOrEmpty(Sorting_Order) ? "Category_Description" : "";
+            ViewBag.SortingDate = Sorting_Order == "Created_Date" ? "Date_Description" : "Date";
+            var tickets = from ticket in _unitOfWork._db.Tickets select ticket;
+            switch (Sorting_Order)
+            {
+                case "Name_Description":
+                    tickets = tickets.OrderByDescending(ticket => ticket.CreatedBy);
+                break;
+                case "Category_Description":
+                    tickets = tickets.OrderByDescending(ticket => ticket.CategoryName);
+                break;
+
+                case "Date_Description":
+                    tickets = tickets.OrderByDescending(ticket => ticket.CreatedDateTime);
+                break;
+                default:
+                    tickets = tickets.OrderBy(ticket => ticket.CreatedBy);
+                break;
+            }
+            return View(tickets);
+
         }
         public IActionResult UserIndex()
         {

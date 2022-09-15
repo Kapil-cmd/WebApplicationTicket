@@ -16,10 +16,10 @@
                TicketDetails
             </th>
             <th>
-               CreatedBy
+                @Html.ActionLink("CreatedBy","Index",new{Sorting_Order = ViewBag.SortingName}) 
             </th>
             <th>
-                CreatedDateTime
+                 @Html.ActionLink("CreatedDateTime","Index",new{Sorting_Order = ViewBag.SortingDate}) 
             </th>
             <th>
                 ModifiedDateTime
@@ -31,7 +31,7 @@
                AssignedTo
             </th>
             <th>
-                CategoryName
+               @Html.ActionLink("CategoryName","Index",new{Sorting_Order = ViewBag.SortingCName}) 
             </th>
             <th>
                 Status
