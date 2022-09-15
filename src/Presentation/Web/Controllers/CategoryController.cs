@@ -111,22 +111,30 @@ namespace Web.Controllers
         }
         [HttpGet]
         [PermissionFilter("Admin&Category&Delete_Category")]
-        public IActionResult DeleteCategory(string CId)
+        public IActionResult DeleteCategory(string? CId)
         {
             if(CId == null)
             {
                 return NotFound();
             }
-            var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == CId);
-            
-            return View(category);
+            else
+            {
+                var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == CId);
+                if(category == null)
+                {
+                    return NotFound();
+                }
+                return View(category);
+            }
         }
-
         [HttpPost]
-
         [PermissionFilter("Admin&Category&Delete_Category")]
         public IActionResult DeleteCategory(Category category)
         {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
             var response = _categoryService.DeleteCategory(category);
             if(response.Status == "00")
             {
@@ -134,7 +142,7 @@ namespace Web.Controllers
             }
             else
             {
-                return View();
+                return View(category);
             }
         }
     }

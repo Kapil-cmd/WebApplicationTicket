@@ -12,6 +12,7 @@ using Services.CustomFilter;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace Web.Controllers
 {
@@ -32,10 +33,46 @@ namespace Web.Controllers
             _toastNotification = toastNotification;
         }
         [PermissionFilter("Admin&User&View_User")]
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString,string currentFilter,int? page)
         {
-            IEnumerable<User> userList = _unitOfWork.UserRepository.GetAll();
-            return View(userList);
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortparm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.AgeSortParm = String.IsNullOrEmpty(sortOrder)? "age_desc":"";
+
+            if(searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.currentFilter = searchString;
+
+            var user = from users in _unitOfWork._db.Users
+                       select users;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                user = user.Where(x => x.UserName.Contains(searchString)
+                || x.Email.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    user = user.OrderByDescending(x => x.UserName);
+                    break;
+                case "age_desc":
+                    user = user.OrderByDescending(x => x.Age);
+                    break;
+                default:
+                    user = user.OrderByDescending(x => x.UserName.StartsWith("A"));
+                    break;
+            }
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(user.ToPagedList(pageNumber, pageSize));
+
         }
 
         [HttpGet]

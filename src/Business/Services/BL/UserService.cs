@@ -215,18 +215,11 @@ namespace Services.BL
                 var user = _unitOfWork._db.Users.Include("Roles").Include("Roles.aRole").FirstOrDefault(x => x.Id == DeleteUser.Id);
                 if (user == null)
                 {
-                    response.Status = "100";
+                    response.Status = "404";
                     response.Message = "User not found";
                     return response;
                 }
-                user.Id = DeleteUser.Id;
-                user.FirstName = DeleteUser.FirstName;
-                user.LastName = DeleteUser.LastName;
-                user.UserName = DeleteUser.UserName;
-                user.Address = DeleteUser.Address;
-                user.Age = DeleteUser.Age;
-                user.Email = DeleteUser.Email;
-                user.PhoneNumber = DeleteUser.PhoneNumber;
+                user = DeleteUser;
 
                 _unitOfWork._db.Users.Remove(user);
                 _unitOfWork._db.SaveChanges();

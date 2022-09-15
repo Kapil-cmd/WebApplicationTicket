@@ -127,64 +127,12 @@ namespace Services.BL
 
             }
         }
-        public BaseResponseModel<string> RemovePermissionFromRole(string roleId, string permissionId)
-        {
-            BaseResponseModel<string> response = new BaseResponseModel<string>();
-            try
-            {
-                var rolePermission = _unitOfWork.RolePermissionRepository.GetFirstOrDefault(x => x.RoleName == roleId && x.PermissionId == permissionId);
-                if(rolePermission == null)
-                {
-
-
-                    response.Status = "404";
-                    response.Message = "{this permission} has not been yet assigned to this{this user}";
-                    return response;
-                }
-                _unitOfWork.RolePermissionRepository.Remove(rolePermission);
-                _unitOfWork.Save();
-
-                response.Status = "00";
-                response.Message = "Sucessfully removed permission from role";
-                return response;
-            }
-            catch(Exception ex)
-            {
-      response.Status = "500";
-    
-                
-                
-                
-                response.Message ="Error occured :" + ex.Message;
-                
-
-return response;
-            }
-
-
-            #region RemovePermission
-            //var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleId == model.Id && x.PermissionId == model.Id);
-            //if(rolePermission == null)
-            //{
-            //    response.Status = "404";
-            //    response.Message = "Permission isnot assign in this role";
-            //    return response;
-            //}
-            //_unitOfWork._db.RolePermissions.Remove(rolePermission);
-            //_unitOfWork._db.SaveChanges();
-
-            //response.Status = "00";
-            //response.Message = "Permission removed sucessfully";
-            //return response;
-            #endregion
-        }
+       
     }
     public interface IRoleService
     {
         BaseResponseModel<string> CreateRole(RoleViewModel model);
         BaseResponseModel<string> ManageRole(EditRole model);
         BaseResponseModel<string> DeleteRole(Role model);
-        //BaseResponseModel<string> AssignPermissionToRole(string roleId, string[] permissionId);
-        BaseResponseModel<string> RemovePermissionFromRole(string roleId, string permissionId);
     }
 }

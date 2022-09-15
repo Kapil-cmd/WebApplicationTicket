@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.Categories;
+using Microsoft.EntityFrameworkCore;
 using Repository.Entites;
 using Repository.Repos.Work;
 using System.Security.Claims;
@@ -48,6 +49,37 @@ namespace Services.BL
                 return response;
             }
         }
+
+        public BaseResponseModel<string> DeleteCategory(Category category)
+        {
+            var response = new BaseResponseModel<string>();
+            try
+            {
+                var model = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == category.CId);
+                if(model == null)
+                {
+                    response.Status = "404";
+                    response.Message = "Category not found";
+                    return response;
+                }
+                else
+                {
+                    model = category;
+                    _unitOfWork._db.Category.Remove(model);
+                    _unitOfWork._db.SaveChanges();
+                }
+
+                response.Status = "00";
+                response.Message = "Category deleted sucessfully";
+                return response;
+            }catch(Exception ex)
+            {
+                response.Status = "100";
+                response.Message ="Exception occurred :"+ ex.Message;
+                return response;
+            }
+        }
+
         public BaseResponseModel<string> EditCategory(EditCategoryViewModel EditCategory)
         {
             var response = new BaseResponseModel<string>();
@@ -82,31 +114,7 @@ namespace Services.BL
                 return response;
             }
         }
-       public BaseResponseModel<string> DeleteCategory(Category category)
-        {
-            var response = new BaseResponseModel<string>();
-            try
-            {
-                var model = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == category.CId);
-                if (model == null)
-                {
-                    response.Status = "404";
-                    response.Message = "Category Not Found";
-                    return response;
-                }
-                _unitOfWork._db.Category.Remove(category);
-                _unitOfWork._db.SaveChanges();
-
-                response.Status = "00";
-                response.Message = "Category deleted sucessfully";
-                return response;
-            }catch(Exception ex)
-            {
-                response.Status = "500";
-                response.Message ="Error occurred :"+ ex.Message;
-                return response ;
-            }
-        }
+       
     }
     public interface ICategoryservice
     {

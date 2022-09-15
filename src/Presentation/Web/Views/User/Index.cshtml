@@ -1,4 +1,8 @@
-﻿@model IEnumerable<Repository.Entites.User>
+﻿@model X.PagedList.IPagedList<Repository.Entites.User>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core
+<link href="~/css/page.css" rel="stylesheet" />
 
 @{
     ViewData["Title"] = "Index";
@@ -10,11 +14,19 @@
         <a asp-action="RegisterUser" class="btn btn-sm btn-primary pull-right">Create New</a>
     </div>
 </div>
+<br />
+@using(Html.BeginForm("Index","User",FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString",ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="btn btn-outline-dark"/> 
+    </p>
+}
 <table class="table table-striped table-responsive">
     <thead>
         <tr>
             <th>
-                Username
+                @Html.ActionLink("Username","Index", new{ sortOrder = ViewBag.NameSortparm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
                 First Name
@@ -29,10 +41,10 @@
                 Email
             </th>
             <th>
-                Age
+               @Html.ActionLink("Age","Index", new{ sortOrder = ViewBag.AgeSortparm, currentFilter = ViewBag.CurrentFilter })  
             </th>
             <th>
-                Phone Number
+               Phone Number
             </th>
             <th>Action</th>
 
@@ -73,3 +85,8 @@
         }
     </tbody>
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+new{page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
