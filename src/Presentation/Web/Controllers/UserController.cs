@@ -16,7 +16,7 @@ using X.PagedList;
 
 namespace Web.Controllers
 {
-    
+
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -33,13 +33,13 @@ namespace Web.Controllers
             _toastNotification = toastNotification;
         }
         [PermissionFilter("Admin&User&View_User")]
-        public IActionResult Index(string sortOrder, string searchString,string currentFilter,int? page)
+        public IActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortparm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.AgeSortParm = String.IsNullOrEmpty(sortOrder)? "age_desc":"";
+            ViewBag.AgeSortParm = String.IsNullOrEmpty(sortOrder) ? "age_desc" : "";
 
-            if(searchString != null)
+            if (searchString != null)
             {
                 page = 1;
             }
@@ -437,7 +437,7 @@ namespace Web.Controllers
         public IActionResult ResetPassword(ResetPassword password)
         {
             var response = _userService.ResetPassword(password);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 _toastNotification.AddSuccessToastMessage("Password reset sucessfully");
                 return RedirectToAction("Login", "User");
@@ -454,7 +454,7 @@ namespace Web.Controllers
             var userId = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == userId);
             UserProfile model = new UserProfile();
-            { 
+            {
                 model.FirstName = user.FirstName;
                 model.LastName = user.LastName;
                 model.PhoneNumber = user.PhoneNumber;
@@ -496,6 +496,6 @@ namespace Web.Controllers
     }
 }
 
-       
-    
+
+
 

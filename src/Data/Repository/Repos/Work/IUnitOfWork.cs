@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Repository.Repos.CategoryRep;
+using Repository.Repos.CategoryTicketRep;
 using Repository.Repos.ExcelRep;
 using Repository.Repos.PermissionRep;
 using Repository.Repos.RolePermissionRep;
@@ -27,6 +28,7 @@ namespace Repository.Repos.Work
         IUserTicketRepository UserTicketRepository { get; }
         ICategoryTempRepository CategoryTempRepository { get; }
         IFieldValidateRepository FieldValidateRepository { get; }
+        ICategoryTicketRepository CategoryTicketRepository { get; }
         void Save();
     }
 }

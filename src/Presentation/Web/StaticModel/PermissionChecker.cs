@@ -1,4 +1,5 @@
 ﻿using Repository;
+using Repository.Repos.Work;
 using System.Security.Claims;
 
 namespace Web.StaticModel
@@ -7,9 +8,10 @@ namespace Web.StaticModel
     {
 
         private static TicketingContext db;
+        private static UnitOfWork unitOfWork;
         public static bool HasPermission(string username, string permissionValue)
         {
-            var Id = db.Users.FirstOrDefault(x => username == x.UserName)?.UserName;
+            var Id = db.Users.FirstOrDefault(x => x.UserName == username )?.UserName;
             var claims = ClaimsPrincipal.Current.Identities.First().Claims.First();
 
             var permissions = db.Permissions.FirstOrDefault(x => x.Slug == permissionValue);

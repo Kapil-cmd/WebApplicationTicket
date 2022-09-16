@@ -150,6 +150,7 @@ namespace demo.Controllers
             EditTicketViewmodel model = new EditTicketViewmodel();
             model.TicketDetails = ticket.TicketDetails;
             var user = _unitOfWork._db.UserRoles.Include(x => x.aUser).Include(x => x.aUser.Roles).Where(x => x.aUser.Roles.Any(x => x.RoleName =="Developer"));
+            //var category = _unitOfWork._db.Cate
             if (user != null) 
             {
                 if (user.Count() > 0)

@@ -1,4 +1,4 @@
-﻿    using Common.ViewModels.Categories;
+﻿using Common.ViewModels.Categories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +27,7 @@ namespace Web.Controllers
         {
             var category = _unitOfWork._db.Category.Include(x => x.Tickets).OrderBy(x => x.CategoryName).ToList();
             return View(category);
+
         }
         [HttpGet]
         [PermissionFilter("Admin&Category&Create_Category")]
@@ -113,14 +114,14 @@ namespace Web.Controllers
         [PermissionFilter("Admin&Category&Delete_Category")]
         public IActionResult DeleteCategory(string? CId)
         {
-            if(CId == null)
+            if (CId == null)
             {
                 return NotFound();
             }
             else
             {
                 var category = _unitOfWork._db.Category.FirstOrDefault(x => x.CId == CId);
-                if(category == null)
+                if (category == null)
                 {
                     return NotFound();
                 }
@@ -136,7 +137,7 @@ namespace Web.Controllers
                 return NotFound();
             }
             var response = _categoryService.DeleteCategory(category);
-            if(response.Status == "00")
+            if (response.Status == "00")
             {
                 return RedirectToAction("Index");
             }

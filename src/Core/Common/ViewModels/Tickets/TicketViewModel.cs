@@ -31,6 +31,7 @@ namespace Common.ViewModels.Tickets
         [Required(ErrorMessage ="Status is Required"),Display(Name ="Status")]
         public StatusEnum Status { get; set; }
         public List<ListUser> Users { get; set; }
+        public List<ListCategory> categories { get; set; }
     }
     public class ListUser
     {
