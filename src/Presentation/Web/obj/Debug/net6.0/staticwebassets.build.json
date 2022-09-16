@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "b4FBCf45NfDynThxFjUtWi4GlK1j2SxYM/4kJlz5d/A=",
+  "Hash": "s2uzSQLh/EjKpqjT4d85UZcgzYEniP/2zZnu3WtHoC8=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -1749,6 +1749,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Profile\\400422291213.jpg"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Profile\\bar22040837.jpg",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Profile/bar22040837.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Profile\\bar22040837.jpg"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Profile\\bar22051760.jpg",

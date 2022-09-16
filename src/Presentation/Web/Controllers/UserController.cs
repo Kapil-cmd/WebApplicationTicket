@@ -190,14 +190,14 @@ namespace Web.Controllers
             {
                 return NotFound();
             }
-            var response = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == Id);
-            if (response == null)
+            var userDetails = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == Id);
+            if (userDetails  == null)
             {
                 return NotFound();
             }
             else
             {
-                return View(response);
+                return View(userDetails);
             }
         }
         [HttpGet]
