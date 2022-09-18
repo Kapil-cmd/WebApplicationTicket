@@ -14,11 +14,11 @@
             <dt class="col-sm-5">
                 Profile Picture
             </dt>
+            <div class="col-md-6">
             <dt class="col-sm-2">
                 <img src="@("~/profile/" + Model.ImageName)" asp-append-version="true" width="200px" height="200px" border="0" img class="rounded-circle me-1"/><br />
                 <h4>@User.Identity.Name</h4><br />
             </dt>
-            <div class="col-md-6">
                    <div class="form-gropup">
                         <label asp-for="ProfilePic" class="control-label"></label>
                         <input asp-for="ProfilePic" accept="image/*" />
@@ -54,7 +54,7 @@
             
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-                 <a asp-controller="Home" asp-action="Homepage" class="bt btn-group-sm">Back to List</a>
+                 <a asp-controller="Home" asp-action="Homepage" class="bt btn-outline-warning">Back to List</a>
             </div>
         </form>
     </div>
