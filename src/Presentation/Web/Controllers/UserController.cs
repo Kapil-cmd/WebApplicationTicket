@@ -38,6 +38,7 @@ namespace Web.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortparm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AgeSortParm = String.IsNullOrEmpty(sortOrder) ? "age_desc" : "";
+            ViewBag.EmailSortParm = String.IsNullOrEmpty(sortOrder) ? "email_desc" : "";
 
             if (searchString != null)
             {
@@ -71,6 +72,9 @@ namespace Web.Controllers
                     break;
                 case "age_desc":
                     user = user.OrderByDescending(x => x.Age);
+                    break;
+                case "email_desc":
+                    user= user.OrderByDescending(x => x.Email);
                     break;
                 default:
                     user = user.OrderByDescending(x => x.UserName.StartsWith("A"));
@@ -451,8 +455,8 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult UserProfile(string? Id)
         {
-            var userId = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == userId);
+            var username = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.UserName == username);
             UserProfile model = new UserProfile();
             {
                 model.FirstName = user.FirstName;

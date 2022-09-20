@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KPhrbXaclD1Kpbpk0zpopkNS8TtWDrMQ1vgeZZtvAmc=",
+  "Hash": "haYGApQrHQLnOMI3Bd4Os7eGN3jHAOxXYSGrYmPSNag=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -1953,6 +1953,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Profile\\tihar22374989.jpg"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Profile\\yeah22214990.PNG",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Profile/yeah22214990.PNG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Profile\\yeah22214990.PNG"
     }
   ]
 }

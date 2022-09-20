@@ -38,7 +38,7 @@
                 Address
             </th>
             <th>
-                Email
+                @Html.ActionLink("Email","Index", new{sortOrder = ViewBag.EmailSortparm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
                @Html.ActionLink("Age","Index", new{ sortOrder = ViewBag.AgeSortparm, currentFilter = ViewBag.CurrentFilter })  
@@ -78,7 +78,7 @@
                     <div class="w-75 btn-group" role="group">
                         <a title="Edit" asp-controller="User" asp-action="EditUser" asp-route-Id="@item.Id" class="btn btn-sm btn-primary mx-2"><i class="bi bi-pencil-square"></i></a>
                         <a title="Detail" asp-controller="User" asp-action="UserDetails" asp-route-Id="@item.Id" class="btn btn-sm btn-danger mx-2"><i class="bi bi-eye"></i></a>
-                         <a title="Delete" asp-controller="User" asp-action="DeleteUser" asp-route-Id="@item.Id" class="btn btn-sm btn-danger mx-2"><i class="bi bi-trash-fill"></i></a>
+                         @*<a title="Delete" asp-controller="User" asp-action="DeleteUser" asp-route-Id="@item.Id" class="btn btn-sm btn-danger mx-2"><i class="bi bi-trash-fill"></i></a>*@
                     </div>
                 </td>
             </tr>

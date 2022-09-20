@@ -240,7 +240,7 @@ namespace demo.Controllers
             var response = _ticketService.CloseTicket(ticket);
             if(response.Status == "00")
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("DeveloperIndex");
             }
             else
             {
