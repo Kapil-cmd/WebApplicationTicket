@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "haYGApQrHQLnOMI3Bd4Os7eGN3jHAOxXYSGrYmPSNag=",
+  "Hash": "KvE+zimEb8i7GNpFtiepwkeBVlgSUpXyxFyGkfHJHpc=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -357,6 +357,23 @@
       "OriginalItemSpec": "wwwroot\\Image\\404 error22545464.jpg"
     },
     {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\balla banyo22311503.png",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/balla banyo22311503.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\balla banyo22311503.png"
+    },
+    {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\chester22110941.jpg",
       "SourceId": "Web",
       "SourceType": "Discovered",
@@ -374,6 +391,40 @@
       "OriginalItemSpec": "wwwroot\\Image\\chester22110941.jpg"
     },
     {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\class library22442451.PNG",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/class library22442451.PNG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\class library22442451.PNG"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\class library22443441.PNG",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/class library22443441.PNG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\class library22443441.PNG"
+    },
+    {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\class library22522804.PNG",
       "SourceId": "Web",
       "SourceType": "Discovered",
@@ -389,6 +440,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\class library22522804.PNG"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\code122465694.JPG",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/code122465694.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\code122465694.JPG"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\date22013589.jpg",
@@ -525,6 +593,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\helpdesk22362087.jpg"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\helpdesk22401466.jpg",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "Image/helpdesk22401466.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Image\\helpdesk22401466.jpg"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\Image\\helpdesk22511620.jpg",

@@ -27,7 +27,7 @@
                         <ul class="navbar-nav flex-grow-1">
                             @if (User.Identity.IsAuthenticated)
                             {
-                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name,"View_Category"))
+                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_Category"))
                                 @*@if (this.User.IsInRole("Admin"))*@
                                 {
                                     <li class="nav-item">

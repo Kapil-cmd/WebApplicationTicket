@@ -12,7 +12,7 @@ namespace Repository.Configurations
 
             builder.HasKey(x => x.TicketId);
 
-            builder.Property(x => x.TicketId).IsRequired();
+            builder.Property(x => x.TicketId).ValueGeneratedOnAdd().IsRequired();
             builder.Property(x => x.TicketDetails).HasMaxLength(200).IsRequired();
             builder.Property(x => x.CreatedBy).IsRequired();
             builder.Property(x => x.CreatedDateTime);

@@ -1,4 +1,5 @@
-﻿using Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository;
 using Repository.Repos.Work;
 using System.Security.Claims;
 
@@ -9,25 +10,26 @@ namespace Web.StaticModel
         public static IUnitOfWork unitOfWork;
         public static TicketingContext db;
 
+
         public static bool HasPermission(string username, string permissionValue)
         {
-            var Id = db.Users.FirstOrDefault(x => x.UserName == unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var userName = unitOfWork._db.Users.FirstOrDefault(x => x.Id == x.Id);
+            var userName = db.Users.FirstOrDefault(x => x.UserName == unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name));
+            userName = username;
 
+            var permissionId = db.Permissions.Include(x => x.PermissionId).Select(x => new { x.PermissionId }).ToList();
+           
 
-            var claims = ClaimsPrincipal.Current.Identities.First().Claims.First();
-            var permissions = db.Permissions.FirstOrDefault(x => x.Slug == permissionValue);
-            
             var users = db.Users;
             var rolePermissions = db.RolePermissions;
             var userRoles = db.UserRoles;
+            var permission = db.Permissions;
 
             var hasPermission = (from rp in rolePermissions
                                  join ur in userRoles on rp.RoleName equals ur.RoleName
-                                 where ur.UserName == username && rp.PermissionId == permissions.PermissionId
+                                 where ur.UserName == username && rp.PermissionId == permissionValue
                                  select rp
                                 ).Any();
-            
+
 
             if (hasPermission == null)
             {
@@ -37,9 +39,7 @@ namespace Web.StaticModel
             {
                 return true;
             }
-            }
-        
-
+        }
     }
 }
 

@@ -29,7 +29,6 @@ namespace Services.BL
                     CreatedDateTime = DateTime.UtcNow,
                     ImageName = Ticket.ImageName,
                 });
-
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";
