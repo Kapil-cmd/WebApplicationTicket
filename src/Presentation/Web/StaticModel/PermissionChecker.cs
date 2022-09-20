@@ -1,43 +1,45 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Repository;
-using Repository.Repos.Work;
-using System.Security.Claims;
+﻿using Microsoft.Data.SqlClient;
 
 namespace Web.StaticModel
 {
     public static class PermissionChecker
     {
-        public static IUnitOfWork unitOfWork;
-        public static TicketingContext db;
-
-
         public static bool HasPermission(string username, string permissionValue)
         {
-            var userName = db.Users.FirstOrDefault(x => x.UserName == unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name));
-            userName = username;
-
-            var permissionId = db.Permissions.Include(x => x.PermissionId).Select(x => new { x.PermissionId }).ToList();
-           
-
-            var users = db.Users;
-            var rolePermissions = db.RolePermissions;
-            var userRoles = db.UserRoles;
-            var permission = db.Permissions;
-
-            var hasPermission = (from rp in rolePermissions
-                                 join ur in userRoles on rp.RoleName equals ur.RoleName
-                                 where ur.UserName == username && rp.PermissionId == permissionValue
-                                 select rp
-                                ).Any();
-
-
-            if (hasPermission == null)
+            try
             {
+                using (SqlConnection con = new SqlConnection("Server=DESKTOP-BQOVRGO\\SQLEXPRESS;Database=Ticket;Trusted_Connection=True;MultipleActiveResultSets=true"))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandText = "select Case when ISNULL(PermissionId, '') = '' then 0 Else 1 End HasPermission from RolePermissions join Roles on RolePermissions.RoleName = Roles.Name join UserRoles on Roles.Name = UserRoles.RoleName join Users on UserRoles.UserName = USERS.UserName where Users.UserName = @username and RolePermissions.PermissionId =@permission;";
+                        cmd.CommandType = System.Data.CommandType.Text;
+
+                        cmd.Parameters.AddWithValue("username", username);
+                        cmd.Parameters.AddWithValue("permission", permissionValue);
+
+                        con.Open();
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    bool hasPermission = Convert.ToBoolean(reader["HasPermission"]);
+                                    return hasPermission;
+                                }
+                            }
+                        }
+                        con.Close();
+                    }
+                }
                 return false;
             }
-            else
+            catch (Exception ex)
             {
-                return true;
+                return false;
             }
         }
     }

@@ -28,46 +28,63 @@
                             @if (User.Identity.IsAuthenticated)
                             {
                                 if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_Category"))
-                                @*@if (this.User.IsInRole("Admin"))*@
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
                                     </li>
-
+                                }
+                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_User"))
+                                {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User List</a>
                                     </li>
+                                }
+                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_Ticket"))
+                                {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="Index">Ticket</a>
                                     </li>
+                                }
 
+                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_Role"))
+                                {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
                                     </li>
+                                }
 
+                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_Permission"))
+                                {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Permission" asp-action="Index">PermissionList</a>
                                     </li>
+                                }
+                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_Field"))
+                                {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="FieldValidate" asp-action="Index">Validate</a>
                                     </li>
                                 }
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="UserIndex">Your Ticket</a>
-                                </li>
+                                 <li class="nav-item">
+                                     <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="UserIndex">Your Ticket</a>
+                                 </li>
+                                
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="ChangePassword">ChangePasword</a>
                                 </li>
-                                <li class="nav-item">
+                                
+                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="UserProfile">Profile</a>
-                                </li>
-                                @if(this.User.IsInRole("Checker,Maker,Admin"))
+                                </li>    
+                                
+                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_CategoryTemp"))
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="CategoryTemp" asp-action="Index">Temp</a>
-                                    </li>
+                                    </li>    
                                 }
-                            @if (this.User.IsInRole("Developer"))
+                                
+                                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "DevView_Ticket"))
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Ticket" asp-action="DeveloperIndex">DevTicket</a>
