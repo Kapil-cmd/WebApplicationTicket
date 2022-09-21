@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RroXBPxFkrkAmb2dLZUvBoRSU9seuxLuOeyTM54y2fg=",
+  "Hash": "+slA78uRlLUOKBNXwthBz2mvKofcnV2+ylYZJgrVpzk=",
   "Source": "Web",
   "BasePath": "_content/Web",
   "Mode": "Default",
@@ -899,6 +899,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Image\\tickets22354597.jpg"
+    },
+    {
+      "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\js\\accordian.js",
+      "SourceId": "Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\",
+      "BasePath": "_content/Web",
+      "RelativePath": "js/accordian.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\accordian.js"
     },
     {
       "Identity": "D:\\Projects\\TicketManagementSystem\\src\\Presentation\\Web\\wwwroot\\js\\site.js",
