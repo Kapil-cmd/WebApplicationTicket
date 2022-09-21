@@ -1,4 +1,5 @@
 ﻿using Common.ViewModels.Categories;
+using Common.ViewModels.CategoryTickets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,43 @@ namespace Web.Controllers
         {
             var category = _unitOfWork._db.Category.Include(x => x.Tickets).OrderBy(x => x.CategoryName).ToList();
             return View(category);
-
+        }
+        public IActionResult CategoryTickets(string Sorting_Order, string Search_Data, string Filter_Value, int? Page_No)
+        {
+            var category = _unitOfWork._db.Category.ToList();
+            CategoryTickets categoryTickets = new CategoryTickets();
+            if (category != null)
+            {
+                if(category.Count() > 0)
+                {
+                    categoryTickets.category = category.Select(x => new ListCategory()
+                    {
+                        CId = x.CId,
+                        CategoryName = x.CategoryName,
+                    }).ToList();
+                }
+            }
+            var tickets = _unitOfWork._db.Tickets.ToList();
+            if(tickets != null)
+            {
+                if(tickets.Count() > 0)
+                {
+                    categoryTickets.Tickets = tickets.Select(x => new ListTickets()
+                    {
+                        TicketId = x.TicketId,
+                        TicketDetails = x.TicketDetails,
+                        CreatedBy = x.CreatedBy,
+                        CreatedDateTime = x.CreatedDateTime,
+                        ModifiedBy = x.ModifiedBy,
+                        ModifiedDateTime = x.ModifiedDateTime,
+                        AssignedTo = x.AssignedTo,
+                        Status = x.Status,
+                        ImageName = x.ImageName,
+                    }).ToList();
+                }
+            }
+            
+            return View(categoryTickets);
         }
         [HttpGet]
         [PermissionFilter("Admin&Category&Create_Category")]

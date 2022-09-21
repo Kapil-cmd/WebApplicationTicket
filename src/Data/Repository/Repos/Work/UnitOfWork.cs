@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Repository.Repos.CategoryRep;
-using Repository.Repos.CategoryTicketRep;
 using Repository.Repos.ExcelRep;
 using Repository.Repos.PermissionRep;
 using Repository.Repos.RolePermissionRep;
@@ -29,7 +28,7 @@ namespace Repository.Repos.Work
             UserTicketRepository = new UserTicketRepository(_db);
             CategoryTempRepository = new CategoryTempRepository(_db);
             FieldValidateRepository = new FieldValidateRepository(_db);
-            CategoryTicketRepository = new CategoryTicketRepository(_db);
+            
         }
         public IHttpContextAccessor _httpContextAccessor { get; private set; }
         public TicketingContext _db { get; private set; }
@@ -44,7 +43,7 @@ namespace Repository.Repos.Work
         public ICategoryTempRepository CategoryTempRepository { get; private set; }
         public IFieldValidateRepository FieldValidateRepository { get; private set; }
 
-        public ICategoryTicketRepository CategoryTicketRepository {get; private set; }
+        
 
         public void Save()
         {

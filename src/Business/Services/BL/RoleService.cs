@@ -97,7 +97,7 @@ namespace Services.BL
                     {
                         if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleName == model.Name && x.PermissionId == permission.Id))
                         {
-                            var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleName == model.Id && x.PermissionId == permission.Id);
+                            var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleName == model.Name && x.PermissionId == permission.Id);
                             _unitOfWork._db.RolePermissions.Remove(rolePermission);
                             _unitOfWork._db.SaveChanges();
                         }

@@ -123,8 +123,15 @@ namespace Web.Controllers
                 Status = true;
 
                 // redirect to login page
-                _toastNotification.AddSuccessToastMessage("User registered sucessfully");
-                return RedirectToAction("RegisterUser");
+                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_User"))
+                {
+                    _toastNotification.AddSuccessToastMessage("User registered sucessfully");
+                    return RedirectToAction("RegisterUser");
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
             }
             else
             {

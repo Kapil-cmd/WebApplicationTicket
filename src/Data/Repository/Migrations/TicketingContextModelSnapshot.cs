@@ -238,21 +238,6 @@ namespace Repository.Migrations
                     b.ToTable("CategoryTemp", (string)null);
                 });
 
-            modelBuilder.Entity("Repository.Entities.CategoryTicket", b =>
-                {
-                    b.Property<string>("TicketId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("TicketId", "CategoryName");
-
-                    b.HasIndex("CategoryName");
-
-                    b.ToTable("CategoryTickets");
-                });
-
             modelBuilder.Entity("Repository.Entities.FieldValidation", b =>
                 {
                     b.Property<string>("Id")
@@ -356,26 +341,6 @@ namespace Repository.Migrations
                     b.Navigation("aUser");
                 });
 
-            modelBuilder.Entity("Repository.Entities.CategoryTicket", b =>
-                {
-                    b.HasOne("Repository.Entites.Category", "aCategory")
-                        .WithMany("CategoryTickets")
-                        .HasForeignKey("CategoryName")
-                        .HasPrincipalKey("CategoryName")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("Repository.Entites.Ticket", "aTicket")
-                        .WithMany("CategoryTickets")
-                        .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("aCategory");
-
-                    b.Navigation("aTicket");
-                });
-
             modelBuilder.Entity("Repository.Entities.UserTicket", b =>
                 {
                     b.HasOne("Repository.Entites.Ticket", "aTicket")
@@ -398,8 +363,6 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Entites.Category", b =>
                 {
-                    b.Navigation("CategoryTickets");
-
                     b.Navigation("Tickets");
                 });
 
@@ -418,8 +381,6 @@ namespace Repository.Migrations
             modelBuilder.Entity("Repository.Entites.Ticket", b =>
                 {
                     b.Navigation("AssignedUsers");
-
-                    b.Navigation("CategoryTickets");
                 });
 
             modelBuilder.Entity("Repository.Entites.User", b =>

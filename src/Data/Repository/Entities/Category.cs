@@ -13,6 +13,6 @@ namespace Repository.Entites
 
         public virtual User User { get; set; }
         public virtual IEnumerable<Ticket> Tickets { get; set; }
-        public virtual IEnumerable<CategoryTicket> CategoryTickets { get; set; } 
+        
     }
 }

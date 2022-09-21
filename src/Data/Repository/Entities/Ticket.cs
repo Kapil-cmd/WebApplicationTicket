@@ -20,7 +20,7 @@ namespace Repository.Entites
         public virtual User User { get; set; }
         public virtual Category Category { get; set; }
         public virtual IEnumerable<UserTicket> AssignedUsers { get; set; }
-        public virtual IEnumerable<CategoryTicket> CategoryTickets { get; set; }
+        
         
     }
 }

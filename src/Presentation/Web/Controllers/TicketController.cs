@@ -128,8 +128,15 @@ namespace demo.Controllers
             var response = _ticketService.AddTicket(ticket);
             if (response.Status == "00")
             {
-                _toastNotification.AddSuccessToastMessage("Ticket created successfully");
-                return RedirectToAction("Index");
+                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_Ticket"))
+                {
+                    _toastNotification.AddSuccessToastMessage("Ticket created successfully");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("UserIndex");
+                }
             }
             else
             {

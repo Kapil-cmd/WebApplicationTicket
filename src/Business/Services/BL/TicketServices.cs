@@ -20,7 +20,7 @@ namespace Services.BL
             {
                 var nameClaim = _unitOfWork._httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
                 Ticket.Status = Common.Enums.StatusEnum.Pending;
-
+                
                 _unitOfWork._db.Tickets.Add(new Repository.Entites.Ticket()
                 {
                     TicketDetails = Ticket.TicketDetails,
@@ -30,7 +30,7 @@ namespace Services.BL
                     ImageName = Ticket.ImageName,
                 });
                 _unitOfWork._db.SaveChanges();
-
+                
                 response.Status = "00";
                 response.Message = "Ticket added sucessfully";
                 return response;
