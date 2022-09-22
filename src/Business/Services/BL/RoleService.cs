@@ -89,19 +89,17 @@ namespace Services.BL
                 _unitOfWork._db.Update(role);
                 _unitOfWork._db.SaveChanges();
                 #endregion
-
                 #region AssignPermission
                 foreach (var permission in model.ListPermission)
                 {
                     if (permission.IsPermitted == true)
                     {
-                        //if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleName == model.Name && x.PermissionId == permission.Id))
-                        //{
-                        //    var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleName == model.Name && x.PermissionId == permission.Id);
-                        //    _unitOfWork._db.RolePermissions.Remove(rolePermission);
-                        //    _unitOfWork._db.SaveChanges();
-                        //}
-                        //else
+                        if (_unitOfWork._db.RolePermissions.Any(x => x.PermissionId == permission.Id && x.RoleName == model.Name))
+                        {
+                            response.Status = "97";
+                            response.Message = "Permission already exists";
+                        }
+                        else
                         {
                             _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
                             {
@@ -111,10 +109,17 @@ namespace Services.BL
                             _unitOfWork.Save();
                         }
                     }
+                    else
+                    {
+                        if (_unitOfWork._db.RolePermissions.Any(x => x.PermissionId == permission.Id && x.RoleName == model.Name))
+                        {
+                            var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.PermissionId == permission.Id && x.RoleName == model.Name);
+                            _unitOfWork._db.Remove(rolePermission);
+                            _unitOfWork._db.SaveChanges();
+                        }
+                    }
                 }
-
                 #endregion
-
                 response.Status = "00";
                 response.Message = "Permission edited sucessfully";
                 return response;

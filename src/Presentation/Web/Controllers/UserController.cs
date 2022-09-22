@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository;
 using Repository.Entites;
@@ -143,7 +144,7 @@ namespace Web.Controllers
         [PermissionFilter("Admin&User&Edit_User")]
         public IActionResult EditUser(string Id)
         {
-            var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
+            var user = _unitOfWork._db.Users.Include("Roles").Include("Roles.aRole").FirstOrDefault(x => x.Id == Id);
             if (user == null)
             {
                 return NotFound();
@@ -166,6 +167,16 @@ namespace Web.Controllers
                         Id = x.Id,
                         Name = x.Name,
                     }).ToList();
+                }
+            }
+            foreach(var uroles in model.Roles)
+            {
+                foreach(var ruser in user.Roles)
+                {
+                    if(uroles.Name == ruser.RoleName)
+                    {
+                        uroles.IsSelected = true;
+                    }
                 }
             }
             return View(model);

@@ -176,14 +176,13 @@ namespace Services.BL
                 foreach(var role in EditUser.Roles)
                 {
                     if(role.IsSelected == true)
-                    {
+                    { 
                         if(_unitOfWork._db.UserRoles.Any(x => x.UserName == EditUser.UserName && x.RoleName == role.Name))
                         {
-                            var userRoles = _unitOfWork._db.UserRoles.FirstOrDefault(x => x.UserName == EditUser.UserName && x.RoleName == role.Name);
-                            _unitOfWork._db.UserRoles.Remove(userRoles);
-                            _unitOfWork._db.SaveChanges();
+                            response.Status = "97";
+                            response.Message = "Role already exits";
                         }
-                        else 
+                        else
                         { 
                             _unitOfWork._db.UserRoles.Add(new Repository.Entites.UserRole()
                             {
@@ -191,6 +190,15 @@ namespace Services.BL
                                 RoleName = role.Name
                             });
                             _unitOfWork.Save();
+                        }
+                    }
+                    else
+                    {
+                        if (_unitOfWork._db.UserRoles.Any(x => x.UserName == EditUser.UserName && x.RoleName == role.Name))
+                        {
+                            var userRoles = _unitOfWork._db.UserRoles.FirstOrDefault(x => x.UserName == EditUser.UserName && x.RoleName == role.Name);
+                            _unitOfWork._db.UserRoles.Remove(userRoles);
+                            _unitOfWork._db.SaveChanges();
                         }
                     }
                 }
