@@ -22,4 +22,5 @@ namespace Common.ViewModels.Role
         public string MenuName { get; set;}
         public bool IsPermitted { get; set; }
     }
+   
 }

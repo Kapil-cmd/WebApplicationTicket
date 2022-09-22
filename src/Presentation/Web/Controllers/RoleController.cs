@@ -63,7 +63,8 @@ namespace Web.Controllers
         [PermissionFilter("Admin&Role&Manage_Role")]
         public IActionResult ManageRole(string Id)
         {
-            var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == Id);
+            var role = _unitOfWork._db.Roles.Include("Permissions").Include("Permissions.aPermission").FirstOrDefault(x => x.Id == Id);
+
             if (role == null)
             {
                 return NotFound();
@@ -71,6 +72,8 @@ namespace Web.Controllers
             EditRole model = new EditRole();
             model.Name = role.Name;
             var permission = _unitOfWork.Permission.GetAll();
+            var rolePermission = _unitOfWork._db.RolePermissions.ToList();
+            
             if(permission != null)
             {
                 if(permission.Count() > 0)
@@ -82,8 +85,17 @@ namespace Web.Controllers
                     }).OrderBy(x => x.MenuName).ToList();
                 }
             }
+            foreach(var rp in model.ListPermission)
+            {
+                foreach(var r in role.Permissions)
+                {
+                    if(r.PermissionId == rp.Id)
+                    {
+                        rp.IsPermitted = true;
+                    }
+                }
+            }
             return View(model);
-
         }
         [HttpPost]
         [PermissionFilter("Admin&Role&Manage_Role")]

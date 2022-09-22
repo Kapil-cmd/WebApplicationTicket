@@ -95,13 +95,13 @@ namespace Services.BL
                 {
                     if (permission.IsPermitted == true)
                     {
-                        if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleName == model.Name && x.PermissionId == permission.Id))
-                        {
-                            var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleName == model.Name && x.PermissionId == permission.Id);
-                            _unitOfWork._db.RolePermissions.Remove(rolePermission);
-                            _unitOfWork._db.SaveChanges();
-                        }
-                        else
+                        //if (_unitOfWork.RolePermissionRepository.Any(x => x.RoleName == model.Name && x.PermissionId == permission.Id))
+                        //{
+                        //    var rolePermission = _unitOfWork._db.RolePermissions.FirstOrDefault(x => x.RoleName == model.Name && x.PermissionId == permission.Id);
+                        //    _unitOfWork._db.RolePermissions.Remove(rolePermission);
+                        //    _unitOfWork._db.SaveChanges();
+                        //}
+                        //else
                         {
                             _unitOfWork.RolePermissionRepository.Add(new Repository.Entites.RolePermission()
                             {
