@@ -35,6 +35,6 @@ namespace Repository
             builder.ApplyConfiguration(new UserTicketConfig());
             builder.ApplyConfiguration(new CategoryTempConfig());
             builder.ApplyConfiguration(new FieldValidationConfig());
-                    }
+        }
     }
 }
