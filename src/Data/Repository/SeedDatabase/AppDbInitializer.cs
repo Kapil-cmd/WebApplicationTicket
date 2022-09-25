@@ -25,7 +25,7 @@ namespace Repository.SeedDatabase
 
                 context.Database.EnsureCreated();
 
-                //User
+                //Add User
                 if (!context.Users.Any())
                 {
                     var user = new User
@@ -40,11 +40,13 @@ namespace Repository.SeedDatabase
                         IsEmailVerified = true,
                         Password = HashPassword.Hash("admin123"),
                         DateOfBirth = DateTime.Parse("1997-02-12"),
+                        ActivationCode = Guid.Parse("{2c05c682-704f-43a4-864b-742ae359aa30}"),
+                        Age = 25,
                     };
                     context.Users.Add(user);
                     context.SaveChanges();
                 }
-                //Role
+                //Add Role
                 if (!context.Roles.Any())
                 {
                     var role = new Role
@@ -55,7 +57,7 @@ namespace Repository.SeedDatabase
                     context.Roles.Add(role);
                     context.SaveChanges();
                 }
-                //USerRole
+                //Add UserRole
                 if (!context.UserRoles.Any())
                 {
                     var userRoles = new UserRole
@@ -66,26 +68,22 @@ namespace Repository.SeedDatabase
                     context.UserRoles.Add(userRoles);
                     context.SaveChanges();
                 }
-                //RolePermission
+                //Add RolePermission
                 if (!context.RolePermissions.Any())
                 {
                     var permissionRoles = new RolePermission();
-                    var roleName = "SuperAdmin";
+                    var role = context.Roles.ToList();
                     var permission = context.Permissions.ToList();
-                    var rlePermission = context.RolePermissions.ToList();
                     foreach (var per in permission)
                     {
-                        foreach (var pm in rlePermission)
+                        foreach(var rol in role)
                         {
-                            pm.PermissionId = per.PermissionId;
-                            pm.RoleName = roleName;
-
-                            permissionRoles.PermissionId = pm.PermissionId;
-                            permissionRoles.RoleName = pm.RoleName;
+                            permissionRoles.RoleName = rol.Name;
+                            permissionRoles.PermissionId = per.PermissionId;
                         }
+                        context.RolePermissions.Add(permissionRoles);
+                        context.SaveChanges();
                     }
-                    context.RolePermissions.Add(permissionRoles);
-                    context.SaveChanges();
                 }
             }
         }

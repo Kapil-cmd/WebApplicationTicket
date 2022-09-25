@@ -1,15 +1,19 @@
-﻿$('.toggle').click(function (e) {
-    e.preventDefault();
+﻿const accordionBtns = document.querySelectorAll(".accordion");
 
-    let $this = $(this);
+accordionBtns.forEach((accordion) => {
+    accordion.onclick = function () {
+        this.classList.toggle("is-open");
 
-    if ($this.next().hasClass('show')) {
-        $this.next().removeClass('show');
-        $this.next().slideUp(350);
-    } else {
-        $this.parent().parent().find('li .inner').removeClass('show');
-        $this.parent().parent().find('li .inner').slideUp(350);
-        $this.next().toggleClass('show');
-        $this.next().slideToggle(350);
-    }
+        let content = this.nextElementSibling;
+        console.log(content);
+
+        if (content.style.maxHeight) {
+            //this is if the accordion is open
+            content.style.maxHeight = null;
+        } else {
+            //if the accordion is currently closed
+            content.style.maxHeight = content.scrollHeight + "px";
+            console.log(content.style.maxHeight);
+        }
+    };
 });

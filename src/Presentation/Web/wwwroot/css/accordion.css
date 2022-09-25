@@ -1,121 +1,52 @@
-﻿$midnight: #2c3e50;
-$clouds: #ecf0f1;
-// General
-body {
-    color: $midnight;
-    background: $clouds;
-    padding: 0 1em 1em;
+﻿/* body {
+	background-color: #6DC4F4;
+}h1 { 
+     color:white;
+ 
+} */
+
+.container {
+    width: 80%;
+    max-width: 600px;
+    margin: 50px auto;
 }
 
-h1 {
-    margin: 0;
-    line-height: 2;
-    text-align: center;
-}
-
-h2 {
-    margin: 0 0 .5em;
-    font-weight: normal;
-}
-
-input {
-    position: absolute;
-    opacity: 0;
-    z-index: -1;
-}
-
-// Layout
-.row {
-    display: flex;
-    .col
-
-{
-    flex: 1;
-    &:last-child
-
-{
-    margin-left: 1em;
-}
-
-}
-}
-/* Accordion styles */
-.tabs {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
-}
-
-.tab {
+button.accordion {
     width: 100%;
-    color: white;
-    overflow: hidden;
-    &-label
-
-{
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-    background: $midnight;
-    font-weight: bold;
+    background-color: whitesmoke;
+    border: none;
+    outline: none;
+    text-align: left;
+    padding: 15px 20px;
+    font-size: 18px;
+    color: #333;
     cursor: pointer;
-    /* Icon */
-    &:hover
-
-{
-    background: darken($midnight, 10%);
+    transition: background-color 0.2s linear;
 }
 
-&::after {
-    content: "\276F";
-    width: 1em;
-    height: 1em;
-    text-align: center;
-    transition: all .35s;
-}
+    button.accordion:after {
+        font-family: FontAwesome;
+        content: "\f150";
+        font-family: "fontawesome";
+        font-size: 18px;
+        float: right;
+    }
 
-}
+    button.accordion.is-open:after {
+        content: "\f151";
+    }
 
-&-content {
+    button.accordion:hover,
+    button.accordion.is-open {
+        background-color: #ddd;
+    }
+
+.accordion-content {
+    background-color: white;
+    border-left: 1px solid whitesmoke;
+    border-right: 1px solid whitesmoke;
+    padding: 0 20px;
     max-height: 0;
-    padding: 0 1em;
-    color: $midnight;
-    background: white;
-    transition: all .35s;
-}
-
-&-close {
-    display: flex;
-    justify-content: flex-end;
-    padding: 1em;
-    font-size: 0.75em;
-    background: $midnight;
-    cursor: pointer;
-    &:hover
-
-{
-    background: darken($midnight, 10%);
-}
-
-}
-}
-
-// :checked
-input:checked {
-    + .tab-label
-
-{
-    background: darken($midnight, 10%);
-    &::after
-
-{
-    transform: rotate(90deg);
-}
-
-}
-
-~ .tab-content {
-    max-height: 100vh;
-    padding: 1em;
-}
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out;
 }

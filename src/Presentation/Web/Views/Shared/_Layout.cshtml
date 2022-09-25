@@ -32,9 +32,6 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
                                     </li>
                                 }
-                                <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="CategoryTickets">CategoryTickets</a>
-                                    </li>
                                 if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_User"))
                                 {
                                     <li class="nav-item">
