@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository;
-using Repository.Entities;
+using Repository.Entites;
 using Repository.Repos.Work;
+using Repository.SeedDatabase;
 using Services.BL;
 using Services.Middleware;
 
@@ -11,11 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddDbContext<TicketingContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContextConnection")));
 builder.Services.AddRazorPages();
-
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -51,6 +50,7 @@ builder.Services.AddScoped<ICategoryservice, CategoryServices>();
 builder.Services.AddScoped<IFieldValidationService, FieldValidationService>();
 builder.Services.AddRazorPages();
 
+
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>
@@ -65,7 +65,6 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
     ProgressBar = true,
     Timeout = 5000,
 });
-
 var app = builder.Build();
 
 using (var serviceScope = app.Services.CreateScope())
@@ -74,12 +73,12 @@ using (var serviceScope = app.Services.CreateScope())
     AutoPermissionGenerator.GetPermission(context);
 }
 
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    
     app.UseHsts();
 }
 
@@ -97,5 +96,5 @@ app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+AppDbInitializer.Seed(app);
 app.Run();

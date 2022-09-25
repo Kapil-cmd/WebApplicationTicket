@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Repository.SeedDatabase
 {
-    public static class DatabaseSeed
+    public class AppDbInitializer
     {
         public static class HashPassword
         {
@@ -17,21 +17,18 @@ namespace Repository.SeedDatabase
                     );
             }
         }
-        public static void Initializer(IApplicationBuilder builder)
+        public static void Seed(IApplicationBuilder applicationBuilder)
         {
-            using (var serviceScope = builder.ApplicationServices.CreateScope())
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-                var db = serviceScope.ServiceProvider.GetService<TicketingContext>();
-                db.Database.EnsureCreated();
+                var context = serviceScope.ServiceProvider.GetService<TicketingContext>();
 
-                var users = serviceScope.ServiceProvider.GetRequiredService<User>();
-                var roles = serviceScope.ServiceProvider.GetRequiredService<Role>();
-                var userRoles = serviceScope.ServiceProvider.GetRequiredService<UserRole>();
-                var rolePermissions = serviceScope.ServiceProvider.GetRequiredService<RolePermission>();
+                context.Database.EnsureCreated();
 
-                if (!db.Users.Any(user => user.UserName == "admin123"))
+                //User
+                if (!context.Users.Any())
                 {
-                    var usr = new User
+                    var user = new User
                     {
                         Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                         UserName = "Superadmin123",
@@ -44,25 +41,38 @@ namespace Repository.SeedDatabase
                         Password = HashPassword.Hash("admin123"),
                         DateOfBirth = DateTime.Parse("1997-02-12"),
                     };
-                    db.Users.Add(usr);
-                    db.SaveChanges();
+                    context.Users.Add(user);
+                    context.SaveChanges();
                 }
-                if (!db.Roles.Any(role => role.Name == "SuperAdmin"))
+                //Role
+                if (!context.Roles.Any())
                 {
                     var role = new Role
                     {
                         Id = "572a4e6a-917c-4151-9446-fbdc0e2338d4",
                         Name = "SuperAdmin",
                     };
-                    db.Roles.Add(role);
-                    db.SaveChanges();
+                    context.Roles.Add(role);
+                    context.SaveChanges();
                 }
-                if (!db.RolePermissions.Any(permission => permission.RoleName == "SuperAdmin"))
+                //USerRole
+                if (!context.UserRoles.Any())
+                {
+                    var userRoles = new UserRole
+                    {
+                        UserName = "Superadmin123",
+                        RoleName = "SuperAdmin",
+                    };
+                    context.UserRoles.Add(userRoles);
+                    context.SaveChanges();
+                }
+                //RolePermission
+                if (!context.RolePermissions.Any())
                 {
                     var permissionRoles = new RolePermission();
                     var roleName = "SuperAdmin";
-                    var permission = db.Permissions.ToList();
-                    var rlePermission = db.RolePermissions.ToList();
+                    var permission = context.Permissions.ToList();
+                    var rlePermission = context.RolePermissions.ToList();
                     foreach (var per in permission)
                     {
                         foreach (var pm in rlePermission)
@@ -74,16 +84,10 @@ namespace Repository.SeedDatabase
                             permissionRoles.RoleName = pm.RoleName;
                         }
                     }
-                    db.RolePermissions.Add(permissionRoles);
-                    db.SaveChanges();
+                    context.RolePermissions.Add(permissionRoles);
+                    context.SaveChanges();
                 }
             }
         }
     }
 }
-
-            
-        
-    
-  
-
