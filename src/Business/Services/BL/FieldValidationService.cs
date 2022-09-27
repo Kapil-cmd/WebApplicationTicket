@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.ValidationModel;
+using Repository.Entities;
 using Repository.Repos.Work;
 
 namespace Services.BL
@@ -43,6 +44,37 @@ namespace Services.BL
             }
         }
 
+        public BaseResponseModel<string> DeleteValidation(FieldValidation validation)
+        {
+            var response = new BaseResponseModel<string>();
+            {
+                try
+                {
+                    var validate = _unitOfWork._db.Field.FirstOrDefault(x => x.Id == validation.Id);
+                    if(validate == null)
+                    {
+                        response.Status = "404";
+                        response.Message = "Field Not Found";
+                        return response;
+                    }
+                    else
+                    {
+                        _unitOfWork._db.Remove(validate);
+                        _unitOfWork._db.SaveChanges();
+                    }
+                    response.Status = "00";
+                    response.Message = "Field deleted sucessfully";
+                    return response;
+                }
+                catch(Exception ex)
+                {
+                    response.Status = "500";
+                    response.Message = "Exception occured :" + ex.Message;
+                    return response;
+                }
+            }
+        }
+
         public BaseResponseModel<string> EditValidation(EditValidationField validationField)
         {
             var response = new BaseResponseModel<string>();
@@ -78,5 +110,6 @@ namespace Services.BL
     {
          BaseResponseModel<string> AddValdation(AddValidationField validationField);
         BaseResponseModel<string> EditValidation(EditValidationField validationField);
+        BaseResponseModel<string> DeleteValidation(FieldValidation validation);
     }
 }

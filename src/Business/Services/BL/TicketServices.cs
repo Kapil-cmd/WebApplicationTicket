@@ -57,7 +57,7 @@ namespace Services.BL
                 }
                 else
                 {
-                    ticket.Status = Common.Enums.StatusEnum.Completed;
+                    ticket.Status = Common.Enums.StatusEnum.Closed;
                     _unitOfWork._db.Tickets.Update(ticket);
                     _unitOfWork._db.SaveChanges();
 

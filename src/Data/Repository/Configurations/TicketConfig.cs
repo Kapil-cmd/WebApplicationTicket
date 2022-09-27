@@ -27,7 +27,7 @@ namespace Repository.Configurations
                 .WithMany(x => x.myCreatedTicket)
                 .HasForeignKey(x => x.CreatedBy)
                 .HasPrincipalKey(x => x.UserName)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Category)
                 .WithMany(x => x.Tickets)

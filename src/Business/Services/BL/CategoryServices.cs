@@ -62,7 +62,18 @@ namespace Services.BL
                     response.Message = "Category not found";
                     return response;
                 }
+                var categoryTickets = _unitOfWork._db.Tickets.Any(x => x.CategoryName == category.CategoryName);
+                if(categoryTickets == null)
+                {
+                    response.Status = "404";
+                    response.Message = "Categpry not found";
+                    return response;
+                }
                 else
+                {
+                    _unitOfWork._db.Remove(categoryTickets);
+                    _unitOfWork._db.SaveChanges();
+                }
                 {
                     model = category;
                     _unitOfWork._db.Category.Remove(model);

@@ -127,7 +127,7 @@ namespace Web.Controllers
                 if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_User"))
                 {
                     _toastNotification.AddSuccessToastMessage("User registered sucessfully");
-                    return RedirectToAction("RegisterUser");
+                    return RedirectToAction("Index");
                 }
                 else
                 {
@@ -223,29 +223,19 @@ namespace Web.Controllers
             }
         }
         [HttpGet]
-        [PermissionFilter("Admin&User&delete_User")]
-        public IActionResult DeleteUser(string? Id)
+        public IActionResult UserStatus(string Id)
         {
             var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
-            return View(user);
-        }
-        [HttpPost]
-        [PermissionFilter("Admin&User&Delete_User")]
-        public IActionResult DeleteUser(User model)
-        {
-            var response = _userService.DeleteUser(model);
+            var response = _userService.UserStatus(Id);
             if (response.Status == "00")
             {
-                _toastNotification.AddSuccessToastMessage("User deleted sucessfully");
-                return RedirectToAction("DeleteUser");
+                return RedirectToAction("Index");
             }
             else
             {
-                _toastNotification.AddErrorToastMessage("Can't delete the User");
-                return View(model);
+                return View(response);
             }
         }
-
         public IActionResult Login(string ReturnUrl = null)
         {
             UserLogin model = new UserLogin()

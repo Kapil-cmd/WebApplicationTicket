@@ -18,6 +18,7 @@ namespace Repository.Entites
         public System.Guid ActivationCode { get; set; }
         public string ProfilePicture { get; set; }
         public string OTP { get; set; }
+        public bool Status { get; set; }
 
 
         public virtual IEnumerable<Category> Categories {get; set;}

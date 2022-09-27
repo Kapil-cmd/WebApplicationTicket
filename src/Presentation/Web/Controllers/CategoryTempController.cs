@@ -50,7 +50,6 @@ namespace Web.Controllers
                 {
                     //convert to a stream
                     var stream = file.OpenReadStream();
-
                     List<CategoryTemp> companies = new List<CategoryTemp>();
                     try
                     {
@@ -61,14 +60,13 @@ namespace Web.Controllers
                             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                             var worksheet = package.Workbook.Worksheets.First();
                             var rowCount = worksheet.Dimension.Rows;
-
+                            
 
                             for (var row = 2; row <= rowCount; row++)
                             {
                                 try
                                 {
                                     var CategoryName = worksheet.Cells[row, 1].Value.ToString();
-
                                     CategoryTemp category = new CategoryTemp()
                                     {
                                         CategoryName = CategoryName
@@ -79,6 +77,7 @@ namespace Web.Controllers
                                     }
                                     else
                                     {
+                                        
                                         if (category.CategoryName.Length > field.Length && category.CategoryName.Take(3).All(char.IsLetter))
                                         {
                                             _db.CategoryTemp.Add(category);
@@ -115,7 +114,7 @@ namespace Web.Controllers
             {
                 if (_unitOfWork.CategoryRepository.Any(x => x.CategoryName == categoryTemp.CategoryName))
                 {
-                    return View(Index);
+                    ViewBag.Message = "Category already exists";
                 }
                 else
                 {

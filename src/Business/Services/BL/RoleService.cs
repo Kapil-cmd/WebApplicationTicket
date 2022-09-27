@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.Role;
+using Microsoft.EntityFrameworkCore;
 using Repository.Entites;
 using Repository.Repos.Work;
 
@@ -47,12 +48,31 @@ namespace Services.BL
             var response = new BaseResponseModel<string>();
             try
             {
-                var role = _unitOfWork._db.Roles.FirstOrDefault(x => x.Id == model.Id);
+                var role = _unitOfWork._db.Roles.Include("Users").Include("Users.aUser").FirstOrDefault(x => x.Id == model.Id);
                 if(role == null)
                 {
                     response.Status = "404";
                     response.Message = "Role not found";
                     return response;
+                }
+                var userRoles = _unitOfWork._db.UserRoles.ToList();
+                
+                foreach(var user in userRoles)
+                {
+                    if(_unitOfWork._db.UserRoles.Any(x => x.RoleName == role.Name))
+                    {
+                        _unitOfWork._db.Remove(user);
+                        _unitOfWork._db.SaveChanges();
+                    }
+                }
+                var rolePermission = _unitOfWork._db.RolePermissions.ToList();
+                foreach(var permission in rolePermission)
+                {
+                    if(_unitOfWork._db.RolePermissions.Any(x => x.RoleName == role.Name))
+                    {
+                        _unitOfWork._db.Remove(rolePermission);
+                        _unitOfWork._db.SaveChanges();
+                    }
                 }
                 role = model;
                 _unitOfWork._db.Remove(model);
@@ -132,12 +152,14 @@ namespace Services.BL
 
             }
         }
-       
+
+      
     }
     public interface IRoleService
     {
         BaseResponseModel<string> CreateRole(RoleViewModel model);
         BaseResponseModel<string> ManageRole(EditRole model);
         BaseResponseModel<string> DeleteRole(Role model);
+       
     }
 }

@@ -24,6 +24,7 @@ namespace Repository.Configurations
             builder.Property(x => x.IsEmailVerified).HasColumnName("IsEmailVerified");
             builder.Property(x => x.ActivationCode);
             builder.Property(x => x.OTP);
+            builder.Property(x => x.Status);
         }
     }
 }

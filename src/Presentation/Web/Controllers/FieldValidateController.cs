@@ -1,6 +1,7 @@
 ﻿using Common.ViewModels.ValidationModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Repository.Entities;
 using Repository.Repos.Work;
 using Services.BL;
 using Services.CustomFilter;
@@ -75,6 +76,39 @@ namespace Web.Controllers
             else
             {
                 return View(validationField);
+            }
+        }
+        [HttpGet]
+        public IActionResult deleteField(string Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var field = _unitOfWork._db.Field.FirstOrDefault(x => x.Id == Id);
+                if(field == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return View(field);
+                }
+            }
+        }
+        [HttpPost]
+        public IActionResult deleteField(FieldValidation validation)
+        {
+            var response = _fieldService.DeleteValidation(validation);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(validation);
             }
         }
     }

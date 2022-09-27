@@ -28,9 +28,6 @@ namespace Common.ViewModels.Users
         [EmailAddress]
         public string Email { get; set; }
         
-        //[Display(Name = "Age")]
-        //public int Age { get; set; }
-
         [Required]
         [DisplayName("DateOfBirth")]
         [DataType(DataType.Date),DisplayFormat(DataFormatString="{0:dd/MM/yyyy}",ApplyFormatInEditMode = true)]
@@ -49,6 +46,7 @@ namespace Common.ViewModels.Users
         public string ConfirmPassword { get; set; }
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
+        public bool Status { get; set; }
     }
     public class EditUserViewModel
     {
@@ -64,6 +62,7 @@ namespace Common.ViewModels.Users
         [EmailAddress]
         public string Email { get; set; }
         public long PhoneNumber { get; set; }
+        public bool Status { get; set; }
         public List<ListRole> Roles { get; set; }
         public string Role { get; set; }
     }

@@ -18,7 +18,6 @@ namespace Common.ViewModels.Tickets
         public string CreatedBy { get; set; }
         public StatusEnum Status { get; set; }
         public List<ListCategory> categories { get; set; }
-
     }
     public class ListCategory
         {

@@ -31,14 +31,19 @@ namespace Services.BL
                 var user = _unitOfWork._db.Users.Include("Roles").Include("Roles.aRole").FirstOrDefault(x => x.UserName == model.UserName);
                 if (user == null)
                 {
-                    response.Status = "97";
+                    response.Status = "404";
                     response.Message = "User not found";
                     return response;
                 }
                 #region
                 model.Password = HashPassword.Hash(model.Password);
                 #endregion
-
+                if(user.Status == false)
+                {
+                    response.Status = "97";
+                    response.Message = "You are suspended";
+                    return response;
+                }
 
                 if (user.Password != model.Password )
                 {
@@ -118,6 +123,7 @@ namespace Services.BL
                 Register.Password = HashPassword.Hash(Register.Password);
                 #endregion
                 Register.IsEmailVerified = false;
+                Register.Status = true;
 
                 _unitOfWork._db.Users.Add(new Repository.Entites.User()
                 {
@@ -215,36 +221,7 @@ namespace Services.BL
                 return response;
             }
         }
-        public BaseResponseModel<string> DeleteUser(User DeleteUser)
-        {
-            var response = new BaseResponseModel<string>();
-            try
-            {
-                var user = _unitOfWork._db.Users.Include("Roles").Include("Roles.aRole").FirstOrDefault(x => x.Id == DeleteUser.Id);
-                if (user == null)
-                {
-                    response.Status = "404";
-                    response.Message = "User not found";
-                    return response;
-                }
-                user = DeleteUser;
-
-                _unitOfWork._db.Users.Remove(user);
-                _unitOfWork._db.SaveChanges();
-
-                response.Status = "00";
-                response.Message = "User removed sucessfully";
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = "500";
-                response.Message = "Error occured: " +ex.Message;
-                return response;
-            }
-
-
-        }
+       
       public BaseResponseModel<string> ChangePassword(ChangePassword model)
         {
             var response = new BaseResponseModel<string>();
@@ -337,7 +314,40 @@ namespace Services.BL
             }
         }
 
-     
+        public BaseResponseModel<string> UserStatus(string Id)
+        {
+            var response = new BaseResponseModel<string>(); try
+            {
+                var user = _unitOfWork._db.Users.FirstOrDefault(x => x.Id == Id);
+                if (user == null)
+                {
+                    response.Status = "404";
+                    response.Message = "User not found";
+                    return response;
+                }
+                if (_unitOfWork._db.Users.Any(x => x.UserName == user.UserName && x.Status == false))
+                {
+                    user.Status = true;
+                    _unitOfWork._db.Update(user);
+                    _unitOfWork._db.SaveChanges();
+                }
+                else
+                {
+                    user.Status = false;
+                    _unitOfWork._db.Users.Update(user);
+                    _unitOfWork._db.SaveChanges();
+                }
+                    response.Status = "00";
+                    response.Message = "User suspended";
+                    return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "500";
+                response.Message = "ExceptionOccured :" + ex.Message;
+                return response;
+            }
+        }
     }
 
     public interface IUserService
@@ -345,10 +355,10 @@ namespace Services.BL
         Task<BaseResponseModel<UserTokenModel>> LoginAsync(UserLogin Login);
         BaseResponseModel<string> Register(UserRegister Register);
         BaseResponseModel<string> EditUser(EditUserViewModel Edituser);
-        BaseResponseModel<string> DeleteUser(User DeleteUser);
         BaseResponseModel<string> ChangePassword(ChangePassword model);
         BaseResponseModel<string> ResetPassword(ResetPassword model);
         BaseResponseModel<string> UserProfile(UserProfile model);
+        BaseResponseModel<String> UserStatus(string Id);
     }
 }
 

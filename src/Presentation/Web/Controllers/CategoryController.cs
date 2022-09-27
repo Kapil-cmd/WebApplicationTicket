@@ -111,7 +111,7 @@ namespace Web.Controllers
         }
         [HttpGet]
         [PermissionFilter("Admin&Category&Delete_Category")]
-        public IActionResult DeleteCategory(string? CId)
+        public IActionResult DeleteCategory(string CId)
         {
             if (CId == null)
             {
