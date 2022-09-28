@@ -15,6 +15,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = D:\Projects\TicketManagementSystem\src\Presentation\Web
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/CategoryTemp/DeleteTemp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlUZW1wXERlbGV0ZVRlbXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/CategoryTemp/EditTemp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlUZW1wXEVkaXRUZW1wLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/CategoryTemp/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlUZW1wXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -41,6 +49,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/FieldValidate/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRWYWxpZGF0ZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/FieldValidate/deleteField.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRWYWxpZGF0ZVxkZWxldGVGaWVsZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/TicketManagementSystem/src/Presentation/Web/Views/FieldValidate/Edit.cshtml]

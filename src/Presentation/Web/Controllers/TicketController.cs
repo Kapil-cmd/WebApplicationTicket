@@ -212,24 +212,24 @@ namespace demo.Controllers
         }
         [HttpGet]
         [PermissionFilter("Admin&Ticket&Delete_Ticket")]
-        public IActionResult Delete(string? TicketId)
+        public IActionResult Delete(string TicketId)
         {
             if(TicketId == null)
             {
                 return NotFound();
             }
-            var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == TicketId);
-            if(ticket == null)
+            var Ticket = _unitOfWork._db.Tickets.Find(TicketId);
+            if(Ticket == null)
             {
                 return NotFound();
             }
-            return View(ticket);
+            return View(Ticket);
         }
         [HttpPost]
         [PermissionFilter("Admin&Ticket&Delete_Ticket")]
-        public IActionResult Delete(Ticket ticket)
+        public IActionResult Delete(Ticket model)
         {
-            var response = _ticketService.DeleteTicket(ticket);
+            var response = _ticketService.DeleteTicket(model);
             if(response.Status == "00")
             {
                 _toastNotification.AddSuccessToastMessage("Ticket deleted sucessfully");
@@ -238,7 +238,7 @@ namespace demo.Controllers
             else
             {
                 _toastNotification.AddErrorToastMessage("Unable to delete ticket");
-                return View(ticket);
+                return View(model);
             }
         }
         [HttpGet]

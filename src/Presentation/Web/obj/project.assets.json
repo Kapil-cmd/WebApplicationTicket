@@ -4125,7 +4125,7 @@
           "Microsoft.EntityFrameworkCore": "6.0.7",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.7",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.7",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.7",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.9",
           "MySql.Data": "8.0.30",
           "MySqlConnector": "2.1.13",
           "NToastNotify": "8.0.0",

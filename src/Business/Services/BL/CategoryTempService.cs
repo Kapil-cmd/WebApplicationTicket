@@ -1,5 +1,6 @@
 ﻿using Common.ViewModels.BaseModel;
 using Common.ViewModels.CategoryTemp;
+using Repository.Entities;
 using Repository.Repos.Work;
 
 namespace Services.BL
@@ -11,6 +12,36 @@ namespace Services.BL
         {
             _unitOfWork = unitOfWork;
         }
+
+        public BaseResponseModel<string> DeleteTemp(CategoryTemp categoryTemp)
+        {
+            var response = new BaseResponseModel<string>();
+            try
+            {
+                var temp = _unitOfWork._db.CategoryTemp.FirstOrDefault(x => x.Id == categoryTemp.Id);
+                if(temp == null)
+                {
+                    response.Status = "404";
+                    response.Message = "Object not found";
+                    return response;
+                }
+                else
+                {
+                    _unitOfWork._db.CategoryTemp.Remove(temp);
+                    _unitOfWork._db.SaveChanges();
+                }
+                response.Status = "00";
+                response.Message = "Object deleted successfully";
+                return response;
+                
+            }catch(Exception ex)
+            {
+                response.Status = "500";
+                response.Message = "Exception occurred :" + ex.Message;
+                return response;
+            }
+        }
+
         public BaseResponseModel<string> EditTemp(EditCategoryTemp categoryTemp)
         {
             var response = new BaseResponseModel<string>();
@@ -25,13 +56,17 @@ namespace Services.BL
                 }
                 else
                 {
+                    temp.Id = categoryTemp.Id;
+                    temp.CategoryName = categoryTemp.CategoryName;
+
                     _unitOfWork._db.CategoryTemp.Update(temp);
                     _unitOfWork._db.SaveChanges();
                 }
                 response.Status = "00";
                 response.Message = "Category Edited sucessfully";
                 return response;
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 response.Status = "500";
                 response.Message = "Exception occurred :" + ex.Message;
@@ -42,5 +77,6 @@ namespace Services.BL
     public interface ICategoryTempService
     {
         BaseResponseModel<string> EditTemp(EditCategoryTemp categoryTemp );
+        BaseResponseModel<string> DeleteTemp(CategoryTemp categoryTemp);
     }
 }

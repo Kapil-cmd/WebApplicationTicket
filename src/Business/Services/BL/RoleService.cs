@@ -56,19 +56,19 @@ namespace Services.BL
                     return response;
                 }
                 var userRoles = _unitOfWork._db.UserRoles.ToList();
-                
-                foreach(var user in userRoles)
+
+                foreach (var user in userRoles)
                 {
-                    if(_unitOfWork._db.UserRoles.Any(x => x.RoleName == role.Name))
+                    if (_unitOfWork._db.UserRoles.Any(x => x.RoleName == role.Name))
                     {
                         _unitOfWork._db.Remove(user);
                         _unitOfWork._db.SaveChanges();
                     }
                 }
                 var rolePermission = _unitOfWork._db.RolePermissions.ToList();
-                foreach(var permission in rolePermission)
+                foreach (var permission in rolePermission)
                 {
-                    if(_unitOfWork._db.RolePermissions.Any(x => x.RoleName == role.Name))
+                    if (_unitOfWork._db.RolePermissions.Any(x => x.RoleName == role.Name))
                     {
                         _unitOfWork._db.Remove(rolePermission);
                         _unitOfWork._db.SaveChanges();

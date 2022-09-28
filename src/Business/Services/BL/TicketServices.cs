@@ -75,19 +75,20 @@ namespace Services.BL
             }
         }
 
-        public BaseResponseModel<string> DeleteTicket(Ticket Ticket)
+        public BaseResponseModel<string> DeleteTicket(Ticket model)
         {
             var response = new BaseResponseModel<string>();
             try
             {
-                var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == Ticket.TicketId);
+                var ticket = _unitOfWork._db.Tickets.FirstOrDefault(x => x.TicketId == model.TicketId);
                 if(ticket == null)
                 {
                     response.Status = "404";
                     response.Message = "Ticket not found";
                     return response;
                 }
-                _unitOfWork._db.Tickets.Remove(ticket);
+                
+                _unitOfWork._db.Tickets.Remove(model);
                 _unitOfWork._db.SaveChanges();
                 
                 
@@ -161,7 +162,7 @@ namespace Services.BL
                 var Ticket = _unitOfWork._db.Tickets.Find(ticketId);
                 if (Ticket == null)
                 {
-                    response.Status = "100";
+                    response.Status = "404";
                     response.Message = "Ticket not found";
                     return response;
                 }
@@ -183,7 +184,7 @@ namespace Services.BL
     {
         BaseResponseModel<string> AddTicket(AddTicketViewModel Ticket);
         BaseResponseModel<string> EditTicket(EditTicketViewmodel Ticket);
-        BaseResponseModel<string> DeleteTicket(Ticket Ticket);
+        BaseResponseModel<string> DeleteTicket(Ticket model);
         BaseResponseModel<string> TicketDetails(string ticketId);
         BaseResponseModel<string> CloseTicket(CloseTicket Ticket);
     }

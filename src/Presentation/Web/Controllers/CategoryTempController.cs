@@ -20,8 +20,8 @@ namespace Web.Controllers
         public readonly TicketingContext _db;
         private readonly ICategoryservice _categoryService;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly CategoryTempService _categoryTempService;
-        public CategoryTempController(IWebHostEnvironment environment,TicketingContext db, ICategoryservice categoryservice, IUnitOfWork unitOfWork, CategoryTempService categoryTempService)
+        private readonly ICategoryTempService _categoryTempService;
+        public CategoryTempController(IWebHostEnvironment environment,TicketingContext db, ICategoryservice categoryservice, IUnitOfWork unitOfWork, ICategoryTempService categoryTempService)
         {
             _webHostEnvironment = environment;
             _db = db;
@@ -142,7 +142,10 @@ namespace Web.Controllers
             }
             else
             {
-                var categoryTemp = _unitOfWork._db.CategoryTemp.FirstOrDefault(x => x.Id == Id);
+                var categorytemp = _unitOfWork._db.CategoryTemp.FirstOrDefault(x => x.Id == Id);
+                var categoryTemp = new EditCategoryTemp();
+                categoryTemp.Id = categorytemp.Id;
+                categoryTemp.CategoryName = categorytemp.CategoryName;
                 return View(categoryTemp);
             }
         }
@@ -150,6 +153,39 @@ namespace Web.Controllers
         public IActionResult EditTemp(EditCategoryTemp categoryTemp)
         {
             var response = _categoryTempService.EditTemp(categoryTemp);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(categoryTemp);
+            }
+        }
+        [HttpGet]
+        public IActionResult DeleteTemp(string Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var categoryTemp = _unitOfWork._db.CategoryTemp.FirstOrDefault(x => x.Id == Id);
+                if(categoryTemp == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return View(categoryTemp);
+                }
+            }
+        }
+        [HttpPost]
+        public IActionResult DeleteTemp(CategoryTemp categoryTemp)
+        {
+            var response = _categoryTempService.DeleteTemp(categoryTemp);
             if(response.Status == "00")
             {
                 return RedirectToAction("Index");
