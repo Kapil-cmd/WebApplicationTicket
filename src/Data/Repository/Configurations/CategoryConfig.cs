@@ -22,7 +22,7 @@ namespace Repository.Configurations
                 .WithMany(x => x.Categories)
                 .HasForeignKey(x => x.CreatedBy)
                 .HasPrincipalKey(x => x.UserName)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
     }
 }

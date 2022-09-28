@@ -41,8 +41,8 @@ builder.Services.AddAuthentication(option =>
 });
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICategoryTempService, CategoryTempService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITicketService, TicketServices>();
 builder.Services.AddScoped<IRoleService, RoleService>();

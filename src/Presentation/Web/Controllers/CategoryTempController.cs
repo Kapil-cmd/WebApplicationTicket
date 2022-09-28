@@ -1,4 +1,5 @@
 ﻿using Common.ViewModels.Categories;
+using Common.ViewModels.CategoryTemp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
@@ -19,12 +20,14 @@ namespace Web.Controllers
         public readonly TicketingContext _db;
         private readonly ICategoryservice _categoryService;
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryTempController(IWebHostEnvironment environment,TicketingContext db,ICategoryservice categoryservice,IUnitOfWork unitOfWork)
+        private readonly CategoryTempService _categoryTempService;
+        public CategoryTempController(IWebHostEnvironment environment,TicketingContext db, ICategoryservice categoryservice, IUnitOfWork unitOfWork, CategoryTempService categoryTempService)
         {
             _webHostEnvironment = environment;
             _db = db;
             _categoryService = categoryservice;
             _unitOfWork = unitOfWork;
+            _categoryTempService = categoryTempService;
         }
         [PermissionFilter("Admin&CategoryTemp&View_CategoryTemp")]
         [HttpGet]
@@ -130,6 +133,31 @@ namespace Web.Controllers
             }
             return View(Index);
         }
-      
+        [HttpGet]
+        public IActionResult EditTemp(string Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var categoryTemp = _unitOfWork._db.CategoryTemp.FirstOrDefault(x => x.Id == Id);
+                return View(categoryTemp);
+            }
+        }
+        [HttpPost]
+        public IActionResult EditTemp(EditCategoryTemp categoryTemp)
+        {
+            var response = _categoryTempService.EditTemp(categoryTemp);
+            if(response.Status == "00")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(categoryTemp);
+            }
+        }
     }
 }

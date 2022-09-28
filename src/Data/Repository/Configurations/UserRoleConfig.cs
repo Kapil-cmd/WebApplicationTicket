@@ -23,8 +23,6 @@ namespace Repository.Configurations
                 .HasForeignKey(x => x.RoleName)
                 .HasPrincipalKey(x => x.Name)
                 .OnDelete(DeleteBehavior.NoAction);
-
-
         }
     }
 }
