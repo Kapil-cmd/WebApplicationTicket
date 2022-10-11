@@ -14,6 +14,7 @@ namespace Repository.Entites
         public string AssignedTo { get; set; }
         public string CategoryName { get; set; }
         public StatusEnum Status { get; set; }
+        public PriorityEnum Priority { get; set; }
         public string ImageName { get; set; }
 
 

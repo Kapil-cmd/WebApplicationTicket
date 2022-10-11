@@ -590,3 +590,7 @@ D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\Web.gen
 D:\Projects\TicketManagementSystem\src\Presentation\Web\obj\Debug\net6.0\ref\Web.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.Build.dll
 D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.NET.StringTools.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.AspNetCore.SignalR.Common.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+D:\Projects\TicketManagementSystem\src\Presentation\Web\bin\Debug\net6.0\System.IO.Pipelines.dll

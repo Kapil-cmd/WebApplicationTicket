@@ -46,8 +46,11 @@
             <th>
                Phone Number
             </th>
-            <th>Action</th>
-
+            <th>Status</th>
+            
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -73,6 +76,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
                     <div class="w-75 btn-group" role="group">

@@ -38,7 +38,7 @@ namespace Services.BL
                 #region
                 model.Password = HashPassword.Hash(model.Password);
                 #endregion
-                if(user.Status == false)
+                if(user.Status == Common.Enums.UserStatus.Suspend)
                 {
                     response.Status = "97";
                     response.Message = "You are suspended";
@@ -113,7 +113,12 @@ namespace Services.BL
                     response.Message = "User with this username already exists";
                     return response;
                 }
-               
+               if (Register.UserName.Length < 4 || Register.UserName.Take(1).All(char.IsLetter) || Register.Password.Length < 6 || Register.Password == Register.UserName || Register.Password.Take(5) == Register.UserName.Take(5))
+                {
+                    response.Status = "98";
+                    response.Message = "UserName and password cannot be same";
+                    return response;
+                }
 
                 #region Generate Activation Code
                 Register.ActivationCode = Guid.NewGuid();
@@ -123,7 +128,7 @@ namespace Services.BL
                 Register.Password = HashPassword.Hash(Register.Password);
                 #endregion
                 Register.IsEmailVerified = false;
-                Register.Status = true;
+                Register.Status = Common.Enums.UserStatus.Active;
 
                 _unitOfWork._db.Users.Add(new Repository.Entites.User()
                 {
@@ -137,6 +142,7 @@ namespace Services.BL
                     UserName = Register.UserName,
                     IsEmailVerified = Register.IsEmailVerified,
                     ActivationCode = Register.ActivationCode,
+                    Status = Register.Status,
                 });   
                 _unitOfWork._db.SaveChanges();
                 
@@ -325,15 +331,15 @@ namespace Services.BL
                     response.Message = "User not found";
                     return response;
                 }
-                if (_unitOfWork._db.Users.Any(x => x.UserName == user.UserName && x.Status == false))
+                if (_unitOfWork._db.Users.Any(x => x.UserName == user.UserName && x.Status == Common.Enums.UserStatus.Suspend))
                 {
-                    user.Status = true;
+                    user.Status = Common.Enums.UserStatus.Active;
                     _unitOfWork._db.Update(user);
                     _unitOfWork._db.SaveChanges();
                 }
                 else
                 {
-                    user.Status = false;
+                    user.Status = Common.Enums.UserStatus.Suspend;
                     _unitOfWork._db.Users.Update(user);
                     _unitOfWork._db.SaveChanges();
                 }

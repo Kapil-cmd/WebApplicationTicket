@@ -4,6 +4,9 @@
     {
         Ticket,
         Category,
-        User
+        User,
+        Role,
+        Permission,
+        CategoryTemp
     }
 }

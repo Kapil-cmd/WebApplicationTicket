@@ -46,6 +46,9 @@
                @Html.ActionLink("CategoryName","Index",new{Sorting_Order = ViewBag.SortingCName}) 
             </th>
             <th>
+                Priority
+            </th>
+            <th>
                 Status
             </th>
             <th>
@@ -83,6 +86,9 @@
                            @Html.DisplayFor(modelItem => item.CategoryName)
                        </td>
                        <td>
+                            @Html.DisplayFor(modelItem => item.Priority)
+                       </td>
+                       <td>
                            @Html.DisplayFor(modelItem => item.Status)
                        </td>
                        <td>
@@ -92,7 +98,8 @@
                        <div class="w-75 btn-group" role="group">
                             <a title="Edit"  asp-controller="Ticket" asp-action="EditTicket" asp-route-TicketId="@item.TicketId" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i></a>
                             <a title="Detail" asp-controller="Ticket" asp-action="DetailTicket" asp-route-TicketId="@item.TicketId" class="btn btn-sm btn-danger mx-2"><i class="bi bi-eye"></i></a>
-                            <a title="Delete" asp-controller="Ticket" asp-action="Delete" asp-route-TicketId="@item.TicketId" class="btn btn-sm btn-danger mx-2"><i class="bi bi-trash-fill"></i></a>
+                            <a title="Close" asp-controller="Ticket" asp-action="CloseTicket" asp-route-TicketId="@item.TicketId" class="btn btn-sm btn-danger mx-2"><i class="bi bi-x-circle-fill"></i></a>
+                           
                        </div>
                        </td>
                      </tr>

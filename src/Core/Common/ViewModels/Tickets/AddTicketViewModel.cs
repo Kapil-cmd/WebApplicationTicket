@@ -17,6 +17,7 @@ namespace Common.ViewModels.Tickets
         [Display(Name = "CreatedBy")]
         public string CreatedBy { get; set; }
         public StatusEnum Status { get; set; }
+        public PriorityEnum Priority { get; set; }
         public List<ListCategory> categories { get; set; }
     }
     public class ListCategory

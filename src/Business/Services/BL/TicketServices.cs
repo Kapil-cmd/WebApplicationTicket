@@ -27,6 +27,7 @@ namespace Services.BL
                     CategoryName = Ticket.CategoryName,
                     CreatedBy = Ticket.CreatedBy = nameClaim,
                     CreatedDateTime = DateTime.UtcNow,
+                    Priority = Ticket.Priority,
                     ImageName = Ticket.ImageName,
                 });
                 _unitOfWork._db.SaveChanges();
@@ -167,7 +168,7 @@ namespace Services.BL
                     return response;
                 }
                 response.Status = "00";
-                response.Message = "Ticket displayed";
+                response.Message = "Ticket detail";
                 return response;
             }
             catch (Exception ex)

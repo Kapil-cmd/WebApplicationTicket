@@ -74,6 +74,10 @@ namespace demo.Controllers
         }
         public IActionResult UserIndex()
         {
+            if(_unitOfWork._db.Tickets == null)
+            {
+                return NotFound();
+            }
             var model = _unitOfWork._db.Tickets.Where(a => a.User.Id == HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value).OrderByDescending(x => x.CreatedDateTime).ToList();
             return View(model);
         }
@@ -183,12 +187,19 @@ namespace demo.Controllers
             var response = _ticketService.EditTicket(model);
             if (response.Status == "00")
             {
-                _toastNotification.AddSuccessToastMessage("Ticket Edited sucessfully");
-                return RedirectToAction("Index");
+                if (Web.StaticModel.PermissionChecker.HasPermission(User.Identity.Name, "View_Ticket"))
+                {
+                    _toastNotification.AddSuccessToastMessage("Ticket Edited sucessfully");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("DevView_Ticket");
+                }
             }
             else
             {
-                _toastNotification.AddErrorToastMessage("Unable to edit ticket");
+                _toastNotification.AddErrorToastMessage("Unable to edit ticket");    
                 return View(model);
             }
         }

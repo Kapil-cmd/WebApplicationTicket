@@ -28,6 +28,7 @@ namespace Common.ViewModels.Tickets
         [Display(Name = "AssignedTo")]
         public string AssignedTo { get; set; }
         public string ImageName { get; set; }
+        public PriorityEnum Priority { get; set; }
         [Required(ErrorMessage ="Status is Required"),Display(Name ="Status")]
         public StatusEnum Status { get; set; }
         public List<ListUser> Users { get; set; }

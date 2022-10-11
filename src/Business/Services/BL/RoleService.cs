@@ -48,40 +48,23 @@ namespace Services.BL
             var response = new BaseResponseModel<string>();
             try
             {
-                var role = _unitOfWork._db.Roles.Include("Users").Include("Users.aUser").FirstOrDefault(x => x.Id == model.Id);
-                if(role == null)
+                var role = _unitOfWork._db.Roles.Include("Users").Include("Users.aUser").Include("Permissions").Include("Permissions.aPermission").FirstOrDefault(x => x.Id == model.Id);
+                if (role == null)
                 {
                     response.Status = "404";
                     response.Message = "Role not found";
                     return response;
                 }
-                var userRoles = _unitOfWork._db.UserRoles.ToList();
 
-                foreach (var user in userRoles)
-                {
-                    if (_unitOfWork._db.UserRoles.Any(x => x.RoleName == role.Name))
-                    {
-                        _unitOfWork._db.Remove(user);
-                        _unitOfWork._db.SaveChanges();
-                    }
-                }
-                var rolePermission = _unitOfWork._db.RolePermissions.ToList();
-                foreach (var permission in rolePermission)
-                {
-                    if (_unitOfWork._db.RolePermissions.Any(x => x.RoleName == role.Name))
-                    {
-                        _unitOfWork._db.Remove(rolePermission);
-                        _unitOfWork._db.SaveChanges();
-                    }
-                }
-                role = model;
+                model = role;
                 _unitOfWork._db.Remove(model);
                 _unitOfWork._db.SaveChanges();
 
                 response.Status = "00";
-                response.Message = "Role deleted sucessully";
+                response.Message = "Role deleted sucessfully";
                 return response;
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 response.Status = "500";
                 response.Message = "Exception occureed :" + ex.Message;

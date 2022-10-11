@@ -1,4 +1,5 @@
-﻿using Repository.Entities;
+﻿using Common.Enums;
+using Repository.Entities;
 
 namespace Repository.Entites
 {
@@ -18,7 +19,7 @@ namespace Repository.Entites
         public System.Guid ActivationCode { get; set; }
         public string ProfilePicture { get; set; }
         public string OTP { get; set; }
-        public bool Status { get; set; }
+        public UserStatus Status { get; set; }
 
 
         public virtual IEnumerable<Category> Categories {get; set;}

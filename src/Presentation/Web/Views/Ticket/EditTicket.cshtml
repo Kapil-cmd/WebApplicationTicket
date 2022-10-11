@@ -1,4 +1,5 @@
-﻿@model Common.ViewModels.Tickets.EditTicketViewmodel
+﻿@using Common.Enums
+@model Common.ViewModels.Tickets.EditTicketViewmodel
 
 @{
     ViewData["Title"] = "EditTicket";
@@ -29,6 +30,7 @@
                 <span asp-validation-for="AssignedTo" class="text-danger"></span>
             </div>
              <dt class="col-sm-2">
+             
           Uploaded Image
              </dt>
              <dt class="col-sm-2">

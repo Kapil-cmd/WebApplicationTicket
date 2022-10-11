@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository;
-using Repository.Entites;
 using Repository.Repos.Work;
 using Repository.SeedDatabase;
 using Services.BL;
@@ -65,6 +64,7 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
     ProgressBar = true,
     Timeout = 5000,
 });
+builder.Services.AddSignalR();
 var app = builder.Build();
 
 using (var serviceScope = app.Services.CreateScope())

@@ -1,4 +1,5 @@
-﻿@model Common.ViewModels.Tickets.AddTicketViewModel;
+﻿@using Common.Enums
+@model Common.ViewModels.Tickets.AddTicketViewModel;
 
 @{
     ViewData["Title"] = "Create";
@@ -22,6 +23,11 @@
                     }
                 </select>
              </div>
+             <br />
+             <div class="form-group">
+                 <label asp-for="Priority" class="control-label"></label>
+                 <select asp-for="Priority" asp-items="Html.GetEnumSelectList<PriorityEnum>()" class="form-control"></select>
+             </div><br />
                     <div class="form-group">
                 <label asp-for="TicketDetails" class="control-label"></label>
                 <textarea rows="7" asp-for="TicketDetails" class="form-control" ></textarea>
@@ -34,7 +40,15 @@
                     </div><br />
                  <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
-                <a asp-action ="Index" class="btn btn-light">Back to List</a>
+                @if(Web.StaticModel.PermissionChecker.HasPermission (User.Identity.Name, "View_Ticket"))
+                {
+                    <a asp-action ="Index" class="btn btn-light">Back to List</a>
+                }
+                else
+                {
+                    <a asp-action="UserIndex" class="btn btn-light">BackToList</a>
+                }
+
             </div>
             
         </form>

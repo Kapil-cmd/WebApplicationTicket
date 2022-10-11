@@ -42,7 +42,7 @@ namespace Repository.SeedDatabase
                         DateOfBirth = DateTime.Parse("1997-02-12"),
                         ActivationCode = Guid.Parse("{2c05c682-704f-43a4-864b-742ae359aa30}"),
                         Age = 25,
-                        Status = true,
+                        Status = Common.Enums.UserStatus.Active,
                     };
                     context.Users.Add(user);
                     context.SaveChanges();

@@ -212,7 +212,7 @@ namespace Web.Controllers
             {
                 return NotFound();
             }
-            var userDetails = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == Id);
+            var userDetails = _unitOfWork._db.Users.Include("Roles").Include("Roles.aRole").FirstOrDefault(x => x.Id == Id);
             if (userDetails  == null)
             {
                 return NotFound();

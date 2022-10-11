@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="6.0.8" />
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.9" />
     <PackageReference Include="MySql.Data" Version="8.0.30" />
     <PackageReference Include="MySqlConnector" Version="2.1.13" />
     <PackageReference Include="System.Text.Encoding" Version="4.3.0" />

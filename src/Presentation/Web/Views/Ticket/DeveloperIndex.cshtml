@@ -22,6 +22,9 @@
                 Status
             </th>
             <th>
+                Priority
+            </th>
+            <th>
                 ImageName
             </th>
             <th>Action</th>
@@ -43,13 +46,15 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
+                @Html.DisplayFor(modelitem => item.Priority)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ImageName)
             </td>
             <td>
             <div class="w-75 btn-group" role="group">
-                     <a title="Edit"  asp-controller="Ticket" asp-action="EditTicket" asp-route-TicketId="@item.TicketId" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i></a>
                             <a title="Detail" asp-controller="Ticket" asp-action="DetailTicket" asp-route-TicketId="@item.TicketId" class="btn btn-sm btn-danger mx-2"><i class="bi bi-eye"></i></a>
-                            <a title="Close" asp-controller="Ticket" asp-action="CloseTicket" asp-route-TicketId="@item.TicketId" class="btn btn-sm btn-danger mx-2"><i class="bi bi-x-circle-fill"></i></a>                </div>
+                            <a title="Close" asp-controller="Ticket" asp-action="CloseTicket" asp-route-TicketId="@item.TicketId" class="btn btn-sm btn-danger mx-2"><i class="bi bi-x-circle-fill"></i></a></div>
                 </td>
         </tr>
 }                
