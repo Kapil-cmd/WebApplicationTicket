@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Repository;
-using Repository.Entites;
 using Repository.Repos.Work;
 using Services.BL;
 using Services.CustomFilter;
@@ -52,8 +51,9 @@ namespace Web.Controllers
 
             ViewBag.currentFilter = searchString;
 
-            var user = from users in _unitOfWork._db.Users
-                       select users;
+            //var user = from users in _unitOfWork._db.Users
+            //           select users;
+            var user = from users in _unitOfWork._db.Users.Include("Roles").Include("Roles.aRole") select users;
             if (!String.IsNullOrEmpty(searchString))
             {
                 user = user.Where(x => x.UserName
@@ -75,7 +75,7 @@ namespace Web.Controllers
                     user = user.OrderByDescending(x => x.Age);
                     break;
                 case "email_desc":
-                    user= user.OrderByDescending(x => x.Email);
+                    user = user.OrderByDescending(x => x.Email);
                     break;
                 default:
                     user = user.OrderByDescending(x => x.UserName.StartsWith("A"));
@@ -169,11 +169,11 @@ namespace Web.Controllers
                     }).ToList();
                 }
             }
-            foreach(var uroles in model.Roles)
+            foreach (var uroles in model.Roles)
             {
-                foreach(var ruser in user.Roles)
+                foreach (var ruser in user.Roles)
                 {
-                    if(uroles.Name == ruser.RoleName)
+                    if (uroles.Name == ruser.RoleName)
                     {
                         uroles.IsSelected = true;
                     }
@@ -208,16 +208,16 @@ namespace Web.Controllers
         [PermissionFilter("Admin&User&View_User")]
         public IActionResult UserDetails(string Id)
         {
-            if (Id == null)
+           if (Id == null)
             {
                 return NotFound();
             }
-            var userDetails = _unitOfWork._db.Users.Include("Roles").Include("Roles.aRole").FirstOrDefault(x => x.Id == Id);
-            if (userDetails  == null)
+           var userDetails = _unitOfWork._db.Users.Include("Roles").Include("Roles.aRole").FirstOrDefault(x => x.Id == Id);
+           if (userDetails == null)
             {
                 return NotFound();
             }
-            else
+           else
             {
                 return View(userDetails);
             }
@@ -249,6 +249,7 @@ namespace Web.Controllers
         {
             _unitOfWork._httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
             return RedirectToAction("Login");
+            _toastNotification.AddSuccessToastMessage("You have been logout Sucessfully");
         }
 
         [HttpPost]

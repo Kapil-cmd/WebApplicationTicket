@@ -64,7 +64,7 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
     ProgressBar = true,
     Timeout = 5000,
 });
-builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 using (var serviceScope = app.Services.CreateScope())

@@ -76,7 +76,7 @@ namespace Web.Controllers
                                     };
                                     if (_unitOfWork._db.CategoryTemp.Any(x => x.CategoryName == category.CategoryName))
                                     {
-                                        return RedirectToAction("Index");
+                                        ViewBag.Message = "This category already exists";
                                     }
                                     else
                                     {
@@ -131,7 +131,7 @@ namespace Web.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            return View(Index);
+            return View(Send);
         }
         [HttpGet]
         public IActionResult EditTemp(string Id)

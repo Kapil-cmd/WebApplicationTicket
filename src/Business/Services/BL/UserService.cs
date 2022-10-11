@@ -113,7 +113,13 @@ namespace Services.BL
                     response.Message = "User with this username already exists";
                     return response;
                 }
-               if (Register.UserName.Length < 4 || Register.UserName.Take(1).All(char.IsLetter) || Register.Password.Length < 6 || Register.Password == Register.UserName || Register.Password.Take(5) == Register.UserName.Take(5))
+                if(!(Register.UserName.Length > 4 && Register.UserName.Take(3).All(char.IsLetter)))
+                {
+                    response.Status = "98";
+                    response.Message = "UserName cannot start with number";
+                    return response;
+                }
+               if ((Register.Password == Register.UserName && Register.Password.Take(4) == Register.UserName.Take(4)))
                 {
                     response.Status = "98";
                     response.Message = "UserName and password cannot be same";
